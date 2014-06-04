@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html><head><meta content="Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing." name="description"><title>Quil - Rendering</title><style>body {
+  color: #333;
+}
+
+a {
+  color: #333;
+}
+
+p {
+  margin: 0px;
+}
+
+.category-div .category, #toc .category {
+  margin: 0px 0px 7px 0px;
+}
+
+.category-div .category a, #toc .category a {
+  color: #D53E07;
+}
+
+.category-div .subcategory, #toc .subcategory {
+  margin: 15px 0px 0px 0px;
+}
+
+.category-div .subcategory a, #toc .subcategory a {
+  color: #009900;
+}
+
+.category-div .function, #toc .function {
+  margin-top: 2px;
+}
+
+.index-page .wrapper {
+  width: 1000px;
+  margin: auto;
+}
+
+.index-page #title {
+  text-align: center;
+}
+
+.index-page .column {
+  float: left;
+  width: 200px;
+  display: inline-block;
+}
+
+.index-page .category-div {
+  padding: 10px;
+  margin: 10px;
+  background: #FAFAFA;
+}
+
+.index-page #description {
+  text-align: center;
+  font-size: 18px;
+}
+
+.fn-page .fns-wrapper {
+  margin: auto;
+  width: 700px;
+}
+
+.fn-page .fns-wrapper h2 {
+  margin: 10px 0px;
+}
+
+.fn-page .fns-wrapper div.function {
+  padding: 10px;
+  margin: 10px auto;
+  background: #FAFAFA;
+}
+
+.fn-page .fns-wrapper div.function code {
+  margin-right: 10px;
+}
+
+.fn-page .fns-wrapper div.function h3 {
+  margin: 2px 0px;
+}
+
+.fn-page .fns-wrapper pre {
+  margin: 0px;
+}
+
+.fn-page .fns-wrapper dt {
+  margin-top: 10px;
+}
+
+.fn-page .fns-wrapper dl {
+  margin: 0px;
+}
+
+.fn-page .fns-wrapper .subcategory {
+  margin: 30px auto 0px auto;
+}
+
+.fn-page #toc {
+  top: 0px;
+  bottom: 20px;
+  overflow-y: scroll;
+  width: 200px;
+  position: fixed;
+}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="rendering.html">Rendering</a></h3><p class="function"><a href="#hint">hint</a></p><p class="function"><a href="#with-graphics">with-graphics</a></p><h4 class="subcategory"><a href="#shaders">Shaders</a></h4><p class="function"><a href="#load-shader">load-shader</a></p><p class="function"><a href="#reset-shader">reset-shader</a></p><p class="function"><a href="#shader">shader</a></p></div><div class="fns-wrapper"><h2>Rendering</h2><div class="function" id="hint"><h3>hint</h3><dl><dt>Arguments</dt><dd><code>[hint-type]</code></dd><dt>Docstring</dt><dd><pre>Set various hints and hacks for the renderer. This is used to
+handle obscure rendering features that cannot be implemented in a
+consistent manner across renderers. Many options will often graduate
+to standard features instead of hints over time.
+
+Options:
+
+:enable-native-fonts - Use the native version fonts when they are
+  installed, rather than the bitmapped version from a .vlw
+  file. This is useful with the default (or JAVA2D) renderer
+  setting, as it will improve font rendering speed. This is not
+  enabled by default, because it can be misleading while testing
+  because the type will look great on your machine (because you have
+  the font installed) but lousy on others' machines if the identical
+  font is unavailable. This option can only be set per-sketch, and
+  must be called before any use of text-font.
+
+:disable-native-fonts - Disables native font support.
+
+:disable-depth-test - Disable the zbuffer, allowing you to draw on
+  top of everything at will. When depth testing is disabled, items
+  will be drawn to the screen sequentially, like a painting. This
+  hint is most often used to draw in 3D, then draw in 2D on top of
+  it (for instance, to draw GUI controls in 2D on top of a 3D
+  interface). Starting in release 0149, this will also clear the
+  depth buffer. Restore the default with :enable-depth-test
+  but note that with the depth buffer cleared, any 3D drawing that
+  happens later in draw will ignore existing shapes on the screen.
+
+:enable-depth-test - Enables the zbuffer.
+
+:enable-depth-sort - Enable primitive z-sorting of triangles and
+  lines in :p3d and :opengl rendering modes. This can slow
+  performance considerably, and the algorithm is not yet perfect.
+
+:disable-depth-sort - Disables hint :enable-depth-sort
+
+:disable-opengl-errors - Speeds up the OPENGL renderer setting
+   by not checking for errors while running.
+
+:enable-opengl-errors - Turns on OpenGL error checking
+
+:enable-depth-mask
+:disable-depth-mask
+
+:enable-optimized-stroke
+:disable-optimized-stroke
+:enable-retina-pixels
+:disable-retina-pixels
+:enable-stroke-perspective
+:disable-stroke-perspective
+:enable-stroke-pure
+:disable-stroke-pure
+:enable-texture-mipmaps
+:disable-texture-mipmaps</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code>hint()</code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="with-graphics"><h3>with-graphics</h3><dl><dt>Arguments</dt><dd><code>[graphics & body]</code></dd><dt>Docstring</dt><dd><pre>All subsequent calls of any drawing function will draw on given graphics.
+'with-graphics' cannot be nested (you can draw simultaneously only on 1 graphics)</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.7</dd></dl></div><h3 class="subcategory" id="shaders">Shaders</h3><div class="function" id="load-shader"><h3>load-shader</h3><dl><dt>Arguments</dt><dd><code>[fragment-filename]</code><code>[fragment-filename vertex-filename]</code></dd><dt>Docstring</dt><dd><pre>Loads a shader into the PShader object. Shaders are compatible with the
+P2D and P3D renderers, but not with the default renderer.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/loadShader_.html">loadShader()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="reset-shader"><h3>reset-shader</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[kind]</code></dd><dt>Docstring</dt><dd><pre>Restores the default shaders. Code that runs after (reset-shader) will
+not be affected by previously defined shaders. Optional 'kind' parameter -
+type of shader, either :points, :lines, or :triangles</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/resetShader_.html">resetShader()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="shader"><h3>shader</h3><dl><dt>Arguments</dt><dd><code>[shader]</code><code>[shader kind]</code></dd><dt>Docstring</dt><dd><pre>Applies the shader specified by the parameters. It's compatible with the :p2d
+and :p3drenderers, but not with the default :java2d renderer. Optional 'kind'
+parameter - type of shader, either :points, :lines, or :triangles</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/shader_.html">shader()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div></div></body></html>

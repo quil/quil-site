@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html><head><meta content="Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing." name="description"><title>Quil - Environment</title><style>body {
+  color: #333;
+}
+
+a {
+  color: #333;
+}
+
+p {
+  margin: 0px;
+}
+
+.category-div .category, #toc .category {
+  margin: 0px 0px 7px 0px;
+}
+
+.category-div .category a, #toc .category a {
+  color: #D53E07;
+}
+
+.category-div .subcategory, #toc .subcategory {
+  margin: 15px 0px 0px 0px;
+}
+
+.category-div .subcategory a, #toc .subcategory a {
+  color: #009900;
+}
+
+.category-div .function, #toc .function {
+  margin-top: 2px;
+}
+
+.index-page .wrapper {
+  width: 1000px;
+  margin: auto;
+}
+
+.index-page #title {
+  text-align: center;
+}
+
+.index-page .column {
+  float: left;
+  width: 200px;
+  display: inline-block;
+}
+
+.index-page .category-div {
+  padding: 10px;
+  margin: 10px;
+  background: #FAFAFA;
+}
+
+.index-page #description {
+  text-align: center;
+  font-size: 18px;
+}
+
+.fn-page .fns-wrapper {
+  margin: auto;
+  width: 700px;
+}
+
+.fn-page .fns-wrapper h2 {
+  margin: 10px 0px;
+}
+
+.fn-page .fns-wrapper div.function {
+  padding: 10px;
+  margin: 10px auto;
+  background: #FAFAFA;
+}
+
+.fn-page .fns-wrapper div.function code {
+  margin-right: 10px;
+}
+
+.fn-page .fns-wrapper div.function h3 {
+  margin: 2px 0px;
+}
+
+.fn-page .fns-wrapper pre {
+  margin: 0px;
+}
+
+.fn-page .fns-wrapper dt {
+  margin-top: 10px;
+}
+
+.fn-page .fns-wrapper dl {
+  margin: 0px;
+}
+
+.fn-page .fns-wrapper .subcategory {
+  margin: 30px auto 0px auto;
+}
+
+.fn-page #toc {
+  top: 0px;
+  bottom: 20px;
+  overflow-y: scroll;
+  width: 200px;
+  position: fixed;
+}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="environment.html">Environment</a></h3><p class="function"><a href="#current-frame-rate">current-frame-rate</a></p><p class="function"><a href="#current-graphics">current-graphics</a></p><p class="function"><a href="#cursor">cursor</a></p><p class="function"><a href="#cursor-image">cursor-image</a></p><p class="function"><a href="#defsketch">defsketch</a></p><p class="function"><a href="#focused">focused</a></p><p class="function"><a href="#frame-count">frame-count</a></p><p class="function"><a href="#frame-rate">frame-rate</a></p><p class="function"><a href="#height">height</a></p><p class="function"><a href="#no-cursor">no-cursor</a></p><p class="function"><a href="#screen-height">screen-height</a></p><p class="function"><a href="#screen-width">screen-width</a></p><p class="function"><a href="#sketch">sketch</a></p><p class="function"><a href="#target-frame-rate">target-frame-rate</a></p><p class="function"><a href="#width">width</a></p></div><div class="fns-wrapper"><h2>Environment</h2><div class="function" id="current-frame-rate"><h3>current-frame-rate</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the current framerate</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/frameRate.html">frameRate</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="current-graphics"><h3>current-graphics</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Graphics currently used for drawing. By default it is sketch graphics,
+but if called inside with-graphics macro - graphics passed to the macro
+is returned. This method should be used if you need to call some methods
+that are not implemented by quil. Example (.beginDraw (current-graphics)).</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="cursor"><h3>cursor</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[cursor-mode]</code></dd><dt>Docstring</dt><dd><pre>Sets the cursor to a predefined symbol or makes it
+visible if already hidden (after no-cursor was called).
+
+Available modes: :arrow, :cross, :hand, :move, :text, :wait
+
+See cursor-image for specifying a generic image as the cursor
+symbol.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/cursor_.html">cursor()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="cursor-image"><h3>cursor-image</h3><dl><dt>Arguments</dt><dd><code>[img]</code><code>[img hx hy]</code></dd><dt>Docstring</dt><dd><pre>Set the cursor to a predefined image. The horizontal and vertical
+active spots of the cursor may be specified with hx and hy.
+It is recommended to make the size 16x16 or 32x32 pixels.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/cursor_.html">cursor()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="defsketch"><h3>defsketch</h3><dl><dt>Arguments</dt><dd><code>[app-name & opts]</code></dd><dt>Docstring</dt><dd><pre>Define and start a sketch and bind it to a var with the symbol
+app-name. If any of the options to the various callbacks are
+symbols, it wraps them in a call to var to ensure they aren't
+inlined and that redefinitions to the original fns are reflected in
+the visualisation. See sketch for the available options.</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="focused"><h3>focused</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns a boolean value representing whether the applet has focus.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/focused.html">focused</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="frame-count"><h3>frame-count</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>The system variable frameCount contains the number of frames
+displayed since the program started. Inside setup() the value is 0
+and and after the first iteration of draw it is 1, etc.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/frameCount.html">frameCount</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="frame-rate"><h3>frame-rate</h3><dl><dt>Arguments</dt><dd><code>[new-rate]</code></dd><dt>Docstring</dt><dd><pre>Specifies a new target framerate (number of frames to be displayed every
+second). If the processor is not fast enough to maintain the
+specified rate, it will not be achieved. For example, the function
+call (frame-rate 30) will attempt to refresh 30 times a second. It
+is recommended to set the frame rate within setup. The default rate
+is 60 frames per second.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/frameRate_.html">frameRate()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="height"><h3>height</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Height of the display window. The value of height is zero until
+size is called.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code>getHeight()</code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="no-cursor"><h3>no-cursor</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Hides the cursor from view. Will not work when running the in full
+screen (Present) mode.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/noCursor_.html">noCursor()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="screen-height"><h3>screen-height</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the height of the main screen in pixels.</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/displayHeight.html">displayHeight</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="screen-width"><h3>screen-width</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the width of the main screen in pixels.</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/displayWidth.html">displayWidth</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="sketch"><h3>sketch</h3><dl><dt>Arguments</dt><dd><code>[& opts]</code></dd><dt>Docstring</dt><dd><pre>Create and start a new visualisation applet.
+
+ :size           - A vector of width and height for the sketch or :fullscreen.
+                   Defaults to [500 300]. If you're using :fullscreen you may
+                   want to enable present mode - :features [:present].
+
+ :renderer       - Specify the renderer type. One of :p2d, :p3d,
+                   :java2d, :opengl, :pdf). Defaults to :java2d.
+                   :dxf renderer can't be used as sketch renderer.
+                   Use begin-raw method for :dxf instead.
+
+ :output-file    - Specify an output file path. Only used in :pdf
+                   mode.
+
+ :title          - a string which will be displayed at the top of
+                   the sketch window.
+
+ :setup          - a fn to be called once when setting the sketch up.
+
+ :draw           - a fn to be repeatedly called at most n times per
+                   second where n is the target frame-rate set for
+                   the visualisation.
+
+ :features       - A vector of keywords customizing sketch behaviour.
+                   Supported features:
+
+                   :keep-on-top - Sketch window will always be above other
+                                  windows. Note: some platforms might not
+                                  support always-on-top windows.
+
+                   :exit-on-close - Shutdown JVM  when sketch is closed.
+
+                   :resizable - Makes sketch resizable.
+
+                   :no-safe-draw - Do not catch and print exception in the
+                                   draw fn. By default all exceptions thrown
+                                   inside draw function are catched so sketch
+                                   doesn't break if something goes wrong.
+
+                   :present - Switch to present mode (fullscreen without
+                              borders, OS panels). You may want to use this
+                              feature together with :size :fullscreen.
+
+                   Usage example: :features [:keep-on-top :present]
+
+ :bgcolor        - Sets background color for unused space in present mode.
+                   Color is specified in hex format: #XXXXXX.
+                   Example: :bgcolor "#00FFFF" (cyan background)
+
+ :focus-gained   - Called when the sketch gains focus.
+
+ :focus-lost     - Called when the sketch loses focus.
+
+ :mouse-entered  - Called when the mouse enters the sketch window.
+
+ :mouse-exited   - Called when the mouse leaves the sketch window
+
+ :mouse-pressed  - Called every time a mouse button is pressed.
+
+ :mouse-released - Called every time a mouse button is released.
+
+ :mouse-clicked  - called once after a mouse button has been pressed
+                   and then released.
+
+ :mouse-moved    - Called every time the mouse moves and a button is
+                   not pressed.
+
+ :mouse-dragged  - Called every time the mouse moves and a button is
+                   pressed.
+
+ :mouse-wheel    - Called every time mouse wheel is rotated.
+                   Takes 1 argument - wheel rotation, an int.
+                   Negative values if the mouse wheel was rotated
+                   up/away from the user, and positive values
+                   if the mouse wheel was rotated down/towards the user
+
+ :key-pressed    - Called every time any key is pressed.
+
+ :key-released   - Called every time any key is released.
+
+ :key-typed      - Called once every time non-modifier keys are
+                   pressed.
+
+ :on-close       - Called once, when sketch is closed</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="target-frame-rate"><h3>target-frame-rate</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the target framerate specified with the fn frame-rate</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.5.0</dd></dl></div><div class="function" id="width"><h3>width</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Width of the display window. The value of width is zero until size is
+called.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code>getWidth()</code></dd><dt>Added in</dt><dd>1.0</dd></dl></div></div></body></html>
