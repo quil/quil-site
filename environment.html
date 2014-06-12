@@ -105,7 +105,8 @@ p {
 }</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="environment.html">Environment</a></h3><p class="function"><a href="#current-frame-rate">current-frame-rate</a></p><p class="function"><a href="#current-graphics">current-graphics</a></p><p class="function"><a href="#cursor">cursor</a></p><p class="function"><a href="#cursor-image">cursor-image</a></p><p class="function"><a href="#defsketch">defsketch</a></p><p class="function"><a href="#focused">focused</a></p><p class="function"><a href="#frame-count">frame-count</a></p><p class="function"><a href="#frame-rate">frame-rate</a></p><p class="function"><a href="#height">height</a></p><p class="function"><a href="#no-cursor">no-cursor</a></p><p class="function"><a href="#screen-height">screen-height</a></p><p class="function"><a href="#screen-width">screen-width</a></p><p class="function"><a href="#sketch">sketch</a></p><p class="function"><a href="#target-frame-rate">target-frame-rate</a></p><p class="function"><a href="#width">width</a></p></div><div class="fns-wrapper"><h2>Environment</h2><div class="function" id="current-frame-rate"><h3>current-frame-rate</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the current framerate</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/frameRate.html">frameRate</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="current-graphics"><h3>current-graphics</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Graphics currently used for drawing. By default it is sketch graphics,
 but if called inside with-graphics macro - graphics passed to the macro
 is returned. This method should be used if you need to call some methods
-that are not implemented by quil. Example (.beginDraw (current-graphics)).</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="cursor"><h3>cursor</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[cursor-mode]</code></dd><dt>Docstring</dt><dd><pre>Sets the cursor to a predefined symbol or makes it
+that are not implemented by quil. Example:
+(.beginDraw (current-graphics)).</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="cursor"><h3>cursor</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[cursor-mode]</code></dd><dt>Docstring</dt><dd><pre>Sets the cursor to a predefined symbol or makes it
 visible if already hidden (after no-cursor was called).
 
 Available modes: :arrow, :cross, :hand, :move, :text, :wait
@@ -130,24 +131,17 @@ screen (Present) mode.</pre></dd><dt>Works only inside sketch functions?</dt><dd
 
  :size           - A vector of width and height for the sketch or :fullscreen.
                    Defaults to [500 300]. If you're using :fullscreen you may
-                   want to enable present mode - :features [:present].
+                   want to enable present mode - :features [:present]
 
- :renderer       - Specify the renderer type. One of :p2d, :p3d,
-                   :java2d, :opengl, :pdf). Defaults to :java2d.
-                   :dxf renderer can't be used as sketch renderer.
-                   Use begin-raw method for :dxf instead.
+ :renderer       - Specify the renderer type. One of :p2d, :p3d, :java2d,
+                   :opengl, :pdf). Defaults to :java2d. :dxf renderer
+                   can't be used as sketch renderer. Use begin-raw method
+                   instead.
 
- :output-file    - Specify an output file path. Only used in :pdf
-                   mode.
+ :output-file    - Specify an output file path. Only used in :pdf mode.
 
- :title          - a string which will be displayed at the top of
+ :title          - A string which will be displayed at the top of
                    the sketch window.
-
- :setup          - a fn to be called once when setting the sketch up.
-
- :draw           - a fn to be repeatedly called at most n times per
-                   second where n is the target frame-rate set for
-                   the visualisation.
 
  :features       - A vector of keywords customizing sketch behaviour.
                    Supported features:
@@ -160,20 +154,32 @@ screen (Present) mode.</pre></dd><dt>Works only inside sketch functions?</dt><dd
 
                    :resizable - Makes sketch resizable.
 
-                   :no-safe-draw - Do not catch and print exception in the
-                                   draw fn. By default all exceptions thrown
-                                   inside draw function are catched so sketch
-                                   doesn't break if something goes wrong.
+                   :no-safe-fns - Do not catch and print exceptions thrown
+                                  inside functions provided to sketch (like
+                                  draw, mouse-click, key-pressed and
+                                  other). By default all exceptions thrown
+                                  inside these functions are catched. This
+                                  prevents sketch from breaking when bad
+                                  function was provided and allows user to
+                                  fix it and reload it on fly. You can
+                                  disable this behaviour by enabling
+                                  :no-safe-fns feature.
 
                    :present - Switch to present mode (fullscreen without
-                              borders, OS panels). You may want to use this
-                              feature together with :size :fullscreen.
+                              borders, OS panels). You may want to use
+                              this feature together with :size :fullscreen.
 
                    Usage example: :features [:keep-on-top :present]
 
  :bgcolor        - Sets background color for unused space in present mode.
                    Color is specified in hex format: #XXXXXX.
                    Example: :bgcolor "#00FFFF" (cyan background)
+
+ :setup          - A function to be called once when setting the sketch up.
+
+ :draw           - A function to be repeatedly called at most n times per
+                   second where n is the target frame-rate set for
+                   the visualisation.
 
  :focus-gained   - Called when the sketch gains focus.
 
@@ -200,7 +206,7 @@ screen (Present) mode.</pre></dd><dt>Works only inside sketch functions?</dt><dd
                    Takes 1 argument - wheel rotation, an int.
                    Negative values if the mouse wheel was rotated
                    up/away from the user, and positive values
-                   if the mouse wheel was rotated down/towards the user
+                   if the mouse wheel was rotated down/ towards the user
 
  :key-pressed    - Called every time any key is pressed.
 
@@ -209,5 +215,9 @@ screen (Present) mode.</pre></dd><dt>Works only inside sketch functions?</dt><dd
  :key-typed      - Called once every time non-modifier keys are
                    pressed.
 
- :on-close       - Called once, when sketch is closed</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="target-frame-rate"><h3>target-frame-rate</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the target framerate specified with the fn frame-rate</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.5.0</dd></dl></div><div class="function" id="width"><h3>width</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Width of the display window. The value of width is zero until size is
+ :on-close       - Called once, when sketch is closed
+
+ :middleware     - vector of middleware to be applied to the sketch.
+                   Middleware will be applied in the same order as in comp
+                   function: [f g] will be applied as (f (g options)).</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="target-frame-rate"><h3>target-frame-rate</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Returns the target framerate specified with the fn frame-rate</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.5.0</dd></dl></div><div class="function" id="width"><h3>width</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Width of the display window. The value of width is zero until size is
 called.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code>getWidth()</code></dd><dt>Added in</dt><dd>1.0</dd></dl></div></div></body></html>

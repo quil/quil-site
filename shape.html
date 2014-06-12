@@ -177,14 +177,15 @@ is :corner. Available modes are:
 down the frame rate of the application, but will enhance the visual
 refinement.
 
-The level parameter (int) increases the level of smoothness with the P2D and P3D
-renderers. This is the level of over sampling applied to the graphics buffer.
-The value '2' will double the rendering size before scaling it down to the
-display size. This is called '2x anti-aliasing.' The value 4 is used for 4x
-anti-aliasing and 8 is specified for 8x anti-aliasing. If level is set to 0,
-it will disable all smoothing; it's the equivalent of the function noSmooth().
-The maximum anti-aliasing level is determined by the hardware of the machine
-that is running the software.
+The level parameter (int) increases the level of smoothness with the
+P2D and P3D renderers. This is the level of over sampling applied to
+the graphics buffer. The value '2' will double the rendering size
+before scaling it down to the display size. This is called '2x
+anti-aliasing.' The value 4 is used for 4x anti-aliasing and 8 is
+specified for 8x anti-aliasing. If level is set to 0, it will disable
+all smoothing; it's the equivalent of the function noSmooth().
+The maximum anti-aliasing level is determined by the hardware of the
+machine that is running the software.
 
 Note that smooth will also improve image quality of resized images.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/smooth_.html">smooth()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="stroke-cap"><h3>stroke-cap</h3><dl><dt>Arguments</dt><dd><code>[cap-mode]</code></dd><dt>Docstring</dt><dd><pre>Sets the style for rendering line endings. These ends are either
 squared, extended, or rounded and specified with the corresponding
@@ -302,12 +303,13 @@ renderers.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt
 all of image data defined since the previous call to begin-shape is
 written into the image buffer. The keyword :close may be passed to
 close the shape (to connect the beginning and the end).</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/endShape_.html">endShape()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="quadratic-vertex"><h3>quadratic-vertex</h3><dl><dt>Arguments</dt><dd><code>[cx cy x3 y3]</code><code>[cx cy cz x3 y3 z3]</code></dd><dt>Docstring</dt><dd><pre>Specifies vertex coordinates for quadratic Bezier curves. Each call to
-quadratic-vertex defines the position of one control points and one anchor
-point of a Bezier curve, adding a new segment to a line or shape. The first
-time quadratic-vertex is used within a begin-shape call, it must be prefaced
-with a call to vertex to set the first anchor point. This function must be
-used between begin-shape and end-shape and only when there is no MODE parameter
-specified to begin-shape. Using the 3D version requires rendering with :p3d.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/quadraticVertex_.html">quadraticVertex()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="texture"><h3>texture</h3><dl><dt>Arguments</dt><dd><code>[img]</code></dd><dt>Docstring</dt><dd><pre>Sets a texture to be applied to vertex points. The texture fn must
+quadratic-vertex defines the position of one control points and one
+anchor point of a Bezier curve, adding a new segment to a line or shape.
+The first time quadratic-vertex is used within a begin-shape call, it
+must be prefaced with a call to vertex to set the first anchor point.
+This function must be used between begin-shape and end-shape and only
+when there is no MODE parameter specified to begin-shape. Using the 3D
+version requires rendering with :p3d.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/quadraticVertex_.html">quadraticVertex()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="texture"><h3>texture</h3><dl><dt>Arguments</dt><dd><code>[img]</code></dd><dt>Docstring</dt><dd><pre>Sets a texture to be applied to vertex points. The texture fn must
 be called between begin-shape and end-shape and before any calls to
 vertex.
 

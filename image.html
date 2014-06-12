@@ -102,7 +102,7 @@ p {
   overflow-y: scroll;
   width: 200px;
   position: fixed;
-}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="image.html">Image</a></h3><p class="function"><a href="#create-image">create-image</a></p><h4 class="subcategory"><a href="#loading-and-displaying">Loading & Displaying</a></h4><p class="function"><a href="#image">image</a></p><p class="function"><a href="#image-mode">image-mode</a></p><p class="function"><a href="#load-image">load-image</a></p><p class="function"><a href="#mask-image">mask-image</a></p><p class="function"><a href="#no-tint">no-tint</a></p><p class="function"><a href="#request-image">request-image</a></p><p class="function"><a href="#tint">tint</a></p><p class="function"><a href="#tint-float">tint-float</a></p><p class="function"><a href="#tint-int">tint-int</a></p><h4 class="subcategory"><a href="#pixels">Pixels</a></h4><p class="function"><a href="#blend">blend</a></p><p class="function"><a href="#copy">copy</a></p><p class="function"><a href="#display-filter">display-filter</a></p><p class="function"><a href="#filter-shader">filter-shader</a></p><p class="function"><a href="#get-pixel">get-pixel</a></p><p class="function"><a href="#image-filter">image-filter</a></p><p class="function"><a href="#pixels">pixels</a></p><p class="function"><a href="#set-image">set-image</a></p><p class="function"><a href="#set-pixel">set-pixel</a></p><p class="function"><a href="#update-pixels">update-pixels</a></p><h4 class="subcategory"><a href="#rendering">Rendering</a></h4><p class="function"><a href="#blend-mode">blend-mode</a></p><p class="function"><a href="#create-graphics">create-graphics</a></p></div><div class="fns-wrapper"><h2>Image</h2><div class="function" id="create-image"><h3>create-image</h3><dl><dt>Arguments</dt><dd><code>[w h format]</code></dd><dt>Docstring</dt><dd><pre>Creates a new PImage (the datatype for storing images). This
+}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="image.html">Image</a></h3><p class="function"><a href="#create-image">create-image</a></p><p class="function"><a href="#resize">resize</a></p><h4 class="subcategory"><a href="#loading-and-displaying">Loading & Displaying</a></h4><p class="function"><a href="#image">image</a></p><p class="function"><a href="#image-mode">image-mode</a></p><p class="function"><a href="#load-image">load-image</a></p><p class="function"><a href="#mask-image">mask-image</a></p><p class="function"><a href="#no-tint">no-tint</a></p><p class="function"><a href="#request-image">request-image</a></p><p class="function"><a href="#tint">tint</a></p><p class="function"><a href="#tint-float">tint-float</a></p><p class="function"><a href="#tint-int">tint-int</a></p><h4 class="subcategory"><a href="#pixels">Pixels</a></h4><p class="function"><a href="#blend">blend</a></p><p class="function"><a href="#copy">copy</a></p><p class="function"><a href="#display-filter">display-filter</a></p><p class="function"><a href="#filter-shader">filter-shader</a></p><p class="function"><a href="#get-pixel">get-pixel</a></p><p class="function"><a href="#image-filter">image-filter</a></p><p class="function"><a href="#pixels">pixels</a></p><p class="function"><a href="#set-image">set-image</a></p><p class="function"><a href="#set-pixel">set-pixel</a></p><p class="function"><a href="#update-pixels">update-pixels</a></p><h4 class="subcategory"><a href="#rendering">Rendering</a></h4><p class="function"><a href="#blend-mode">blend-mode</a></p><p class="function"><a href="#create-graphics">create-graphics</a></p></div><div class="fns-wrapper"><h2>Image</h2><div class="function" id="create-image"><h3>create-image</h3><dl><dt>Arguments</dt><dd><code>[w h format]</code></dd><dt>Docstring</dt><dd><pre>Creates a new PImage (the datatype for storing images). This
 provides a fresh buffer of pixels to play with. Set the size of the
 buffer with the width and height parameters. The format parameter
 defines how the pixels are stored. See the PImage reference for more
@@ -111,7 +111,17 @@ information.
 Possible formats: :rgb, :argb, :alpha (grayscale alpha channel)
 
 Prefer using create-image over initialising new PImage instances
-directly.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/createImage_.html">createImage()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><h3 class="subcategory" id="loading-and-displaying">Loading & Displaying</h3><div class="function" id="image"><h3>image</h3><dl><dt>Arguments</dt><dd><code>[img x y]</code><code>[img x y c d]</code></dd><dt>Docstring</dt><dd><pre>Displays images to the screen. Processing currently works with GIF,
+directly.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/createImage_.html">createImage()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="resize"><h3>resize</h3><dl><dt>Arguments</dt><dd><code>[img w h]</code></dd><dt>Docstring</dt><dd><pre>Resize the image to a new width and height. 
+To make the image scale proportionally, use 0 as the value for the wide or
+high parameter. For instance, to make the width of an image 150 pixels,
+and change the height using the same proportion, use resize(150, 0).
+
+Even though a PGraphics is technically a PImage, it is not possible 
+to rescale the image data found in a PGraphics. 
+(It's simply not possible to do this consistently across renderers: 
+technically infeasible with P3D, or what would it even do with PDF?) 
+If you want to resize PGraphics content, first get a copy of its image data
+using the get() method, and call resize() on the PImage that is returned.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://processing.org/reference/PImage_resize_.html">resize()</a></code></dd><dt>Added in</dt><dd>2.1.0</dd></dl></div><h3 class="subcategory" id="loading-and-displaying">Loading & Displaying</h3><div class="function" id="image"><h3>image</h3><dl><dt>Arguments</dt><dd><code>[img x y]</code><code>[img x y c d]</code></dd><dt>Docstring</dt><dd><pre>Displays images to the screen. Processing currently works with GIF,
 JPEG, and Targa images. The color of an image may be modified with
 the tint function and if a GIF has transparency, it will maintain
 its transparency. The img parameter specifies the image to display
@@ -250,7 +260,8 @@ resize the source pixels to fit the specified target region. No
 alpha information is used in the process, however if the source
 image has an alpha channel set, it will be copied as well. </pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/copy_.html">copy()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="display-filter"><h3>display-filter</h3><dl><dt>Arguments</dt><dd><code>[mode]</code><code>[mode level]</code></dd><dt>Docstring</dt><dd><pre>Originally named filter in Processing Language.
 Filters the display window with the specified mode and level.
-Level defines the quality of the filter and mode may be one of the following keywords:
+Level defines the quality of the filter and mode may be one of the
+following keywords:
 
 :threshold - converts the image to black and white pixels depending
              if they are above or below the threshold defined by
@@ -259,7 +270,8 @@ Level defines the quality of the filter and mode may be one of the following key
              0.5 is used.
 :gray      - converts any colors in the image to grayscale
              equivalents. Doesn't work with level.
-:invert    - sets each pixel to its inverse value. Doesn't work with level.
+:invert    - sets each pixel to its inverse value. Doesn't work with
+             level.
 :posterize - limits each channel of the image to the number of
              colors specified as the level parameter. The parameter can
              be set to values between 2 and 255, but results are most
@@ -268,7 +280,8 @@ Level defines the quality of the filter and mode may be one of the following key
              specifying the extent of the blurring. If no level
              parameter is used, the blur is equivalent to Guassian
              blur of radius 1.
-:opaque    - sets the alpha channel to entirely opaque. Doesn't work with level.
+:opaque    - sets the alpha channel to entirely opaque. Doesn't work
+             with level.
 :erode     - reduces the light areas. Doesn't work with level.
 :dilate    - increases the light areas.  Doesn't work with level.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/filter_.html">filter()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="filter-shader"><h3>filter-shader</h3><dl><dt>Arguments</dt><dd><code>[shader-obj]</code></dd><dt>Docstring</dt><dd><pre>Originally named filter in Processing Language.
 Filters the display window with given shader (only in :p2d and :p3d modes).</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/filter_.html">filter()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="get-pixel"><h3>get-pixel</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[img]</code><code>[x y]</code><code>[img x y]</code><code>[x y w h]</code><code>[img x y w h]</code></dd><dt>Docstring</dt><dd><pre>Reads the color of any pixel or grabs a section of an image. If no
@@ -296,7 +309,8 @@ the following keywords:
              0.5 is used.
 :gray      - converts any colors in the image to grayscale
              equivalents. Doesn't work with level.
-:invert    - sets each pixel to its inverse value. Doesn't work with level.
+:invert    - sets each pixel to its inverse value. Doesn't work with
+             level.
 :posterize - limits each channel of the image to the number of
              colors specified as the level parameter. The parameter can
              be set to values between 2 and 255, but results are most
@@ -305,7 +319,8 @@ the following keywords:
              specifying the extent of the blurring. If no level
              parameter is used, the blur is equivalent to Guassian
              blur of radius 1.
-:opaque    - sets the alpha channel to entirely opaque. Doesn't work with level.
+:opaque    - sets the alpha channel to entirely opaque. Doesn't work
+             with level.
 :erode     - reduces the light areas. Doesn't work with level.
 :dilate    - increases the light areas.  Doesn't work with level.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/PImage_filter_.html">PImage.filter()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="pixels"><h3>pixels</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[img]</code></dd><dt>Docstring</dt><dd><pre>Array containing the values for all the pixels in the display
 window or image. This array is therefore the size of the display window. If
