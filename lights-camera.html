@@ -1,114 +1,270 @@
-<!DOCTYPE html>
-<html><head><meta content="Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing." name="description"><title>Quil - Lights, Camera</title><style>body {
-  color: #333;
-}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 
-a {
-  color: #333;
-}
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+  <meta content=
+  "Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing."
+  name="description">
 
-p {
+  <title>Quil - Lights, Camera</title>
+  <style type="text/css">
+body {
+  color: #333;
+  }
+
+  a {
+  color: #333;
+  }
+
+  p {
   margin: 0px;
-}
+  }
 
-.category-div .category, #toc .category {
+  .category-div .category, #toc .category {
   margin: 0px 0px 7px 0px;
-}
+  }
 
-.category-div .category a, #toc .category a {
+  .category-div .category a, #toc .category a {
   color: #D53E07;
-}
+  }
 
-.category-div .subcategory, #toc .subcategory {
+  .category-div .subcategory, #toc .subcategory {
   margin: 15px 0px 0px 0px;
-}
+  }
 
-.category-div .subcategory a, #toc .subcategory a {
+  .category-div .subcategory a, #toc .subcategory a {
   color: #009900;
-}
+  }
 
-.category-div .function, #toc .function {
+  .category-div .function, #toc .function {
   margin-top: 2px;
-}
+  }
 
-.index-page .wrapper {
+  .index-page .wrapper {
   width: 1000px;
   margin: auto;
-}
+  }
 
-.index-page #title {
+  .index-page #title {
   text-align: center;
-}
+  }
 
-.index-page .column {
+  .index-page .column {
   float: left;
   width: 200px;
   display: inline-block;
-}
+  }
 
-.index-page .category-div {
+  .index-page .category-div {
   padding: 10px;
   margin: 10px;
   background: #FAFAFA;
-}
+  }
 
-.index-page #description {
+  .index-page #description {
   text-align: center;
   font-size: 18px;
-}
+  }
 
-.fn-page .fns-wrapper {
+  .fn-page .fns-wrapper {
   margin: auto;
   width: 700px;
-}
+  }
 
-.fn-page .fns-wrapper h2 {
+  .fn-page .fns-wrapper h2 {
   margin: 10px 0px;
-}
+  }
 
-.fn-page .fns-wrapper div.function {
+  .fn-page .fns-wrapper div.function {
   padding: 10px;
   margin: 10px auto;
   background: #FAFAFA;
-}
+  }
 
-.fn-page .fns-wrapper div.function code {
+  .fn-page .fns-wrapper div.function code {
   margin-right: 10px;
-}
+  }
 
-.fn-page .fns-wrapper div.function h3 {
+  .fn-page .fns-wrapper div.function h3 {
   margin: 2px 0px;
-}
+  }
 
-.fn-page .fns-wrapper pre {
+  .fn-page .fns-wrapper pre {
   margin: 0px;
-}
+  }
 
-.fn-page .fns-wrapper dt {
+  .fn-page .fns-wrapper dt {
   margin-top: 10px;
-}
+  }
 
-.fn-page .fns-wrapper dl {
+  .fn-page .fns-wrapper dl {
   margin: 0px;
-}
+  }
 
-.fn-page .fns-wrapper .subcategory {
+  .fn-page .fns-wrapper .subcategory {
   margin: 30px auto 0px auto;
-}
+  }
 
-.fn-page #toc {
+  .fn-page #toc {
   top: 0px;
   bottom: 20px;
   overflow-y: scroll;
   width: 200px;
   position: fixed;
-}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="lights-camera.html">Lights, Camera</a></h3><h4 class="subcategory"><a href="#camera-subcategory">Camera</a></h4><p class="function"><a href="#begin-camera">begin-camera</a></p><p class="function"><a href="#camera">camera</a></p><p class="function"><a href="#end-camera">end-camera</a></p><p class="function"><a href="#frustum">frustum</a></p><p class="function"><a href="#ortho">ortho</a></p><p class="function"><a href="#perspective">perspective</a></p><p class="function"><a href="#print-camera">print-camera</a></p><p class="function"><a href="#print-projection">print-projection</a></p><h4 class="subcategory"><a href="#coordinates-subcategory">Coordinates</a></h4><p class="function"><a href="#model-x">model-x</a></p><p class="function"><a href="#model-y">model-y</a></p><p class="function"><a href="#model-z">model-z</a></p><p class="function"><a href="#screen-x">screen-x</a></p><p class="function"><a href="#screen-y">screen-y</a></p><p class="function"><a href="#screen-z">screen-z</a></p><h4 class="subcategory"><a href="#lights-subcategory">Lights</a></h4><p class="function"><a href="#ambient-light">ambient-light</a></p><p class="function"><a href="#directional-light">directional-light</a></p><p class="function"><a href="#light-falloff">light-falloff</a></p><p class="function"><a href="#light-specular">light-specular</a></p><p class="function"><a href="#lights">lights</a></p><p class="function"><a href="#no-lights">no-lights</a></p><p class="function"><a href="#normal">normal</a></p><p class="function"><a href="#point-light">point-light</a></p><p class="function"><a href="#spot-light">spot-light</a></p><h4 class="subcategory"><a href="#material-properties-subcategory">Material Properties</a></h4><p class="function"><a href="#ambient">ambient</a></p><p class="function"><a href="#ambient-float">ambient-float</a></p><p class="function"><a href="#ambient-int">ambient-int</a></p><p class="function"><a href="#emissive">emissive</a></p><p class="function"><a href="#emissive-float">emissive-float</a></p><p class="function"><a href="#emissive-int">emissive-int</a></p><p class="function"><a href="#shininess">shininess</a></p><p class="function"><a href="#specular">specular</a></p></div><div class="fns-wrapper"><h2>Lights, Camera</h2><h3 class="subcategory" id="camera-subcategory">Camera</h3><div class="function" id="begin-camera"><h3>begin-camera</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Sets the matrix mode to the camera matrix so calls such as
+  }
+  </style>
+</head>
+
+<body class="fn-page">
+  <div id="toc">
+    <h3><a href="index.html">Back to index</a></h3>
+
+    <h3 class="category"><a href="lights-camera.html">Lights,
+    Camera</a></h3>
+
+    <h4 class="subcategory"><a href=
+    "#camera-subcategory">Camera</a></h4>
+
+    <p class="function"><a href=
+    "#begin-camera">begin-camera</a></p>
+
+    <p class="function"><a href="#camera">camera</a></p>
+
+    <p class="function"><a href="#end-camera">end-camera</a></p>
+
+    <p class="function"><a href="#frustum">frustum</a></p>
+
+    <p class="function"><a href="#ortho">ortho</a></p>
+
+    <p class="function"><a href="#perspective">perspective</a></p>
+
+    <p class="function"><a href=
+    "#print-camera">print-camera</a></p>
+
+    <p class="function"><a href=
+    "#print-projection">print-projection</a></p>
+
+    <h4 class="subcategory"><a href=
+    "#coordinates-subcategory">Coordinates</a></h4>
+
+    <p class="function"><a href="#model-x">model-x</a></p>
+
+    <p class="function"><a href="#model-y">model-y</a></p>
+
+    <p class="function"><a href="#model-z">model-z</a></p>
+
+    <p class="function"><a href="#screen-x">screen-x</a></p>
+
+    <p class="function"><a href="#screen-y">screen-y</a></p>
+
+    <p class="function"><a href="#screen-z">screen-z</a></p>
+
+    <h4 class="subcategory"><a href=
+    "#lights-subcategory">Lights</a></h4>
+
+    <p class="function"><a href=
+    "#ambient-light">ambient-light</a></p>
+
+    <p class="function"><a href=
+    "#directional-light">directional-light</a></p>
+
+    <p class="function"><a href=
+    "#light-falloff">light-falloff</a></p>
+
+    <p class="function"><a href=
+    "#light-specular">light-specular</a></p>
+
+    <p class="function"><a href="#lights">lights</a></p>
+
+    <p class="function"><a href="#no-lights">no-lights</a></p>
+
+    <p class="function"><a href="#normal">normal</a></p>
+
+    <p class="function"><a href="#point-light">point-light</a></p>
+
+    <p class="function"><a href="#spot-light">spot-light</a></p>
+
+    <h4 class="subcategory"><a href=
+    "#material-properties-subcategory">Material Properties</a></h4>
+
+    <p class="function"><a href="#ambient">ambient</a></p>
+
+    <p class="function"><a href=
+    "#ambient-float">ambient-float</a></p>
+
+    <p class="function"><a href="#ambient-int">ambient-int</a></p>
+
+    <p class="function"><a href="#emissive">emissive</a></p>
+
+    <p class="function"><a href=
+    "#emissive-float">emissive-float</a></p>
+
+    <p class="function"><a href=
+    "#emissive-int">emissive-int</a></p>
+
+    <p class="function"><a href="#shininess">shininess</a></p>
+
+    <p class="function"><a href="#specular">specular</a></p>
+  </div>
+
+  <div class="fns-wrapper">
+    <h2>Lights, Camera</h2>
+
+    <h3 class="subcategory" id="camera-subcategory">Camera</h3>
+
+    <div class="function" id="begin-camera">
+      <h3>begin-camera</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the matrix mode to the camera matrix so calls such as
 translate, rotate, apply-matrix and reset-matrix affect the
 camera. begin-camera should always be used with a following
 end-camera and pairs of begin-camera and end-camera cannot be
 nested.
 
-For most situations the camera function will be sufficient.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/beginCamera_.html">beginCamera()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="camera"><h3>camera</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[eyeX eyeY eyeZ centerX centerY centerZ upX upY upZ]</code></dd><dt>Docstring</dt><dd><pre>Sets the position of the camera through setting the eye position,
+For most situations the camera function will be sufficient.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/beginCamera_.html">beginCamera()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="camera">
+      <h3>camera</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[eyeX eyeY eyeZ centerX centerY
+        centerZ upX upY upZ]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the position of the camera through setting the eye position,
 the center of the scene, and which axis is facing upward. Moving the
 eye position and the direction it is pointing (the center of the
 scene) allows the images to be seen from different angles. The
@@ -127,16 +283,143 @@ upY:      1
 upZ:      0
 
 Similar imilar to gluLookAt() in OpenGL, but it first clears the
-current camera settings.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/camera_.html">camera()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="end-camera"><h3>end-camera</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Unsets the matrix mode from the camera matrix. See begin-camera.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/endCamera_.html">endCamera()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="frustum"><h3>frustum</h3><dl><dt>Arguments</dt><dd><code>[left right bottom top near far]</code></dd><dt>Docstring</dt><dd><pre>Sets a perspective matrix defined through the parameters. Works
+current camera settings.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/camera_.html">camera()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="end-camera">
+      <h3>end-camera</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Unsets the matrix mode from the camera matrix. See begin-camera.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/endCamera_.html">endCamera()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="frustum">
+      <h3>frustum</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[left right bottom top near far]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets a perspective matrix defined through the parameters. Works
 like glFrustum, except it wipes out the current perspective matrix
-rather than muliplying itself with it.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/frustum_.html">frustum()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="ortho"><h3>ortho</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[left right bottom top]</code><code>[left right bottom top near far]</code></dd><dt>Docstring</dt><dd><pre>Sets an orthographic projection and defines a parallel clipping
+rather than muliplying itself with it.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/frustum_.html">frustum()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="ortho">
+      <h3>ortho</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[left right bottom
+        top]</code><code>[left right bottom top near
+        far]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets an orthographic projection and defines a parallel clipping
 volume. All objects with the same dimension appear the same size,
 regardless of whether they are near or far from the camera. The
 parameters to this function specify the clipping volume where left
 and right are the minimum and maximum x values, top and bottom are
 the minimum and maximum y values, and near and far are the minimum
 and maximum z values. If no parameters are given, the default is
-used: (ortho 0 width 0 height -10 10)</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/ortho_.html">ortho()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="perspective"><h3>perspective</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[fovy aspect z-near z-far]</code></dd><dt>Docstring</dt><dd><pre>Sets a perspective projection applying foreshortening, making
+used: (ortho 0 width 0 height -10 10)
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/ortho_.html">ortho()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="perspective">
+      <h3>perspective</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[fovy aspect z-near
+        z-far]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets a perspective projection applying foreshortening, making
 distant objects appear smaller than closer ones. The parameters
 define a viewing volume with the shape of truncated pyramid. Objects
 near to the front of the volume appear their actual size, while
@@ -146,36 +429,353 @@ projection. The version of perspective without parameters sets the
 default perspective and the version with four parameters allows the
 programmer to set the area precisely. The default values are:
 perspective(PI/3.0, width/height, cameraZ/10.0, cameraZ*10.0) where
-cameraZ is ((height/2.0) / tan(PI*60.0/360.0));</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/perspective_.html">perspective()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="print-camera"><h3>print-camera</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Prints the current camera matrix to std out. Useful for debugging.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/printCamera_.html">printCamera()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="print-projection"><h3>print-projection</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Prints the current projection matrix to std out. Useful for
-debugging</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/printProjection_.html">printProjection()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><h3 class="subcategory" id="coordinates-subcategory">Coordinates</h3><div class="function" id="model-x"><h3>model-x</h3><dl><dt>Arguments</dt><dd><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Returns the three-dimensional x, y, z position in model space. This
+cameraZ is ((height/2.0) / tan(PI*60.0/360.0));
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/perspective_.html">perspective()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="print-camera">
+      <h3>print-camera</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Prints the current camera matrix to std out. Useful for debugging.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/printCamera_.html">printCamera()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="print-projection">
+      <h3>print-projection</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Prints the current projection matrix to std out. Useful for
+debugging
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/printProjection_.html">
+        printProjection()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <h3 class="subcategory" id="coordinates-subcategory">
+    Coordinates</h3>
+
+    <div class="function" id="model-x">
+      <h3>model-x</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Returns the three-dimensional x, y, z position in model space. This
 returns the x value for a given coordinate based on the current set
 of transformations (scale, rotate, translate, etc.) The x value can
 be used to place an object in space relative to the location of the
-original point once the transformations are no longer in use.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/modelX_.html">modelX()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="model-y"><h3>model-y</h3><dl><dt>Arguments</dt><dd><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Returns the three-dimensional x, y, z position in model space. This
+original point once the transformations are no longer in use.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/modelX_.html">modelX()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="model-y">
+      <h3>model-y</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Returns the three-dimensional x, y, z position in model space. This
 returns the y value for a given coordinate based on the current set
 of transformations (scale, rotate, translate, etc.) The y value can
 be used to place an object in space relative to the location of the
-original point once the transformations are no longer in use.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/modelY_.html">modelY()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="model-z"><h3>model-z</h3><dl><dt>Arguments</dt><dd><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Returns the three-dimensional x, y, z position in model space. This
+original point once the transformations are no longer in use.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/modelY_.html">modelY()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="model-z">
+      <h3>model-z</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Returns the three-dimensional x, y, z position in model space. This
 returns the z value for a given coordinate based on the current set
 of transformations (scale, rotate, translate, etc.) The z value can
 be used to place an object in space relative to the location of the
-original point once the transformations are no longer in use.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/modelZ_.html">modelZ()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="screen-x"><h3>screen-x</h3><dl><dt>Arguments</dt><dd><code>[x y]</code><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Takes a three-dimensional x, y, z position and returns the x value
+original point once the transformations are no longer in use.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/modelZ_.html">modelZ()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="screen-x">
+      <h3>screen-x</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y]</code><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Takes a three-dimensional x, y, z position and returns the x value
 for where it will appear on a (two-dimensional) screen, once
-affected by translate, scale or any other transformations</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/screenX_.html">screenX()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="screen-y"><h3>screen-y</h3><dl><dt>Arguments</dt><dd><code>[x y]</code><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Takes a three-dimensional x, y, z position and returns the y value
+affected by translate, scale or any other transformations
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/screenX_.html">screenX()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="screen-y">
+      <h3>screen-y</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y]</code><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Takes a three-dimensional x, y, z position and returns the y value
 for where it will appear on a (two-dimensional) screen, once
-affected by translate, scale or any other transformations</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/screenY_.html">screenY()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="screen-z"><h3>screen-z</h3><dl><dt>Arguments</dt><dd><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Given an x, y, z coordinate, returns its z value.
+affected by translate, scale or any other transformations
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/screenY_.html">screenY()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="screen-z">
+      <h3>screen-z</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Given an x, y, z coordinate, returns its z value.
  This value can be used to determine if an x, y, z coordinate is in
  front or in back of another (x, y, z) coordinate. The units are
  based on how the zbuffer is set up, and don't relate to anything
  'real'. They're only useful for in comparison to another value
- obtained from screen-z, or directly out of the zbuffer</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/screenZ_.html">screenZ()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><h3 class="subcategory" id="lights-subcategory">Lights</h3><div class="function" id="ambient-light"><h3>ambient-light</h3><dl><dt>Arguments</dt><dd><code>[red green blue]</code><code>[red green blue x y z]</code></dd><dt>Docstring</dt><dd><pre>Adds an ambient light. Ambient light doesn't come from a specific direction,
+ obtained from screen-z, or directly out of the zbuffer
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/screenZ_.html">screenZ()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <h3 class="subcategory" id="lights-subcategory">Lights</h3>
+
+    <div class="function" id="ambient-light">
+      <h3>ambient-light</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[red green blue]</code><code>[red green blue x y
+        z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Adds an ambient light. Ambient light doesn't come from a specific direction,
 the rays have light have bounced around so much that objects are
 evenly lit from all sides. Ambient lights are almost always used in
 combination with other types of lights. Lights need to be included
 in the draw to remain persistent in a looping program. Placing them
 in the setup of a looping program will cause them to only have an
 effect the first time through the loop. The effect of the
-parameters is determined by the current color mode.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/ambientLight_.html">ambientLight()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="directional-light"><h3>directional-light</h3><dl><dt>Arguments</dt><dd><code>[r g b nx ny nz]</code></dd><dt>Docstring</dt><dd><pre>Adds a directional light. Directional light comes from one
+parameters is determined by the current color mode.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/ambientLight_.html">ambientLight()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="directional-light">
+      <h3>directional-light</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[r g b nx ny nz]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Adds a directional light. Directional light comes from one
 direction and is stronger when hitting a surface squarely and weaker
 if it hits at a a gentle angle. After hitting a surface, a
 directional lights scatters in all directions. Lights need to be
@@ -185,7 +785,39 @@ them to only have an effect the first time through the loop. The
 affect of the r, g, and b parameters is determined by the current
 color mode. The nx, ny, and nz parameters specify the direction the
 light is facing. For example, setting ny to -1 will cause the
-geometry to be lit from below (the light is facing directly upward)</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/directionalLight_.html">directionalLight()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="light-falloff"><h3>light-falloff</h3><dl><dt>Arguments</dt><dd><code>[constant linear quadratic]</code></dd><dt>Docstring</dt><dd><pre>Sets the falloff rates for point lights, spot lights, and ambient
+geometry to be lit from below (the light is facing directly upward)
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/directionalLight_.html">
+        directionalLight()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="light-falloff">
+      <h3>light-falloff</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[constant linear quadratic]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the falloff rates for point lights, spot lights, and ambient
 lights. The parameters are used to determine the falloff with the
 following equation:
 
@@ -199,13 +831,75 @@ used, for example, if you wanted a region of your scene to be lit
 ambiently one color and another region to be lit ambiently by
 another color, you would use an ambient light with location and
 falloff. You can think of it as a point light that doesn't care
-which direction a surface is facing.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/lightFalloff_.html">lightFalloff()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="light-specular"><h3>light-specular</h3><dl><dt>Arguments</dt><dd><code>[r g b]</code></dd><dt>Docstring</dt><dd><pre>Sets the specular color for lights. Like fill, it affects only the
+which direction a surface is facing.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/lightFalloff_.html">lightFalloff()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="light-specular">
+      <h3>light-specular</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[r g b]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the specular color for lights. Like fill, it affects only the
 elements which are created after it in the code. Specular refers to
 light which bounces off a surface in a perferred direction (rather
 than bouncing in all directions like a diffuse light) and is used
 for creating highlights. The specular quality of a light interacts
 with the specular material qualities set through the specular and
-shininess functions.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/lightSpecular_.html">lightSpecular()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="lights"><h3>lights</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Sets the default ambient light, directional light, falloff, and
+shininess functions.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/lightSpecular_.html">lightSpecular()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="lights">
+      <h3>lights</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the default ambient light, directional light, falloff, and
 specular values. The defaults are:
 
 (ambient-light 128 128 128)
@@ -216,58 +910,455 @@ specular values. The defaults are:
 Lights need to be included in the draw to remain persistent in a
 looping program. Placing them in the setup of a looping program
 will cause them to only have an effect the first time through the
-loop.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/lights_.html">lights()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="no-lights"><h3>no-lights</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Disable all lighting. Lighting is turned off by default and enabled
+loop.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/lights_.html">lights()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="no-lights">
+      <h3>no-lights</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Disable all lighting. Lighting is turned off by default and enabled
 with the lights fn. This function can be used to disable lighting so
 that 2D geometry (which does not require lighting) can be drawn
-after a set of lighted 3D geometry.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/noLights_.html">noLights()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="normal"><h3>normal</h3><dl><dt>Arguments</dt><dd><code>[nx ny nz]</code></dd><dt>Docstring</dt><dd><pre>Sets the current normal vector. This is for drawing three
+after a set of lighted 3D geometry.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/noLights_.html">noLights()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="normal">
+      <h3>normal</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[nx ny nz]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the current normal vector. This is for drawing three
 dimensional shapes and surfaces and specifies a vector perpendicular
 to the surface of the shape which determines how lighting affects
 it. Processing attempts to automatically assign normals to shapes,
 but since that's imperfect, this is a better option when you want
-more control. This function is identical to glNormal3f() in OpenGL.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/normal_.html">normal()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="point-light"><h3>point-light</h3><dl><dt>Arguments</dt><dd><code>[r g b x y z]</code></dd><dt>Docstring</dt><dd><pre>Adds a point light. Lights need to be included in the draw() to
+more control. This function is identical to glNormal3f() in OpenGL.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/normal_.html">normal()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="point-light">
+      <h3>point-light</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[r g b x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Adds a point light. Lights need to be included in the draw() to
 remain persistent in a looping program. Placing them in the setup()
 of a looping program will cause them to only have an effect the
 first time through the loop. The affect of the r, g, and b
 parameters is determined by the current color mode. The x, y, and z
-parameters set the position of the light</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/pointLight_.html">pointLight()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="spot-light"><h3>spot-light</h3><dl><dt>Arguments</dt><dd><code>[r g b x y z nx ny nz angle concentration]</code><code>[[r g b] [x y z] [nx ny nz] angle concentration]</code></dd><dt>Docstring</dt><dd><pre>Adds a spot light. Lights need to be included in the draw to
+parameters set the position of the light
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/pointLight_.html">pointLight()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="spot-light">
+      <h3>spot-light</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[r g b x y z nx ny nz angle
+        concentration]</code><code>[[r g b] [x y z] [nx ny nz]
+        angle concentration]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Adds a spot light. Lights need to be included in the draw to
 remain persistent in a looping program. Placing them in the setup
 of a looping program will cause them to only have an effect the
 first time through the loop. The affect of the r, g, and b
 parameters is determined by the current color mode. The x, y, and z
 parameters specify the position of the light and nx, ny, nz specify
 the direction or light. The angle parameter affects angle of the
-spotlight cone.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/spotLight_.html">spotLight()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><h3 class="subcategory" id="material-properties-subcategory">Material Properties</h3><div class="function" id="ambient"><h3>ambient</h3><dl><dt>Arguments</dt><dd><code>[rgb]</code><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Sets the ambient reflectance for shapes drawn to the screen. This
+spotlight cone.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/spotLight_.html">spotLight()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <h3 class="subcategory" id="material-properties-subcategory">
+    Material Properties</h3>
+
+    <div class="function" id="ambient">
+      <h3>ambient</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[rgb]</code><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the ambient reflectance for shapes drawn to the screen. This
 is combined with the ambient light component of environment. The
 color components set through the parameters define the
 reflectance. For example in the default color mode, setting x=255,
 y=126, z=0, would cause all the red light to reflect and half of the
 green light to reflect. Used in combination with emissive, specular,
-and shininess in setting the material properties of shapes.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/ambient_.html">ambient()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="ambient-float"><h3>ambient-float</h3><dl><dt>Arguments</dt><dd><code>[gray]</code><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Sets the ambient reflectance for shapes drawn to the screen. This
+and shininess in setting the material properties of shapes.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/ambient_.html">ambient()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="ambient-float">
+      <h3>ambient-float</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[gray]</code><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the ambient reflectance for shapes drawn to the screen. This
 is combined with the ambient light component of environment. The
 color components set through the parameters define the
 reflectance. For example in the default color mode, setting x=255,
 y=126, z=0, would cause all the red light to reflect and half of the
 green light to reflect. Used in combination with emissive, specular,
-and shininess in setting the material properties of shapes.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/ambient_.html">ambient()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="ambient-int"><h3>ambient-int</h3><dl><dt>Arguments</dt><dd><code>[rgb]</code></dd><dt>Docstring</dt><dd><pre>Sets the ambient reflectance for shapes drawn to the screen. This
+and shininess in setting the material properties of shapes.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/ambient_.html">ambient()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="ambient-int">
+      <h3>ambient-int</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[rgb]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the ambient reflectance for shapes drawn to the screen. This
 is combined with the ambient light component of environment. The rgb
 color components set define the reflectance. Used in combination
 with emissive, specular, and shininess in setting the material
-properties of shapes.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/ambient_.html">ambient()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="emissive"><h3>emissive</h3><dl><dt>Arguments</dt><dd><code>[c]</code><code>[r g b]</code></dd><dt>Docstring</dt><dd><pre>Sets the emissive color of the material used for drawing shapes
+properties of shapes.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/ambient_.html">ambient()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="emissive">
+      <h3>emissive</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[c]</code><code>[r g b]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the emissive color of the material used for drawing shapes
 drawn to the screen. Used in combination with ambient, specular, and
 shininess in setting the material properties of shapes.
 
 If passed one arg - it is assumed to be an int (i.e. a color),
-multiple args are converted to floats.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/emissive_.html">emissive()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="emissive-float"><h3>emissive-float</h3><dl><dt>Arguments</dt><dd><code>[float-val]</code><code>[r g b]</code></dd><dt>Docstring</dt><dd><pre>Sets the emissive color of the material used for drawing shapes
+multiple args are converted to floats.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/emissive_.html">emissive()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="emissive-float">
+      <h3>emissive-float</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[float-val]</code><code>[r g b]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the emissive color of the material used for drawing shapes
  drawn to the screen. Used in combination with ambient, specular, and
  shininess in setting the material properties of shapes. Converts all
- args to floats</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/emissive_.html">emissive()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="emissive-int"><h3>emissive-int</h3><dl><dt>Arguments</dt><dd><code>[int-val]</code></dd><dt>Docstring</dt><dd><pre>Sets the emissive color of the material used for drawing shapes
+ args to floats
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/emissive_.html">emissive()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="emissive-int">
+      <h3>emissive-int</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[int-val]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the emissive color of the material used for drawing shapes
 drawn to the screen. Used in combination with ambient, specular, and
 shininess in setting the material properties of shapes. Converts all
-args to ints</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/emissive_.html">emissive()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="shininess"><h3>shininess</h3><dl><dt>Arguments</dt><dd><code>[shine]</code></dd><dt>Docstring</dt><dd><pre>Sets the amount of gloss in the surface of shapes. Used in
+args to ints
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/emissive_.html">emissive()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="shininess">
+      <h3>shininess</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[shine]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the amount of gloss in the surface of shapes. Used in
 combination with ambient, specular, and emissive in setting
-the material properties of shapes.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/shininess_.html">shininess()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="specular"><h3>specular</h3><dl><dt>Arguments</dt><dd><code>[gray]</code><code>[x y z]</code></dd><dt>Docstring</dt><dd><pre>Sets the specular color of the materials used for shapes drawn to
+the material properties of shapes.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/shininess_.html">shininess()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="specular">
+      <h3>specular</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[gray]</code><code>[x y z]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the specular color of the materials used for shapes drawn to
 the screen, which sets the color of hightlights. Specular refers to
 light which bounces off a surface in a perferred direction (rather
 than bouncing in all directions like a diffuse light). Used in
 combination with emissive, ambient, and shininess in setting
-the material properties of shapes.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/specular_.html">specular()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div></div></body></html>
+the material properties of shapes.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/specular_.html">specular()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+  </div>
+</body>
+</html>

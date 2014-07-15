@@ -1,108 +1,208 @@
-<!DOCTYPE html>
-<html><head><meta content="Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing." name="description"><title>Quil - Image</title><style>body {
-  color: #333;
-}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 
-a {
-  color: #333;
-}
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+  <meta content=
+  "Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing."
+  name="description">
 
-p {
+  <title>Quil - Image</title>
+  <style type="text/css">
+body {
+  color: #333;
+  }
+
+  a {
+  color: #333;
+  }
+
+  p {
   margin: 0px;
-}
+  }
 
-.category-div .category, #toc .category {
+  .category-div .category, #toc .category {
   margin: 0px 0px 7px 0px;
-}
+  }
 
-.category-div .category a, #toc .category a {
+  .category-div .category a, #toc .category a {
   color: #D53E07;
-}
+  }
 
-.category-div .subcategory, #toc .subcategory {
+  .category-div .subcategory, #toc .subcategory {
   margin: 15px 0px 0px 0px;
-}
+  }
 
-.category-div .subcategory a, #toc .subcategory a {
+  .category-div .subcategory a, #toc .subcategory a {
   color: #009900;
-}
+  }
 
-.category-div .function, #toc .function {
+  .category-div .function, #toc .function {
   margin-top: 2px;
-}
+  }
 
-.index-page .wrapper {
+  .index-page .wrapper {
   width: 1000px;
   margin: auto;
-}
+  }
 
-.index-page #title {
+  .index-page #title {
   text-align: center;
-}
+  }
 
-.index-page .column {
+  .index-page .column {
   float: left;
   width: 200px;
   display: inline-block;
-}
+  }
 
-.index-page .category-div {
+  .index-page .category-div {
   padding: 10px;
   margin: 10px;
   background: #FAFAFA;
-}
+  }
 
-.index-page #description {
+  .index-page #description {
   text-align: center;
   font-size: 18px;
-}
+  }
 
-.fn-page .fns-wrapper {
+  .fn-page .fns-wrapper {
   margin: auto;
   width: 700px;
-}
+  }
 
-.fn-page .fns-wrapper h2 {
+  .fn-page .fns-wrapper h2 {
   margin: 10px 0px;
-}
+  }
 
-.fn-page .fns-wrapper div.function {
+  .fn-page .fns-wrapper div.function {
   padding: 10px;
   margin: 10px auto;
   background: #FAFAFA;
-}
+  }
 
-.fn-page .fns-wrapper div.function code {
+  .fn-page .fns-wrapper div.function code {
   margin-right: 10px;
-}
+  }
 
-.fn-page .fns-wrapper div.function h3 {
+  .fn-page .fns-wrapper div.function h3 {
   margin: 2px 0px;
-}
+  }
 
-.fn-page .fns-wrapper pre {
+  .fn-page .fns-wrapper pre {
   margin: 0px;
-}
+  }
 
-.fn-page .fns-wrapper dt {
+  .fn-page .fns-wrapper dt {
   margin-top: 10px;
-}
+  }
 
-.fn-page .fns-wrapper dl {
+  .fn-page .fns-wrapper dl {
   margin: 0px;
-}
+  }
 
-.fn-page .fns-wrapper .subcategory {
+  .fn-page .fns-wrapper .subcategory {
   margin: 30px auto 0px auto;
-}
+  }
 
-.fn-page #toc {
+  .fn-page #toc {
   top: 0px;
   bottom: 20px;
   overflow-y: scroll;
   width: 200px;
   position: fixed;
-}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="image.html">Image</a></h3><p class="function"><a href="#create-image">create-image</a></p><p class="function"><a href="#resize">resize</a></p><h4 class="subcategory"><a href="#loading-and-displaying-subcategory">Loading & Displaying</a></h4><p class="function"><a href="#image">image</a></p><p class="function"><a href="#image-mode">image-mode</a></p><p class="function"><a href="#load-image">load-image</a></p><p class="function"><a href="#mask-image">mask-image</a></p><p class="function"><a href="#no-tint">no-tint</a></p><p class="function"><a href="#request-image">request-image</a></p><p class="function"><a href="#tint">tint</a></p><p class="function"><a href="#tint-float">tint-float</a></p><p class="function"><a href="#tint-int">tint-int</a></p><h4 class="subcategory"><a href="#pixels-subcategory">Pixels</a></h4><p class="function"><a href="#blend">blend</a></p><p class="function"><a href="#copy">copy</a></p><p class="function"><a href="#display-filter">display-filter</a></p><p class="function"><a href="#filter-shader">filter-shader</a></p><p class="function"><a href="#get-pixel">get-pixel</a></p><p class="function"><a href="#image-filter">image-filter</a></p><p class="function"><a href="#pixels">pixels</a></p><p class="function"><a href="#set-image">set-image</a></p><p class="function"><a href="#set-pixel">set-pixel</a></p><p class="function"><a href="#update-pixels">update-pixels</a></p><h4 class="subcategory"><a href="#rendering-subcategory">Rendering</a></h4><p class="function"><a href="#blend-mode">blend-mode</a></p><p class="function"><a href="#create-graphics">create-graphics</a></p></div><div class="fns-wrapper"><h2>Image</h2><div class="function" id="create-image"><h3>create-image</h3><dl><dt>Arguments</dt><dd><code>[w h format]</code></dd><dt>Docstring</dt><dd><pre>Creates a new PImage (the datatype for storing images). This
+  }
+  </style>
+</head>
+
+<body class="fn-page">
+  <div id="toc">
+    <h3><a href="index.html">Back to index</a></h3>
+
+    <h3 class="category"><a href="image.html">Image</a></h3>
+
+    <p class="function"><a href=
+    "#create-image">create-image</a></p>
+
+    <p class="function"><a href="#resize">resize</a></p>
+
+    <h4 class="subcategory"><a href=
+    "#loading-and-displaying-subcategory">Loading &amp;
+    Displaying</a></h4>
+
+    <p class="function"><a href="#image">image</a></p>
+
+    <p class="function"><a href="#image-mode">image-mode</a></p>
+
+    <p class="function"><a href="#load-image">load-image</a></p>
+
+    <p class="function"><a href="#mask-image">mask-image</a></p>
+
+    <p class="function"><a href="#no-tint">no-tint</a></p>
+
+    <p class="function"><a href=
+    "#request-image">request-image</a></p>
+
+    <p class="function"><a href="#tint">tint</a></p>
+
+    <p class="function"><a href="#tint-float">tint-float</a></p>
+
+    <p class="function"><a href="#tint-int">tint-int</a></p>
+
+    <h4 class="subcategory"><a href=
+    "#pixels-subcategory">Pixels</a></h4>
+
+    <p class="function"><a href="#blend">blend</a></p>
+
+    <p class="function"><a href="#copy">copy</a></p>
+
+    <p class="function"><a href=
+    "#display-filter">display-filter</a></p>
+
+    <p class="function"><a href=
+    "#filter-shader">filter-shader</a></p>
+
+    <p class="function"><a href="#get-pixel">get-pixel</a></p>
+
+    <p class="function"><a href=
+    "#image-filter">image-filter</a></p>
+
+    <p class="function"><a href="#pixels">pixels</a></p>
+
+    <p class="function"><a href="#set-image">set-image</a></p>
+
+    <p class="function"><a href="#set-pixel">set-pixel</a></p>
+
+    <p class="function"><a href=
+    "#update-pixels">update-pixels</a></p>
+
+    <h4 class="subcategory"><a href=
+    "#rendering-subcategory">Rendering</a></h4>
+
+    <p class="function"><a href="#blend-mode">blend-mode</a></p>
+
+    <p class="function"><a href=
+    "#create-graphics">create-graphics</a></p>
+  </div>
+
+  <div class="fns-wrapper">
+    <h2>Image</h2>
+
+    <div class="function" id="create-image">
+      <h3>create-image</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[w h format]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Creates a new PImage (the datatype for storing images). This
 provides a fresh buffer of pixels to play with. Set the size of the
 buffer with the width and height parameters. The format parameter
 defines how the pixels are stored. See the PImage reference for more
@@ -111,7 +211,38 @@ information.
 Possible formats: :rgb, :argb, :alpha (grayscale alpha channel)
 
 Prefer using create-image over initialising new PImage instances
-directly.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/createImage_.html">createImage()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="resize"><h3>resize</h3><dl><dt>Arguments</dt><dd><code>[img w h]</code></dd><dt>Docstring</dt><dd><pre>Resize the image to a new width and height. 
+directly.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/createImage_.html">createImage()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="resize">
+      <h3>resize</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[img w h]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Resize the image to a new width and height. 
 To make the image scale proportionally, use 0 as the value for the wide or
 high parameter. For instance, to make the width of an image 150 pixels,
 and change the height using the same proportion, use resize(150, 0).
@@ -121,7 +252,42 @@ to rescale the image data found in a PGraphics.
 (It's simply not possible to do this consistently across renderers: 
 technically infeasible with P3D, or what would it even do with PDF?) 
 If you want to resize PGraphics content, first get a copy of its image data
-using the get() method, and call resize() on the PImage that is returned.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://processing.org/reference/PImage_resize_.html">resize()</a></code></dd><dt>Added in</dt><dd>2.1.0</dd></dl></div><h3 class="subcategory" id="loading-and-displaying-subcategory">Loading & Displaying</h3><div class="function" id="image"><h3>image</h3><dl><dt>Arguments</dt><dd><code>[img x y]</code><code>[img x y c d]</code></dd><dt>Docstring</dt><dd><pre>Displays images to the screen. Processing currently works with GIF,
+using the get() method, and call resize() on the PImage that is returned.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://processing.org/reference/PImage_resize_.html">resize()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>2.1.0</dd>
+      </dl>
+    </div>
+
+    <h3 class="subcategory" id=
+    "loading-and-displaying-subcategory">Loading &amp;
+    Displaying</h3>
+
+    <div class="function" id="image">
+      <h3>image</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[img x y]</code><code>[img x y c d]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Displays images to the screen. Processing currently works with GIF,
 JPEG, and Targa images. The color of an image may be modified with
 the tint function and if a GIF has transparency, it will maintain
 its transparency. The img parameter specifies the image to display
@@ -134,7 +300,38 @@ define the x and y values of the opposite corner of the image.
 
 Starting with release 0124, when using the default (JAVA2D)
 renderer, smooth will also improve image quality of resized
-images.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/image_.html">image()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="image-mode"><h3>image-mode</h3><dl><dt>Arguments</dt><dd><code>[mode]</code></dd><dt>Docstring</dt><dd><pre>Modifies the location from which images draw. The default mode is :corner.
+images.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/image_.html">image()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="image-mode">
+      <h3>image-mode</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[mode]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Modifies the location from which images draw. The default mode is :corner.
  Available modes are:
 
 :corner  - specifies the location to be the upper left corner and
@@ -145,7 +342,38 @@ images.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Or
            location of one corner of the image and uses the fourth
            and fifth parameters to set the opposite corner.
 
-:center  - draw images centered at the given x and y position.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/imageMode_.html">imageMode()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="load-image"><h3>load-image</h3><dl><dt>Arguments</dt><dd><code>[filename]</code></dd><dt>Docstring</dt><dd><pre>Loads an image into a variable of type PImage. Four types of
+:center  - draw images centered at the given x and y position.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/imageMode_.html">imageMode()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="load-image">
+      <h3>load-image</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[filename]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Loads an image into a variable of type PImage. Four types of
 images ( .gif, .jpg, .tga, .png) images may be loaded. To load
 correctly, images must be located in the data directory of the
 current sketch. In most cases, load all images in setup to preload
@@ -165,7 +393,38 @@ returned, but the width and height of the image will be set to
 -1. This happens if bad image data is returned or cannot be decoded
 properly. Sometimes this happens with image URLs that produce a 403
 error or that redirect to a password prompt, because load-image
-will attempt to interpret the HTML as image data.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/loadImage_.html">loadImage()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="mask-image"><h3>mask-image</h3><dl><dt>Arguments</dt><dd><code>[mask]</code><code>[img mask]</code></dd><dt>Docstring</dt><dd><pre>Masks part of an image from displaying by loading another image and
+will attempt to interpret the HTML as image data.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/loadImage_.html">loadImage()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="mask-image">
+      <h3>mask-image</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[mask]</code><code>[img mask]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Masks part of an image from displaying by loading another image and
 using it as an alpha channel.  This mask image should only contain
 grayscale data, but only the blue color channel is used. The mask
 image needs to be the same size as the image to which it is
@@ -176,15 +435,109 @@ or graphics if used inside with-graphics macro. If you're passing
 graphics to this function - it works only with :p3d and :opengl renderers.
 
 This method is useful for creating dynamically generated alpha
-masks.</pre></dd><dt>Works only inside sketch functions?</dt><dd>No</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/PImage_mask_.html">PImage.mask()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="no-tint"><h3>no-tint</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Removes the current fill value for displaying images and reverts to
-displaying images with their original hues.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/noTint_.html">noTint()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="request-image"><h3>request-image</h3><dl><dt>Arguments</dt><dd><code>[filename]</code></dd><dt>Docstring</dt><dd><pre>This function load images on a separate thread so that your sketch
+masks.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>No</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/PImage_mask_.html">PImage.mask()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="no-tint">
+      <h3>no-tint</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Removes the current fill value for displaying images and reverts to
+displaying images with their original hues.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/noTint_.html">noTint()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="request-image">
+      <h3>request-image</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[filename]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+This function load images on a separate thread so that your sketch
 does not freeze while images load during setup. While the image is
 loading, its width and height will be 0. If an error occurs while
 loading the image, its width and height will be set to -1. You'll
 know when the image has loaded properly because its width and height
 will be greater than 0. Asynchronous image loading (particularly
 when downloading from a server) can dramatically improve
-performance.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/requestImage_.html">requestImage()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="tint"><h3>tint</h3><dl><dt>Arguments</dt><dd><code>[rgb]</code><code>[rgb alpha]</code><code>[r g b]</code><code>[r g b a]</code></dd><dt>Docstring</dt><dd><pre>Sets the fill value for displaying images. Images can be tinted to
+performance.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/requestImage_.html">requestImage()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="tint">
+      <h3>tint</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[rgb]</code><code>[rgb alpha]</code><code>[r g
+        b]</code><code>[r g b a]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the fill value for displaying images. Images can be tinted to
 specified colors or made transparent by setting the alpha.
 
 To make an image transparent, but not change it's color, use white
@@ -196,7 +549,39 @@ The value for the parameter gray must be less than or equal to the
 current maximum value as specified by colorMode(). The default
 maximum value is 255.
 
-Also used to control the coloring of textures in 3D.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/tint_.html">tint()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="tint-float"><h3>tint-float</h3><dl><dt>Arguments</dt><dd><code>[gray]</code><code>[gray alpha]</code><code>[r g b]</code><code>[r g b a]</code></dd><dt>Docstring</dt><dd><pre>Sets the fill value for displaying images. Images can be tinted to
+Also used to control the coloring of textures in 3D.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/tint_.html">tint()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="tint-float">
+      <h3>tint-float</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[gray]</code><code>[gray alpha]</code><code>[r g
+        b]</code><code>[r g b a]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the fill value for displaying images. Images can be tinted to
 specified colors or made transparent by setting the alpha.
 
 To make an image transparent, but not change it's color, use white
@@ -208,7 +593,38 @@ The value for the parameter gray must be less than or equal to the
 current maximum value as specified by colorMode(). The default
 maximum value is 255.
 
-Also used to control the coloring of textures in 3D.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/tint_.html">tint()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="tint-int"><h3>tint-int</h3><dl><dt>Arguments</dt><dd><code>[rgb]</code><code>[rgb alpha]</code></dd><dt>Docstring</dt><dd><pre>Sets the fill value for displaying images. Images can be tinted to
+Also used to control the coloring of textures in 3D.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/tint_.html">tint()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="tint-int">
+      <h3>tint-int</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[rgb]</code><code>[rgb alpha]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Sets the fill value for displaying images. Images can be tinted to
 specified colors or made transparent by setting the alpha.
 
 To make an image transparent, but not change it's color, use white
@@ -220,7 +636,43 @@ The value for the parameter gray must be less than or equal to the
 current maximum value as specified by colorMode(). The default
 maximum value is 255.
 
-Also used to control the coloring of textures in 3D.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/tint_.html">tint()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><h3 class="subcategory" id="pixels-subcategory">Pixels</h3><div class="function" id="blend"><h3>blend</h3><dl><dt>Arguments</dt><dd><code>[x y width height dx dy dwidth dheight mode]</code><code>[src-img x y width height dx dy dwidth dheight mode]</code><code>[src-img dest-img x y width height dx dy dwidth dheight mode]</code></dd><dt>Docstring</dt><dd><pre>Blends a region of pixels from one image into another with full alpha
+Also used to control the coloring of textures in 3D.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/tint_.html">tint()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <h3 class="subcategory" id="pixels-subcategory">Pixels</h3>
+
+    <div class="function" id="blend">
+      <h3>blend</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y width height dx dy dwidth dheight
+        mode]</code><code>[src-img x y width height dx dy dwidth
+        dheight mode]</code><code>[src-img dest-img x y width
+        height dx dy dwidth dheight mode]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Blends a region of pixels from one image into another with full alpha
 channel support. If src is not specified it defaults to current-graphics.
 If dest is not specified it defaults to current-graphics.
 
@@ -252,13 +704,78 @@ Available blend modes are:
               Called "Color Dodge" in Illustrator and Photoshop.
 :burn       - Darker areas are applied, increasing contrast, ignores
               lights. Called "Color Burn" in Illustrator and
-              Photoshop.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/blend_.html">blend()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="copy"><h3>copy</h3><dl><dt>Arguments</dt><dd><code>[[sx sy swidth sheight] [dx dy dwidth dheight]]</code><code>[src-img [sx sy swidth sheight] [dx dy dwidth dheight]]</code><code>[src-img dest-img [sx sy swidth sheight] [dx dy dwidth dheight]]</code></dd><dt>Docstring</dt><dd><pre>Copies a region of pixels from the one image to another. If src-img
+              Photoshop.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/blend_.html">blend()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="copy">
+      <h3>copy</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[[sx sy swidth sheight] [dx dy dwidth
+        dheight]]</code><code>[src-img [sx sy swidth sheight] [dx
+        dy dwidth dheight]]</code><code>[src-img dest-img [sx sy
+        swidth sheight] [dx dy dwidth dheight]]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Copies a region of pixels from the one image to another. If src-img
 is not specified it defaults to current-graphics. If dest-img is not
 specified - it defaults to current-graphics. If the source
 and destination regions aren't the same size, it will automatically
 resize the source pixels to fit the specified target region. No
 alpha information is used in the process, however if the source
-image has an alpha channel set, it will be copied as well. </pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/copy_.html">copy()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="display-filter"><h3>display-filter</h3><dl><dt>Arguments</dt><dd><code>[mode]</code><code>[mode level]</code></dd><dt>Docstring</dt><dd><pre>Originally named filter in Processing Language.
+image has an alpha channel set, it will be copied as well. 
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/copy_.html">copy()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="display-filter">
+      <h3>display-filter</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[mode]</code><code>[mode level]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Originally named filter in Processing Language.
 Filters the display window with the specified mode and level.
 Level defines the quality of the filter and mode may be one of the
 following keywords:
@@ -283,8 +800,72 @@ following keywords:
 :opaque    - sets the alpha channel to entirely opaque. Doesn't work
              with level.
 :erode     - reduces the light areas. Doesn't work with level.
-:dilate    - increases the light areas.  Doesn't work with level.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/filter_.html">filter()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="filter-shader"><h3>filter-shader</h3><dl><dt>Arguments</dt><dd><code>[shader-obj]</code></dd><dt>Docstring</dt><dd><pre>Originally named filter in Processing Language.
-Filters the display window with given shader (only in :p2d and :p3d modes).</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/filter_.html">filter()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="get-pixel"><h3>get-pixel</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[img]</code><code>[x y]</code><code>[img x y]</code><code>[x y w h]</code><code>[img x y w h]</code></dd><dt>Docstring</dt><dd><pre>Reads the color of any pixel or grabs a section of an image. If no
+:dilate    - increases the light areas.  Doesn't work with level.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/filter_.html">filter()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="filter-shader">
+      <h3>filter-shader</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[shader-obj]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Originally named filter in Processing Language.
+Filters the display window with given shader (only in :p2d and :p3d modes).
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/filter_.html">filter()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>2.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="get-pixel">
+      <h3>get-pixel</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[img]</code><code>[x
+        y]</code><code>[img x y]</code><code>[x y w
+        h]</code><code>[img x y w h]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Reads the color of any pixel or grabs a section of an image. If no
 parameters are specified, a copy of entire image is returned. Get the
 value of one pixel by specifying an x,y coordinate. Get a section of
 the image by specifying an additional width and height parameter.
@@ -297,7 +878,39 @@ will be in RGB.
 Getting the color of a single pixel with (get x y) is easy, but not
 as fast as grabbing the data directly using the pixels fn.
 
-If no img specified - current-graphics is used.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/get_.html">get()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="image-filter"><h3>image-filter</h3><dl><dt>Arguments</dt><dd><code>[img mode]</code><code>[img mode level]</code></dd><dt>Docstring</dt><dd><pre>Originally named filter in Processing Language.
+If no img specified - current-graphics is used.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/get_.html">get()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="image-filter">
+      <h3>image-filter</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[img mode]</code><code>[img mode
+        level]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Originally named filter in Processing Language.
 Filters given image with the specified mode and level.
 Level defines the quality of the filter and mode may be one of
 the following keywords:
@@ -322,14 +935,107 @@ the following keywords:
 :opaque    - sets the alpha channel to entirely opaque. Doesn't work
              with level.
 :erode     - reduces the light areas. Doesn't work with level.
-:dilate    - increases the light areas.  Doesn't work with level.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/PImage_filter_.html">PImage.filter()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="pixels"><h3>pixels</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[img]</code></dd><dt>Docstring</dt><dd><pre>Array containing the values for all the pixels in the display
+:dilate    - increases the light areas.  Doesn't work with level.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/PImage_filter_.html">PImage.filter()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>2.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="pixels">
+      <h3>pixels</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[img]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Array containing the values for all the pixels in the display
 window or image. This array is therefore the size of the display window. If
 this array is modified, the update-pixels fn must be called to update
 the changes. Calls .loadPixels before obtaining the pixel array.
 
-Only works with P2D and P3D renderer if used without arguments.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/pixels.html">pixels[]</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="set-image"><h3>set-image</h3><dl><dt>Arguments</dt><dd><code>[x y src]</code></dd><dt>Docstring</dt><dd><pre>Writes an image directly into the display window. The x and y
+Only works with P2D and P3D renderer if used without arguments.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/pixels.html">pixels[]</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="set-image">
+      <h3>set-image</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y src]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Writes an image directly into the display window. The x and y
 parameters define the coordinates for the upper-left corner of the
-image.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/set_.html">set()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="set-pixel"><h3>set-pixel</h3><dl><dt>Arguments</dt><dd><code>[x y c]</code><code>[img x y c]</code></dd><dt>Docstring</dt><dd><pre>Changes the color of any pixel in the display window. The x and y
+image.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/set_.html">set()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="set-pixel">
+      <h3>set-pixel</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[x y c]</code><code>[img x y c]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Changes the color of any pixel in the display window. The x and y
 parameters specify the pixel to change and the color parameter
 specifies the color value. The color parameter is affected by the
 current color mode (the default is RGB values from 0 to 255).
@@ -343,7 +1049,38 @@ Due to what appears to be a bug in Apple's Java implementation, the
 point() and set() methods are extremely slow in some circumstances
 when used with the default renderer. Using :p2d or :p3d will fix the
 problem. Grouping many calls to point or set-pixel together can also
-help. (Bug 1094)</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/set_.html">set()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="update-pixels"><h3>update-pixels</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[img]</code></dd><dt>Docstring</dt><dd><pre>Updates the display window or image with the data in the pixels array.
+help. (Bug 1094)
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/set_.html">set()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="update-pixels">
+      <h3>update-pixels</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[img]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Updates the display window or image with the data in the pixels array.
 Use in conjunction with (pixels). If you're only reading pixels from
 the array, there's no need to call update-pixels unless there are
 changes.
@@ -353,7 +1090,41 @@ update-pixels. However, the rule is that any time you want to
 manipulate the pixels array, you must first call pixels, and
 after changes have been made, call update-pixels. Even if the
 renderer may not seem to use this function in the current Processing
-release, this will always be subject to change.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/updatePixels_.html">updatePixels()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div><h3 class="subcategory" id="rendering-subcategory">Rendering</h3><div class="function" id="blend-mode"><h3>blend-mode</h3><dl><dt>Arguments</dt><dd><code>[mode]</code></dd><dt>Docstring</dt><dd><pre>Blends the pixels in the display window according to the defined mode.
+release, this will always be subject to change.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/updatePixels_.html">updatePixels()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <h3 class="subcategory" id="rendering-subcategory">
+    Rendering</h3>
+
+    <div class="function" id="blend-mode">
+      <h3>blend-mode</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[mode]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Blends the pixels in the display window according to the defined mode.
 There is a choice of the following modes to blend the source pixels (A)
 with the ones of pixels already in the display window (B):
 
@@ -375,7 +1146,39 @@ with the ones of pixels already in the display window (B):
 Note: :hard-light, :soft-light, :dodge, :overlay, :dodge, :burn, :difference
 modes are not supported by this function.
 
-factor is alpha value of pixel being drawed</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/blendMode_.html">blendMode()</a></code></dd><dt>Added in</dt><dd>2.0</dd></dl></div><div class="function" id="create-graphics"><h3>create-graphics</h3><dl><dt>Arguments</dt><dd><code>[w h]</code><code>[w h renderer]</code><code>[w h renderer path]</code></dd><dt>Docstring</dt><dd><pre>Creates and returns a new PGraphics object of the types :p2d, :p3d,
+factor is alpha value of pixel being drawed
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/blendMode_.html">blendMode()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>2.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="create-graphics">
+      <h3>create-graphics</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[w h]</code><code>[w h renderer]</code><code>[w h
+        renderer path]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Creates and returns a new PGraphics object of the types :p2d, :p3d,
 :java2d, :pdf. By default :java2d is used. Use this class if you
 need to draw into an off-screen graphics buffer. It's not possible
 to use create-graphics with the :opengl renderer, because it doesn't
@@ -395,4 +1198,24 @@ possible to draw into a graphics and maintain the alpha channel. By
 using save to write a PNG or TGA file, the transparency of the
 graphics object will be honored. Note that transparency levels are
 binary: pixels are either complete opaque or transparent. This means
-that text characters will be opaque blocks.</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd><code><a href="http://www.processing.org/reference/createGraphics_.html">createGraphics()</a></code></dd><dt>Added in</dt><dd>1.0</dd></dl></div></div></body></html>
+that text characters will be opaque blocks.
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd><code><a href=
+        "http://www.processing.org/reference/createGraphics_.html">createGraphics()</a></code></dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+  </div>
+</body>
+</html>

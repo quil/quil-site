@@ -1,121 +1,243 @@
-<!DOCTYPE html>
-<html><head><meta content="Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing." name="description"><title>Quil - State</title><style>body {
-  color: #333;
-}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 
-a {
-  color: #333;
-}
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+  <meta content=
+  "Quil is a clojure animation library for creating interactive sketches. Quil is based on Processing."
+  name="description">
 
-p {
+  <title>Quil - State</title>
+  <style type="text/css">
+body {
+  color: #333;
+  }
+
+  a {
+  color: #333;
+  }
+
+  p {
   margin: 0px;
-}
+  }
 
-.category-div .category, #toc .category {
+  .category-div .category, #toc .category {
   margin: 0px 0px 7px 0px;
-}
+  }
 
-.category-div .category a, #toc .category a {
+  .category-div .category a, #toc .category a {
   color: #D53E07;
-}
+  }
 
-.category-div .subcategory, #toc .subcategory {
+  .category-div .subcategory, #toc .subcategory {
   margin: 15px 0px 0px 0px;
-}
+  }
 
-.category-div .subcategory a, #toc .subcategory a {
+  .category-div .subcategory a, #toc .subcategory a {
   color: #009900;
-}
+  }
 
-.category-div .function, #toc .function {
+  .category-div .function, #toc .function {
   margin-top: 2px;
-}
+  }
 
-.index-page .wrapper {
+  .index-page .wrapper {
   width: 1000px;
   margin: auto;
-}
+  }
 
-.index-page #title {
+  .index-page #title {
   text-align: center;
-}
+  }
 
-.index-page .column {
+  .index-page .column {
   float: left;
   width: 200px;
   display: inline-block;
-}
+  }
 
-.index-page .category-div {
+  .index-page .category-div {
   padding: 10px;
   margin: 10px;
   background: #FAFAFA;
-}
+  }
 
-.index-page #description {
+  .index-page #description {
   text-align: center;
   font-size: 18px;
-}
+  }
 
-.fn-page .fns-wrapper {
+  .fn-page .fns-wrapper {
   margin: auto;
   width: 700px;
-}
+  }
 
-.fn-page .fns-wrapper h2 {
+  .fn-page .fns-wrapper h2 {
   margin: 10px 0px;
-}
+  }
 
-.fn-page .fns-wrapper div.function {
+  .fn-page .fns-wrapper div.function {
   padding: 10px;
   margin: 10px auto;
   background: #FAFAFA;
-}
+  }
 
-.fn-page .fns-wrapper div.function code {
+  .fn-page .fns-wrapper div.function code {
   margin-right: 10px;
-}
+  }
 
-.fn-page .fns-wrapper div.function h3 {
+  .fn-page .fns-wrapper div.function h3 {
   margin: 2px 0px;
-}
+  }
 
-.fn-page .fns-wrapper pre {
+  .fn-page .fns-wrapper pre {
   margin: 0px;
-}
+  }
 
-.fn-page .fns-wrapper dt {
+  .fn-page .fns-wrapper dt {
   margin-top: 10px;
-}
+  }
 
-.fn-page .fns-wrapper dl {
+  .fn-page .fns-wrapper dl {
   margin: 0px;
-}
+  }
 
-.fn-page .fns-wrapper .subcategory {
+  .fn-page .fns-wrapper .subcategory {
   margin: 30px auto 0px auto;
-}
+  }
 
-.fn-page #toc {
+  .fn-page #toc {
   top: 0px;
   bottom: 20px;
   overflow-y: scroll;
   width: 200px;
   position: fixed;
-}</style></head><body class="fn-page"><div id="toc"><h3><a href="index.html">Back to index</a></h3><h3 class="category"><a href="state.html">State</a></h3><p class="function"><a href="#set-state!">set-state!</a></p><p class="function"><a href="#state">state</a></p><p class="function"><a href="#state-atom">state-atom</a></p></div><div class="fns-wrapper"><h2>State</h2><div class="function" id="set-state!"><h3>set-state!</h3><dl><dt>Arguments</dt><dd><code>[& state-vals]</code></dd><dt>Docstring</dt><dd><pre>Set sketch-specific state. May only be called once (ideally in the
+  }
+  </style>
+</head>
+
+<body class="fn-page">
+  <div id="toc">
+    <h3><a href="index.html">Back to index</a></h3>
+
+    <h3 class="category"><a href="state.html">State</a></h3>
+
+    <p class="function"><a href="#set-state!">set-state!</a></p>
+
+    <p class="function"><a href="#state">state</a></p>
+
+    <p class="function"><a href="#state-atom">state-atom</a></p>
+  </div>
+
+  <div class="fns-wrapper">
+    <h2>State</h2>
+
+    <div class="function" id="set-state!">
+      <h3>set-state!</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[&amp; state-vals]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Set sketch-specific state. May only be called once (ideally in the
 setup fn).  Subsequent calls have no effect.
 
 Example:
-(set-state! :foo 1 :bar (atom true) :baz (/ (width) 2))</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="state"><h3>state</h3><dl><dt>Arguments</dt><dd><code>[]</code><code>[key]</code></dd><dt>Docstring</dt><dd><pre>Retrieve sketch-specific state by key. Must initially call
+(set-state! :foo 1 :bar (atom true) :baz (/ (width) 2))
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd>None. It is present only in Quil.</dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="state">
+      <h3>state</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code><code>[key]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Retrieve sketch-specific state by key. Must initially call
 set-state! to store state. If no parameter passed whole
 state map is returned.
 
 (set-state! :foo 1)
-(state :foo) ;=> 1
-(state) ;=> {:foo 1}</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div><div class="function" id="state-atom"><h3>state-atom</h3><dl><dt>Arguments</dt><dd><code>[]</code></dd><dt>Docstring</dt><dd><pre>Retrieve sketch-specific state-atom. All changes to the
+(state :foo) ;=&gt; 1
+(state) ;=&gt; {:foo 1}
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd>None. It is present only in Quil.</dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+
+    <div class="function" id="state-atom">
+      <h3>state-atom</h3>
+
+      <dl>
+        <dt>Arguments</dt>
+
+        <dd><code>[]</code></dd>
+
+        <dt>Docstring</dt>
+
+        <dd>
+          <pre>
+Retrieve sketch-specific state-atom. All changes to the
 atom will be reflected in the state.
 
 (set-state! :foo 1)
-(state :foo) ;=> 1
+(state :foo) ;=&gt; 1
 (swap! (state-atom) update-in [:foo] inc)
-(state :foo) ;=> 2</pre></dd><dt>Works only inside sketch functions?</dt><dd>Yes</dd><dt>Original Processing method</dt><dd>None. It is present only in Quil.</dd><dt>Added in</dt><dd>1.0</dd></dl></div></div></body></html>
+(state :foo) ;=&gt; 2
+</pre>
+        </dd>
+
+        <dt>Works only inside sketch functions?</dt>
+
+        <dd>Yes</dd>
+
+        <dt>Original Processing method</dt>
+
+        <dd>None. It is present only in Quil.</dd>
+
+        <dt>Added in</dt>
+
+        <dd>1.0</dd>
+      </dl>
+    </div>
+  </div>
+</body>
+</html>
