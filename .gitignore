@@ -1,0 +1,16 @@
+*.aux
+*.log
+*.jar
+lib/*
+classes/
+pom-generated.xml
+pom.xml
+native
+.cake
+.lein-deps-sum
+target
+.lein-repl-history
+.lein-failures
+.nrepl-port
+*.iml
+*.idea
