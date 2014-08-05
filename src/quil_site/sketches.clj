@@ -25,7 +25,7 @@
 (def sketches (atom {}))
 
 (defn create-sketch [sketch]
-  (let [id (swap! id inc)
+  (let [id (str (swap! id inc))
         sketch (assoc sketch :id id)]
     (swap! sketches assoc id sketch)
     (resp/response {:id id})))

@@ -18,7 +18,7 @@
   (-> app
       dump-request
       site
-      json/wrap-json-body
+      (json/wrap-json-body {:keywords? true})
       json/wrap-json-response
       stacktrace/wrap-stacktrace))
 
