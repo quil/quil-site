@@ -1,19 +1,28 @@
 (ns quil-site.sketches
   (:require [compojure.core :refer :all :exclude [routes]]
             [ring.util.response :as resp]
-            [net.cgrand.enlive-html :as enlive]))
+            [hiccup.page :as p]))
 
 (defn new-sketch-page []
   "hello")
 
 (defn show-sketch [id])
 
-(defn run-sketch [id])
+(defn sketch-html [id]
+  (-> (list [:head
+             [:title "Sketch"]
+             [:script {:async "async"
+                       :src (str "/sketches/js/" id)}]]
+            [:body])
+      (p/html5)))
+
+(defn run-sketch [id]
+  (-> (sketch-html id)
+      (resp/response)
+      (resp/content-type "text/html")))
 
 (def id (atom 0))
 (def sketches (atom {}))
-
-(swap! sketches assoc "123" {:js "console.log('123213123');"})
 
 (defn create-sketch [sketch]
   (let [id (swap! id inc)
