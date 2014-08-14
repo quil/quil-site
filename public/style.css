@@ -1,0 +1,14 @@
+#snippet {
+    width: 500px;
+    height: 300px;
+}
+
+[input] {
+    float: left;
+}
+
+#sketch {
+    float: right;
+    width: 500px;
+    height: 300px;
+}

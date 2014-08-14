@@ -1,7 +1,28 @@
 (ns quil-site.sketches
   (:require [compojure.core :refer :all :exclude [routes]]
             [ring.util.response :as resp]
-            [hiccup.page :as p]))
+            [hiccup.page :as p]
+            [cljs.closure :as cljs]
+            [cljs.env :as cljs-env]
+            [me.raynes.fs :as fs]))
+
+(def cljs-compilation-dir (fs/temp-dir "cljs-compilation"))
+
+(defn compile-cljs [cljs-text]
+  (let [source (fs/temp-file "cljs-source" "cljs")
+        compiled (fs/temp-file "cljs-compiled")]
+    (spit source cljs-text)
+    (cljs/build source
+                {:optimizations :simple
+                 :output-to (.getAbsolutePath compiled)
+                 :output-dir (.getAbsolutePath cljs-compilation-dir)
+                 :externs ["externs/processing.js"]
+                 :preamble ["processing.min.js"]
+                 :pretty-print true})
+    (let [compiled-text (slurp compiled)]
+      (fs/delete source)
+      (fs/delete compiled)
+      compiled-text)))
 
 (defn new-sketch-page []
   "hello")
@@ -26,7 +47,10 @@
 
 (defn create-sketch [sketch]
   (let [id (str (swap! id inc))
-        sketch (assoc sketch :id id)]
+        js (-> sketch :cljs compile-cljs)
+        sketch (assoc sketch
+                      :id id
+                      :js js)]
     (swap! sketches assoc id sketch)
     (resp/response {:id id})))
 

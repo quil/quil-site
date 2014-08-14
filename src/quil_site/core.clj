@@ -1,13 +1,15 @@
 (ns quil-site.core
-  (:require [compojure.core :as cmpj]
+  (:require [compojure.core :refer [defroutes GET]]
             [compojure.handler :refer [site]]
+            [compojure.route :refer [files]]
             [ring.middleware.json :as json]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.stacktrace :as stacktrace]
             [quil-site.sketches :as sketches]))
 
-(cmpj/defroutes app
-  sketches/routes)
+(defroutes app
+  sketches/routes
+  (files "/"))
 
 (defn dump-request [handler]
   (fn [req]
@@ -15,7 +17,7 @@
     (handler req)))
 
 (def handler
-  (-> app
+  (-> #'app
       dump-request
       site
       (json/wrap-json-body {:keywords? true})

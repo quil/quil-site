@@ -7,4 +7,7 @@
                  [compojure "1.1.8"]
                  [hiccup "1.0.5"]
                  [ring "1.3.0"]
-                 [ring/ring-json "0.3.1"]])
+                 [ring/ring-json "0.3.1"]
+                 [org.clojure/clojurescript "0.0-2268"]
+                 [quil "2.2.2-SNAPSHOT"]
+                 [me.raynes/fs "1.4.6"]])
