@@ -5,9 +5,11 @@
             [ring.middleware.json :as json]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.stacktrace :as stacktrace]
-            [quil-site.sketches :as sketches]))
+            [quil-site.sketches :as sketches]
+            [quil-site.views.about :refer [about-page]]))
 
 (defroutes app
+  (GET "/" [] (about-page))
   sketches/routes
   (files "/"))
 
@@ -24,5 +26,10 @@
       json/wrap-json-response
       stacktrace/wrap-stacktrace))
 
-(def server (run-jetty #(handler %) {:port 8080 :join? false}))
-#_(.stop server)
+(comment
+
+ (def server (run-jetty #(handler %) {:port 8080 :join? false}))
+
+ (.stop server)
+
+)

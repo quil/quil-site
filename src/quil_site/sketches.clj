@@ -4,7 +4,8 @@
             [hiccup.page :as p]
             [cljs.closure :as cljs]
             [cljs.env :as cljs-env]
-            [me.raynes.fs :as fs]))
+            [me.raynes.fs :as fs]
+            [quil-site.views.sketches :as views]))
 
 (def cljs-compilation-dir (fs/temp-dir "cljs-compilation"))
 
@@ -24,21 +25,14 @@
       (fs/delete compiled)
       compiled-text)))
 
-(defn new-sketch-page []
-  "hello")
-
 (defn show-sketch [id])
 
 (defn sketch-html [id]
   (-> (list [:head
              [:title "Sketch"]
-             [:script {:async "async"
-                       :src (str "/sketches/js/" id)}]]
+             [:script {:src (str "/sketches/js/" id)}]]
             [:body])
-      (p/html5)))
-
-(defn run-sketch [id]
-  (-> (sketch-html id)
+      (p/html5)
       (resp/response)
       (resp/content-type "text/html")))
 
@@ -62,8 +56,8 @@
 
 (defroutes routes
   (context "/sketches" []
-    (GET "/new" [] (new-sketch-page))
+    (GET "/create" [] (views/create-sketch-page))
     (GET "/show/:id" [id] (show-sketch id))
-    (GET "/run/:id" [id] (run-sketch id))
+    (GET "/html/:id" [id] (sketch-html id))
     (GET "/js/:id" [id] (sketch-js id))
     (POST "/create" req (create-sketch (:body req)))))
