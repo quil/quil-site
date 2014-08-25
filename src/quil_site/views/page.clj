@@ -1,4 +1,4 @@
-(ns quil-site.views.util
+(ns quil-site.views.page
   (:require [hiccup.page :as p]
             [hiccup.element :as e]))
 
@@ -14,9 +14,14 @@
 
    (p/include-css "/css/bootstrap.min.css" "/css/styles.css")])
 
-(defn- body [content]
+(defn- make-tab [opts name text url]
+  [:li {:class (if (= name (:tab opts))
+                 "active" "")}
+   (e/link-to url text)])
+
+(defn- body [opts content]
   [:body
-   [:div.navbar.navbar-inverse.navbar-fixed-top {:role "navigation"}
+   [:div.navbar.navbar-default {:role "navigation"}
     [:div.container
      [:div.navbar-header
       [:button.navbar-toggle {:type "button"
@@ -30,15 +35,16 @@
 
      [:div.collapse.navbar-collapse
       [:ul.nav.navbar-nav
-       [:li.active (e/link-to "/" "About")]
-       [:li.api (e/link-to "http://quil.info" "API")]
-       [:li.create (e/link-to "/sketches/create" "Create")]]]]]
+       (make-tab opts :about "About" "/")
+       (make-tab opts :api "API" "http://quil.info")
+       (make-tab opts :create "Create" "/sketches/create")]]]]
 
-   [:div.container
-    [:div.starter-template content]]
-   (p/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" "/js/bootstrap.min.js" "/js/script.js")])
+   [:div.container-fluid {:class (-> opts :type (or "") name)}
+    content]
 
-(defn page [& content]
+   (p/include-js "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" "/js/bootstrap.min.js" "/js/script.js")])
+
+(defn page [opts & content]
   (p/html5 {:lang "en"}
            (list (head)
-                 (body content))))
+                 (body opts content))))
