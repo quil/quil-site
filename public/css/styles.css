@@ -24,6 +24,11 @@
     margin-top: 100px;
 }
 
+.sketch .CodeMirror {
+    height: 500px;
+    border: 1px solid gray;
+}
+
 body .navbar {
     border-radius: 0px;
 }

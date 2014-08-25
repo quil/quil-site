@@ -1,5 +1,7 @@
+var editor;
+
 function send() {
-    var data = {cljs: $('#source').val()};
+    var data = {cljs: editor.getValue()};
     $.ajax({
         url: '/sketches/create',
         method: 'POST',
@@ -17,12 +19,17 @@ function send() {
 }
 
 $(function() {
+    editor = CodeMirror.fromTextArea($('#source')[0], {
+        mode: 'clojure'
+    });
+
     $.ajax({
         url: '/sketches/info/basic',
         method: 'GET',
         success: function(resp) {
-            $('#source').val(resp.cljs);
+            editor.setValue(resp.cljs);
         }
     });
     $('#send').on('click', send);
+
 });

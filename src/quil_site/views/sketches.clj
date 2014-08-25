@@ -3,7 +3,11 @@
 
 (defn create-sketch-page []
   (page {:tab :create
-         :type :sketch}
+         :type :sketch
+         :css-files ["/codemirror-4.5/lib/codemirror.css"]
+         :js-files ["/codemirror-4.5/lib/codemirror.js"
+                    "/codemirror-4.5/mode/clojure/clojure.js"
+                    "/js/sketch.js"]}
         [:div.row
          [:div.col-md-6
           [:div

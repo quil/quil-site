@@ -14,12 +14,12 @@
         compiled (fs/temp-file "cljs-compiled")]
     (spit source cljs-text)
     (cljs/build source
-                {:optimizations :simple
+                {:optimizations :advanced
                  :output-to (.getAbsolutePath compiled)
                  :output-dir (.getAbsolutePath cljs-compilation-dir)
                  :externs ["externs/processing.js"]
                  :preamble ["processing.min.js"]
-                 :pretty-print true})
+                 :pretty-print false})
     (let [compiled-text (slurp compiled)]
       (fs/delete source)
       (fs/delete compiled)

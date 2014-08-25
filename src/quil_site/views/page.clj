@@ -2,7 +2,7 @@
   (:require [hiccup.page :as p]
             [hiccup.element :as e]))
 
-(defn- head []
+(defn- head [opts]
   [:head
    [:meta {:charset "utf-8"}]
    [:meta {:http-equiv "X-UA-Compatible"
@@ -12,7 +12,10 @@
 
    [:title "Quil"]
 
-   (p/include-css "/css/bootstrap.min.css" "/css/styles.css")])
+   (let [css-files (conj (:css-files opts [])
+                         "/css/bootstrap.min.css"
+                         "/css/styles.css")]
+     (apply p/include-css css-files))])
 
 (defn- make-tab [opts name text url]
   [:li {:class (if (= name (:tab opts))
@@ -42,9 +45,12 @@
    [:div.container-fluid {:class (-> opts :type (or "") name)}
     content]
 
-   (p/include-js "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" "/js/bootstrap.min.js" "/js/script.js")])
+   (let [js-files (concat ["//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+                           "/js/bootstrap.min.js"]
+                          (:js-files opts []))]
+       (apply p/include-js js-files))])
 
 (defn page [opts & content]
   (p/html5 {:lang "en"}
-           (list (head)
+           (list (head opts)
                  (body opts content))))
