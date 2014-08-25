@@ -8,13 +8,28 @@
          :js-files ["/codemirror-4.5/lib/codemirror.js"
                     "/codemirror-4.5/mode/clojure/clojure.js"
                     "/js/sketch.js"]}
-        [:div.row
-         [:div.col-md-6
-          [:div
-           [:a#send.btn.btn-primary.btn-sm
-            {:href "#"} "Run"]]
+
+        [:ul.nav.nav-tabs {:role "tablist"}
+         [:li.active [:a#source-tab {:href "#"
+                                     :role "tab"
+                                     :data-target "#source-content"
+                                     :data-toggle "tab"}
+                      "Source"]]
+         [:li [:a#result-tab {:href "#"
+                              :role "tab"
+                              :data-target "#result-content"
+                              :data-toggle "tab"}
+               "View"]]
+         [:div.btn-group
+           [:button#send.btn.btn-primary "Run"]]]
+
+        [:div.tab-content
+         [:div#source-content.tab-pane.active
           [:div
            [:textarea#source]]]
-         [:div.col-md-6
+         [:div#result-content.tab-pane
           [:iframe#result.hidden]
-          [:img#ajax-status.hidden {:src "/img/sketch_loading.gif"}]]]))
+          [:div#ajax-status.hidden
+           [:img {:src "/img/sketch_loading.gif"}]
+           [:h3 "Compiling"]]]]
+))

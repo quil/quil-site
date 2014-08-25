@@ -14,12 +14,12 @@
         compiled (fs/temp-file "cljs-compiled")]
     (spit source cljs-text)
     (cljs/build source
-                {:optimizations :advanced
+                {:optimizations :simple
                  :output-to (.getAbsolutePath compiled)
                  :output-dir (.getAbsolutePath cljs-compilation-dir)
                  :externs ["externs/processing.js"]
                  :preamble ["processing.min.js"]
-                 :pretty-print false})
+                 :pretty-print true})
     (let [compiled-text (slurp compiled)]
       (fs/delete source)
       (fs/delete compiled)
@@ -40,21 +40,6 @@
 
 (def id (atom 0))
 (def sketches (atom {}))
-
-(defn create-sketch [sketch]
-  (let [id (str (swap! id inc))
-        js (-> sketch :cljs compile-cljs)
-        sketch (assoc sketch
-                      :id id
-                      :js js)]
-    (swap! sketches assoc id sketch)
-    (resp/response {:id id})))
-
-(defn sketch-js [id]
-  (-> (@sketches id)
-      (:js (format "alert('Hello, world, %s');" id))
-      (resp/response)
-      (resp/content-type "application/javascript")))
 
 (def test "(ns my.core
   (:require [quil.core :as q :include-macros true]
@@ -90,8 +75,37 @@
   :middleware [m/fun-mode])")
 
 (defn sketch-info [id]
-  (resp/response {:id id
-                  :cljs test}))
+  (let [default {:cljs test}
+        sketch (select-keys (@sketches id default)
+                            [:id :cljs])]
+    (-> sketch
+        (assoc :result :ok)
+        (resp/response))))
+
+(defn create-sketch [sketch]
+  (try
+    (let [js (-> sketch :cljs compile-cljs)
+          id (str (swap! id inc))
+          sketch (assoc sketch
+                   :id id
+                   :js js)]
+      (swap! sketches assoc id sketch)
+      (sketch-info id))
+    (catch clojure.lang.ExceptionInfo e
+      (let [data (.getData e)]
+        (resp/response {:result :error
+                        :message (.getMessage e)
+                        :column (:column data)
+                        :line (:line data)})))
+    (catch java.lang.Exception e
+      (resp/response {:result :error
+                      :message "Server error :/"}))))
+
+(defn sketch-js [id]
+  (-> (@sketches id)
+      (:js (format "alert('Hello, world, %s');" id))
+      (resp/response)
+      (resp/content-type "application/javascript")))
 
 (defroutes routes
   (context "/sketches" []
