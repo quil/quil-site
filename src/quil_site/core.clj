@@ -26,6 +26,9 @@
       json/wrap-json-response
       stacktrace/wrap-stacktrace))
 
+(defn run []
+  (run-jetty handler {:port 8080}))
+
 (comment
 
  (def server (run-jetty #(handler %) {:port 8080 :join? false}))
