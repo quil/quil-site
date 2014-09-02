@@ -10,4 +10,16 @@
                  [ring/ring-json "0.3.1"]
                  [org.clojure/clojurescript "0.0-2268"]
                  [quil "2.2.2-SNAPSHOT"]
-                 [me.raynes/fs "1.4.6"]])
+                 [me.raynes/fs "1.4.6"]]
+
+  :source-paths ["src/clj"]
+
+  :plugins [[lein-cljsbuild "1.0.3"]]
+
+  :cljsbuild {
+    :builds [{
+        :source-paths ["src/cljs"]
+        :compiler {
+          :output-to "public/js/preload.js"
+          :optimizations :simple
+          :preamble ["processing.min.js"]}}]})

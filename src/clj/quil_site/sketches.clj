@@ -9,6 +9,14 @@
 
 (def cljs-compilation-dir (fs/temp-dir "cljs-compilation"))
 
+(defn compile-cljs-2 [cljs-text]
+  (let [source (fs/temp-file "cljs-source" "cljs")]
+   (spit source cljs-text)
+   (let [compiled (cljs-env/with-compiler-env (cljs-env/default-compiler-env)
+                    (cljs/-compile source {}))]
+     (fs/delete source)
+     compiled)))
+
 (defn compile-cljs [cljs-text]
   (let [source (fs/temp-file "cljs-source" "cljs")
         compiled (fs/temp-file "cljs-compiled")]
@@ -30,6 +38,7 @@
 (defn sketch-html [id]
   (-> (list [:head
              [:title "Sketch"]
+             [:script {:src "/js/preload.js"}]
              [:script {:src (str "/sketches/js/" id)}]
              [:style {:type "text/css"}
               "body { margin: 0px; overflow: hidden; } "]]
@@ -84,7 +93,7 @@
 
 (defn create-sketch [sketch]
   (try
-    (let [js (-> sketch :cljs compile-cljs)
+    (let [js (-> sketch :cljs compile-cljs-2)
           id (str (swap! id inc))
           sketch (assoc sketch
                    :id id
