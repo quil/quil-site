@@ -10,7 +10,8 @@
                  [ring/ring-json "0.3.1"]
                  [org.clojure/clojurescript "0.0-2268"]
                  [quil "2.2.2-SNAPSHOT"]
-                 [me.raynes/fs "1.4.6"]]
+                 [me.raynes/fs "1.4.6"]
+                 [org.clojure/tools.reader "0.8.8"]]
 
   :source-paths ["src/clj"]
 

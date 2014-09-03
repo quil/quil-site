@@ -9,10 +9,15 @@
 }
 
 .sketch #result {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.sketch #result iframe {
     width: 500px;
     height: 500px;
     display: block;
-    margin: 20px auto;
+    margin: auto;
     border: 1px dashed #ecf0f1;
 }
 
