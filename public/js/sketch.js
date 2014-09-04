@@ -1,5 +1,21 @@
 var editor;
 
+function showErrorAlert(error) {
+    var alert = $('<div></div>')
+        .addClass('alert')
+        .addClass('alert-danger')
+        .attr('role', 'alert')
+        .text(error.message)
+        .insertBefore('#source');
+}
+
+function setErrors(errors) {
+    editor.getOption('lint').options.cljsErrors = errors;
+    $('#source-content .alert-danger').remove();
+    errors.forEach(showErrorAlert);
+    CodeMirror.signal(editor, 'change', editor);
+}
+
 function runSketch(id, size) {
     var src = '/sketches/html/' + id;
     var width = size ? size[0] : 500;
@@ -12,14 +28,17 @@ function runSketch(id, size) {
     $('#result a')
         .attr('href', src);
     $('#ajax-status').addClass('hidden');
+    setErrors([]);
 }
 
 function showError(response) {
-    console.log(response);
     $('#ajax-status').addClass('hidden');
+    $('#source-tab').tab('show');
+    setErrors([response]);
 }
 
 function send() {
+    editor.clearGutter('CodeMirror-lint-markers');
     var data = {cljs: editor.getValue()};
     $.ajax({
         url: '/sketches/create',
@@ -40,9 +59,23 @@ function send() {
 }
 
 $(function() {
+    CodeMirror.registerHelper('lint', 'clojure', function(text, options) {
+        return options.cljsErrors.map(function(error) {
+            return {
+                from: CodeMirror.Pos(error.line - 1, error.column - 2),
+                to: CodeMirror.Pos(error.line - 1, error.column - 1),
+                message: error.message
+            }
+        });
+    });
+
     editor = CodeMirror.fromTextArea($('#source')[0], {
         mode: 'clojure',
-        lineNumbers: true
+        lineNumbers: true,
+        gutters: ["CodeMirror-lint-markers"],
+        lint: {
+            options: {cljsErrors: []},
+        }
     });
 
     $.ajax({
@@ -53,5 +86,4 @@ $(function() {
         }
     });
     $('#send').on('click', send);
-
 });

@@ -6,9 +6,11 @@
 (defn create-sketch-page []
   (page {:tab :create
          :type :sketch
-         :css-files ["/codemirror-4.5/lib/codemirror.css"]
+         :css-files ["/codemirror-4.5/lib/codemirror.css"
+                     "/codemirror-4.5/addon/lint/lint.css"]
          :js-files ["/codemirror-4.5/lib/codemirror.js"
                     "/codemirror-4.5/mode/clojure/clojure.js"
+                    "/codemirror-4.5/addon/lint/lint.js"
                     "/js/sketch.js"]}
 
         [:ul.nav.nav-tabs {:role "tablist"}
