@@ -1,8 +1,7 @@
-(ns quil-site.sketches
+(ns quil-site.controllers.sketches
   (:require [compojure.core :refer :all :exclude [routes]]
             [compojure.route :refer [not-found]]
             [ring.util.response :as resp]
-            [hiccup.page :as p]
             [cljs.closure :as cljs]
             [cljs.env :as cljs-env]
             [me.raynes.fs :as fs]

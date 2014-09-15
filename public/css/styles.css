@@ -47,3 +47,38 @@
 body .navbar {
     border-radius: 0px;
 }
+
+body {
+    overflow-y: scroll;
+}
+
+body .container-fluid a {
+    text-decoration: underline;
+}
+
+.api-index .category-div {
+    background-color: #F7F8FA;
+    padding: 7px;
+    margin: 10px 0px;
+}
+
+.api-index .category {
+    margin: 0px 0px 7px 0px;
+}
+
+.api-index .category a {
+    color: #18bc9c;
+}
+
+.api-index .subcategory a {
+    color: #3498db;
+}
+
+.api-index .function a {
+    margin: 5px 0px;
+    color: #2c3e50;
+}
+
+.api-index .function sup {
+    margin-left: 2px;
+}

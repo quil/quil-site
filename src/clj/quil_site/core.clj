@@ -5,12 +5,14 @@
             [ring.middleware.json :as json]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.stacktrace :as stacktrace]
-            [quil-site.sketches :as sketches]
+            [quil-site.controllers.sketches :as sketches]
+            [quil-site.controllers.api :as api]
             [quil-site.views.about :refer [about-page]]))
 
 (defroutes app
   (GET "/" [] (about-page))
   sketches/routes
+  api/routes
   (files "/"))
 
 (defn dump-request [handler]
