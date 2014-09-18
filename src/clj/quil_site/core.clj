@@ -17,7 +17,7 @@
 
 (defn dump-request [handler]
   (fn [req]
-    (clojure.pprint/pprint req)
+;    (clojure.pprint/pprint req)
     (handler req)))
 
 (def handler

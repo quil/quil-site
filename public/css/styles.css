@@ -56,29 +56,45 @@ body .container-fluid a {
     text-decoration: underline;
 }
 
-.api-index .category-div {
+.api .category-div {
     background-color: #F7F8FA;
     padding: 7px;
     margin: 10px 0px;
 }
 
-.api-index .category {
+.api .category {
     margin: 0px 0px 7px 0px;
 }
 
-.api-index .category a {
+.api .category a {
     color: #18bc9c;
 }
 
-.api-index .subcategory a {
+.api .subcategory a {
     color: #3498db;
 }
 
-.api-index .function a {
+.api .function a {
     margin: 5px 0px;
     color: #2c3e50;
 }
 
-.api-index .function sup {
+.api .function sup {
     margin-left: 2px;
+}
+
+.api .arg {
+    display: block;
+}
+
+.api .docstring {
+    background-color: transparent;
+    border: 0px;
+    color: initial;
+    padding: 0px;
+    margin: 0px;
+}
+
+.api dt {
+    margin-top: 10px;
 }

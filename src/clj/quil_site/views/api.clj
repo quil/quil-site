@@ -13,7 +13,7 @@
    ["Lights, Camera" "Output"]
    ["Environment" "Input" "Structure"]])
 
-(defn- as-url [str]
+(defn as-url [str]
   (-> str
       (string/lower-case)
       (string/replace  #"[ &,?]" {" " "-"
@@ -27,49 +27,115 @@
   ([text to]
      (link text to nil))
   ([text to anchor]
-     (let [page (->> (or to "")
-                     as-url
-                     (str "/api/"))]
+     (let [page (if to
+                  (str "/api/" (as-url to))
+                  "")]
       (e/link-to (if anchor
                    (str page "#" (as-url anchor))
                    page)
                  (u/escape-html text)))))
 
-(defn- subcategory-index [cat subcat fns]
+(defn- render-type-specific [host content type what]
+  (if (and (= what :fn) (not= type :both))
+    (let [tooltip (str "Available only in "
+                       (if (= type :clj)
+                         "Clojure"
+                         "ClojureScript")
+                       " version.")
+          type (clojure.core/name type)]
+      [host [:span {:title tooltip}
+                    content
+                    [:sup type]]])
+    [host content]))
+
+(defn- render-subcategory-index [cat subcat fns]
   (let [fns (map (fn [{:keys [name type what]}]
-                   (if (and (= what :fn) (not= type :both))
-                     (let [tooltip (str "Available only in "
-                                        (if (= type :clj)
-                                          "Clojure"
-                                          "ClojureScript")
-                                        " version.")
-                           type (clojure.core/name type)]
-                       [:p.function [:span {:title tooltip}
-                                     (link name cat name)
-                                     [:sup type]]])
-                     [:p.function (link name cat name)]))
+                   (let [fn-link (link name
+                                       (if subcat
+                                         (str cat "/" subcat)
+                                         cat)
+                                       name)]
+                    (render-type-specific :p.function fn-link
+                                          type what)))
                  fns)]
     (if subcat
-      (cons [:h4.subcategory (link subcat cat (str subcat "-subcategory"))]
+      (cons [:h4.subcategory (link subcat (str cat "/" subcat))]
             fns)
       fns)))
 
-(defn- category-index [cat subcats]
+(defn- render-category-index [cat subcats]
   [:div.category-div
    [:h3.category (link cat)]
    (for [[subcat fns] subcats]
-     (subcategory-index cat subcat fns))])
+     (render-subcategory-index cat subcat fns))])
 
 (defn api-index [functions]
-  (page {:type :api-index
+  (page {:type :api
          :tab :api
          :js-files ["/js/api.js"]}
         (for [column index-page-columns]
           [:div.col-md-2.col-sm-4.col-xs-6
-           (map #(category-index % (functions %)) column)])))
+           (map #(render-category-index % (functions %)) column)])))
 
-(defn api-category [name subcats]
-  (page {:type :api-category
+(defn- trim-docstring
+  "Removes extra spaces in the begginning of dostringing lines."
+  [dostringing]
+  (->> (string/split dostringing #"\n")
+       (map #(string/replace % #"^  " ""))
+       (string/join "\n")))
+
+(defn- render-function [fn]
+  (let [{:keys [name args subcategory docstring link type what
+                processing-name requires-bindings category]} fn
+        args (map #(if (vector? %) {:value % :type :both} %)
+                  args)
+        fields (array-map
+                "Arguments"
+                (for [{:keys [value type]} args]
+                  (render-type-specific :span.arg [:code (pr-str value)]
+                                         type what))
+
+                "Docstring"
+                [:pre.docstring (trim-docstring docstring)]
+
+                "Works only inside sketch functions?"
+                (if requires-bindings "Yes" "No")
+
+                "Original Processing method"
+                (if processing-name
+                  (if link
+                    [:span (e/link-to link processing-name)]
+                    [:span processing-name])
+                  "None. It is present only in Quil."))]
+    [:div.function {:id (as-url name)}
+     (render-type-specific :h3 name type what)
+     [:dl (for [[key val] fields]
+            (list [:dt key] [:dd val]))]]))
+
+(defn- render-function-index [{:keys [name type what]}]
+  (render-type-specific :p.function (link name nil name)
+                        type what))
+
+(defn api-category [cat subcats]
+  (page {:type :api
          :tab :api
          :js-files ["/js/api.js"]}
-        name))
+        [:ol.breadcrumb
+         [:li (e/link-to "/api" "Index")]
+         [:li.active cat]]
+        (map render-function-index (subcats nil))
+        (for [subcat (keys subcats)
+              :when subcat]
+          [:h4.subcategory (link subcat (str cat "/" subcat))])
+        (map render-function (subcats nil))))
+
+(defn api-subcategory [cat subcat fns]
+  (page {:type :api
+         :tab :api
+         :js-files ["/js/api.js"]}
+        [:ol.breadcrumb
+         [:li (e/link-to "/api" "Index")]
+         [:li (link cat)]
+         [:li.active subcat]]
+        (map render-function-index fns)
+        (map render-function fns)))

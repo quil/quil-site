@@ -13,14 +13,32 @@
   (let [categories (->> functions
                         vals
                         (group-by :category))]
-    (map-map #(group-by :subcategory %) categories)))
+    (map-map #(->> %
+                   (sort-by :name)
+                   (group-by :subcategory)
+                   (into (sorted-map)))
+             categories)))
 
 (def all-fns (edn/read-string (slurp "api-2.2.2.clj")))
 
 (def fns-by-categories (split-into-categories all-fns))
 
+(def url->full (->> (concat (keys fns-by-categories)
+                            (mapcat keys (vals fns-by-categories)))
+                    (remove nil?)
+                    (map #(vector (views/as-url %) %))
+                    (into {})))
+
 (defroutes routes
   (context "/api" []
     (GET "/" [] (views/api-index fns-by-categories))
-    (GET "/:category" [category] (views/api-category category
-                                                     (fns-by-categories category)))))
+    (GET "/:category" [category]
+         (let [category (url->full category)]
+          (views/api-category category
+                              (fns-by-categories category))))
+    (GET "/:category/:subcategory" [category subcategory]
+         (let [category (url->full category)
+               subcategory (url->full subcategory)]
+          (views/api-subcategory category subcategory
+                                 (get-in fns-by-categories
+                                         [category subcategory]))))))
