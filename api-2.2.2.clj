@@ -855,10 +855,7 @@
   :category "Shape"},
  pixels
  {:link "http://www.processing.org/reference/pixels.html",
-  :args
-  ({:value [], :type :both}
-   {:value [img], :type :clj}
-   {:value [proc], :type :cljs}),
+  :args ({:value [], :type :both} {:value [img], :type :both}),
   :what :fn,
   :name pixels,
   :subcategory "Pixels",
@@ -1894,10 +1891,7 @@
   :category "Lights, Camera"},
  update-pixels
  {:link "http://www.processing.org/reference/updatePixels_.html",
-  :args
-  ({:value [], :type :both}
-   {:value [img], :type :clj}
-   {:value [proc], :type :cljs}),
+  :args ({:value [], :type :both} {:value [img], :type :both}),
   :what :fn,
   :name update-pixels,
   :subcategory "Pixels",

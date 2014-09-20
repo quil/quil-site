@@ -52,7 +52,7 @@ body {
     overflow-y: scroll;
 }
 
-body .container-fluid a {
+body .container a {
     text-decoration: underline;
 }
 
@@ -60,6 +60,11 @@ body .container-fluid a {
     background-color: #F7F8FA;
     padding: 7px;
     margin: 10px 0px;
+}
+
+.api .breadcrumb {
+    background-color: transparent;
+    padding-left: 0px;
 }
 
 .api .category {
@@ -81,6 +86,24 @@ body .container-fluid a {
 
 .api .function sup {
     margin-left: 2px;
+}
+
+.api .function-doc {
+    background-color: #f7f8fa;
+    margin: 10px 0px;
+    padding: 10px 0px 10px 10px;
+}
+
+.api .function-doc dl {
+    margin-bottom: 0px;
+}
+
+.api .function-doc h3 {
+    margin: 0px;
+}
+
+.api .function-index {
+    margin-bottom: 30px;
 }
 
 .api .arg {

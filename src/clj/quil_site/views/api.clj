@@ -89,28 +89,34 @@
                 processing-name requires-bindings category]} fn
         args (map #(if (vector? %) {:value % :type :both} %)
                   args)
-        fields (array-map
-                "Arguments"
+        fields {:arguments
                 (for [{:keys [value type]} args]
                   (render-type-specific :span.arg [:code (pr-str value)]
                                          type what))
 
-                "Docstring"
+                :docstring
                 [:pre.docstring (trim-docstring docstring)]
 
-                "Works only inside sketch functions?"
+                :binding?
                 (if requires-bindings "Yes" "No")
 
-                "Original Processing method"
+                :original-name
                 (if processing-name
                   (if link
                     [:span (e/link-to link processing-name)]
                     [:span processing-name])
-                  "None. It is present only in Quil."))]
-    [:div.function {:id (as-url name)}
+                  "None. It is present only in Quil.")}]
+    [:div.function-doc {:id (as-url name)}
      (render-type-specific :h3 name type what)
-     [:dl (for [[key val] fields]
-            (list [:dt key] [:dd val]))]]))
+     [:div.row
+      [:div.col-md-7.col-xs-12
+       [:dl
+        [:dt "Arguments"] [:dd (:arguments fields)]
+        [:dt "Docstring"] [:dd (:docstring fields)]]]
+      [:div.col-md-5.col-xs-12
+       [:dl
+        [:dt "Works only inside sketch functions?"] [:dd (:binding? fields)]
+        [:dt "Original Processing method"] [:dd (:original-name fields)]]]]]))
 
 (defn- render-function-index [{:keys [name type what]}]
   (render-type-specific :p.function (link name nil name)
@@ -123,10 +129,11 @@
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
          [:li.active cat]]
-        (map render-function-index (subcats nil))
         (for [subcat (keys subcats)
               :when subcat]
           [:h4.subcategory (link subcat (str cat "/" subcat))])
+        [:div.function-index
+         (map render-function-index (subcats nil))]
         (map render-function (subcats nil))))
 
 (defn api-subcategory [cat subcat fns]
@@ -137,5 +144,6 @@
          [:li (e/link-to "/api" "Index")]
          [:li (link cat)]
          [:li.active subcat]]
-        (map render-function-index fns)
+        [:div.function-index
+         (map render-function-index fns)]
         (map render-function fns)))
