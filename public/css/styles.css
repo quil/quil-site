@@ -1,8 +1,3 @@
-.about {
-  padding: 40px 15px;
-  text-align: center;
-}
-
 .sketch #source {
     width: 100%;
     height: 500px;
@@ -52,7 +47,7 @@ body {
     overflow-y: scroll;
 }
 
-body .container a {
+body .container.api a {
     text-decoration: underline;
 }
 
@@ -120,4 +115,24 @@ body .container a {
 
 .api dt {
     margin-top: 10px;
+}
+
+.about .features dd {
+    margin-bottom: 10px;
+}
+
+.about dl.features {
+    margin-bottom: 0px;
+}
+
+.about .features dt {
+    font-size: 17px;
+}
+
+.about h4 {
+    margin-top: 0px;
+}
+
+.about .section {
+    margin: 40px 0px;
 }
