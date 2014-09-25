@@ -7,8 +7,8 @@
             [me.raynes.fs :as fs]
             [quil-site.views.sketches :as views]
             [clojure.tools.reader.edn :as edn]
-            [clojure.tools.reader.reader-types :refer [string-push-back-reader]]))
-
+            [clojure.tools.reader.reader-types :refer [string-push-back-reader]]
+            [clojure.core.cache :as cache]))
 
 (def test-source "(ns my.core
   (:require [quil.core :as q :include-macros true]
@@ -103,10 +103,16 @@
 (defn show-sketch [id])
 
 (def id (atom 0))
-(def sketches (atom {}))
+(def sketches (atom (cache/lru-cache-factory {} :threshold 128)))
+
+(defn get-sketch [id]
+  (if-let [sketch (cache/lookup @sketches id)]
+    (do (swap! sketches cache/hit id)
+        sketch)
+    nil))
 
 (defn sketch-html [id]
-  (if-let [sketch (@sketches id)]
+  (if-let [sketch (get-sketch id)]
     (let [size (or (:size sketch) [500 500])]
       (-> (views/create-run-sketch-page id size)
           (resp/response)
@@ -115,7 +121,7 @@
 
 (defn sketch-info [id]
   (let [default {:cljs test-source}
-        sketch (select-keys (@sketches id default)
+        sketch (select-keys (or (get-sketch id) default)
                             [:id :cljs :size])]
     (-> sketch
         (assoc :result :ok)
@@ -144,7 +150,7 @@
                       :message "Server error :/"}))))
 
 (defn sketch-js [id]
-  (-> (@sketches id)
+  (-> (get-sketch id)
       (:js (format "alert('Hello, world, %s');" id))
       (resp/response)
       (resp/content-type "application/javascript")))

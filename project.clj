@@ -11,7 +11,8 @@
                  [org.clojure/clojurescript "0.0-2268"]
                  [quil "2.2.2-SNAPSHOT"]
                  [me.raynes/fs "1.4.6"]
-                 [org.clojure/tools.reader "0.8.8"]]
+                 [org.clojure/tools.reader "0.8.8"]
+                 [org.clojure/core.cache "0.6.4"]]
 
   :source-paths ["src/clj"]
 
