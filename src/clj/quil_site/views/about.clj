@@ -16,7 +16,7 @@
           [:div.col-md-6.col-xs-12
            [:dl.features
             [:dt "Clojure and ClojureScript"]
-            [:dd "Skecthes can be run from clojure or in a browser without modifications."]
+            [:dd "Sketches can be run from clojure or in a browser without modifications."]
             [:dt "2D and 3D"]
             [:dd "Quil provides several renderers that allows to draw in 2D, 3D and even in PDF."]
             [:dt "Based on " (link-to "http://processing.org" "Processing")]
