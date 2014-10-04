@@ -52,7 +52,7 @@
             [:li "Open " [:code "web/index.html"]]]]]
 
          [:p "Check out tutorials for using Quil in "
-          (link-to "https://github.com/quil/quil/wiki/Dynamic-Workflow-%28for-LightTable%29" "LighTable")
+          (link-to "https://github.com/quil/quil/wiki/Dynamic-Workflow-%28for-LightTable%29" "Light Table")
           " and general "
           (link-to "https://github.com/quil/quil/wiki/Dynamic-Workflow-%28for-REPL%29" "REPL")
           "."]]
