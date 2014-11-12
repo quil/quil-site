@@ -20,7 +20,7 @@
 
   :cljsbuild {
     :builds [{
-        :source-paths ["src/cljs"]
+        :source-paths ["src/cljs-preload"]
         :compiler {
           :output-to "public/js/preload.js"
           :optimizations :simple
