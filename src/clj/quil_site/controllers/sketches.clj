@@ -1,11 +1,13 @@
 (ns quil-site.controllers.sketches
   (:require [compojure.core :refer :all :exclude [routes]]
             [compojure.route :refer [not-found]]
+            [clojure.java.io :as io]
             [ring.util.response :as resp]
             [cljs.closure :as cljs]
             [cljs.env :as cljs-env]
             [me.raynes.fs :as fs]
             [quil-site.views.sketches :as views]
+            [quil-site.examples :refer [get-example-source]]
             [clojure.tools.reader.edn :as edn]
             [clojure.tools.reader.reader-types :refer [string-push-back-reader]]
             [clojure.core.cache :as cache]))
@@ -42,7 +44,6 @@
   :update update
   :draw draw
   :middleware [m/fun-mode])")
-
 
 (defn extract-size [sketch-source]
   (letfn [(read-all [text]
@@ -100,16 +101,24 @@
       (fs/delete compiled)
       compiled-text)))
 
-(defn show-sketch [id])
-
 (def id (atom 0))
 (def sketches (atom (cache/lru-cache-factory {} :threshold 128)))
+
+(defn get-example [id]
+  (let [name (subs id (count "example_"))]
+    (get-example-source name)))
 
 (defn get-sketch [id]
   (if-let [sketch (cache/lookup @sketches id)]
     (do (swap! sketches cache/hit id)
         sketch)
-    nil))
+    (if (.startsWith id "example_")
+      (if-let [source (get-example id)]
+        (let [sketch {:cljs source}]
+          (swap! sketches assoc id sketch)
+          sketch)
+        nil)
+      nil)))
 
 (defn sketch-html [id]
   (if-let [sketch (get-sketch id)]
@@ -150,16 +159,15 @@
                       :message "Server error :/"}))))
 
 (defn sketch-js [id]
-  (-> (get-sketch id)
-      (:js (format "alert('Hello, world, %s');" id))
+  (-> (:js (get-sketch id))
       (resp/response)
       (resp/content-type "application/javascript")))
 
 (defroutes routes
   (context "/sketches" []
-    (GET "/create" [] (views/create-sketch-page))
+    (GET "/create" [] (views/sketch-page "basic"))
     (GET "/info/:id" [id] (sketch-info id))
-    (GET "/show/:id" [id] (show-sketch id))
+    (GET "/show/:id" [id] (views/sketch-page id))
     (GET "/html/:id" [id] (sketch-html id))
     (GET "/js/:id" [id] (sketch-js id))
     (POST "/create" req (create-sketch (:body req)))))

@@ -17,6 +17,9 @@
 
   :source-paths ["src/clj"]
 
+  ; Need access to cljs examples.
+  :resource-paths ["src/cljs/quil_site/examples"]
+
   :plugins [[lein-cljsbuild "1.0.3"]]
 
   :cljsbuild {
@@ -25,9 +28,11 @@
        :compiler
          {:output-to "public/js/preload.js"
           :optimizations :simple
+          :pretty-print false
           :preamble ["processing.min.js"]}}
       {:source-paths ["src/cljs"]
        :compiler
          {:output-to "public/js/main.js"
           :optimizations :simple
-          :preamble ["processing.min.js"]}}]})
+          :preamble ["processing.min.js"]
+          :externs ["externs/processing.js"]}}]})

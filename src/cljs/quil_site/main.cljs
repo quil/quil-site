@@ -30,7 +30,7 @@
 
 (defn run-example [example host]
   (let [{:keys [name author run-fn]} example
-        link (str "/sketches/show/examples_" name)]
+        link (str "/sketches/show/example_" name)]
     (dom/setProperties (query-selector host "a")
                        #js {"href" link})
     (dom/setTextContent (query-selector host ".author")

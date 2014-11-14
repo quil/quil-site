@@ -3,7 +3,7 @@
             [hiccup.page :as p]
             [clojure.string :as string]))
 
-(defn create-sketch-page []
+(defn sketch-page [id]
   (page {:tab :create
          :type :sketch
          :css-files ["/codemirror-4.5/lib/codemirror.css"
@@ -30,7 +30,8 @@
         [:div.tab-content
          [:div#source-content.tab-pane.active
           [:div
-           [:textarea#source]]]
+           [:textarea#source
+            {:data-sketch-id id}]]]
          [:div#result-content.tab-pane
           [:div#result.hidden
            [:a "Link"]

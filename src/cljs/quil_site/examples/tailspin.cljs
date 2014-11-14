@@ -1,6 +1,6 @@
 (ns quil-site.examples.tailspin
   (:require [quil.core :as q :include-macros true]
-            [quil-site.main :as main]
+            quil-site.main ;DELETE
             [quil.middleware :as m]))
 
 (defn setup []
@@ -11,9 +11,11 @@
                                 (range 0 1 0.05))]
                      [r 0]))}))
 
+(def speed 0.001)
+
 (defn move [dot]
   (let [[r a] dot]
-    [r (+ a (* r 0.001))]))
+    [r (+ a (* r speed))]))
 
 (defn update [state]
   (update-in state [:dots] #(map move %)))
@@ -39,13 +41,14 @@
                (rest tail)
                curr)))))
 
-(defn run-sketch [host size]
-  (q/sketch
-    :host host
-    :size [size size]
-    :setup setup
-    :update update
-    :draw draw
-    :middleware [m/fun-mode]))
+(defn run-sketch [host size] ;DELETE
+(q/sketch
+  :host host
+  :size [size size]
+  :setup setup
+  :update update
+  :draw draw
+  :middleware [m/fun-mode])
+) ;DELETE
 
-(main/register-example! "tailspin" "Erik Svedäng" run-sketch)
+(quil-site.main/register-example! "tailspin" "Erik Svedäng" run-sketch) ;DELETE

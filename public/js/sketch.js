@@ -79,7 +79,7 @@ $(function() {
     });
 
     $.ajax({
-        url: '/sketches/info/basic',
+        url: '/sketches/info/' + $('#source').data('sketch-id'),
         method: 'GET',
         success: function(resp) {
             editor.setValue(resp.cljs);
