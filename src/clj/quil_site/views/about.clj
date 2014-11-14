@@ -4,11 +4,22 @@
 
 (defn about-page []
   (page {:tab :about
-         :type :about}
+         :type :about
+         :js-files ["/js/main.js"]}
         [:div.section
-         [:h3 "Quil"]
          [:p.lead
           "Clojure/ClojureScript library for creating interactive drawings and animations. Check out " (link-to "/sketches/create" "online sketch") "."]]
+
+        [:div.row.examples
+         (for [classes ["col-md-4 col-sm-6 col-xs-12"
+                        "col-md-4 col-sm-6 hidden-xs"
+                        "col-md-4 hidden-sm hidden-xs"]]
+           [:div {:class classes}
+            [:div.example
+             [:canvas]
+             [:div.footer
+              [:a "Source"]
+              [:span.author]]]])]
 
         [:div.section
          [:h3 "Features"]

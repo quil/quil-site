@@ -136,3 +136,14 @@ body .container.api a {
 .about .section {
     margin: 40px 0px;
 }
+
+.about .example {
+    width: 200px;
+    margin: auto;
+}
+
+.about .example .footer {
+    display: flex;
+    justify-content: space-around;
+}
+
