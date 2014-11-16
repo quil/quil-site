@@ -48,7 +48,6 @@
     height: 100%;
     margin: 0px;
     overflow: hidden;
-    position: relative;
   }
   canvas {
     display: block;
