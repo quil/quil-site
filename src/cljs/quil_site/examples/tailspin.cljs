@@ -5,12 +5,15 @@
 
 (defn setup []
   (q/frame-rate 30)
-  (let [max-r (/ (q/width) 2)]
+  (let [max-r (/ (q/width) 2)
+        n (int (q/map-range (q/width)
+                            200 500
+                            20 50))]
    {:dots (into [] (for [r (map #(* max-r %)
-                                (range 0 1 0.05))]
+                                (range 0 1 (/ n)))]
                      [r 0]))}))
 
-(def speed 0.0005)
+(def speed 0.0003)
 (def speed 0.001) ; hack to make it faster on in small size ;DELETE
 
 (defn move [dot]
