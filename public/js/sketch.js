@@ -75,7 +75,8 @@ $(function() {
         gutters: ["CodeMirror-lint-markers"],
         lint: {
             options: {cljsErrors: []},
-        }
+        },
+        viewportMargin: Infinity
     });
 
     $.ajax({

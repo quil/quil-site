@@ -17,6 +17,14 @@
   ([selector]
      (query-selector-all js/document selector)))
 
+(defn num-of-visible-examples []
+  (let [size (dom/getViewportSize)
+        width (.-width size)]
+    (condp < width
+      992 3
+      768 2
+      0   1)))
+
 (extend-type js/NodeList
   ISeqable
   (-seq [array] (array-seq array 0)))
@@ -39,8 +47,10 @@
 
 (events/listenOnce js/window EventType/LOAD
   (fn []
-    (doseq [[host example] (map vector
-                                (query-selector-all ".example")
-                                (cycle (shuffle @examples))) ]
-      (run-example example host))))
+    (let [[visible invisible] (split-at (num-of-visible-examples)
+                                        (query-selector-all ".example"))]
+     (doseq [[host example] (map vector visible (shuffle @examples)) ]
+       (run-example example host))
+     (doseq [host invisible]
+       (dom/removeNode host)))))
 

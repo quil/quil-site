@@ -29,10 +29,19 @@
 }
 
 .sketch .CodeMirror {
-    height: 500px;
+    height: auto;
     border-left: 1px solid #ecf0f1;
     border-right: 1px solid #ecf0f1;
     border-bottom: 1px solid #ecf0f1;
+}
+
+.sketch .CodeMirror-scroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.sketch .CodeMirror pre {
+    font-size: 14px;
 }
 
 .sketch .nav-tabs .btn-group {
