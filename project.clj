@@ -22,6 +22,25 @@
 
   :plugins [[lein-cljsbuild "1.0.3"]]
 
+  :profiles {:dev
+             {:cljsbuild
+              {:builds
+               [{:source-paths ["src/cljs"]
+                 :compiler
+                 {:output-to "public/js/main.js"
+                  :optimizations :simple
+                  :preamble ["processing.min.js"]}}]}}
+             :prod
+             {:cljsbuild
+              {:builds
+               [{:source-paths ["src/cljs"]
+                 :compiler
+                 {:output-to "public/js/main.js"
+                  :optimizations :advanced
+                  :pretty-print false
+                  :preamble ["processing.min.js"]
+                  :externs ["externs/processing.js"]}}]}}}
+
   :cljsbuild {
     :builds [
       {:source-paths ["src/cljs-preload"]
@@ -29,10 +48,4 @@
          {:output-to "public/js/preload.js"
           :optimizations :simple
           :pretty-print false
-          :preamble ["processing.min.js"]}}
-      {:source-paths ["src/cljs"]
-       :compiler
-         {:output-to "public/js/main.js"
-          :optimizations :simple
-          :preamble ["processing.min.js"]
-          :externs ["externs/processing.js"]}}]})
+          :preamble ["processing.min.js"]}}]})
