@@ -39,7 +39,8 @@
 
 (events/listenOnce js/window EventType/LOAD
   (fn []
-    (doseq [host (query-selector-all ".example") ]
-      (let [example (first @examples)]
-        (run-example example host)))))
+    (doseq [[host example] (map vector
+                                (query-selector-all ".example")
+                                (cycle (shuffle @examples))) ]
+      (run-example example host))))
 

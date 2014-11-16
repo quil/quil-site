@@ -5,13 +5,13 @@
 
 (defn setup []
   (q/frame-rate 30)
-  (q/color-mode :hsb)
   (let [max-r (/ (q/width) 2)]
    {:dots (into [] (for [r (map #(* max-r %)
                                 (range 0 1 0.05))]
                      [r 0]))}))
 
-(def speed 0.001)
+(def speed 0.0005)
+(def speed 0.001) ; hack to make it faster on in small size ;DELETE
 
 (defn move [dot]
   (let [[r a] dot]
@@ -30,7 +30,7 @@
   (let [dots (:dots state)]
     (loop [curr (first dots)
            tail (rest dots)
-           prev (last dots)]
+           prev nil]
       (let [[x y] (dot->coord curr)]
         (q/ellipse x y 5 5)
         (when prev
