@@ -12,6 +12,16 @@
 
    [:title "Quil"]
 
+   [:script {:async "async"
+             :src "//www.google-analytics.com/analytics.js"}]
+   [:script
+    "(function(i,s,r){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+  })(window,document,'ga');
+
+  ga('create', 'UA-51485241-2', 'auto');
+  ga('send', 'pageview');"]
+
    (let [css-files (conj (:css-files opts [])
                          "/css/bootstrap.min.css"
                          "/css/styles.css")]
