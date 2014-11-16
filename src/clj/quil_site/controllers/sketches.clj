@@ -69,7 +69,6 @@
                  (map second)
                  first))]
     (let [size (-> sketch-source read-all find-defsketch get-size)]
-      (clojure.pprint/pprint (find-defsketch (read-all sketch-source)))
       (if (and (or (list? size) (vector? size))
                (every? number? size))
         (vec (take 2 size))
