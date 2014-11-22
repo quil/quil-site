@@ -8,12 +8,12 @@
                  [hiccup "1.0.5"]
                  [ring "1.3.0"]
                  [ring/ring-json "0.3.1"]
-                 [quil "2.2.3-SNAPSHOT"]
+                 [quil "2.2.4"]
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/tools.reader "0.8.8"]
                  [org.clojure/core.cache "0.6.4"]
 
-                 [org.clojure/clojurescript "0.0-2268"]]
+                 [org.clojure/clojurescript "0.0-2371"]]
 
   :source-paths ["src/clj"]
 
