@@ -1,5 +1,6 @@
 (ns quil-site.main
   (:require [goog.dom :as dom]
+            [goog.dom.classes :as classes]
             [goog.events :as events]
             [goog.events.EventType :as EventType]))
 
@@ -31,19 +32,34 @@
 
 (def examples (atom []))
 
-(defn register-example! [name author run-fn]
-  (swap! examples conj {:name name
-                        :author author
-                        :run-fn run-fn}))
+(defn register-example! [name author run-fn &
+                         {:keys [interactive?]
+                          :or {interactive? false}
+                          :as st}]
+  (swap! examples conj (assoc st
+                         :name name
+                         :author author
+                         :run-fn run-fn)))
 
 (defn run-example [example host]
-  (let [{:keys [name author run-fn]} example
+  (let [{:keys [name author run-fn interactive?]} example
         link (str "/sketches/show/example_" name)]
+    (when interactive?
+      (classes/remove (query-selector host ".glyphicon.hidden")
+                      "hidden"))
     (dom/setProperties (query-selector host "a")
                        #js {"href" link})
     (dom/setTextContent (query-selector host ".author")
                         (str "by " author))
    (run-fn (query-selector host "canvas") 200)))
+
+(defn enable-tooltips []
+  ; I'm lazy to include proper externs now so I will use strings
+  ; Please fix it if your eyes are bleeding.
+  (let [tooltips ((aget js/window "$")
+                  "[data-toggle='tooltip']")]
+    (.call (aget tooltips "tooltip")
+           tooltips)))
 
 (events/listenOnce js/window EventType/LOAD
   (fn []
@@ -52,5 +68,6 @@
      (doseq [[host example] (map vector visible (shuffle @examples)) ]
        (run-example example host))
      (doseq [host invisible]
-       (dom/removeNode host)))))
+       (dom/removeNode host))
+     (enable-tooltips))))
 

@@ -14,7 +14,7 @@
                      [r 0]))}))
 
 (def speed 0.0003)
-(def speed 0.001) ; hack to make it faster on in small size ;DELETE
+(def speed 0.001) ; hack to make it faster in small size ;DELETE
 
 (defn move [dot]
   (let [[r a] dot]

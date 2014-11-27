@@ -256,4 +256,4 @@
     :middleware [m/fun-mode])
 ) ;DELETE
 
-(quil-site.main/register-example! "equilibrium" "Nikita Beloglazov" run-sketch) ;DELETE
+(quil-site.main/register-example! "equilibrium" "Nikita Beloglazov" run-sketch :interactive? true) ;DELETE

@@ -230,5 +230,5 @@
   :middleware [m/fun-mode])
 ) ;DELETE
 
-(quil-site.main/register-example! "quilts" "Erik Svedäng" run-sketch) ;DELETE
+(quil-site.main/register-example! "quilts" "Erik Svedäng" run-sketch :interactive? true) ;DELETE
 

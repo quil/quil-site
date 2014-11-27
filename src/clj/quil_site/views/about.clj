@@ -18,6 +18,11 @@
             [:div.example
              [:canvas]
              [:div.footer
+              [:span.glyphicon.glyphicon-sort.hidden
+               {:data-toggle "tooltip"
+                :data-placement "bottom"
+                :title (str "Interactive. Select to start interacting using "
+                            "mouse/keyboard.")}]
               [:a "Source"]
               [:span.author]]]])]
 

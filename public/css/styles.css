@@ -154,5 +154,6 @@ body .container.api a {
 .about .example .footer {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
