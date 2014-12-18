@@ -13,7 +13,7 @@
                  [org.clojure/tools.reader "0.8.8"]
                  [org.clojure/core.cache "0.6.4"]
 
-                 [org.clojure/clojurescript "0.0-2371"]]
+                 [org.clojure/clojurescript "0.0-2496"]]
 
   :source-paths ["src/clj"]
 

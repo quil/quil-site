@@ -168,20 +168,19 @@
 (defn slower [speed]
   (max 0.0 (- speed 0.25)))
 
-(defn on-key-down [state]
-  (let [k (q/key-code)]
-    (cond
-     (or (= k 87) (= k 38)) (update-in state [:ship :speed] faster)
-     (or (= k 83) (= k 40)) (update-in state [:ship :speed] slower)
-     (or (= k 65) (= k 37)) (assoc-in state [:ship :dir-change] -0.15)
-     (or (= k 68) (= k 39)) (assoc-in state [:ship :dir-change] 0.15)
-     :else state)))
+(defn on-key-down [state event]
+  (case (:key event)
+    (:w :up) (update-in state [:ship :speed] faster)
+    (:s :down) (update-in state [:ship :speed] slower)
+    (:a :left) (assoc-in state [:ship :dir-change] -0.15)
+    (:d :right) (assoc-in state [:ship :dir-change] 0.15)
+    state))
 
 (defn on-key-up [state]
-  (let [k (q/key-code)]
-    (if (or (= k 37) (= k 39) (= k 65) (= k 68))
-      (assoc-in state [:ship :dir-change] 0)
-      state)))
+  (if (contains? #{:left :right :a :d}
+                 (q/key-as-keyword))
+    (assoc-in state [:ship :dir-change] 0)
+    state))
 
 (defn on-screen? [x y]
   (let [margin 100]
