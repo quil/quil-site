@@ -8,9 +8,10 @@
             [me.raynes.fs :as fs]
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
-            [clojure.tools.reader.edn :as edn]
+            [clojure.tools.reader :as reader]
             [clojure.tools.reader.reader-types :refer [string-push-back-reader]]
-            [clojure.core.cache :as cache]))
+            [clojure.core.cache :as cache]
+            [cljs.tagged-literals :as tags]))
 
 (def test-source "(ns my.core
   (:require [quil.core :as q :include-macros true]
@@ -50,11 +51,15 @@
             (try
               (let [reader (string-push-back-reader text)
                     endof (gensym)]
-                (->> #(edn/read {:eof endof} reader)
-                     (repeatedly)
-                     (take-while #(not= % endof))
-                     (doall)))
-              (catch Exception e '())))
+                (binding [reader/*read-eval* false
+                          reader/*data-readers* tags/*cljs-data-readers*]
+                  (->> #(reader/read reader false endof)
+                       (repeatedly)
+                       (take-while #(not= % endof))
+                       (doall))))
+              (catch Exception e
+                (println e)
+                '())))
           (defsketch? [form]
             (and (list? form)
                  (symbol? (first form))
