@@ -5,7 +5,6 @@
             [ring.util.response :as resp]
             [cljs.closure :as cljs]
             [cljs.env :as cljs-env]
-            [me.raynes.fs :as fs]
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
             [clojure.tools.reader :as reader]
@@ -23,12 +22,12 @@
   {:color 0
    :angle 0})
 
-(defn update [state]
+(defn update-state [state]
   (let [{:keys [color angle]} state]
     {:color (mod (+ color 0.7) 255)
      :angle (mod (+ angle 0.1) q/TWO-PI)}))
 
-(defn draw [state]
+(defn draw-state [state]
   (q/background 240)
   (q/fill (:color state) 255 255)
   (let [angle (:angle state)
@@ -42,25 +41,30 @@
   :host \"my\"
   :size [500 500]
   :setup setup
-  :update update
-  :draw draw
+  :update update-state
+  :draw draw-state
   :middleware [m/fun-mode])")
 
-(defn extract-size [sketch-source]
-  (letfn [(read-all [text]
-            (try
-              (let [reader (string-push-back-reader text)
-                    endof (gensym)]
-                (binding [reader/*read-eval* false
-                          reader/*data-readers* tags/*cljs-data-readers*]
-                  (->> #(reader/read reader false endof)
-                       (repeatedly)
-                       (take-while #(not= % endof))
-                       (doall))))
-              (catch Exception e
-                (println e)
-                '())))
-          (defsketch? [form]
+(defn parse-cljs
+  "Parses cljs source code using clojure.tools.reader and return vector
+  of parsed expressions."
+  [cljs-source]
+  (try
+    (let [reader (string-push-back-reader cljs-source)
+          endof (gensym)]
+      (binding [reader/*read-eval* false
+                reader/*data-readers* tags/*cljs-data-readers*]
+        (->> #(reader/read reader false endof)
+             (repeatedly)
+             (take-while #(not= % endof))
+             (doall)
+             vec)))
+    (catch Exception e
+      (println e)
+      [])))
+
+(defn extract-size [sketch]
+  (letfn [(defsketch? [form]
             (and (list? form)
                  (symbol? (first form))
                  (= "defsketch" (name (first form)))))
@@ -73,37 +77,16 @@
                  (filter #(= :size (first %)))
                  (map second)
                  first))]
-    (let [size (-> sketch-source read-all find-defsketch get-size)]
+    (let [size (-> sketch find-defsketch get-size)]
       (if (and (or (list? size) (vector? size))
                (every? number? size))
         (vec (take 2 size))
         nil))))
 
-(def cljs-compilation-dir (fs/temp-dir "cljs-compilation"))
-
-(defn compile-cljs-2 [cljs-text]
-  (let [source (fs/temp-file "cljs-source" "cljs")]
-   (spit source cljs-text)
-   (let [compiled (cljs-env/with-compiler-env (cljs-env/default-compiler-env)
-                    (cljs/-compile source {}))]
-     (fs/delete source)
-     compiled)))
-
-(defn compile-cljs [cljs-text]
-  (let [source (fs/temp-file "cljs-source" "cljs")
-        compiled (fs/temp-file "cljs-compiled")]
-    (spit source cljs-text)
-    (cljs/build source
-                {:optimizations :simple
-                 :output-to (.getAbsolutePath compiled)
-                 :output-dir (.getAbsolutePath cljs-compilation-dir)
-                 :externs ["externs/processing.js"]
-                 :preamble ["processing.min.js"]
-                 :pretty-print true})
-    (let [compiled-text (slurp compiled)]
-      (fs/delete source)
-      (fs/delete compiled)
-      compiled-text)))
+(defn compile-cljs [cljs-forms]
+  (binding [cljs.analyzer/*cljs-file* "something.cljs"]
+    (cljs-env/with-compiler-env (cljs-env/default-compiler-env)
+      (cljs/-compile cljs-forms {}))))
 
 (def id (atom 0))
 (def sketches (atom (cache/lru-cache-factory {} :threshold 128)))
@@ -143,8 +126,9 @@
 (defn create-sketch [sketch]
   (try
     (let [source (:cljs sketch)
-          js (compile-cljs-2 source)
-          size (extract-size source)
+          parsed (parse-cljs source)
+          js (compile-cljs parsed)
+          size (extract-size parsed)
           id (str (swap! id inc))
           sketch (assoc sketch
                    :id id
