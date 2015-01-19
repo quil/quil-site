@@ -20,14 +20,14 @@
   (let [[r a] dot]
     [r (+ a (* r speed))]))
 
-(defn update [state]
+(defn update-state [state]
   (update-in state [:dots] #(map move %)))
 
 (defn dot->coord [[r a]]
   [(+ (/ (q/width) 2) (* r (q/cos a)))
    (+ (/ (q/height) 2) (* r (q/sin a)))])
 
-(defn draw [state]
+(defn draw-state [state]
   (q/background 250)
   (q/fill 0)
   (let [dots (:dots state)]
@@ -49,8 +49,8 @@
   :host host
   :size [size size]
   :setup setup
-  :update update
-  :draw draw
+  :update update-state
+  :draw draw-state
   :middleware [m/fun-mode])
 ) ;DELETE
 

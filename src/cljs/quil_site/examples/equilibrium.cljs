@@ -139,7 +139,7 @@
    points
    (range (count points))))
 
-(defn update
+(defn update-state
   "Updates sketch state. If sketch is d then the state
   returned unmodified."
   [state]
@@ -180,7 +180,7 @@
     (q/stroke-weight 1)
     (q/line (+ mx a) (+ my b) (- mx a) (- my b))))
 
-(defn draw
+(defn draw-state
   "Draws sketch state."
   [{:keys [points] :as state}]
   (q/background 250)
@@ -248,8 +248,8 @@
     :host host
     :size [size size]
     :setup setup
-    :draw draw
-    :update update
+    :update update-state
+    :draw draw-state
     :mouse-pressed mouse-pressed
     :mouse-dragged mouse-dragged
     :key-pressed key-pressed

@@ -151,7 +151,7 @@
 (defn remove-old-smokes [smokes]
   (remove old? smokes))
 
-(defn update [state]
+(defn update-state [state]
   (-> state
       (update-in [:ship] auto-rotate)
       (update-in [:ship] wiggle-ship)
@@ -201,7 +201,7 @@
       (render-fn entity)
       (q/pop-matrix))))
 
-(defn draw [state]
+(defn draw-state [state]
   (q/background (pulse 20 40  15.0)
                 (pulse 40 60 40.0)
                 (pulse 50 70 5.0))
@@ -222,10 +222,10 @@
   :host host
   :size [size size]
   :setup setup
-  :update update
+  :update update-state
   :key-pressed on-key-down
   :key-released on-key-up
-  :draw draw
+  :draw draw-state
   :middleware [m/fun-mode])
 ) ;DELETE
 
