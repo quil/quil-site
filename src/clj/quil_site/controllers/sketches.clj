@@ -3,14 +3,12 @@
             [compojure.route :refer [not-found]]
             [clojure.java.io :as io]
             [ring.util.response :as resp]
-            [cljs.closure :as cljs]
-            [cljs.env :as cljs-env]
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
-            [clojure.tools.reader :as reader]
-            [clojure.tools.reader.reader-types :refer [string-push-back-reader]]
+            [quil-site.compiler :refer [compile-cljs parse-cljs]]
+
             [clojure.core.cache :as cache]
-            [cljs.tagged-literals :as tags]))
+))
 
 (def test-source "(ns my.core
   (:require [quil.core :as q :include-macros true]
@@ -45,24 +43,6 @@
   :draw draw-state
   :middleware [m/fun-mode])")
 
-(defn parse-cljs
-  "Parses cljs source code using clojure.tools.reader and return vector
-  of parsed expressions."
-  [cljs-source]
-  (try
-    (let [reader (string-push-back-reader cljs-source)
-          endof (gensym)]
-      (binding [reader/*read-eval* false
-                reader/*data-readers* tags/*cljs-data-readers*]
-        (->> #(reader/read reader false endof)
-             (repeatedly)
-             (take-while #(not= % endof))
-             (doall)
-             vec)))
-    (catch Exception e
-      (println e)
-      [])))
-
 (defn extract-size [sketch]
   (letfn [(defsketch? [form]
             (and (list? form)
@@ -82,11 +62,6 @@
                (every? number? size))
         (vec (take 2 size))
         nil))))
-
-(defn compile-cljs [cljs-forms]
-  (binding [cljs.analyzer/*cljs-file* "something.cljs"]
-    (cljs-env/with-compiler-env (cljs-env/default-compiler-env)
-      (cljs/-compile cljs-forms {}))))
 
 (def id (atom 0))
 (def sketches (atom (cache/lru-cache-factory {} :threshold 128)))
@@ -143,6 +118,7 @@
                         :column (:column data)
                         :line (:line data)})))
     (catch java.lang.Exception e
+      (.printStackTrace e)
       (resp/response {:result :error
                       :message "Server error :/"}))))
 
