@@ -65,7 +65,7 @@
             [:li "Create project: " [:code "lein new quil-cljs my-sketch"]]
             [:li [:code "cd my-sketch"]]
             [:li "Build the project: "[:code "lein cljsbuild once"]]
-            [:li "Open " [:code "web/index.html"]]]]]
+            [:li "Open " [:code "index.html"]]]]]
 
          [:p "Check out tutorials for using Quil in "
           (link-to "https://github.com/quil/quil/wiki/Dynamic-Workflow-%28for-LightTable%29" "Light Table")
