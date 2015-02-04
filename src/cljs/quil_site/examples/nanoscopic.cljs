@@ -1,4 +1,4 @@
-(ns quil-site.examples.quilts
+(ns quil-site.examples.nanoscopic
   (:require [quil.core :as q :include-macros true]
             quil-site.main ;DELETE
             [quil.middleware :as m]))
@@ -229,5 +229,5 @@
   :middleware [m/fun-mode])
 ) ;DELETE
 
-(quil-site.main/register-example! "quilts" "Erik Svedäng" run-sketch :interactive? true) ;DELETE
+(quil-site.main/register-example! "nanoscopic" "Erik Svedäng" run-sketch :interactive? true) ;DELETE
 
