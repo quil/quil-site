@@ -56,6 +56,10 @@ function send() {
     $('#result').addClass('hidden');
     $('#ajax-status').removeClass('hidden');
     $('#result-tab').tab('show');
+    $('head').append(
+        $('<link/>')
+            .attr('rel', 'prefetch')
+            .attr('href', '/js/preload.js'));
 }
 
 $(function() {
