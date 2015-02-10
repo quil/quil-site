@@ -10,7 +10,7 @@
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
 
-   [:title "Quil"]
+   [:title (or (:title opts) "Quil")]
 
    [:script {:async "async"
              :src "//www.google-analytics.com/analytics.js"}]

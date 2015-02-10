@@ -6,6 +6,7 @@
 (defn sketch-page [id]
   (page {:tab :create
          :type :sketch
+         :title (str "Quil " id)
          :css-files ["/codemirror-4.5/lib/codemirror.css"
                      "/codemirror-4.5/addon/lint/lint.css"]
          :js-files ["/codemirror-4.5/lib/codemirror.js"

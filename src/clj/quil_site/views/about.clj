@@ -5,7 +5,8 @@
 (defn about-page []
   (page {:tab :about
          :type :about
-         :js-files ["/js/main.js"]}
+         :js-files ["/js/main.js"]
+         :title "Quil: animation in Clojure"}
         [:div.section
          [:p.lead
           "Clojure/ClojureScript library for creating interactive drawings and animations. Check out " (link-to "/sketches/create" "online sketch") "."]]

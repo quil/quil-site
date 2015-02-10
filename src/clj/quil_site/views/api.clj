@@ -72,6 +72,7 @@
 (defn api-index [functions]
   (page {:type :api
          :tab :api
+         :title "Quil API"
          :js-files ["/js/api.js"]}
         (for [column index-page-columns]
           [:div.col-md-2.col-sm-4.col-xs-6
@@ -125,6 +126,7 @@
 (defn api-category [cat subcats]
   (page {:type :api
          :tab :api
+         :title (str "Quil API " cat)
          :js-files ["/js/api.js"]}
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
@@ -139,6 +141,7 @@
 (defn api-subcategory [cat subcat fns]
   (page {:type :api
          :tab :api
+         :title (str "Quil API " subcat)
          :js-files ["/js/api.js"]}
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
