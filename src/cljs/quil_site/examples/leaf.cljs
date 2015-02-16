@@ -15,7 +15,7 @@
 
 (defn setup []
   (q/frame-rate 60)
-  (q/background 250))
+  (q/background 255))
 
 (defn draw []
   (q/with-translation [(/ (q/width) 2) 10]

@@ -28,7 +28,7 @@
    (+ (/ (q/height) 2) (* r (q/sin a)))])
 
 (defn draw-state [state]
-  (q/background 250)
+  (q/background 255)
   (q/fill 0)
   (let [dots (:dots state)]
     (loop [curr (first dots)

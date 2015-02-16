@@ -35,7 +35,7 @@
     (q/bezier base-x 0 base-x 0
               0 (- x-max) x y)))
 (defn draw []
-  (q/background (pulse 230 250 1.0))
+  (q/background 255)
   (q/stroke 0)
   (q/stroke-weight 1)
   (q/no-fill)
