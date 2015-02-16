@@ -2,7 +2,8 @@
   (:require [goog.dom :as dom]
             [goog.dom.classes :as classes]
             [goog.events :as events]
-            [goog.events.EventType :as EventType]))
+            [goog.events.EventType :as EventType]
+            [clojure.string :as cstr]))
 
 (enable-console-print!)
 
@@ -41,9 +42,13 @@
                          :author author
                          :run-fn run-fn)))
 
+(defn example-name->link [name]
+  (->> (cstr/replace name " " "-")
+       (str "/sketches/show/example_")))
+
 (defn run-example [example host]
   (let [{:keys [name author run-fn interactive?]} example
-        link (str "/sketches/show/example_" name)]
+        link (example-name->link name)]
     (when interactive?
       (classes/remove (query-selector host ".glyphicon.hidden")
                       "hidden"))
