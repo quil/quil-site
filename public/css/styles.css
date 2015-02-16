@@ -153,7 +153,24 @@ body .container.api a {
 
 .about .example .footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+}
+
+.about .example .footer * {
+    margin: 0px 5px;
+}
+
+.about .example .name {
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.about .example .author {
+    text-align: center;
+}
+
+.about .example canvas {
+    margin-top: 5px;
 }
 

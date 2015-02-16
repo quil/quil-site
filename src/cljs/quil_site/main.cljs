@@ -54,6 +54,8 @@
                       "hidden"))
     (dom/setProperties (query-selector host "a")
                        #js {"href" link})
+    (dom/setTextContent (query-selector host ".name")
+                        name)
     (dom/setTextContent (query-selector host ".author")
                         (str "by " author))
    (run-fn (query-selector host "canvas") 200)))

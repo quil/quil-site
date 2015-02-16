@@ -17,6 +17,8 @@
                         "col-md-4 hidden-sm hidden-xs"]]
            [:div {:class classes}
             [:div.example
+             [:div.name]
+             [:div.author]
              [:canvas]
              [:div.footer
               [:span.glyphicon.glyphicon-sort.hidden
@@ -24,8 +26,7 @@
                 :data-placement "bottom"
                 :title (str "Interactive. Select to start interacting using "
                             "mouse/keyboard.")}]
-              [:a "Source"]
-              [:span.author]]]])]
+              [:a "source"]]]])]
 
         [:div.section
          [:h3 "Features"]
