@@ -72,9 +72,10 @@
         h (q/height)]
     (q/with-translation [(/ w 2) (/ h 2)]
       (q/scale (/ (min w h) field-size))
+      (q/background 255)
 
       ; Draw background and back stars
-      (draw-image state :bg [0 0])
+;      (draw-image state :bg [0 0])
       (draw-stars state (:stars2 state))
 
       ; Slightly move and rotate spaceship
