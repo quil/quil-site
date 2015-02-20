@@ -3,7 +3,8 @@
             [goog.dom.classes :as classes]
             [goog.events :as events]
             [goog.events.EventType :as EventType]
-            [clojure.string :as cstr]))
+            [clojure.string :as cstr]
+            goog.Uri))
 
 (enable-console-print!)
 
@@ -68,13 +69,23 @@
     (.call (aget tooltips "tooltip")
            tooltips)))
 
-(events/listenOnce js/window EventType/LOAD
-  (fn []
-    (let [[visible invisible] (split-at (num-of-visible-examples)
-                                        (query-selector-all ".example"))]
-     (doseq [[host example] (map vector visible (shuffle @examples)) ]
-       (run-example example host))
-     (doseq [host invisible]
-       (dom/removeNode host))
-     (enable-tooltips))))
+(defn get-examples-to-show []
+  (let [url (goog.Uri. js/document.URL)
+        debug-examples (set (.getParameterValues url "example"))]
+    (if (empty? debug-examples)
+      (shuffle @examples)
+      (filter #(contains? debug-examples
+                          (cstr/replace (:name %) " " "-"))
+              @examples))))
+
+(defn init []
+  (let [[visible invisible] (split-at (num-of-visible-examples)
+                                      (query-selector-all ".example"))]
+    (doseq [[host example] (map vector visible (get-examples-to-show))]
+      (run-example example host))
+    (doseq [host invisible]
+      (dom/removeNode host))
+    (enable-tooltips)))
+
+(events/listenOnce js/window EventType/LOAD init)
 
