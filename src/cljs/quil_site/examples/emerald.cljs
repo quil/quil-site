@@ -3,9 +3,6 @@
             quil-site.main ;DELETE
   ))
 
-(defn setup []
-  (q/frame-rate 60))
-
 (defn pulse [low high rate]
   (let [diff (- high low)
         half (/ diff 2)

@@ -1,4 +1,4 @@
-(ns quil-site.examples.emerald
+(ns quil-site.examples.waves
   (:require [quil.core :as q :include-macros true]
             quil-site.main ;DELETE
   ))

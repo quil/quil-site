@@ -14,5 +14,7 @@ target
 .nrepl-port
 *.iml
 *.idea
-public/js/preload.js
-public/js/main.js
+public/js/
+!public/js/api.js
+!public/js/bootstrap.min.js
+!public/js/sketch.js
