@@ -74,7 +74,7 @@
 
 (def available-examples
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
-   "leaf" "nanoscopic" "spaceship" "tailspin" "waves"])
+   "leaf" "nanoscopic" "spaceship" "tailspin" "waves" "tree"])
 
 (defn get-examples-to-show []
   (let [url (goog.Uri. js/document.URL)

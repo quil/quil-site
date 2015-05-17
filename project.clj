@@ -31,7 +31,8 @@
                   "public/js/nanoscopic.js"
                   "public/js/spaceship.js"
                   "public/js/tailspin.js"
-                  "public/js/waves.js"]
+                  "public/js/waves.js"
+                  "public/js/tree.js"]
 
   :plugins [[lein-cljsbuild "1.0.5"]]
 
@@ -71,7 +72,9 @@
                             :tailspin {:output-to "public/js/tailspin.js"
                                        :entries #{quil-site.examples.tailspin}}
                             :waves {:output-to "public/js/waves.js"
-                                    :entries #{quil-site.examples.waves}}}}}]}}}
+                                    :entries #{quil-site.examples.waves}}
+                            :tree {:output-to "public/js/tree.js"
+                                   :entries #{quil-site.examples.tree}}}}}]}}}
 
   :cljsbuild {
     :builds [
