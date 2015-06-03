@@ -32,7 +32,8 @@
                   "public/js/spaceship.js"
                   "public/js/tailspin.js"
                   "public/js/waves.js"
-                  "public/js/tree.js"]
+                  "public/js/tree.js"
+                  "target"]
 
   :plugins [[lein-cljsbuild "1.0.5"]]
 

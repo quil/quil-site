@@ -165,5 +165,5 @@
    :middleware [m/fun-mode])
 ) ;DELETE
 
-(quil-site.main/register-example! "tree" "Nikita Beloglazov" run-sketch :interactive? false) ;DELETE
+(quil-site.main/register-example! "tree" "Nikita Beloglazov" run-sketch) ;DELETE
 
