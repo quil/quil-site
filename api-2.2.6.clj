@@ -69,6 +69,19 @@
   :docstring
   "Sets the current font size. This size will be used in all\n  subsequent calls to the text fn. Font size is measured in\n  units of pixels.",
   :category "Typography"},
+ navigation-2d
+ {:link nil,
+  :args ({:value [options], :type :both}),
+  :what :fn,
+  :ns "quil.middleware",
+  :name navigation-2d,
+  :subcategory nil,
+  :added "2.2.6",
+  :type :both,
+  :requires-bindings false,
+  :docstring
+  "Enables navigation over 2D sketch. Drag mouse to change the center of the\n  sketch and mouse wheel controls zoom. This middleware requires fun-mode.\n\n  Customization\n\n  You can customize this middleware by providing map as\n  :navigation-2d option in defsketch/sketch. Map can have following\n  optional keys:\n\n  :position - vector of 2 numbers, x and y - center of the screen.\n              Default is width/2, height/2.\n\n  :zoom - number indicating current zoom level. Default is 1.\n\n  Accessing position information from sketch\n\n  navigation-2d uses fun-mode under the hood so all position-related\n  information is stored in the state map. It means that you can access in\n  draw/update/any handler and modify it if you need to. Position\n  information is a map which is stored under :navigation-2d key in the\n  state map. Position consists of 2 values: :position and :zoom.\n  See \"Customization\" section above for more details.\n\n  Usage example:\n\n  (q/defsketch my-sketch\n    ...\n    :middleware [m/fun-mode m/navigation-2d])\n",
+  :category "Middleware"},
  text-char
  {:link "http://www.processing.org/reference/text_.html",
   :args
@@ -1142,6 +1155,19 @@
   :requires-bindings false,
   :docstring "Returns the height of the main screen in pixels.",
   :category "Environment"},
+ pause-on-error
+ {:link nil,
+  :args #{[options]},
+  :what :fn,
+  :ns "quil.middleware",
+  :name pause-on-error,
+  :subcategory nil,
+  :added "2.2.0",
+  :type :clj,
+  :requires-bindings false,
+  :docstring
+  "Pauses sketch if any of user-provided handlers throws error.\n  It allows to fix the error on the fly and continue sketch.\n  May be good alternative to default '500ms pause if exception'\n  behaviour.",
+  :category "Middleware"},
  red
  {:link "http://www.processing.org/reference/red_.html",
   :args ({:value [c], :type :both}),
@@ -1945,6 +1971,19 @@
   :docstring
   "Draws a number to the screen in the specified position. See text fn\n  for more details.",
   :category "Typography"},
+ fun-mode
+ {:link nil,
+  :args ({:value [options], :type :both}),
+  :what :fn,
+  :ns "quil.middleware",
+  :name fun-mode,
+  :subcategory nil,
+  :added "2.1.0",
+  :type :both,
+  :requires-bindings false,
+  :docstring
+  "Introduces function mode. Adds 'update' function which takes current\n  state and returns new state. Makes all other functions (setup, draw,\n  mouse-click, etc) state-aware. See wiki for more details.",
+  :category "Middleware"},
  rotate
  {:link "http://www.processing.org/reference/rotate_.html",
   :args
@@ -2611,6 +2650,19 @@
   :processing-link
   "http://processing.org/reference/javadoc/core/processing/core/PGraphics.html#fillColor",
   :category "Color"},
+ navigation-3d
+ {:link nil,
+  :args ({:value [options], :type :both}),
+  :what :fn,
+  :ns "quil.middleware",
+  :name navigation-3d,
+  :subcategory nil,
+  :added "2.2.0",
+  :type :both,
+  :requires-bindings false,
+  :docstring
+  "Enables navigation in 3D space. Similar to how it is done in\n  shooters: WASD navigation, space is go up, drag mouse to look around.\n  This middleware requires fun-mode.\n\n\n  Navigation\n\n  * Drag mouse to look around. You can change settings to bind\n    mouse-moved instead of mouse-dragged to look around. See\n    customization info below.\n\n  * Keyboard:\n    * w - go forward\n    * s - go backward\n    * a - strafe left\n    * d - strafe right\n    * space - go up\n    * z - go down, can't bind to ctrl, limitation of Processing\n\n\n  Customization\n\n  You can customize this middleware by providing map as\n  :navigation-3d option in defsketch/sketch. Map can have following\n  optional keys:\n\n  :position - vector of 3 numbers, initial camera position. Default\n              is the same as in 'camera' function.\n\n  :straight - vector of 3 numbers, direction you'll be looking at.\n              Default is [0 0 -1] (looking down).\n\n  :up - vector of 3 numbers, 'up' direction. Default is [0 1 0].\n\n  :pixels-in-360 - number, mouse sensitivity. Defines how many pixels\n                   you need to move/drag you mouse to rotate 360 degrees.\n                   The less the number the more sensitive is mouse.\n                   Default is 1000.\n\n  :step-size - number, number of pixels you move on each key event (wasd).\n               Default is 20.\n\n  :rotate-on - keyword, either :mouse-dragged or :mouse-moved. Specifies\n               on which mouse event camera should rotate. Default is\n               :mouse-dragged.\n\n\n  Accessing position information from sketch\n\n  navigation-3d uses fun-mode under the hood  so all position-related\n  information is stored in the state map. It means that you can access in\n  draw/update/any handler and modify it if you need to. Position\n  information is a map which is stored under :navigation-3d key in the\n  state map. Position consists of 3 values: :position, :straight and :up.\n  See \"Customization\" section above for more details.\n\n  Usage example:\n\n  (q/defsketch my-sketch\n    ...\n    :middleware [m/fun-mode m/navigation-3d])\n\n  See wiki article for more(?) details:\n  https://github.com/quil/quil/wiki/Navigation-3D",
+  :category "Middleware"},
  green
  {:link "http://www.processing.org/reference/green_.html",
   :args ({:value [col], :type :both}),

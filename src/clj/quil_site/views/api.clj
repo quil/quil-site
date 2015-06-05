@@ -10,8 +10,8 @@
    ["Image" "Transform" "Rendering" ]
    ["Math" "Data" "State"]
    ["Shape"]
-   ["Lights, Camera" "Output"]
-   ["Environment" "Input" "Structure"]])
+   ["Lights, Camera" "Environment"]
+   ["Input" "Output" "Structure" "Middleware"]])
 
 (defn as-url [str]
   (-> str
@@ -87,7 +87,7 @@
 
 (defn- render-function [fn]
   (let [{:keys [name args subcategory docstring link type what
-                processing-name requires-bindings category]} fn
+                processing-name requires-bindings category ns]} fn
         args (map #(if (vector? %) {:value % :type :both} %)
                   args)
         fields {:arguments
@@ -108,7 +108,9 @@
                     [:span processing-name])
                   "None. It is present only in Quil.")}]
     [:div.function-doc {:id (as-url name)}
-     (render-type-specific :h3 name type what)
+     (render-type-specific :h3 (str
+                                (if ns (str ns "/") "")
+                                name) type what)
      [:div.row
       [:div.col-md-7.col-xs-12
        [:dl
