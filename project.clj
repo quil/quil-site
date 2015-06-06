@@ -12,6 +12,7 @@
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/tools.reader "0.9.2"]
                  [org.clojure/core.cache "0.6.4"]
+                 [org.clojure/data.codec "0.1.0"]
                  [clj-http "1.1.2"]
                  [cheshire "5.5.0"]
 
