@@ -5,8 +5,7 @@
             [ring.util.response :as resp]
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
-            [quil-site.compiler :refer [compile-cljs parse-cljs]]
-
+            [quil-site.compiler :refer [compile-or-get-cached parse-cljs]]
             [clojure.core.cache :as cache]
 ))
 
@@ -102,7 +101,7 @@
   (try
     (let [source (:cljs sketch)
           parsed (parse-cljs source)
-          js (compile-cljs parsed)
+          js (compile-or-get-cached parsed)
           size (extract-size parsed)
           id (str (swap! id inc))
           sketch (assoc sketch

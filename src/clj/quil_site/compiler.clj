@@ -4,7 +4,11 @@
             [cljs.env :as cljs-env]
             [clojure.tools.reader :as reader]
             [clojure.tools.reader.reader-types :refer [string-push-back-reader]]
-            [cljs.tagged-literals :as tags]))
+            [cljs.tagged-literals :as tags]
+            [clojure.core.cache :as c]
+            [pandect.algo.sha256 :as sha256]))
+
+(def ^{:private true} cache (atom (c/lru-cache-factory {} :threshold 128)))
 
 (defn parse-cljs
   "Parses cljs source code using clojure.tools.reader and return vector
@@ -24,7 +28,7 @@
       (println e)
       [])))
 
-(defn get-upstream-deps
+(defn- get-upstream-deps
   "returns a merged map containing all upstream dependencies defined by libraries on the classpath"
   []
   (let [classloader (. (Thread/currentThread) (getContextClassLoader))
@@ -32,7 +36,7 @@
 
     (apply merge-with concat upstream-deps)))
 
-(defn compile-cljs [cljs-forms]
+(defn- compile-cljs [cljs-forms]
   (let [upstream (get-upstream-deps)
         opts {:ups-libs (:libs upstream)
               :ups-foreign-libs (:foreign-libs upstream)
@@ -43,6 +47,15 @@
       (cljs-env/with-compiler-env
         (assoc compiler-env :js-dependency-index (deps/js-dependency-index opts))
         (cljs/-compile cljs-forms {})))))
+
+(defn compile-or-get-cached [cljs-forms]
+  (let [hash (sha256/sha256 (pr-str cljs-forms))]
+    (if-let [compiled (c/lookup @cache hash)]
+      (do (swap! cache c/hit hash)
+          compiled)
+     (let [compiled (compile-cljs cljs-forms)]
+       (swap! cache assoc hash compiled)
+       compiled))))
 
 
 (comment
@@ -80,6 +93,6 @@
   :draw draw-state
   :middleware [m/fun-mode])")
 
-  (compile-cljs (parse-cljs test-source))
+  (compile-or-get-cached (parse-cljs test-source))
 
   )
