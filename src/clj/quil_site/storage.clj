@@ -3,26 +3,45 @@
             [cheshire.core :refer [generate-string]]
             [clojure.tools.reader.edn :as edn]
             [clojure.data.codec.base64 :as b64]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [pandect.algo.sha256 :as sha256])
   (:import [java.io ByteArrayOutputStream ByteArrayInputStream]
            [java.util.zip GZIPOutputStream GZIPInputStream]))
 
 (def keys-map (edn/read-string (slurp "keys.clj")))
 
-(defn request [method keys path body]
-  (:body
-   (http/request {:method method
-                  :url (str "https://api.parse.com/1/classes/" path)
-                  :headers {"X-Parse-Application-Id" (:app-key keys)
-                            "X-Parse-REST-API-Key" (:rest-key keys)}
-                  :body body
-                  :as :json})))
+(def headers {"X-Parse-Application-Id" (:app-key keys-map)
+              "X-Parse-REST-API-Key" (:rest-key keys-map)})
 
-(defn create-object [object]
-  (request :post keys-map "Sketch" (generate-string object)))
+(def url (str "https://api.parse.com/1/classes/"
+              (:class keys-map "SketchDev")))
 
-(defn get-object [id]
-  (request :get keys-map (str "Sketch/" id) nil))
+(defn- create-object [object]
+  (:body (http/post url {:headers headers
+                         :body (generate-string object)
+                         :as :json})))
+
+(defn- find-object-by-hash [object]
+  (:body (http/get url {:headers headers
+                        :query-params {"where" (generate-string
+                                                {:hash (:hash object)})}
+                        :as :json})))
+
+(defn- get-object [id]
+  (:body (http/get (str url "/" id) {:headers headers
+                                     :as :json})))
+
+(defn save-source [source]
+  (let [obj {:source source
+             :hash (sha256/sha256 source)}]
+    (if-let [existing (-> (find-object-by-hash obj)
+                          :results
+                          first)]
+      (:objectId existing)
+      (:objectId (create-object obj)))))
+
+(defn load-source [id]
+  (-> id get-object :source))
 
 (defn string->gzip->base64 [text]
   (let [out (ByteArrayOutputStream.)
@@ -40,9 +59,13 @@
 
 (comment
 
-  (create-object {:hello "worldddd"})
+  (create-object {:hello "worldddd" :hash "12345"})
 
   (get-object "fSv6r7DNPd")
+
+  (find-object-by-hash {:hash "12345"})
+
+  (save-source "sdf")
 
   (do
     (require 'quil-site.controllers.sketches)

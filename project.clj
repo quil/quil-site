@@ -15,6 +15,7 @@
                  [org.clojure/data.codec "0.1.0"]
                  [clj-http "1.1.2"]
                  [cheshire "5.5.0"]
+                 [pandect "0.5.2"]
 
                  [org.clojure/clojurescript "0.0-3308"]]
 
