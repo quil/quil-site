@@ -20,6 +20,12 @@ function runSketch(id, size) {
     var src = '/sketches/html/' + id;
     var width = size ? size[0] : 500;
     var height = size ? size[1] : 500;
+    // firefox has weird bug around hidden iframes
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=733698
+    // So unhide iframe immediately before it was fully loaded.
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        $('#result').removeClass('hidden');
+    }
     $('#result iframe')
         .attr('src', src)
         .css('width', width + 'px')
