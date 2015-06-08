@@ -88,7 +88,7 @@
 
 (defn sketch-from-source [source id]
   (let [parsed (parse-cljs source)
-        js (future (compile-or-get-cached parsed))
+        js (future (compile-or-get-cached parsed source))
         size (extract-size parsed)
         id (future (or id (get-id-for-source source)))]
     {:cljs source
