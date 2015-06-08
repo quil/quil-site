@@ -48,15 +48,15 @@
         (assoc compiler-env :js-dependency-index (deps/js-dependency-index opts))
         (cljs/-compile cljs-forms {})))))
 
-(defn compile-or-get-cached [cljs-forms]
-  (let [hash (sha256/sha256 (pr-str cljs-forms))]
+(defn compile-or-get-cached [cljs-forms orig-source]
+  (let [hash (sha256/sha256 orig-source)]
     (if-let [compiled (c/lookup @cache hash)]
-      (do (swap! cache c/hit hash)
-          compiled)
-     (let [compiled (compile-cljs cljs-forms)]
-       (swap! cache assoc hash compiled)
-       compiled))))
-
+      (do
+        (swap! cache c/hit hash)
+        compiled)
+      (let [compiled (compile-cljs cljs-forms)]
+        (swap! cache assoc hash compiled)
+        compiled))))
 
 (comment
 

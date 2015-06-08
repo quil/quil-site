@@ -7,7 +7,8 @@
             [quil-site.examples :refer [get-example-source]]
             [quil-site.compiler :refer [compile-or-get-cached parse-cljs]]
             [quil-site.storage :as s]
-            [clojure.core.cache :as c]))
+            [clojure.core.cache :as c]
+            [pandect.algo.sha256 :as sha256]))
 
 (def test-source "(ns my.core
   (:require [quil.core :as q :include-macros true]
@@ -65,24 +66,35 @@
 (def id (atom 0))
 (def sketches (atom (c/lru-cache-factory {} :threshold 128)))
 
-(defn sketch-from-source [source id]
-  (let [parsed (parse-cljs source)
-        js (future (compile-or-get-cached parsed))
-        size (extract-size parsed)
-        id (future (or id (s/save-source source)))]
-    {:cljs source
-     :js @js
-     :size size
-     :id @id}))
+(def id-caches (atom (c/lru-cache-factory {} :threshold 512)))
 
 (defn get-example [id]
   (let [name (subs id (count "example_"))]
     (get-example-source name)))
 
+(defn get-id-for-source [source]
+  (let [hash (sha256/sha256 source)]
+    (if-let [id (c/lookup @id-caches hash)]
+      (do (swap! id-caches c/hit hash)
+          id)
+      (let [id (s/save-source source)]
+        (swap! id-caches assoc hash id)
+        id))))
+
 (defn get-source-for-id [id]
   (if (.startsWith id "example_")
     (get-example id)
     (s/load-source id)))
+
+(defn sketch-from-source [source id]
+  (let [parsed (parse-cljs source)
+        js (future (compile-or-get-cached parsed))
+        size (extract-size parsed)
+        id (future (or id (get-id-for-source source)))]
+    {:cljs source
+     :js @js
+     :size size
+     :id @id}))
 
 (defn get-sketch [id]
   (if-let [sketch (c/lookup @sketches id)]
