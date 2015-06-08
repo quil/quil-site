@@ -29,6 +29,9 @@ function runSketch(id, size) {
         .attr('href', src);
     $('#ajax-status').addClass('hidden');
     setErrors([]);
+    if (window.history  && window.history.replaceState) {
+        window.history.replaceState({}, '', '/sketches/show/' + id);
+    }
 }
 
 function showError(response) {
