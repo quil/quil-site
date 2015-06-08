@@ -6,8 +6,8 @@
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
             [quil-site.compiler :refer [compile-or-get-cached parse-cljs]]
-            [clojure.core.cache :as cache]
-))
+            [quil-site.storage :as s]
+            [clojure.core.cache :as c]))
 
 (def test-source "(ns my.core
   (:require [quil.core :as q :include-macros true]
@@ -63,22 +63,35 @@
         nil))))
 
 (def id (atom 0))
-(def sketches (atom (cache/lru-cache-factory {} :threshold 128)))
+(def sketches (atom (c/lru-cache-factory {} :threshold 128)))
+
+(defn sketch-from-source [source id]
+  (let [parsed (parse-cljs source)
+        js (future (compile-or-get-cached parsed))
+        size (extract-size parsed)
+        id (future (or id (s/save-source source)))]
+    {:cljs source
+     :js @js
+     :size size
+     :id @id}))
 
 (defn get-example [id]
   (let [name (subs id (count "example_"))]
     (get-example-source name)))
 
+(defn get-source-for-id [id]
+  (if (.startsWith id "example_")
+    (get-example id)
+    (s/load-source id)))
+
 (defn get-sketch [id]
-  (if-let [sketch (cache/lookup @sketches id)]
-    (do (swap! sketches cache/hit id)
+  (if-let [sketch (c/lookup @sketches id)]
+    (do (swap! sketches c/hit id)
         sketch)
-    (if (.startsWith id "example_")
-      (if-let [source (get-example id)]
-        (let [sketch {:cljs source}]
-          (swap! sketches assoc id sketch)
-          sketch)
-        nil)
+    (if-let [source (get-source-for-id id)]
+      (let [sketch (sketch-from-source source id)]
+        (do (swap! sketches assoc id sketch)
+            sketch))
       nil)))
 
 (defn sketch-html [id]
@@ -99,15 +112,8 @@
 
 (defn create-sketch [sketch]
   (try
-    (let [source (:cljs sketch)
-          parsed (parse-cljs source)
-          js (compile-or-get-cached parsed)
-          size (extract-size parsed)
-          id (str (swap! id inc))
-          sketch (assoc sketch
-                   :id id
-                   :size size
-                   :js js)]
+    (let [sketch (sketch-from-source (:cljs sketch) nil)
+          id (:id sketch)]
       (swap! sketches assoc id sketch)
       (sketch-info id))
     (catch clojure.lang.ExceptionInfo e

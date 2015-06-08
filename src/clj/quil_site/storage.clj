@@ -41,7 +41,10 @@
       (:objectId (create-object obj)))))
 
 (defn load-source [id]
-  (-> id get-object :source))
+  (try
+    (-> id get-object :source)
+    (catch Exception e
+      nil)))
 
 (defn string->gzip->base64 [text]
   (let [out (ByteArrayOutputStream.)
