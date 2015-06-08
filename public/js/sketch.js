@@ -20,7 +20,6 @@ function runSketch(id, size) {
     var src = '/sketches/html/' + id;
     var width = size ? size[0] : 500;
     var height = size ? size[1] : 500;
-    $('#result').removeClass('hidden');
     $('#result iframe')
         .attr('src', src)
         .css('width', width + 'px')
@@ -94,4 +93,8 @@ $(function() {
         }
     });
     $('#send').on('click', send);
+    $('#result iframe').load(function() {
+        $('#result').removeClass('hidden');
+    });
+
 });
