@@ -28,6 +28,11 @@
                             "mouse/keyboard.")}]
               [:a "source"]]]])]
 
+        [:div#add-example
+         [:a {:href "https://github.com/quil/quil/wiki/Adding-new-example-to-quil.info"}
+          [:small
+           "Have a nice sketch?"]]]
+
         [:div.section
          [:h3 "Features"]
          [:div.row

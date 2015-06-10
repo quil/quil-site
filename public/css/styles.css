@@ -174,3 +174,7 @@ body .container.api a {
     margin-top: 5px;
 }
 
+#add-example {
+    margin-top: 20px;
+    text-align: right;
+}
