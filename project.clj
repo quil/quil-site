@@ -37,6 +37,7 @@
                   "public/js/tailspin.js"
                   "public/js/waves.js"
                   "public/js/tree.js"
+                  "public/js/geometric-twinkle.js"
                   "target"]
 
   :plugins [[lein-cljsbuild "1.0.5"]]
@@ -79,7 +80,9 @@
                             :waves {:output-to "public/js/waves.js"
                                     :entries #{quil-site.examples.waves}}
                             :tree {:output-to "public/js/tree.js"
-                                   :entries #{quil-site.examples.tree}}}}}]}}}
+                                   :entries #{quil-site.examples.tree}}
+                            :geometric-twinkle {:output-to "public/js/geometric-twinkle.js"
+                                   :entries #{quil-site.examples.geometric-twinkle}}}}}]}}}
 
   :cljsbuild {
     :builds [
