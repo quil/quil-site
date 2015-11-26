@@ -81,7 +81,7 @@
                                     :entries #{quil-site.examples.waves}}
                             :tree {:output-to "public/js/tree.js"
                                    :entries #{quil-site.examples.tree}}
-                            :geometric-twinkle {:output-to "public/js/geometric-twinkle.js"
+                            :geometric-twinkle {:output-to "public/js/geometric_twinkle.js"
                                    :entries #{quil-site.examples.geometric-twinkle}}}}}]}}}
 
   :cljsbuild {

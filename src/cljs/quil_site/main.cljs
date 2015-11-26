@@ -74,7 +74,7 @@
 
 (def available-examples
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
-   "leaf" "nanoscopic" "spaceship" "tailspin" "waves" "tree" 
+   "leaf" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
    "geometric-twinkle"])
 
 (defn get-examples-to-show []
