@@ -41,7 +41,7 @@
 
 
 (defn run-sketch [host size] ;DELETE
-(q/defsketch my-sketch
+(q/sketch
   :host host
   :size [size size]
   :setup setup
