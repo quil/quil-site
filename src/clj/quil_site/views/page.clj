@@ -49,6 +49,7 @@
      [:div.collapse.navbar-collapse
       [:ul.nav.navbar-nav
        (make-tab opts :about "About" "/")
+       (make-tab opts :examples "Examples" "/examples")
        (make-tab opts :api "API" "/api")
        (make-tab opts :create "Create" "/sketches/create")]]]]
 

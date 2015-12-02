@@ -8,10 +8,12 @@
             [ring.middleware.stacktrace :as stacktrace]
             [quil-site.controllers.sketches :as sketches]
             [quil-site.controllers.api :as api]
-            [quil-site.views.about :refer [about-page]]))
+            [quil-site.views.about :refer [about-page]]
+            [quil-site.views.examples :refer [examples-page]]))
 
 (defroutes app
   (GET "/" [] (about-page))
+  (GET "/examples" [] (examples-page))
   sketches/routes
   api/routes
   (files "/"))

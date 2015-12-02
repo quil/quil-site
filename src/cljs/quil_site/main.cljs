@@ -4,6 +4,7 @@
             [goog.events :as events]
             [goog.events.EventType :as EventType]
             [clojure.string :as cstr]
+            [quil.core :as q :include-macros true]
             goog.Uri))
 
 (enable-console-print!)
@@ -38,6 +39,37 @@
   (->> (cstr/replace name " " "-")
        (str "/sketches/show/example_")))
 
+(defn pause-after-next-frame [sketch]
+  (let [real-sketch (aget (aget sketch "externals") "sketch")
+        set-on-frame-end #(aset real-sketch "onFrameEnd" %)]
+    (set-on-frame-end
+     (fn []
+       (q/with-sketch sketch
+         (q/no-loop))
+       (set-on-frame-end (fn []))))))
+
+(defn should-start-paused? []
+  (boolean (query-selector ".container.examples-page")))
+
+(defn setup-play-pause-functionality [host sketch]
+  (pause-after-next-frame sketch )
+  (let [play-button (query-selector host ".play")
+        pause-button (query-selector host ".pause")]
+    (classes/remove play-button "hidden")
+    (classes/remove pause-button "hidden")
+    (classes/add pause-button "invisible")
+    (events/listen play-button EventType/CLICK
+                   (fn []
+                     (q/with-sketch sketch
+                       (q/start-loop))
+                     (classes/add play-button "hidden")
+                     (classes/remove pause-button "invisible")))
+    (events/listen pause-button EventType/CLICK
+                   (fn []
+                     (pause-after-next-frame sketch)
+                     (classes/remove play-button "hidden")
+                     (classes/add pause-button "invisible")))))
+
 (defn run-example [example host]
   (let [{:keys [name author run-fn interactive?]} example
         link (example-name->link name)]
@@ -50,7 +82,9 @@
                         name)
     (dom/setTextContent (query-selector host ".author")
                         (str "by " author))
-   (run-fn (query-selector host "canvas") 200)))
+    (let [sketch (run-fn (query-selector host "canvas") 200)]
+      (when (should-start-paused?)
+        (setup-play-pause-functionality host sketch)))))
 
 (defn register-example! [name author run-fn &
                          {:keys [interactive?]
@@ -75,7 +109,7 @@
 (def available-examples
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
    "leaf" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
-   "geometric-twinkle"])
+   "geometric twinkle"])
 
 (defn get-examples-to-show []
   (let [url (goog.Uri. js/document.URL)
@@ -93,7 +127,7 @@
                             "async" "async"})
     (dom/append js/document.body script)))
 
-(defn init []
+(defn init-about-page []
   (let [[visible invisible] (split-at (num-of-visible-examples)
                                       (query-selector-all ".example"))]
     (doseq [[host example-name] (map vector visible (get-examples-to-show))]
@@ -103,6 +137,23 @@
     (doseq [host invisible]
       (dom/removeNode host))
     (enable-tooltips)))
+
+(defn init-examples-page []
+  (doseq [example-name available-examples]
+    (let [host (.cloneNode (query-selector "#template") true)]
+      (classes/remove host "hidden")
+      (.appendChild (query-selector ".examples") host)
+      (.removeAttribute host "id")
+      (if-let [example (@examples example-name)]
+        (run-example example host)
+        (load-example example-name host))))
+  (enable-tooltips))
+
+(defn init []
+  (cond (query-selector ".container.about")
+        (init-about-page)
+        (query-selector ".container.examples-page")
+        (init-examples-page)))
 
 (events/listenOnce js/window EventType/LOAD init)
 

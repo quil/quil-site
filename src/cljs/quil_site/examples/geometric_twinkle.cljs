@@ -50,4 +50,4 @@
   :middleware [m/fun-mode])
 ) ;DELETE
 
-(quil-site.main/register-example! "geometric-twinkle" "Jeremy Kross" run-sketch) ;DELETE
+(quil-site.main/register-example! "geometric twinkle" "Jeremy Kross" run-sketch) ;DELETE

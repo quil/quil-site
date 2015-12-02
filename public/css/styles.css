@@ -146,35 +146,64 @@ body .container.api a {
     margin: 40px 0px;
 }
 
-.about .example {
+.example {
     width: 200px;
     margin: auto;
 }
 
-.about .example .footer {
+.example .footer {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.about .example .footer * {
+.example .footer * {
     margin: 0px 5px;
 }
 
-.about .example .name {
+.example .name {
     text-transform: capitalize;
     text-align: center;
 }
 
-.about .example .author {
+.example .author {
     text-align: center;
 }
 
-.about .example canvas {
+.example .canvas-container {
     margin-top: 5px;
+    position: relative;
+}
+
+.example .canvas-container .play, .example .canvas-container .hover {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    height: 200px;
+}
+
+.example .canvas-container .play {
+    background-image: url("/img/play.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.example .canvas-container .play:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 #add-example {
     margin-top: 20px;
     text-align: center;
+}
+
+.examples-page .example {
+    margin-top: 50px;
+}
+
+.example .pause:hover {
+    cursor: pointer;
 }
