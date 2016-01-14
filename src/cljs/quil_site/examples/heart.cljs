@@ -51,9 +51,6 @@
         (update :counter dec)
         (update :points #(mapv (:scaling-function state) %)))))
 
-  (q/defsketch sk
-)
-
 (defn run-sketch [host size] ;DELETE
 (q/sketch
   :host host
