@@ -82,7 +82,9 @@
                             :tree {:output-to "public/js/tree.js"
                                    :entries #{quil-site.examples.tree}}
                             :geometric-twinkle {:output-to "public/js/geometric_twinkle.js"
-                                                :entries #{quil-site.examples.geometric-twinkle}}}}}]}}}
+                                                :entries #{quil-site.examples.geometric-twinkle}}
+                            :heart {:output-to "public/js/heart.js"
+                                    :entries #{quil-site.examples.heart}}}}}]}}}
 
   :cljsbuild {
     :builds [

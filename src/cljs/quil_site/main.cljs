@@ -109,7 +109,7 @@
 (def available-examples
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
    "leaf" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
-   "geometric twinkle"])
+   "geometric twinkle" "heart"])
 
 (defn get-examples-to-show []
   (let [url (goog.Uri. js/document.URL)
