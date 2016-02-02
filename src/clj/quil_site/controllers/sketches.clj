@@ -82,9 +82,10 @@
         id))))
 
 (defn get-source-for-id [id]
-  (if (.startsWith id "example_")
-    (get-example id)
-    (s/load-source id)))
+  (cond
+    (.startsWith id "example_") (get-example id)
+    (= id "basic") test-source
+    :default (s/load-source id)))
 
 (defn sketch-from-source [source id]
   (let [parsed (parse-cljs source)
