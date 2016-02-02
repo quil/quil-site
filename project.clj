@@ -38,6 +38,8 @@
                   "public/js/waves.js"
                   "public/js/tree.js"
                   "public/js/geometric_twinkle.js"
+                  "public/js/heart.js"
+                  "public/js/golden_ratio_flower.js"
                   "target"]
 
   :plugins [[lein-cljsbuild "1.0.5"]]
@@ -86,7 +88,7 @@
                             :heart {:output-to "public/js/heart.js"
                                     :entries #{quil-site.examples.heart}}
                             :golden-ratio-flower {:output-to "public/js/golden_ratio_flower.js"
-                                                  :entries #{quil-site.examples.golden-ratio-flowe}}}}}]}}}
+                                                  :entries #{quil-site.examples.golden-ratio-flower}}}}}]}}}
 
   :cljsbuild {
     :builds [
