@@ -84,7 +84,9 @@
                             :geometric-twinkle {:output-to "public/js/geometric_twinkle.js"
                                                 :entries #{quil-site.examples.geometric-twinkle}}
                             :heart {:output-to "public/js/heart.js"
-                                    :entries #{quil-site.examples.heart}}}}}]}}}
+                                    :entries #{quil-site.examples.heart}}
+                            :golden-ratio-flower {:output-to "public/js/golden_ratio_flower.js"
+                                                  :entries #{quil-site.examples.golden-ratio-flowe}}}}}]}}}
 
   :cljsbuild {
     :builds [
