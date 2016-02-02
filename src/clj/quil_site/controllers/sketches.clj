@@ -93,7 +93,7 @@
         size (extract-size parsed)
         id (future (or id (get-id-for-source source)))]
     {:cljs source
-     :js @js
+     :js js
      :size size
      :id @id}))
 
@@ -142,6 +142,7 @@
 
 (defn sketch-js [id]
   (-> (:js (get-sketch id))
+      deref
       (resp/response)
       (resp/content-type "application/javascript")))
 
