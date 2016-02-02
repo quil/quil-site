@@ -2,77 +2,80 @@
   (:require [clj-http.client :as http]
             [cheshire.core :refer [generate-string]]
             [clojure.tools.reader.edn :as edn]
-            [clojure.data.codec.base64 :as b64]
             [clojure.java.io :as io]
-            [pandect.algo.sha256 :as sha256])
-  (:import [java.io ByteArrayOutputStream ByteArrayInputStream]
-           [java.util.zip GZIPOutputStream GZIPInputStream]))
+            [pandect.algo.sha256 :as sha256]))
 
-(def keys-map (edn/read-string (slurp "keys.clj")))
+(def keys-map (try (edn/read-string (slurp "keys.clj"))
+                   (catch Exception e {})))
 
-(def headers {"X-Parse-Application-Id" (:app-key keys-map)
-              "X-Parse-REST-API-Key" (:rest-key keys-map)})
+(def url (str (:url keys-map "local")
+              "/"
+              (:path keys-map "sketchesDev")))
 
-(def url (str "https://api.parse.com/1/classes/"
-              (:class keys-map "SketchDev")))
+(def local-url "local/sketchesDev")
+(def local-db (atom {}))
+(def local-id (atom 1))
 
 (defn- create-object [object]
-  (:body (http/post url {:headers headers
-                         :body (generate-string object)
-                         :as :json})))
+  (-> (str url ".json")
+    (http/post {:body (generate-string object)
+                :as :json})
+    :body
+    :name))
 
 (defn- find-object-by-hash [object]
-  (:body (http/get url {:headers headers
-                        :query-params {"where" (generate-string
-                                                {:hash (:hash object)})}
-                        :as :json})))
+  (:body (http/get (str url ".json")
+                   {:query-params {"orderBy" "\"hash\""
+                                   "equalTo" (str \" (:hash object) \")}
+                    :as :json})))
 
 (defn- get-object [id]
-  (:body (http/get (str url "/" id) {:headers headers
-                                     :as :json})))
+  (:body (http/get (str url "/" id ".json") {:as :json})))
 
-(defn save-source [source]
+(defn- save-source-in-firebase [source]
   (let [obj {:source source
              :hash (sha256/sha256 source)}]
-    (if-let [existing (-> (find-object-by-hash obj)
-                          :results
-                          first)]
-      (:objectId existing)
-      (:objectId (create-object obj)))))
+    (if-let [existing-id (-> obj find-object-by-hash first first)]
+      (name existing-id)
+      (create-object obj))))
 
-(defn load-source [id]
+(defn- load-source-from-firebase [id]
   (try
     (-> id get-object :source)
     (catch Exception e
       nil)))
 
-(defn string->gzip->base64 [text]
-  (let [out (ByteArrayOutputStream.)
-        gzip (GZIPOutputStream. out)]
-    (.write gzip (.getBytes text "UTF-8"))
-    (.close gzip)
-    (String. (b64/encode (.toByteArray out)) "UTF-8")))
+(defn- save-source-local [source]
+  (let [id (str (swap! local-id inc))]
+    (swap! local-db assoc id source)
+    id))
 
-(defn base64->gzip->string [base64-text]
-  (->> (.getBytes base64-text "UTF-8")
-       (b64/decode)
-       (ByteArrayInputStream.)
-       (GZIPInputStream.)
-       (slurp)))
+(defn- load-source-local [id]
+  (@local-db id))
+
+(defn save-source [source]
+  (if (= url local-url)
+    (save-source-local source)
+    (save-source-in-firebase source)))
+
+(defn load-source [id]
+  (if (= url local-url)
+    (load-source-local id)
+    (load-source-from-firebase id)))
 
 (comment
 
-  (create-object {:hello "worldddd" :hash "12345"})
+  (create-object {:source "worldddd" :hash "12345"})
 
   (get-object "fSv6r7DNPd")
 
-  (find-object-by-hash {:hash "12345"})
+  (find-object-by-hash {:source "sdf" :hash "12345"})
 
-  (save-source "sdf")
+  (save-source "sdfff")
 
   (do
     (require 'quil-site.controllers.sketches)
     (def source quil-site.controllers.sketches/test-source))
-  (count (string->gzip->base64 s))
+
 
   )
