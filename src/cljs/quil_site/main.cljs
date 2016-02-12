@@ -108,7 +108,7 @@
 
 (def available-examples
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
-   "leaf" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
+   "leaf" "colorjoy" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
    "geometric twinkle" "heart" "golden ratio flower"])
 
 (defn get-examples-to-show []

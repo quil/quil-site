@@ -32,6 +32,7 @@
                   "public/js/equilibrium.js"
                   "public/js/hyper.js"
                   "public/js/leaf.js"
+                  "public/js/colorjoy.js"
                   "public/js/nanoscopic.js"
                   "public/js/spaceship.js"
                   "public/js/tailspin.js"
@@ -73,6 +74,8 @@
                                     :entries #{quil-site.examples.hyper}}
                             :leaf {:output-to "public/js/leaf.js"
                                    :entries #{quil-site.examples.leaf}}
+                            :colorjoy {:output-to "public/js/colorjoy.js"
+                                   :entries #{quil-site.examples.colorjoy}}
                             :nanoscopic {:output-to "public/js/nanoscopic.js"
                                          :entries #{quil-site.examples.nanoscopic}}
                             :spaceship {:output-to "public/js/spaceship.js"
