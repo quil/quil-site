@@ -16,6 +16,7 @@
   (GET "/examples" [] (examples-page))
   sketches/routes
   api/routes
+  (files "/out" {:root "out"})
   (files "/"))
 
 (defn dump-request [handler]
@@ -25,7 +26,7 @@
 
 (def handler
   (-> #'app
-;      dump-request
+      ;dump-request
       site
       (json/wrap-json-body {:keywords? true})
       json/wrap-json-response

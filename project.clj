@@ -42,7 +42,8 @@
                   "public/js/geometric_twinkle.js"
                   "public/js/heart.js"
                   "public/js/golden_ratio_flower.js"
-                  "target"]
+                  "target"
+                  "out"]
 
   :plugins [[lein-cljsbuild "1.1.2"]]
 
@@ -53,7 +54,10 @@
                [{:source-paths ["src/cljs"]
                  :compiler
                  {:output-to "public/js/main.js"
-                  :optimizations :simple}}]}}
+                  :output-dir "out"
+                  :main "quil-site.compilation"
+                  :optimizations :none
+                  :pretty-print true}}]}}
              :prod
              {:cljsbuild
               {:builds

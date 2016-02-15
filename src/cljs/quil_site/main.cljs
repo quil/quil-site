@@ -9,6 +9,8 @@
 
 (enable-console-print!)
 
+(def dev-mode? goog/DEBUG)
+
 (defn query-selector
   ([element selector]
      (.querySelector element selector))
@@ -156,4 +158,9 @@
         (init-examples-page)))
 
 (events/listenOnce js/window EventType/LOAD init)
+
+(when dev-mode?
+  (doseq [example available-examples
+          :let [namespace (str "quil_site.examples."(cstr/replace example " " "_"))]]
+    (goog/require namespace)))
 
