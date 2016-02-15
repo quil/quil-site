@@ -3,21 +3,22 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.7.0"]
-                 [compojure "1.3.4"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [compojure "1.4.0"]
                  [hiccup "1.0.5"]
-                 [ring "1.3.2"]
-                 [ring/ring-json "0.3.1"]
+                 [ring "1.4.0"]
+                 [ring/ring-json "0.4.0"]
                  [quil "2.3.0"]
                  [me.raynes/fs "1.4.6"]
-                 [org.clojure/tools.reader "0.9.2"]
+                 [org.clojure/tools.reader "0.10.0"]
                  [org.clojure/core.cache "0.6.4"]
                  [org.clojure/data.codec "0.1.0"]
-                 [clj-http "1.1.2"]
+                 [clj-http "2.0.1"]
                  [cheshire "5.5.0"]
-                 [pandect "0.5.2"]
+                 [pandect "0.5.4"]
+                 [replumb "0.1.4"]
 
-                 [org.clojure/clojurescript "0.0-3308"]]
+                 [org.clojure/clojurescript "1.7.228"]]
 
   :source-paths ["src/clj"]
 
@@ -43,7 +44,7 @@
                   "public/js/golden_ratio_flower.js"
                   "target"]
 
-  :plugins [[lein-cljsbuild "1.0.5"]]
+  :plugins [[lein-cljsbuild "1.1.2"]]
 
   :profiles {:dev
 
