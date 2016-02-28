@@ -8,7 +8,7 @@
                  [hiccup "1.0.5"]
                  [ring "1.4.0"]
                  [ring/ring-json "0.4.0"]
-                 [quil "2.3.0"]
+                 [quil "2.3.1-SNAPSHOT"]
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/tools.reader "0.10.0"]
                  [org.clojure/core.cache "0.6.4"]
@@ -23,7 +23,7 @@
   :source-paths ["src/clj"]
 
   ; Need access to cljs examples.
-  :resource-paths ["src/cljs/quil_site/examples"]
+  :resource-paths ["src/cljs/main/quil_site/examples"]
 
   :clean-targets ["public/js/main.js"
                   "public/js/preload.js"
@@ -51,17 +51,17 @@
 
              {:cljsbuild
               {:builds
-               [{:source-paths ["src/cljs"]
+               [{:source-paths ["src/cljs/main"]
                  :compiler
                  {:output-to "public/js/main.js"
                   :output-dir "out"
-                  :main "quil-site.compilation"
+                  :main "quil-site.main"
                   :optimizations :none
                   :pretty-print true}}]}}
              :prod
              {:cljsbuild
               {:builds
-               [{:source-paths ["src/cljs"]
+               [{:source-paths ["src/cljs/main"]
                  :compiler
                  {:output-to "public/js/main.js"
                   :optimizations :advanced
@@ -100,7 +100,7 @@
 
   :cljsbuild {
     :builds [
-      {:source-paths ["src/cljs-preload"]
+      {:source-paths ["src/cljs/preload"]
        :compiler
          {:output-to "public/js/preload.js"
           :optimizations :simple
