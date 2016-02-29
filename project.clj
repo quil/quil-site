@@ -66,6 +66,8 @@
                  {:output-to "public/js/main.js"
                   :optimizations :advanced
                   :pretty-print false
+                  :pseudo-names false
+                  :closure-defines {"goog.DEBUG" false}
                   :modules {:cljs-base {:output-to "public/js/main.js"}
                             :dancer {:output-to "public/js/dancer.js"
                                      :entries #{quil-site.examples.dancer}}

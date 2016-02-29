@@ -9,8 +9,6 @@
 
 (enable-console-print!)
 
-(def dev-mode? goog/DEBUG)
-
 (defn query-selector
   ([element selector]
      (.querySelector element selector))
@@ -159,8 +157,10 @@
 
 (events/listenOnce js/window EventType/LOAD init)
 
-(when dev-mode?
+; hack to load examples with :optimizations :none
+; note that this code should not run under :advanced optimizations
+(when goog/DEBUG
   (doseq [example available-examples
           :let [namespace (str "quil_site.examples."(cstr/replace example " " "_"))]]
-    (goog/require namespace)))
+    ((aget js/goog "require") namespace)))
 
