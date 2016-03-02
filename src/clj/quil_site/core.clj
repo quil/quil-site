@@ -16,7 +16,8 @@
   (GET "/examples" [] (examples-page))
   sketches/routes
   api/routes
-  (files "/out" {:root "out"})
+  (files "/out-main" {:root "out-main"})
+  (files "/out-compiler" {:root "out-compiler"})
   (files "/"))
 
 (defn dump-request [handler]

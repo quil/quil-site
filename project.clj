@@ -27,6 +27,7 @@
 
   :clean-targets ["public/js/main.js"
                   "public/js/preload.js"
+                  "public/js/editor.js"
                   "public/js/dancer.js"
                   "public/js/dry_paint.js"
                   "public/js/emerald.js"
@@ -43,7 +44,8 @@
                   "public/js/heart.js"
                   "public/js/golden_ratio_flower.js"
                   "target"
-                  "out"]
+                  "out-main"
+                  "out-editor"]
 
   :plugins [[lein-cljsbuild "1.1.2"]]
 
@@ -54,8 +56,15 @@
                [{:source-paths ["src/cljs/main"]
                  :compiler
                  {:output-to "public/js/main.js"
-                  :output-dir "out"
+                  :output-dir "out-main"
                   :main "quil-site.main"
+                  :optimizations :none
+                  :pretty-print true}}
+                {:source-paths ["src/cljs/compiler"]
+                 :compiler
+                 {:output-to "public/js/editor.js"
+                  :output-dir "out-editor"
+                  :main "quil-site.compiler"
                   :optimizations :none
                   :pretty-print true}}]}}
              :prod
@@ -98,7 +107,13 @@
                             :heart {:output-to "public/js/heart.js"
                                     :entries #{quil-site.examples.heart}}
                             :golden-ratio-flower {:output-to "public/js/golden_ratio_flower.js"
-                                                  :entries #{quil-site.examples.golden-ratio-flower}}}}}]}}}
+                                                  :entries #{quil-site.examples.golden-ratio-flower}}}}}
+                {:source-paths ["src/cljs/editor"]
+                 :compiler
+                 {:output-to "public/js/editor.js"
+                  :optimizations :simple
+                  :pretty-print false
+                  :closure-defines {"goog.DEBUG" false}}}]}}}
 
   :cljsbuild {
     :builds [
