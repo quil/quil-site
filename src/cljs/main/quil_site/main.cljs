@@ -123,7 +123,7 @@
   (let [script (dom/createElement "script")
         file-name (str (cstr/replace name " " "_") ".js")]
     (dom/setProperties script
-                       #js {"src" (str "/js/" file-name)
+                       #js {"src" (str "/js/examples/" file-name)
                             "async" "async"})
     (dom/append js/document.body script)))
 

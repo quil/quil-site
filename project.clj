@@ -28,21 +28,7 @@
   :clean-targets ["public/js/main.js"
                   "public/js/preload.js"
                   "public/js/editor.js"
-                  "public/js/dancer.js"
-                  "public/js/dry_paint.js"
-                  "public/js/emerald.js"
-                  "public/js/equilibrium.js"
-                  "public/js/hyper.js"
-                  "public/js/leaf.js"
-                  "public/js/colorjoy.js"
-                  "public/js/nanoscopic.js"
-                  "public/js/spaceship.js"
-                  "public/js/tailspin.js"
-                  "public/js/waves.js"
-                  "public/js/tree.js"
-                  "public/js/geometric_twinkle.js"
-                  "public/js/heart.js"
-                  "public/js/golden_ratio_flower.js"
+                  "public/js/examples"
                   "target"
                   "out-main"
                   "out-editor"]
@@ -78,35 +64,35 @@
                   :pseudo-names false
                   :closure-defines {"goog.DEBUG" false}
                   :modules {:cljs-base {:output-to "public/js/main.js"}
-                            :dancer {:output-to "public/js/dancer.js"
+                            :dancer {:output-to "public/js/examples/dancer.js"
                                      :entries #{quil-site.examples.dancer}}
-                            :dry-paint {:output-to "public/js/dry_paint.js"
+                            :dry-paint {:output-to "public/js/examples/exdry_paint.js"
                                         :entries #{quil-site.examples.dry-paint}}
-                            :emerald {:output-to "public/js/emerald.js"
+                            :emerald {:output-to "public/js/examples/emerald.js"
                                       :entries #{quil-site.examples.emerald}}
-                            :equilibrium {:output-to "public/js/equilibrium.js"
+                            :equilibrium {:output-to "public/js/examples/equilibrium.js"
                                           :entries #{quil-site.examples.equilibrium}}
-                            :hyper {:output-to "public/js/hyper.js"
+                            :hyper {:output-to "public/js/examples/hyper.js"
                                     :entries #{quil-site.examples.hyper}}
-                            :leaf {:output-to "public/js/leaf.js"
+                            :leaf {:output-to "public/js/examples/leaf.js"
                                    :entries #{quil-site.examples.leaf}}
-                            :colorjoy {:output-to "public/js/colorjoy.js"
+                            :colorjoy {:output-to "public/js/examples/colorjoy.js"
                                    :entries #{quil-site.examples.colorjoy}}
-                            :nanoscopic {:output-to "public/js/nanoscopic.js"
+                            :nanoscopic {:output-to "public/js/examples/nanoscopic.js"
                                          :entries #{quil-site.examples.nanoscopic}}
-                            :spaceship {:output-to "public/js/spaceship.js"
+                            :spaceship {:output-to "public/js/examples/spaceship.js"
                                         :entries #{quil-site.examples.spaceship}}
-                            :tailspin {:output-to "public/js/tailspin.js"
+                            :tailspin {:output-to "public/js/examples/tailspin.js"
                                        :entries #{quil-site.examples.tailspin}}
-                            :waves {:output-to "public/js/waves.js"
+                            :waves {:output-to "public/js/examples/waves.js"
                                     :entries #{quil-site.examples.waves}}
-                            :tree {:output-to "public/js/tree.js"
+                            :tree {:output-to "public/js/examples/tree.js"
                                    :entries #{quil-site.examples.tree}}
-                            :geometric-twinkle {:output-to "public/js/geometric_twinkle.js"
+                            :geometric-twinkle {:output-to "public/js/examples/geometric_twinkle.js"
                                                 :entries #{quil-site.examples.geometric-twinkle}}
-                            :heart {:output-to "public/js/heart.js"
+                            :heart {:output-to "public/js/examples/heart.js"
                                     :entries #{quil-site.examples.heart}}
-                            :golden-ratio-flower {:output-to "public/js/golden_ratio_flower.js"
+                            :golden-ratio-flower {:output-to "public/js/examples/golden_ratio_flower.js"
                                                   :entries #{quil-site.examples.golden-ratio-flower}}}}}
                 {:source-paths ["src/cljs/editor"]
                  :compiler
