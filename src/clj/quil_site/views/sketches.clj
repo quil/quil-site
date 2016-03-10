@@ -12,7 +12,7 @@
          :js-files ["/codemirror-4.5/lib/codemirror.js"
                     "/codemirror-4.5/mode/clojure/clojure.js"
                     "/codemirror-4.5/addon/lint/lint.js"
-                    "/js/sketch.js"]}
+                    "/js/editor.js"]}
 
         [:ul.nav.nav-tabs {:role "tablist"}
          [:li.active [:a#source-tab {:href "#"
@@ -34,12 +34,10 @@
            [:textarea#source
             {:data-sketch-id id}]]]
          [:div#result-content.tab-pane
-          [:div#result.hidden
-           [:a "Link"]
-           [:iframe]]
-          [:div#ajax-status.hidden
-           [:img {:src "/img/sketch_loading.gif"}]
-           [:h3 "Compiling"]]]]
+          [:div#result
+           [:iframe
+            {:src "/iframe.html"
+             :style "width: 500px; height: 500px;"}]]]]
 ))
 
 (defn create-run-sketch-css [[width height]]

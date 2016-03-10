@@ -93,6 +93,7 @@
 
 (defn run [source]
   (compile source (fn [res]
+                    (println "Sending" res)
                     (.postMessage (.-contentWindow (.querySelector js/document "iframe"))
                                   #js {:type "eval"
                                        :source (:value res)}

@@ -16,9 +16,9 @@
                  [clj-http "2.0.1"]
                  [cheshire "5.5.0"]
                  [pandect "0.5.4"]
-                 [replumb "0.1.4"]
+                 [jayq "2.5.4"]
 
-                 [org.clojure/clojurescript "1.7.228"]]
+                 [org.clojure/clojurescript "1.8.9"]]
 
   :source-paths ["src/clj"]
 
@@ -43,14 +43,16 @@
                  :compiler
                  {:output-to "public/js/main.js"
                   :output-dir "out-main"
+                  :asset-path "/out-main"
                   :main "quil-site.main"
                   :optimizations :none
                   :pretty-print true}}
-                {:source-paths ["src/cljs/compiler"]
+                {:source-paths ["src/cljs/editor"]
                  :compiler
                  {:output-to "public/js/editor.js"
                   :output-dir "out-editor"
-                  :main "quil-site.compiler"
+                  :asset-path "/out-editor"
+                  :main "quil-site.editor"
                   :optimizations :none
                   :pretty-print true}}]}}
              :prod

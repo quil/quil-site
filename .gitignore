@@ -17,5 +17,5 @@ target
 public/js/
 !public/js/api.js
 !public/js/bootstrap.min.js
-!public/js/sketch.js
 keys.clj
+out-*

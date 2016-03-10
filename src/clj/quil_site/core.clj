@@ -17,7 +17,7 @@
   sketches/routes
   api/routes
   (files "/out-main" {:root "out-main"})
-  (files "/out-compiler" {:root "out-compiler"})
+  (files "/out-editor" {:root "out-editor"})
   (files "/"))
 
 (defn dump-request [handler]
