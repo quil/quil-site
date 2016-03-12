@@ -56,7 +56,9 @@
             :lineNumbers true
             :gutters #js ["CodeMirror-lint-markers"]
             :lint #js {:options #js {:cljsErrors #js []}}
-            :viewportMargin js/Infinity}))
+            :viewportMargin js/Infinity
+            :matchBrackets true
+            :autoCloseBrackets true}))
   (j/ajax
    {:url (str "/sketches/info/" (j/data (j/$ "#source") "sketch-id"))
     :method "GET"

@@ -7,11 +7,9 @@
   (page {:tab :create
          :type :sketch
          :title (str "Quil " id)
-         :css-files ["/codemirror-4.5/lib/codemirror.css"
-                     "/codemirror-4.5/addon/lint/lint.css"]
-         :js-files ["/codemirror-4.5/lib/codemirror.js"
-                    "/codemirror-4.5/mode/clojure/clojure.js"
-                    "/codemirror-4.5/addon/lint/lint.js"
+         :css-files ["/css/codemirror-5.12.css"
+                     "/css/codemirror-5.12-lint.css"]
+         :js-files ["/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
                     "/js/editor.js"]}
 
         [:ul.nav.nav-tabs {:role "tablist"}
