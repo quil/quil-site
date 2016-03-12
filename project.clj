@@ -54,6 +54,7 @@
                   :asset-path "/out-editor"
                   :main "quil-site.editor"
                   :optimizations :none
+                  :dump-core false
                   :pretty-print true}}]}}
              :prod
              {:cljsbuild
@@ -65,6 +66,8 @@
                   :pretty-print false
                   :pseudo-names false
                   :closure-defines {"goog.DEBUG" false}
+                  :optimize-constants true
+                  :static-fns true
                   :modules {:cljs-base {:output-to "public/js/main.js"}
                             :dancer {:output-to "public/js/examples/dancer.js"
                                      :entries #{quil-site.examples.dancer}}
@@ -101,6 +104,9 @@
                  {:output-to "public/js/editor.js"
                   :optimizations :simple
                   :pretty-print false
+                  :optimize-constants true
+                  :static-fns true
+                  :dump-core false
                   :closure-defines {"goog.DEBUG" false}}}]}}}
 
   :cljsbuild {
@@ -109,4 +115,6 @@
        :compiler
          {:output-to "public/js/preload.js"
           :optimizations :simple
-          :pretty-print false}}]})
+          :pretty-print false
+          :optimize-constants true
+          :static-fns true}}]})

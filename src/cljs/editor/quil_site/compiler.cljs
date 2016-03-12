@@ -70,9 +70,13 @@
       #js {"prototype" #js {"PConstants" #js {}}})
 (set! js/window #js {})
 
-(fetch-file! "/cache.edn"
+(fetch-file! "/quil-cache.edn"
              #(do
                 (reset! cached-macros (r/read-string %))))
+
+(def core-cache (atom nil))
+
+(fetch-file! "/core-cache.edn" #(reset! core-cache (r/read-string %)))
 
 (defn load-macros-ns [{:keys [name macros] :as opts} cb]
   (if-let [{:keys [source cache]} (@cached-macros
@@ -85,11 +89,14 @@
          :source ""})))
 
 (defn compile [source cb]
-  (cjs/compile-str (cjs/empty-state) source nil
-                   {:load load-macros-ns
-                    :eval cjs/js-eval
-                    :verbose false}
-                   cb))
+  (let [state (cjs/empty-state)]
+    (cjs/load-analysis-cache!
+     state 'cljs.core (@core-cache 'cljs.core))
+    (cjs/compile-str state source nil
+                    {:load load-macros-ns
+                     :eval cjs/js-eval
+                     :verbose false}
+                    cb)))
 
 (defn run [source]
   (compile source (fn [res]
