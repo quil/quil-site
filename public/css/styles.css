@@ -9,11 +9,9 @@
 }
 
 .sketch #result iframe {
-    width: 500px;
-    height: 500px;
     display: block;
     margin: auto;
-    border: 1px dashed #ecf0f1;
+    border: 1px dashed #ccd0d1;
 }
 
 .sketch #ajax-status {

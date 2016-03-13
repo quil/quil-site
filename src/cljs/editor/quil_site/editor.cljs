@@ -32,6 +32,12 @@
     (c/run code))
   (.tab (j/$ "#result-tab") "show"))
 
+(defn resize-iframe [message]
+  (let [{:keys [width height]} message
+        iframe (j/$ "iframe")]
+    (j/attr iframe "width" width)
+    (j/attr iframe "height" height)))
+
 (defn init []
   (.registerHelper
    js/CodeMirror "lint" "clojure"
@@ -64,7 +70,13 @@
     :method "GET"
     :success #(.setValue @editor (.-cljs %))})
 
-  (j/on (j/$ "#send") "click" compile))
+  (j/on (j/$ "#send") "click" compile)
+  (j/on (j/$ js/window) "message"
+        (fn [event]
+          (let [message (js->clj (.-data (.-originalEvent event))
+                                 :keywordize-keys true)]
+            (when (= (:type message) "resize-iframe")
+              (resize-iframe message))))))
 
 (j/$ init)
 

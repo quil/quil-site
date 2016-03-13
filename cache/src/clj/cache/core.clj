@@ -39,7 +39,7 @@
 ;(.stop serve)
 
 (defn build-cljs []
-  (build/watch "src/cljs"
+  (build/build "src/cljs"
                {:main 'cache.core
                 :output-to "main.js"
                 :output-dir "out"

@@ -36,7 +36,7 @@
       (q/ellipse x y 100 100))))
 
 (q/defsketch my
-  :host \"my\"
+  :host \"host\"
   :size [500 500]
   :setup setup
   :update update-state

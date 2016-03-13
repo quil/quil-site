@@ -10,7 +10,7 @@
 
 (defn set-size-and-host [source]
   (-> source
-      (cstr/replace #":host host" ":host \"canvas\"")
+      (cstr/replace #":host host" ":host \"host\"")
       (cstr/replace #":size \[size size\]" ":size [500 500]")))
 
 (defn get-example-source

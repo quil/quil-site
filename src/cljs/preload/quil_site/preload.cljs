@@ -10,7 +10,13 @@
   (let [{:keys [type source]} (js->clj (.-data event)
                                        :keywordize-keys true)]
     (when (= type "eval")
-      (js/eval source))))
+      (js/eval source)
+      (let [canvas (.querySelector js/document "#host")]
+        (.postMessage (.-top js/window)
+                      #js {:type "resize-iframe"
+                           :width (.-width canvas)
+                           :height (.-height canvas)}
+                      "*")))))
 
 (.addEventListener js/window EventType/MESSAGE handle-message)
 

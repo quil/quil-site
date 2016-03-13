@@ -35,7 +35,8 @@
           [:div#result
            [:iframe
             {:src "/iframe.html"
-             :style "width: 500px; height: 500px;"}]]]]
+             :height "500"
+             :width "500"}]]]]
 ))
 
 (defn create-run-sketch-css [[width height]]
