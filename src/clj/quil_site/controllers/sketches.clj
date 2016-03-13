@@ -5,7 +5,6 @@
             [ring.util.response :as resp]
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
-            [quil-site.compiler :refer [compile-or-get-cached parse-cljs]]
             [quil-site.storage :as s]
             [clojure.core.cache :as c]
             [pandect.algo.sha256 :as sha256]))
@@ -43,26 +42,6 @@
   :draw draw-state
   :middleware [m/fun-mode])")
 
-(defn extract-size [sketch]
-  (letfn [(defsketch? [form]
-            (and (list? form)
-                 (symbol? (first form))
-                 (= "defsketch" (name (first form)))))
-          (find-defsketch [forms]
-            (->> forms
-                 (filter defsketch?)
-                 first))
-          (get-size [[defsketch name & options]]
-            (->> (partition 2 options)
-                 (filter #(= :size (first %)))
-                 (map second)
-                 first))]
-    (let [size (-> sketch find-defsketch get-size)]
-      (if (and (or (list? size) (vector? size))
-               (every? number? size))
-        (vec (take 2 size))
-        nil))))
-
 (def id (atom 0))
 (def sketches (atom (c/lru-cache-factory {} :threshold 128)))
 
@@ -88,14 +67,8 @@
     :default (s/load-source id)))
 
 (defn sketch-from-source [source id]
-  (let [parsed (parse-cljs source)
-        js (future (compile-or-get-cached parsed source))
-        size (extract-size parsed)
-        id (future (or id (get-id-for-source source)))]
-    {:cljs source
-     :js js
-     :size size
-     :id @id}))
+  {:cljs source
+   :id (or id (get-id-for-source source))})
 
 (defn get-sketch [id]
   (if-let [sketch (c/lookup @sketches id)]
@@ -106,14 +79,6 @@
         (do (swap! sketches assoc id sketch)
             sketch))
       nil)))
-
-(defn sketch-html [id]
-  (if-let [sketch (get-sketch id)]
-    (let [size (or (:size sketch) [500 500])]
-      (-> (views/create-run-sketch-page id size)
-          (resp/response)
-          (resp/content-type "text/html")))
-    (not-found (str "Sketch " id " not found."))))
 
 (defn sketch-info [id]
   (let [default {:cljs test-source}
@@ -129,28 +94,14 @@
           id (:id sketch)]
       (swap! sketches assoc id sketch)
       (sketch-info id))
-    (catch clojure.lang.ExceptionInfo e
-      (let [data (.getData e)]
-        (resp/response {:result :error
-                        :message (.getMessage e)
-                        :column (:column data)
-                        :line (:line data)})))
     (catch java.lang.Exception e
       (.printStackTrace e)
       (resp/response {:result :error
-                      :message "Server error :/"}))))
-
-(defn sketch-js [id]
-  (-> (:js (get-sketch id))
-      deref
-      (resp/response)
-      (resp/content-type "application/javascript")))
+                      :message "Server error"}))))
 
 (defroutes routes
   (context "/sketches" []
     (GET "/create" [] (views/sketch-page "basic"))
     (GET "/info/:id" [id] (sketch-info id))
     (GET "/show/:id" [id] (views/sketch-page id))
-    (GET "/html/:id" [id] (sketch-html id))
-    (GET "/js/:id" [id] (sketch-js id))
     (POST "/create" req (create-sketch (:body req)))))
