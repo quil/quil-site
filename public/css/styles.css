@@ -205,3 +205,9 @@ body .container.api a {
 .example .pause:hover {
     cursor: pointer;
 }
+
+#share-dialog input {
+    cursor: pointer;
+    height: 35px;
+    padding: 5px;
+}

@@ -1,6 +1,7 @@
 (ns quil-site.editor
   (:require [quil-site.compiler :as c]
-            [jayq.core :as j]))
+            [jayq.core :as j]
+            [clojure.string :as cstr]))
 
 (def editor (atom nil))
 
@@ -32,13 +33,26 @@
     (c/run code))
   (.tab (j/$ "#result-tab") "show"))
 
+(def popover-template
+  "<div id=\"share-dialog\">
+    <input value=\"$URL\" class=\"form-control\" readonly=\"readonly\"/>
+  </div>")
+
 (defn show-share-dialog [resp]
   (let [path (str "/sketches/show/" (:id resp))
-        url (str (.-protocol js/location) "//" (.-host js/location) path)]
+        url (str (.-protocol js/location) "//" (.-host js/location) path)
+        el (cstr/replace popover-template "$URL" url)]
     (println "Share url:" url)
     (when-let [history (.-history js/window)]
       (.replaceState history
-                     #js {} "" path))))
+                     #js {} "" path))
+    (.popover (j/$ "#share")
+              #js {:container "body"
+                   :placement "bottom"
+                   :html true
+                   :content el
+                   :trigger "manual"})
+    (.popover (j/$ "#share") "show")))
 
 (defn share []
   (j/ajax
@@ -95,6 +109,7 @@
   (j/on (j/$ "#send") "click" compile)
   (j/on (j/$ "#reset") "click" reset-iframe)
   (j/on (j/$ "#share") "click" share)
+  (j/on (j/$ "body") "click" "#share-dialog input" #(this-as el (.select el)))
   (j/on (j/$ js/window) "message"
         (fn [event]
           (let [message (js->clj (.-data (.-originalEvent event))
