@@ -32,11 +32,33 @@
     (c/run code))
   (.tab (j/$ "#result-tab") "show"))
 
+(defn show-share-dialog [resp]
+  (let [path (str "/sketches/show/" (:id resp))
+        url (str (.-protocol js/location) "//" (.-host js/location) path)]
+    (println "Share url:" url)
+    (when-let [history (.-history js/window)]
+      (.replaceState history
+                     #js {} "" path))))
+
+(defn share []
+  (j/ajax
+   {:url "/sketches/create"
+    :method "POST"
+    :data (.stringify js/JSON #js {:cljs (.getValue @editor)})
+    :contentType "application/json"
+    :success (fn [resp]
+              (let [resp (js->clj resp :keywordize-keys true)]
+                (show-share-dialog resp)))}))
+
 (defn resize-iframe [message]
   (let [{:keys [width height]} message
         iframe (j/$ "iframe")]
     (j/attr iframe "width" width)
     (j/attr iframe "height" height)))
+
+(defn reset-iframe []
+  (let [iframe (j/$ "iframe")]
+    (j/attr iframe "src" (j/attr iframe "src"))))
 
 (defn init []
   (.registerHelper
@@ -71,6 +93,8 @@
     :success #(.setValue @editor (.-cljs %))})
 
   (j/on (j/$ "#send") "click" compile)
+  (j/on (j/$ "#reset") "click" reset-iframe)
+  (j/on (j/$ "#share") "click" share)
   (j/on (j/$ js/window) "message"
         (fn [event]
           (let [message (js->clj (.-data (.-originalEvent event))
