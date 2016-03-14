@@ -55,6 +55,7 @@
     (.popover (j/$ "#share") "show")))
 
 (defn share []
+  (.popover (j/$ "#share") "destroy")
   (j/ajax
    {:url "/sketches/create"
     :method "POST"
