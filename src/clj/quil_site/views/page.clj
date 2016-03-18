@@ -53,7 +53,9 @@
        (make-tab opts :api "API" "/api")
        (make-tab opts :create "Create" "/sketches/create")]]]]
 
-   [:div.container {:class (-> opts :type (or "") name)}
+   [:div {:class (str (-> opts :type (or "") name)
+                      " "
+                      (:container-class opts "container"))}
     content]
 
    (let [js-files (concat ["//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"

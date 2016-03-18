@@ -5,6 +5,7 @@
 (defn sketch-page [id]
   (page {:tab :create
          :type :sketch
+         :container-class "container-fluid"
          :title (str "Quil " id)
          :css-files ["/css/codemirror-5.12.css"
                      "/css/codemirror-5.12-lint.css"]
@@ -14,6 +15,7 @@
         [:div.btn-group
          [:button#send.btn.btn-primary "Run"]
          [:button#reset.btn "Reset"]
+         [:button#hide.btn.disabled "Hide"]
          [:button#share.btn "Share"]]
 
         [:div#content
@@ -22,6 +24,7 @@
            [:textarea#source
             {:data-sketch-id id}]]]
          [:div#result-content
-          {:style "width: 500px; height: 500px;"}
-          [:iframe
-           {:src "/iframe.html"}]]]))
+          {:style "width: 0px;"}
+          [:iframe {:src "/iframe.html"
+                    :width "0"
+                    :height "0"}]]]))

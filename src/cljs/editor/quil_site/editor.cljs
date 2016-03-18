@@ -4,6 +4,22 @@
             [clojure.string :as cstr]))
 
 (def editor (atom nil))
+(def result-pane-size (atom [0 0]))
+(def scroll-width 20)
+
+(defn hide-result-pane []
+  (let [width (.-offsetWidth (.querySelector js/document "#source-content"))]
+    (j/css (j/$ "#result-content") "left" (str width "px")))
+  (j/add-class (j/$ "#hide") "disabled"))
+
+(defn show-result-pane []
+  (let [view-width (.-offsetWidth (.querySelector js/document "#content"))
+        pane-width (first @result-pane-size)]
+    (j/css (j/$ "#result-content") "left" (str (- view-width
+                                                  pane-width
+                                                  scroll-width)
+                                               "px")))
+  (j/remove-class (j/$ "#hide") "disabled"))
 
 (defn show-error-alert [error]
   (-> (j/$ "<div></div>")
@@ -30,8 +46,7 @@
   (.clearGutter @editor "CodeMirror-lint-markers")
   (let [code (.getValue @editor)]
     (println "Compiling" code)
-    (c/run code))
-  (.tab (j/$ "#result-tab") "show"))
+    (c/run code)))
 
 (def popover-template
   "<div id=\"share-dialog\">
@@ -66,27 +81,29 @@
                 (show-share-dialog resp)))}))
 
 (defn resize-iframe [message]
-  (let [{:keys [width height]} message]
+  (let [{:keys [width height]} message
+        pane (j/$ "#result-content")
+        pane-height (j/outer-height pane)
+        content-width (j/outer-width (j/$ "#content"))
+        source-width (j/outer-width (j/$ "#source-content"))
+        pane-width (-> width
+                       (min (- content-width scroll-width))
+                       (max (- content-width source-width scroll-width)))]
+    (reset! result-pane-size [pane-width pane-height])
     (doto (j/$ "iframe")
       (j/attr "width" width)
-      (j/attr "height" height))
-    (doto (j/$ "#result-content")
-      (j/css "width" (str width "px"))
-      (j/css "height" (str height "px")))))
+      (j/attr "height" height)
+      (j/css "top" (str (max (- (/ pane-height 2)
+                                (/ height 2))
+                             0)
+                        "px")))
+    (doto pane
+      (j/css "width" (str (+ scroll-width pane-width) "px"))))
+  (show-result-pane))
 
 (defn reset-iframe []
   (let [iframe (j/$ "iframe")]
     (j/attr iframe "src" (j/attr iframe "src"))))
-
-(defn hide-result-pane []
-  (let [rect (.getBoundingClientRect (.querySelector js/document "#source-content"))]
-    (j/css (j/$ "#result-content") "left" (str (.-right rect) "px"))))
-
-(defn show-result-pane []
-  (let [view-width (.-clientWidth (.-documentElement js/document))]
-    (j/css (j/$ "#result-content") "left" (str (- view-width
-                                                  (.-offsetWidth (.querySelector js/document "#result-content")))
-                                               "px"))))
 
 (defn init []
   (.registerHelper
@@ -132,7 +149,10 @@
               (resize-iframe message)))))
   (hide-result-pane)
   (j/on (j/$ "#result-content") "mouseenter" show-result-pane)
-  (j/on (j/$ "#source-content") "mouseenter" hide-result-pane))
+  (j/on (j/$ "#hide") "click" hide-result-pane)
+  (.on js/CodeMirror @editor "mousedown" #(do
+                                            (hide-result-pane)
+                                            (.popover (j/$ "#share") "destroy"))))
 
 
 (j/$ init)

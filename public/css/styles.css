@@ -4,15 +4,16 @@
 }
 
 .sketch #content {
-    height: calc(100% - 43px);
+    height: calc(100% - 63px);
     height: -webkit-calc(100% - 63px);
+    position: relative;
 }
 
 .sketch #source-content {
     max-width: 740px;
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .sketch #content > div {
@@ -26,17 +27,21 @@
 
 .sketch #result-content {
     position: absolute;
-    border: 2px solid red;
-    transition: left 0.5s ease;
+    transition: left 0.5s ease, width 0.5s ease;
     z-index: 10;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 100%;
+    max-width: 100%;
+    background-color: #FFFFFF;
 }
 
 .sketch iframe {
     display: block;
+    position: relative;
     margin: auto;
-    width: 100%;
-    height: 100%;
-    border: 1px dashed #ccd0d1;
+    border: 1px dashed #828282;
+    transition: width 0.5s ease, height 0.5s ease;
 }
 
 .sketch #ajax-status {
@@ -76,7 +81,7 @@ body .navbar {
 }
 
 body {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
