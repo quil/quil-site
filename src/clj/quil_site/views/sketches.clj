@@ -11,30 +11,17 @@
          :js-files ["/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
                     "/js/editor.js"]}
 
-        [:ul.nav.nav-tabs {:role "tablist"}
-         [:li.active [:a#source-tab {:href "#"
-                                     :role "tab"
-                                     :data-target "#source-content"
-                                     :data-toggle "tab"}
-                      "Source"]]
-         [:li [:a#result-tab {:href "#"
-                              :role "tab"
-                              :data-target "#result-content"
-                              :data-toggle "tab"}
-               "View"]]
-         [:div.btn-group
-          [:button#send.btn.btn-primary "Run"]
-          [:button#reset.btn "Reset"]
-          [:button#share.btn "Share"]]]
+        [:div.btn-group
+         [:button#send.btn.btn-primary "Run"]
+         [:button#reset.btn "Reset"]
+         [:button#share.btn "Share"]]
 
-        [:div.tab-content
-         [:div#source-content.tab-pane.active
+        [:div#content
+         [:div#source-content
           [:div
            [:textarea#source
             {:data-sketch-id id}]]]
-         [:div#result-content.tab-pane
-          [:div#result
-           [:iframe
-            {:src "/iframe.html"
-             :height "500"
-             :width "500"}]]]]))
+         [:div#result-content
+          {:style "width: 500px; height: 500px;"}
+          [:iframe
+           {:src "/iframe.html"}]]]))

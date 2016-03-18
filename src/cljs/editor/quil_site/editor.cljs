@@ -48,7 +48,7 @@
                      #js {} "" path))
     (.popover (j/$ "#share")
               #js {:container "body"
-                   :placement "bottom"
+                   :placement "right"
                    :html true
                    :content el
                    :trigger "manual"})
@@ -66,14 +66,27 @@
                 (show-share-dialog resp)))}))
 
 (defn resize-iframe [message]
-  (let [{:keys [width height]} message
-        iframe (j/$ "iframe")]
-    (j/attr iframe "width" width)
-    (j/attr iframe "height" height)))
+  (let [{:keys [width height]} message]
+    (doto (j/$ "iframe")
+      (j/attr "width" width)
+      (j/attr "height" height))
+    (doto (j/$ "#result-content")
+      (j/css "width" (str width "px"))
+      (j/css "height" (str height "px")))))
 
 (defn reset-iframe []
   (let [iframe (j/$ "iframe")]
     (j/attr iframe "src" (j/attr iframe "src"))))
+
+(defn hide-result-pane []
+  (let [rect (.getBoundingClientRect (.querySelector js/document "#source-content"))]
+    (j/css (j/$ "#result-content") "left" (str (.-right rect) "px"))))
+
+(defn show-result-pane []
+  (let [view-width (.-clientWidth (.-documentElement js/document))]
+    (j/css (j/$ "#result-content") "left" (str (- view-width
+                                                  (.-offsetWidth (.querySelector js/document "#result-content")))
+                                               "px"))))
 
 (defn init []
   (.registerHelper
@@ -116,7 +129,11 @@
           (let [message (js->clj (.-data (.-originalEvent event))
                                  :keywordize-keys true)]
             (when (= (:type message) "resize-iframe")
-              (resize-iframe message))))))
+              (resize-iframe message)))))
+  (hide-result-pane)
+  (j/on (j/$ "#result-content") "mouseenter" show-result-pane)
+  (j/on (j/$ "#source-content") "mouseenter" hide-result-pane))
+
 
 (j/$ init)
 
