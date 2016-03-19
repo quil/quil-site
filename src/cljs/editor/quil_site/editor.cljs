@@ -42,11 +42,32 @@
   (.tab (j/$ "#source-tab") "show")
   (set-errors [error]))
 
-(defn compile []
-  (.clearGutter @editor "CodeMirror-lint-markers")
-  (let [code (.getValue @editor)]
-    (println "Compiling" code)
-    (c/run code)))
+(defn compile
+  ([] (compile (.getValue @editor)))
+  ([code]
+   (.clearGutter @editor "CodeMirror-lint-markers")
+   (c/run code)))
+
+(defn get-ns-part [code]
+  (loop [[fst & rst] (cstr/trim code)
+         accum ""
+         balance 0]
+    (if (or (and (zero? balance) (not (empty? accum)))
+            (nil? fst))
+      accum
+      (recur rst (str accum fst)
+             (+ balance
+                (condp contains? fst
+                  #{\[ \( \{} 1
+                  #{\] \) \}} -1
+                  0))))))
+
+(defn compile-selected []
+  (let [selection (.getSelection @editor)
+        code (.getValue @editor)]
+    (if (empty? selection)
+      (compile code)
+      (compile (str (get-ns-part code) \newline selection)))))
 
 (def popover-template
   "<div id=\"share-dialog\">
@@ -131,13 +152,14 @@
             :lint #js {:options #js {:cljsErrors #js []}}
             :viewportMargin js/Infinity
             :matchBrackets true
-            :autoCloseBrackets true}))
+            :autoCloseBrackets true
+            :extraKeys #js {"Ctrl-Enter" compile-selected}}))
   (j/ajax
    {:url (str "/sketches/info/" (j/data (j/$ "#source") "sketch-id"))
     :method "GET"
     :success #(.setValue @editor (.-cljs %))})
 
-  (j/on (j/$ "#send") "click" compile)
+  (j/on (j/$ "#send") "click" #(compile))
   (j/on (j/$ "#reset") "click" reset-iframe)
   (j/on (j/$ "#share") "click" share)
   (j/on (j/$ "body") "click" "#share-dialog input" #(this-as el (.select el)))
