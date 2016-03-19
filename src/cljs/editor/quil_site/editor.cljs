@@ -17,7 +17,7 @@
 (defn show-result-pane []
   (let [view-width (.-offsetWidth (.querySelector js/document "#content"))
         pane-width (first @result-pane-size)
-        pane-bigger? (> pane-width (j/outer-width (j/$ "iframe")))]
+        pane-bigger? (> pane-width (int (j/attr (j/$ "iframe") "width")))]
     (j/css (j/$ "#result-content") "left" (str (- view-width
                                                   pane-width
                                                   scroll-width)
