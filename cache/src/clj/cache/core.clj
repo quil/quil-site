@@ -38,18 +38,19 @@
 ;(def serve (start-server))
 ;(.stop serve)
 
-(defn build-cljs []
-  (build/build "src/cljs"
-               {:main 'cache.core
-                :output-to "main.js"
-                :output-dir "out"
-                :target :nodejs
-                :optimizations :none
-                :pretty-print true}))
+(defn build-cljs [watch]
+  ((if watch build/watch build/build)
+   "src/cljs"
+   {:main 'cache.core
+    :output-to "main.js"
+    :output-dir "out"
+    :target :nodejs
+    :optimizations :none
+    :pretty-print true}))
 
-(defn run []
+(defn run [& args]
   (let [server (start-server)]
-    (build-cljs)
+    (build-cljs (= (first args) "watch"))
     (stream-sh "node" "main.js")
     (.stop server)
     (System/exit 0)))

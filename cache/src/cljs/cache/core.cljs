@@ -18,7 +18,11 @@
       (.on "end" #(cb @buffer)))))
 
 (def ignore-lib
-  #{"org.processingjs.Processing"})
+  #{"org.processingjs.Processing"
+    "clojure.string"
+    "goog.dom"
+    "goog.events"
+    "goog.events.EventType"})
 
 (defn send-get [path cb]
   (.get http (str "http://localhost:7788/" path)
@@ -82,6 +86,8 @@
            {:name name :macros macros}
            {:cache (strip-cache cache) :source source})))
 
+(def load-quil-sketch (atom false))
+
 (defn load-library-quil [{:keys [name macros]} cb]
   (println "Loading" name "macros" macros)
   (let [filename (-> (str name)
@@ -92,7 +98,8 @@
                ["cljs" "cljc"])]
     (if (or (ignore-lib (str name))
             (and (= (str name) "quil.sketch")
-                 (not macros)))
+                 (not macros)
+                 (not @load-quil-sketch)))
       (cb {:lang :clj :source
            (if (= name 'clojure.string) "" (str "(ns " name ")"))})
       (try-read-extensions filename exts
@@ -109,26 +116,53 @@
 (def block (str (cstr/join \newline (repeat 3 "#################"))
                 \newline))
 
+(defn write-caches [f]
+  (let [sk-cache ((-> f :state deref :cljs.analyzer/namespaces) 'quil.sketch)]
+    (swap! caches assoc {:name 'quil.sketch :macros false} {:cache (strip-cache sk-cache)
+                                                            :source ""}))
+
+  (write-file "quil-cache.edn" (pr-str @caches))
+  (let [core-cache (:cljs.analyzer/namespaces @(cljs.js/empty-state))]
+    (write-file "core-cache.edn" (pr-str (map-value strip-cache core-cache))))
+  (if (:value f)
+    (println "Success!")
+    (println "Something went wrong" f)))
+
+(defn compile [str cb]
+  (reset! cljs.js/*loaded* #{'clojure.string})
+  (let [state (cljs.js/empty-state)]
+   (cljs.js/compile-str
+    state str "test"
+    {:eval (fn [res]
+             (cljs.js/js-eval res))
+     :load load-library-quil
+     :verbose false
+     :load-macros (not @load-quil-sketch)
+     :cache-source #(do (println "Cache" (:name %1))
+                        (save-cache %1)
+                        (%2 {:value nil}))}
+    (fn [res] (cb (assoc res :state state))))))
+
+(defn compile-quil-core [cb]
+  (println "########")
+  (println "Compiling quil.core")
+  (compile "(ns my.foo (:require-macros [quil.core]))
+            (quil.core/defsketch my
+              :size [500 500])"
+           #(do
+              (println "!@#!@#@!#@!#")
+              (cb))))
+
+(defn compile-quil-sketch [cb]
+  (println "########")
+  (println "Compiling quil.sketch")
+  (reset! load-quil-sketch true)
+  (compile "(ns my.foo (:require [quil.sketch])) (+ 1 1)"
+           cb))
+
 (defn -main [& args]
   (println "Hello world!")
-  (swap! cljs.js/*loaded* conj 'clojure.string)
-  (cljs.js/compile-str (cljs.js/empty-state)
-                    "(ns my.foo (:require-macros [quil.core]))
-                     (quil.core/defsketch my
-                       :size [500 500])"
-                    "test"
-                    {:eval cljs.js/js-eval
-                     :load load-library-quil
-                     :verbose false
-                     :cache-source #(do (println "Cache" (:name %1))
-                                        (save-cache %1)
-                                        (%2 {:value nil}))}
-                    (fn [f]
-                      (write-file "quil-cache.edn" (pr-str @caches))
-                      (let [core-cache (:cljs.analyzer/namespaces @(cljs.js/empty-state))]
-                        (write-file "core-cache.edn" (pr-str (map-value strip-cache core-cache))))
-                      (if (:value f)
-                        (println "Success!")
-                        (println "Something went wrong" f)))))
+  (reset! cljs.js/*loaded* #{'clojure.string})
+  (compile-quil-core #(compile-quil-sketch write-caches)))
 
 (set! *main-cli-fn* -main)
