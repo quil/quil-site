@@ -31,7 +31,8 @@
                   "public/js/examples"
                   "target"
                   "out-main"
-                  "out-editor"]
+                  "out-editor"
+                  "out-preload"]
 
   :plugins [[lein-cljsbuild "1.1.2"]]
 
@@ -55,6 +56,14 @@
                   :main "quil-site.editor"
                   :optimizations :none
                   :dump-core false
+                  :pretty-print true}}
+                {:source-paths ["src/cljs/preload"]
+                 :compiler
+                 {:output-to "public/js/preload.js"
+                  :output-dir "out-preload"
+                  :asset-path "/out-preload"
+                  :main "quil-site.preload"
+                  :optimizations :none
                   :pretty-print true}}]}}
              :prod
              {:cljsbuild
@@ -107,14 +116,15 @@
                   :optimize-constants true
                   :static-fns true
                   :dump-core false
-                  :closure-defines {"goog.DEBUG" false}}}]}}}
+                  :closure-defines {"goog.DEBUG" false}}}
+                {:source-paths ["src/cljs/preload"]
+                 :compiler
+                 {:output-to "public/js/preload.js"
+                  :optimizations :simple
+                  :pretty-print false
+                  :optimize-constants true
+                  :static-fns true}}]}}}
 
   :cljsbuild {
     :builds [
-      {:source-paths ["src/cljs/preload"]
-       :compiler
-         {:output-to "public/js/preload.js"
-          :optimizations :simple
-          :pretty-print false
-          :optimize-constants true
-          :static-fns true}}]})
+      ]})

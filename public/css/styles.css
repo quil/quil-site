@@ -7,7 +7,7 @@
     height: calc(100% - 63px);
     height: -webkit-calc(100% - 63px);
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .sketch #source-content {
