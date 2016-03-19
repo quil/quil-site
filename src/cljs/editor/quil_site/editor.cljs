@@ -16,12 +16,17 @@
 
 (defn show-result-pane []
   (let [view-width (.-offsetWidth (.querySelector js/document "#content"))
-        pane-width (first @result-pane-size)]
+        pane-width (first @result-pane-size)
+        pane-bigger? (> pane-width (j/outer-width (j/$ "iframe")))]
     (j/css (j/$ "#result-content") "left" (str (- view-width
                                                   pane-width
                                                   scroll-width)
-                                               "px")))
-  (j/remove-class (j/$ "#hide") "disabled"))
+                                               "px"))
+    ; when pane bigger - it means that it won't slide because
+    ; it already enough space to cover the whole iframe.
+    ; in that case don't enable "hide" button
+    (when-not pane-bigger?
+      (j/remove-class (j/$ "#hide") "disabled"))))
 
 (defn set-errors [errors]
   (let [options (.-options (.getOption @editor "lint"))]
