@@ -20,7 +20,8 @@
 
         [:div#content
          [:div#source-content
-          [:div
+          [:img#sketch-loading {:src "/img/sketch_loading.gif"}]
+          [:div.hidden
            [:textarea#source
             {:data-sketch-id id}]]]
          [:div#result-content

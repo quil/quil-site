@@ -119,6 +119,11 @@
   (let [iframe (j/$ "iframe")]
     (j/attr iframe "src" (j/attr iframe "src"))))
 
+(defn set-editor-source [source]
+  (j/add-class (j/$ "#sketch-loading") "hidden")
+  (j/remove-class (j/$ "#source-content > div") "hidden")
+  (.setValue @editor source))
+
 (defn init []
   (.registerHelper
    js/CodeMirror "lint" "clojure"
@@ -151,7 +156,7 @@
   (j/ajax
    {:url (str "/sketches/info/" (j/data (j/$ "#source") "sketch-id"))
     :method "GET"
-    :success #(.setValue @editor (.-cljs %))})
+    :success #(set-editor-source (.-cljs %))})
 
   (j/on (j/$ "#send") "click" #(compile))
   (j/on (j/$ "#reset") "click" reset-iframe)

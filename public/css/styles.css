@@ -7,6 +7,7 @@
     height: calc(100% - 63px);
     height: -webkit-calc(100% - 63px);
     position: relative;
+    overflow-x: hidden;
 }
 
 .sketch #source-content {
@@ -14,6 +15,11 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
+}
+
+.sketch #sketch-loading {
+    display: block;
+    margin: 25vh auto 25vh auto;
 }
 
 .sketch #content > div {
