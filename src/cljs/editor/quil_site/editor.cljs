@@ -3,6 +3,8 @@
             [jayq.core :as j]
             [clojure.string :as cstr]))
 
+(enable-console-print!)
+
 (def editor (atom nil))
 (def result-pane-size (atom [0 0]))
 (def scroll-width 20)
@@ -21,32 +23,19 @@
                                                "px")))
   (j/remove-class (j/$ "#hide") "disabled"))
 
-(defn show-error-alert [error]
-  (-> (j/$ "<div></div>")
-      (j/add-class "alert")
-      (j/add-class "alert-danger")
-      (j/attr "role" "alert")
-      (j/text (.-message error))
-      (j/insert-before "#source")))
-
 (defn set-errors [errors]
-  (let [options (.-options (.getOptions @editor "lint"))]
+  (let [options (.-options (.getOption @editor "lint"))]
     (set! (.-cljsErrors options) errors)
-    (j/remove (j/$ "#source-content .alert-danger"))
-    (doseq [error errors]
-      (show-error-alert error))
     (.signal js/CodeMirror @editor "change" @editor)))
-
-(defn show-error [error]
-  (j/add-class (j/$ "#ajax-status") "hidden")
-  (.tab (j/$ "#source-tab") "show")
-  (set-errors [error]))
 
 (defn compile
   ([] (compile (.getValue @editor)))
   ([code]
+   (println "compiling" code)
    (.clearGutter @editor "CodeMirror-lint-markers")
-   (c/run code)))
+   (c/run code (fn [res]
+                 (set-errors (remove nil? (conj (:warnings res) (:error res))))
+                 (cljs.pprint/pprint res)))))
 
 (defn get-ns-part [code]
   (loop [[fst & rst] (cstr/trim code)
@@ -62,12 +51,25 @@
                   #{\] \) \}} -1
                   0))))))
 
+(defn complete-selection [ns selection pos]
+  (let [line (inc (.-line pos))
+        col (.-ch pos)
+        append-symbs (fn [st ch n]
+                       (apply str st (repeat n ch)))]
+    (-> ns
+        (append-symbs \newline (- line (count (cstr/split-lines ns))))
+        (append-symbs " " (dec col))
+        (str selection))))
+
 (defn compile-selected []
   (let [selection (.getSelection @editor)
         code (.getValue @editor)]
     (if (empty? selection)
       (compile code)
-      (compile (str (get-ns-part code) \newline selection)))))
+      (compile (complete-selection
+                (get-ns-part code)
+                selection
+                (.getCursor @editor "from"))))))
 
 (def popover-template
   "<div id=\"share-dialog\">
@@ -131,15 +133,16 @@
    js/CodeMirror "lint" "clojure"
    (fn [text options]
      (letfn [(error-to-obj [error]
-               #js
                {:from (.Pos js/CodeMirror
-                            (- (.-line error) 1)
-                            (- (.-column error) 2))
+                            (- (:line error) 1)
+                            (- (:column error) 1))
                 :to (.Pos js/CodeMirror
-                          (- (.-line error) 1)
-                          (- (.-column error) 1))
-                :message (.-message error)})]
-       (map error-to-obj (.-cljsErrors options)))))
+                          (- (:line error) 1)
+                          (- (:column error) 0))
+                :message (:message error)
+                :severity (name (:type error))})]
+       (clj->js
+        (map error-to-obj (.-cljsErrors options))))))
 
   (reset! editor
           (.fromTextArea
