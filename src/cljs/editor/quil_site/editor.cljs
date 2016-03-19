@@ -74,28 +74,16 @@
                 selection
                 (.getCursor @editor "from"))))))
 
-(def popover-template
-  "<div id=\"share-dialog\">
-    <input value=\"$URL\" class=\"form-control\" readonly=\"readonly\"/>
-  </div>")
-
 (defn show-share-dialog [resp]
   (let [path (str "/sketches/show/" (:id resp))
-        url (str (.-protocol js/location) "//" (.-host js/location) path)
-        el (cstr/replace popover-template "$URL" url)]
+        url (str (.-protocol js/location) "//" (.-host js/location) path)]
+    (j/val (j/$ "#share-dialog input") url)
     (when-let [history (.-history js/window)]
       (.replaceState history
                      #js {} "" path))
-    (.popover (j/$ "#share")
-              #js {:container "body"
-                   :placement "right"
-                   :html true
-                   :content el
-                   :trigger "manual"})
-    (.popover (j/$ "#share") "show")))
+    (.modal (j/$ "#share-dialog") "show")))
 
 (defn share []
-  (.popover (j/$ "#share") "destroy")
   (j/ajax
    {:url "/sketches/create"
     :method "POST"
