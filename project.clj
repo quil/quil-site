@@ -18,7 +18,7 @@
                  [pandect "0.5.4"]
                  [jayq "2.5.4"]
 
-                 [org.clojure/clojurescript "1.8.9"]]
+                 [org.clojure/clojurescript "1.8.34"]]
 
   :source-paths ["src/clj"]
 
