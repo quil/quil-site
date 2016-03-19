@@ -31,11 +31,9 @@
 (defn compile
   ([] (compile (.getValue @editor)))
   ([code]
-   (println "compiling" code)
    (.clearGutter @editor "CodeMirror-lint-markers")
    (c/run code (fn [res]
-                 (set-errors (remove nil? (conj (:warnings res) (:error res))))
-                 (cljs.pprint/pprint res)))))
+                 (set-errors (remove nil? (conj (:warnings res) (:error res))))))))
 
 (defn get-ns-part [code]
   (loop [[fst & rst] (cstr/trim code)
@@ -80,7 +78,6 @@
   (let [path (str "/sketches/show/" (:id resp))
         url (str (.-protocol js/location) "//" (.-host js/location) path)
         el (cstr/replace popover-template "$URL" url)]
-    (println "Share url:" url)
     (when-let [history (.-history js/window)]
       (.replaceState history
                      #js {} "" path))
@@ -125,6 +122,7 @@
   (show-result-pane))
 
 (defn reset-iframe []
+  (c/reset-state!)
   (let [iframe (j/$ "iframe")]
     (j/attr iframe "src" (j/attr iframe "src"))))
 
@@ -176,6 +174,9 @@
   (j/on (j/$ "#result-content") "mouseenter" show-result-pane)
   (j/on (j/$ "#hide") "click" hide-result-pane)
   (.on js/CodeMirror @editor "mousedown" #(do
+                                            (hide-result-pane)
+                                            (.popover (j/$ "#share") "destroy")))
+  (.on js/CodeMirror @editor "touchstart" #(do
                                             (hide-result-pane)
                                             (.popover (j/$ "#share") "destroy"))))
 

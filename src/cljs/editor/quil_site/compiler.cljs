@@ -64,17 +64,23 @@
          :column column}
         (recur (ex-cause error))))))
 
+(def state (atom nil))
+
+(defn reset-state! []
+  (reset! state (cjs/empty-state))
+  (cjs/load-analysis-cache!
+   @state 'cljs.core (@core-cache 'cljs.core)))
+
 (defn compile [source cb]
-  (let [state (cjs/empty-state)
-        warnings (atom [])]
-    (cjs/load-analysis-cache!
-     state 'cljs.core (@core-cache 'cljs.core))
+  (when (nil? @state)
+    (reset-state!))
+  (let [warnings (atom [])]
     (ana/with-warning-handlers [(fn [type env extra]
                                   (swap! warnings conj
                                          {:type type
                                           :env env
                                           :extra extra}))]
-     (cjs/compile-str state source nil
+     (cjs/compile-str @state source nil
                       {:load load-macros-ns
                        :eval cjs/js-eval
                        :verbose false}
