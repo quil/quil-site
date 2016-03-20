@@ -6,7 +6,7 @@
 
 (def period 7)
 
-(defn heart [s t]
+(defn heart-point [s t]
   (let [x (* s (* 16 (q/pow (Math/sin t) 3)))
         y (* s (- (* 13 (q/cos t))
                   (* 5 (q/cos (* 2 t)))
@@ -24,7 +24,7 @@
 
 (defn setup []
   (q/frame-rate 20)
-  {:points (mapv (partial heart (/ (q/height) 40)) 
+  {:points (mapv (partial heart-point (/ (q/height) 40))
                  (range 0 10 0.1))
    :scaling-function contraction
    :counter period})
