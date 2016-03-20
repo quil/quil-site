@@ -80,7 +80,7 @@
                   :modules {:cljs-base {:output-to "public/js/main.js"}
                             :dancer {:output-to "public/js/examples/dancer.js"
                                      :entries #{quil-site.examples.dancer}}
-                            :dry-paint {:output-to "public/js/examples/exdry_paint.js"
+                            :dry-paint {:output-to "public/js/examples/dry_paint.js"
                                         :entries #{quil-site.examples.dry-paint}}
                             :emerald {:output-to "public/js/examples/emerald.js"
                                       :entries #{quil-site.examples.emerald}}
@@ -113,7 +113,6 @@
                  {:output-to "public/js/editor.js"
                   :optimizations :simple
                   :pretty-print false
-                  :optimize-constants true
                   :static-fns true
                   :dump-core false
                   :closure-defines {"goog.DEBUG" false}}}
@@ -122,9 +121,4 @@
                  {:output-to "public/js/preload.js"
                   :optimizations :simple
                   :pretty-print false
-                  :optimize-constants true
-                  :static-fns true}}]}}}
-
-  :cljsbuild {
-    :builds [
-      ]})
+                  :static-fns true}}]}}})
