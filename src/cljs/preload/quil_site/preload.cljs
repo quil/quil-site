@@ -20,3 +20,8 @@
 
 (.addEventListener js/window EventType/MESSAGE handle-message)
 
+(.addEventListener (.querySelector js/document "canvas")
+                   "click"
+                   #(.focus (.querySelector (.-document (.-top js/window))
+                                            "iframe")))
+
