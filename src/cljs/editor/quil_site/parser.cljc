@@ -25,7 +25,7 @@
 (defn- find-in-form [form point]
   (let [{:keys [end-line end-column]} (meta form)]
     (cond
-      (and (list? form)
+      (and (coll? form)
            (= point (dec-point [end-line end-column]))) form
       (coll? form) (->> form
                         (map #(find-in-form % point))

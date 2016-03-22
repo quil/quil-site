@@ -42,6 +42,6 @@
 
     " (def abc \"]]))()\")" [0 19] {:form "(def abc \"]]))()\")" :start [0 1]}
 
-    ";()()[]]}{}}}\n(def abc ; this ) abc You!\n42)" [2 2]
+    ";()()[]]}{}}}\n(def abc ; this ) abc You!\n42)" [2 3]
     {:form "(def abc ; this ) abc You!\n42)" :start [1 0]}))
 
