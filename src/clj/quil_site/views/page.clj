@@ -20,7 +20,13 @@
   })(window,document,'ga');
 
   ga('create', 'UA-51485241-2', 'auto');
-  ga('send', 'pageview');"]
+  ga('send', 'pageview');
+  window.onerror = function(message) {
+    ga('send', 'exception', {
+      exDescription: message,
+      exFatal: false
+    });
+  };"]
 
    (let [css-files (conj (:css-files opts [])
                          "/css/bootstrap.min.css"
