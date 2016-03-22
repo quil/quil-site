@@ -55,6 +55,34 @@
       :no-code (set "alert-warning" "no form found under cursor")
       :clear (set "" ""))))
 
+(defn save-code [cb]
+  (let [code (.getValue @editor)]
+   (j/ajax
+    {:url "/sketches/create"
+     :method "POST"
+     :data (.stringify js/JSON #js {:cljs code})
+     :contentType "application/json"
+     :success (fn [resp]
+                (let [resp (js->clj resp :keywordize-keys true)]
+                  (cb resp)))})))
+
+(defn show-share-dialog [resp]
+  (let [path (str "/sketches/show/" (:id resp))
+        url (str (.-protocol js/location) "//" (.-host js/location) path)]
+    (j/val (j/$ "#share-dialog input") url)
+    (.modal (j/$ "#share-dialog") "show")))
+
+(defn update-url [resp]
+  (let [path (str "/sketches/show/" (:id resp))]
+    (when (not= path (.-pathname js/location))
+      (.pushState js/history
+                  #js {:source (:cljs resp)} "" path))))
+
+(defn share []
+  (save-code
+   #(do (update-url %)
+        (show-share-dialog %))))
+
 (defn compile
   ([] (compile (.getValue @editor)))
   ([code]
@@ -63,6 +91,7 @@
    (set-status {:type :clear})
    (.clearGutter @editor "CodeMirror-lint-markers")
    (c/run code (fn [res]
+                 (save-code update-url)
                  (cond (:error res) (set-status {:type :errors})
                        (not (empty? (:warnings res))) (set-status {:type :warnings})
                        :default (set-status {:type :ok}))
@@ -105,25 +134,6 @@
                            (set-status {:type :errors})
                            (set-errors [(:error selection)]))
       :default (set-status {:type :no-code}))))
-
-(defn show-share-dialog [resp]
-  (let [path (str "/sketches/show/" (:id resp))
-        url (str (.-protocol js/location) "//" (.-host js/location) path)]
-    (j/val (j/$ "#share-dialog input") url)
-    (when-let [history (.-history js/window)]
-      (.replaceState history
-                     #js {} "" path))
-    (.modal (j/$ "#share-dialog") "show")))
-
-(defn share []
-  (j/ajax
-   {:url "/sketches/create"
-    :method "POST"
-    :data (.stringify js/JSON #js {:cljs (.getValue @editor)})
-    :contentType "application/json"
-    :success (fn [resp]
-              (let [resp (js->clj resp :keywordize-keys true)]
-                (show-share-dialog resp)))}))
 
 (defn resize-iframe [message]
   (let [{:keys [width height]} message
@@ -208,7 +218,11 @@
                                             (.popover (j/$ "#share") "destroy")))
   (.on js/CodeMirror @editor "touchstart" #(do
                                             (hide-result-pane)
-                                            (.popover (j/$ "#share") "destroy"))))
+                                            (.popover (j/$ "#share") "destroy")))
+  (.addEventListener js/window
+                     "popstate"
+                     (fn [event] (when-let [source (.-source (.-state event))]
+                                   (set-editor-source source )))))
 
 
 (j/$ init)
