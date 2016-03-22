@@ -21,6 +21,8 @@
                  [org.clojure/clojurescript "1.8.34"]]
 
   :source-paths ["src/clj"]
+  :test-paths ["test/"
+               "src/cljs/editor"]
 
   ; Need access to cljs examples.
   :resource-paths ["src/cljs/main/quil_site/examples"]
@@ -56,14 +58,6 @@
                   :main "quil-site.editor"
                   :optimizations :none
                   :dump-core false
-                  :pretty-print true}}
-                {:source-paths ["src/cljs/preload"]
-                 :compiler
-                 {:output-to "public/js/preload.js"
-                  :output-dir "out-preload"
-                  :asset-path "/out-preload"
-                  :main "quil-site.preload"
-                  :optimizations :none
                   :pretty-print true}}]}}
              :prod
              {:cljsbuild
@@ -115,10 +109,10 @@
                   :pretty-print false
                   :static-fns true
                   :dump-core false
-                  :closure-defines {"goog.DEBUG" false}}}
-                {:source-paths ["src/cljs/preload"]
-                 :compiler
-                 {:output-to "public/js/preload.js"
-                  :optimizations :simple
-                  :pretty-print false
-                  :static-fns true}}]}}})
+                  :closure-defines {"goog.DEBUG" false}}}]}}}
+  :cljsbuild {:builds [{:source-paths ["src/cljs/preload"]
+                        :compiler
+                        {:output-to "public/js/preload.js"
+                         :optimizations :simple
+                         :pretty-print false
+                         :static-fns true}}]})

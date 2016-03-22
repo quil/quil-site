@@ -4,7 +4,8 @@
             [cljs.reader :as r]
             [cljs.pprint :as pprint]
             [goog.events :as events]
-            [goog.events.EventType :as EventType])
+            [goog.events.EventType :as EventType]
+            [quil-site.parser :as p])
   (:import goog.net.XhrIo))
 
 (defn fetch-file!
@@ -53,17 +54,6 @@
      :line (:line env)
      :column (:column env)}))
 
-(defn convert-error [error]
-  (if (nil? error)
-    nil
-    (let [{:keys [line column]} (ex-data error)]
-      (if (or line column)
-        {:message (ex-message error)
-         :type :error
-         :line line
-         :column column}
-        (recur (ex-cause error))))))
-
 (def state (atom nil))
 
 (defn reset-state! []
@@ -95,7 +85,7 @@
                                          :source (:value res)}
                                     "*"))
                     (cb (update res
-                                :error convert-error)))))
+                                :error p/convert-error)))))
 
 (goog/exportSymbol "compile" #(compile % (fn [res]
                                            (println res))))

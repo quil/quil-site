@@ -12,11 +12,14 @@
          :js-files ["/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
                     "/js/editor.js"]}
 
-        [:div.btn-group
-         [:button#send.btn.btn-primary "Run"]
-         [:button#reset.btn "Reset"]
-         [:button#hide.btn.disabled "Hide"]
-         [:button#share.btn "Share"]]
+        [:div
+         [:div.btn-group
+          [:button#send.btn.btn-primary "Run"]
+          [:button#reset.btn "Reset"]
+          [:button#hide.btn.disabled "Hide"]
+          [:button#share.btn "Share"]]
+         [:dev#result-status.alert
+          {:role "alert"}]]
 
         [:div#content
          [:div#source-content

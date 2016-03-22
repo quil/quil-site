@@ -1,7 +1,9 @@
 (ns quil-site.editor
   (:require [quil-site.compiler :as c]
+            [quil-site.parser :as p]
             [jayq.core :as j]
-            [clojure.string :as cstr]))
+            [clojure.string :as cstr]
+            [cljs.pprint :as pprint]))
 
 (enable-console-print!)
 
@@ -29,50 +31,80 @@
       (j/remove-class (j/$ "#hide") "disabled"))))
 
 (defn set-errors [errors]
+  (println errors)
   (let [options (.-options (.getOption @editor "lint"))]
+    (.clearGutter @editor "CodeMirror-lint-markers")
     (set! (.-cljsErrors options) errors)
     (.signal js/CodeMirror @editor "change" @editor)))
+
+(defn set-status [status]
+  (let [el (j/$ "#result-status")
+        set (fn [class text]
+              (println "Setting" class text)
+              (-> el
+                  (j/add-class class)
+                  (j/text text)))]
+    (-> el
+        (j/remove-class "alert-success")
+        (j/remove-class "alert-warning")
+        (j/remove-class "alert-danger"))
+    (case (:type status)
+      :ok (set "alert-success" "succesfully evaluated")
+      :warnings (set "alert-warning" "evaluated with warnings")
+      :errors (set "alert-danger" "found some errors")
+      :no-code (set "alert-warning" "no form found under cursor")
+      :clear (set "" ""))))
 
 (defn compile
   ([] (compile (.getValue @editor)))
   ([code]
+   (println "Compiling")
+   (println code)
+   (set-status {:type :clear})
    (.clearGutter @editor "CodeMirror-lint-markers")
    (c/run code (fn [res]
+                 (cond (:error res) (set-status {:type :errors})
+                       (not (empty? (:warnings res))) (set-status {:type :warnings})
+                       :default (set-status {:type :ok}))
                  (set-errors (remove nil? (conj (:warnings res) (:error res))))))))
 
-(defn get-ns-part [code]
-  (loop [[fst & rst] (cstr/trim code)
-         accum ""
-         balance 0]
-    (if (or (and (zero? balance) (not (empty? accum)))
-            (nil? fst))
-      accum
-      (recur rst (str accum fst)
-             (+ balance
-                (condp contains? fst
-                  #{\[ \( \{} 1
-                  #{\] \) \}} -1
-                  0))))))
+(defn cursor-to-point [cursor]
+  [(.-line cursor) (.-ch cursor)])
 
 (defn complete-selection [ns selection pos]
-  (let [line (inc (.-line pos))
-        col (.-ch pos)
+  (let [[line col] pos
         append-symbs (fn [st ch n]
                        (apply str st (repeat n ch)))]
-    (-> ns
-        (append-symbs \newline (- line (count (cstr/split-lines ns))))
-        (append-symbs " " (dec col))
-        (str selection))))
+    (if (cstr/includes? selection ns)
+      selection
+      (-> ns
+          (str \newline)
+          (append-symbs \newline (- line (count (cstr/split-lines ns))))
+          (append-symbs " " (dec col))
+          (str selection)))))
+
+(defn get-selection [editor]
+  (let [user-selection (.getSelection editor)]
+    (if (empty? user-selection)
+      (let [point (cursor-to-point (.getCursor editor))
+            res (p/get-form-ends-at-point (.getValue editor) point)]
+        (if (:form res)
+          {:value (:form res)
+           :start (:start res)}
+          res))
+      {:value user-selection
+       :start (cursor-to-point (.getCursor editor "from"))})))
 
 (defn compile-selected []
-  (let [selection (.getSelection @editor)
-        code (.getValue @editor)]
-    (if (empty? selection)
-      (compile code)
-      (compile (complete-selection
-                (get-ns-part code)
-                selection
-                (.getCursor @editor "from"))))))
+  (let [ns (p/get-ns-form (.getValue @editor))
+        selection (get-selection @editor)]
+    (cond
+      (:value selection) (compile (complete-selection
+                                   ns (:value selection) (:start selection)))
+      (:error selection) (do
+                           (set-status {:type :errors})
+                           (set-errors [(:error selection)]))
+      :default (set-status {:type :no-code}))))
 
 (defn show-share-dialog [resp]
   (let [path (str "/sketches/show/" (:id resp))
