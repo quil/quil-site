@@ -11,6 +11,14 @@
 (def result-pane-size (atom [0 0]))
 (def scroll-width 20)
 
+(defn report-action
+  ([action]
+   (report-action action nil ))
+  ([action label]
+   (report-action action label nil))
+  ([action label value]
+   (js/ga "send" "event" "sketch" action label value)))
+
 (defn hide-result-pane []
   (let [width (.-offsetWidth (.querySelector js/document "#source-content"))]
     (j/css (j/$ "#result-content") "left" (str width "px")))
@@ -53,7 +61,9 @@
       :warnings (set "alert-warning" "evaluated with warnings")
       :errors (set "alert-danger" "found some errors")
       :no-code (set "alert-warning" "no form found under cursor")
-      :clear (set "" ""))))
+      :clear (set "" ""))
+    (when (not= (:type status) :clear)
+      (report-action "status" (name (:type status))))))
 
 (defn save-code [cb]
   (let [code (.getValue @editor)]
@@ -81,21 +91,23 @@
 (defn share []
   (save-code
    #(do (update-url %)
-        (show-share-dialog %))))
+        (show-share-dialog %)))
+  (report-action "share"))
 
 (defn compile
-  ([] (compile (.getValue @editor)))
+  ([]
+   (compile (.getValue @editor)))
   ([code]
-   (println "Compiling")
-   (println code)
    (set-status {:type :clear})
    (.clearGutter @editor "CodeMirror-lint-markers")
-   (c/run code (fn [res]
-                 (save-code update-url)
-                 (cond (:error res) (set-status {:type :errors})
-                       (not (empty? (:warnings res))) (set-status {:type :warnings})
-                       :default (set-status {:type :ok}))
-                 (set-errors (remove nil? (conj (:warnings res) (:error res))))))))
+   (let [start (.now js/Date)]
+     (c/run code (fn [res]
+                   (report-action "compile-time" nil (- (.now js/Date) start))
+                   (save-code update-url)
+                   (cond (:error res) (set-status {:type :errors})
+                         (not (empty? (:warnings res))) (set-status {:type :warnings})
+                         :default (set-status {:type :ok}))
+                   (set-errors (remove nil? (conj (:warnings res) (:error res)))))))))
 
 (defn cursor-to-point [cursor]
   [(.-line cursor) (.-ch cursor)])
@@ -117,12 +129,15 @@
     (if (empty? user-selection)
       (let [point (cursor-to-point (.getCursor editor))
             res (p/get-form-ends-at-point (.getValue editor) point)]
+        (report-action "compile" "form")
         (if (:form res)
           {:value (:form res)
            :start (:start res)}
           res))
-      {:value user-selection
-       :start (cursor-to-point (.getCursor editor "from"))})))
+      (do
+        (report-action "compil" "sel")
+        {:value user-selection
+         :start (cursor-to-point (.getCursor editor "from"))}))))
 
 (defn compile-selected []
   (let [ns (p/get-ns-form (.getValue @editor))
@@ -200,8 +215,12 @@
     :method "GET"
     :success #(set-editor-source (.-cljs %))})
 
-  (j/on (j/$ "#send") "click" #(compile))
-  (j/on (j/$ "#reset") "click" reset-iframe)
+  (j/on (j/$ "#send") "click" #(do
+                                 (compile)
+                                 (report-action "compile" "all")))
+  (j/on (j/$ "#reset") "click" #(do
+                                 (reset-iframe)
+                                 (report-action "reset")))
   (j/on (j/$ "#share") "click" share)
   (j/on (j/$ "body") "click" "#share-dialog input" #(this-as el (.select el)))
   (j/on (j/$ js/window) "message"
@@ -212,7 +231,9 @@
               (resize-iframe message)))))
   (hide-result-pane)
   (j/on (j/$ "#result-content") "mouseenter" show-result-pane)
-  (j/on (j/$ "#hide") "click" hide-result-pane)
+  (j/on (j/$ "#hide") "click" #(do
+                                (hide-result-pane)
+                                (report-action "hide")))
   (.on js/CodeMirror @editor "mousedown" #(do
                                             (hide-result-pane)
                                             (.popover (j/$ "#share") "destroy")))
