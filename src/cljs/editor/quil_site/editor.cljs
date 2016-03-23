@@ -243,7 +243,9 @@
   (.addEventListener js/window
                      "popstate"
                      (fn [event] (when-let [source (.-source (.-state event))]
-                                   (set-editor-source source )))))
+                                   (set-editor-source source ))))
+
+  (.tooltip (j/$ "[data-toggle=\"tooltip\"") #js {:container "body"}))
 
 
 (j/$ init)

@@ -14,10 +14,26 @@
 
         [:div
          [:div.btn-group
-          [:button#send.btn.btn-primary "Run"]
-          [:button#reset.btn "Reset"]
-          [:button#hide.btn.disabled "Hide"]
-          [:button#share.btn "Share"]]
+          [:button#send.btn.btn-primary
+           {:data-toggle "tooltip"
+            :data-placement "bottom"
+            :title "Run sketch. Use Ctrl+Enter to eval selected code or eval a form under cursor."}
+           "Run"]
+          [:button#reset.btn
+           {:data-toggle "tooltip"
+            :data-placement "bottom"
+            :title "Reset drawing area. Doesn't affect code."}
+           "Clear"]
+          [:button#hide.btn.disabled
+           {:data-toggle "tooltip"
+            :data-placement "bottom"
+            :title "Hide drawing area revealing editor."}
+           "Hide"]
+          [:button#share.btn
+           {:data-toggle "tooltip"
+            :data-placement "bottom"
+            :title "Share sketch via URL."}
+           "Share"]]
          [:dev#result-status.alert
           {:role "alert"}]]
 
