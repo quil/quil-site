@@ -4,6 +4,7 @@
             [cljs.reader :as r]
             [cljs.pprint :as pprint]
             [goog.events :as events]
+            [goog.Promise :as Promise]
             [goog.events.EventType :as EventType]
             [quil-site.parser :as p])
   (:import goog.net.XhrIo))
@@ -23,6 +24,11 @@
     (catch :default e
       (src-cb nil))))
 
+(def macros-loaded (Promise/withResolver))
+(def core-loaded (Promise/withResolver))
+(def all-loaded (Promise/all #js [(.-promise macros-loaded)
+                                  (.-promise core-loaded)]))
+
 (def cached-macros (atom {}))
 
 (set! js/Processing
@@ -31,11 +37,14 @@
 
 (fetch-file! "/quil-cache.edn"
              #(do
+                (.resolve macros-loaded)
                 (reset! cached-macros (r/read-string %))))
 
 (def core-cache (atom nil))
 
-(fetch-file! "/core-cache.edn" #(reset! core-cache (r/read-string %)))
+(fetch-file! "/core-cache.edn" #(do
+                                  (.resolve core-loaded)
+                                  (reset! core-cache (r/read-string %))))
 
 (defn load-macros-ns [{:keys [name macros] :as opts} cb]
   (if-let [{:keys [source cache]} (@cached-macros

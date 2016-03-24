@@ -177,9 +177,12 @@
     (j/attr iframe "src" (j/attr iframe "src"))))
 
 (defn set-editor-source [source]
-  (j/add-class (j/$ "#sketch-loading") "hidden")
-  (j/remove-class (j/$ "#source-content > div") "hidden")
-  (.setValue @editor source))
+  ; Display editor only wheh compiler loaded all resources.
+  (.then c/all-loaded
+         (fn []
+           (j/add-class (j/$ "#sketch-loading") "hidden")
+           (j/remove-class (j/$ "#source-content > div") "hidden")
+           (.setValue @editor source))))
 
 (defn init []
   (.registerHelper
