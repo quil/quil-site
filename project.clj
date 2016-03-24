@@ -8,7 +8,7 @@
                  [hiccup "1.0.5"]
                  [ring "1.4.0"]
                  [ring/ring-json "0.4.0"]
-                 [quil "2.3.1-SNAPSHOT"]
+                 [quil "2.4.0"]
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/tools.reader "0.10.0"]
                  [org.clojure/core.cache "0.6.4"]
@@ -36,7 +36,7 @@
                   "out-editor"
                   "out-preload"]
 
-  :plugins [[lein-cljsbuild "1.1.2"]]
+  :plugins [[lein-cljsbuild "1.1.3"]]
 
   :profiles {:dev
 

@@ -136,11 +136,11 @@
   "The system variable frameCount contains the number of frames\n  displayed since the program started. Inside setup() the value is 0\n  and after the first iteration of draw it is 1, etc.",
   :what :fn},
  with-graphics
- {:args #{[graphics & body]},
+ {:args ({:value [graphics & body], :type :both}),
   :category "Rendering",
   :added "1.7",
   :name with-graphics,
-  :type :clj,
+  :type :both,
   :processing-name nil,
   :requires-bindings true,
   :link nil,
@@ -380,12 +380,12 @@
   "Calculates the natural logarithm (the base-e logarithm) of a\n  number. This function expects the values greater than 0.0.",
   :what :fn},
  with-stroke
- {:args #{[stroke-args & body]},
+ {:args ({:value [stroke-args & body], :type :both}),
   :category "Color",
   :added "1.7",
   :name with-stroke,
   :subcategory "Utility Macros",
-  :type :clj,
+  :type :both,
   :processing-name nil,
   :requires-bindings true,
   :link nil,
@@ -404,6 +404,19 @@
   :link "http://www.processing.org/reference/ambient_.html",
   :docstring
   "Sets the ambient reflectance for shapes drawn to the screen. This\n  is combined with the ambient light component of environment. The\n  color components set through the parameters define the\n  reflectance. For example in the default color mode, setting x=255,\n  y=126, z=0, would cause all the red light to reflect and half of the\n  green light to reflect. Used in combination with emissive, specular,\n  and shininess in setting the material properties of shapes.",
+  :what :fn},
+ key-modifiers
+ {:args #{[]},
+  :category "Input",
+  :added "2.4.0",
+  :name key-modifiers,
+  :subcategory "Keyboard",
+  :type :clj,
+  :processing-name nil,
+  :requires-bindings true,
+  :link nil,
+  :docstring
+  "Set of key modifiers that were pressed when event happened.\n  Possible modifiers :ctrl, :alt, :shift, :meta. Not available in\n  ClojureScript.",
   :what :fn},
  end-raw
  {:args ({:value [], :type :both}),
@@ -711,6 +724,19 @@
   :docstring
   "A sequence of strings representing the fonts on this system\n  available for use.\n\n  Because of limitations in Java, not all fonts can be used and some\n  might work with one operating system and not others. When sharing a\n  sketch with other people or posting it on the web, you may need to\n  include a .ttf or .otf version of your font in the data directory of\n  the sketch because other people might not have the font installed on\n  their computer. Only fonts that can legally be distributed should be\n  included with a sketch.",
   :what :fn},
+ clear
+ {:args #{[]},
+  :category "Color",
+  :added "2.4.0",
+  :name clear,
+  :subcategory "Setting",
+  :type :clj,
+  :processing-name "clear()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/clear_.html",
+  :docstring
+  "Clears the pixels within a buffer. This function only works on\n  graphics objects created with the (create-graphics) function meaning\n  that you should call it only inside (with-graphics) macro. Unlike\n  the main graphics context (the display window), pixels in additional\n  graphics areas created with (create-graphics) can be entirely or\n  partially transparent. This function clears everything in a graphics\n  object to make all of the pixels 100% transparent.",
+  :what :fn},
  binary
  {:args
   ({:value [val], :type :both} {:value [val num-digits], :type :both}),
@@ -919,7 +945,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/smooth_.html",
   :docstring
-  "Draws all geometry with smooth (anti-aliased) edges. This will slow\n  down the frame rate of the application, but will enhance the visual\n  refinement.\n\n  Clojure: must be called inside :settings function.\n  ClojureScript: can be called anywhere.\n\n  The level parameter (int) increases the level of smoothness with the\n  P2D and P3D renderers. This is the level of over sampling applied to\n  the graphics buffer. The value '2' will double the rendering size\n  before scaling it down to the display size. This is called '2x\n  anti-aliasing.' The value 4 is used for 4x anti-aliasing and 8 is\n  specified for 8x anti-aliasing. If level is set to 0, it will disable\n  all smoothing; it's the equivalent of the function noSmooth().\n  The maximum anti-aliasing level is determined by the hardware of the\n  machine that is running the software.\n\n  Note that smooth will also improve image quality of resized images.",
+  "Draws all geometry with smooth (anti-aliased) edges. This will slow\n  down the frame rate of the application, but will enhance the visual\n  refinement.\n\n  Must be called inside :settings handler.\n\n  The level parameter (int) increases the level of smoothness with the\n  P2D and P3D renderers. This is the level of over sampling applied to\n  the graphics buffer. The value '2' will double the rendering size\n  before scaling it down to the display size. This is called '2x\n  anti-aliasing.' The value 4 is used for 4x anti-aliasing and 8 is\n  specified for 8x anti-aliasing. If level is set to 0, it will disable\n  all smoothing; it's the equivalent of the function noSmooth().\n  The maximum anti-aliasing level is determined by the hardware of the\n  machine that is running the software.\n\n  Note that smooth will also improve image quality of resized images.",
   :what :fn},
  shear-x
  {:args ({:value [angle], :type :both}),
@@ -1130,6 +1156,19 @@
   :link "http://www.processing.org/reference/keyPressed.html",
   :docstring "true if any key is currently pressed, false otherwise.",
   :what :fn},
+ display-density
+ {:args #{[display] []},
+  :category "Environment",
+  :added "2.4.0",
+  :name display-density,
+  :subcategory nil,
+  :type :clj,
+  :processing-name "displayDensity()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/displayDensity_.html",
+  :docstring
+  "This function returns the number 2 if the screen is a high-density\n  screen (called a Retina display on OS X or high-dpi on Windows and\n  Linux) and a 1 if not. This information is useful for a program to\n  adapt to run at double the pixel density on a screen that supports\n  it. Can be used in conjunction with (pixel-density)",
+  :what :fn},
  quadratic-vertex
  {:args
   ({:value [cx cy cz x3 y3 z3], :type :both}
@@ -1144,6 +1183,32 @@
   :link "http://www.processing.org/reference/quadraticVertex_.html",
   :docstring
   "Specifies vertex coordinates for quadratic Bezier curves. Each call to\n  quadratic-vertex defines the position of one control points and one\n  anchor point of a Bezier curve, adding a new segment to a line or shape.\n  The first time quadratic-vertex is used within a begin-shape call, it\n  must be prefaced with a call to vertex to set the first anchor point.\n  This function must be used between begin-shape and end-shape and only\n  when there is no MODE parameter specified to begin-shape. Using the 3D\n  version requires rendering with :p3d.",
+  :what :fn},
+ clip
+ {:args #{[x y w h]},
+  :category "Rendering",
+  :added "2.4.0",
+  :name clip,
+  :subcategory nil,
+  :type :clj,
+  :processing-name "clip()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/clip_.html",
+  :docstring
+  "Limits the rendering to the boundaries of a rectangle defined by\n  the parameters. The boundaries are drawn based on the state of\n  the (image-mode) fuction, either :corner, :corners, or :center.\n  To disable use (no-clip).",
+  :what :fn},
+ pixel-density
+ {:args #{[density]},
+  :category "Environment",
+  :added "2.4.0",
+  :name pixel-density,
+  :subcategory nil,
+  :type :clj,
+  :processing-name "pixelDensity()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/pixelDensity_.html",
+  :docstring
+  "It makes it possible for Processing to render using all of the pixels\n  on high resolutions screens like Apple Retina displays and Windows\n  High-DPI displays. Possible values 1 or 2. Must be called only from\n  :settings handler. To get density of the current screen you can use\n  (display-density) function.",
   :what :fn},
  begin-raw
  {:args #{[renderer filename]},
@@ -1527,16 +1592,16 @@
   "Increases or decreases the size of a shape by expanding and\n  contracting vertices. Objects always scale from their relative\n  origin to the coordinate system. Scale values are specified as\n  decimal percentages. For example, the function call (scale 2)\n  increases the dimension of a shape by 200%. Transformations apply to\n  everything that happens after and subsequent calls to the function\n  multiply the effect. For example, calling (scale 2) and then\n  (scale 1.5) is the same as (scale 3). If scale is called within\n  draw, the transformation is reset when the loop begins again. Using\n  this fuction with the z parameter requires specfying :p3d or :opengl\n  as the renderer. This function can be further controlled by\n  push-matrix and pop-matrix.",
   :what :fn},
  defsketch
- {:args #{[app-name & options]},
+ {:args ({:value [app-name & options], :type :both}),
   :category "Environment",
   :added "1.0",
   :name defsketch,
   :subcategory nil,
-  :type :clj,
+  :type :both,
   :requires-bindings false,
   :link nil,
   :docstring
-  "Define and start a sketch and bind it to a var with the symbol\n  app-name. If any of the options to the various callbacks are\n  symbols, it wraps them in a call to var to ensure they aren't\n  inlined and that redefinitions to the original fns are reflected in\n  the visualisation.\n\n  Available options:\n\n   :size           - A vector of width and height for the sketch or :fullscreen.\n                     Defaults to [500 300]. If you're using :fullscreen you may\n                     want to enable present mode - :features [:present]\n\n   :renderer       - Specifies the renderer type. One of :p2d, :p3d, :java2d,\n                     :opengl, :pdf). Defaults to :java2d. :dxf renderer\n                     can't be used as sketch renderer. Use begin-raw method\n                     instead. In clojurescript only :p2d and :p3d renderers\n                     are supported.\n\n   :output-file    - Specifies an output file path. Only used in :pdf mode.\n                     Not supported in clojurescript.\n\n   :title          - A string which will be displayed at the top of\n                     the sketch window. Not supported in clojurescript.\n\n   :features       - A vector of keywords customizing sketch behaviour.\n                     Supported features:\n\n                     :keep-on-top - Sketch window will always be above other\n                                    windows. Note: some platforms might not\n                                    support always-on-top windows.\n                                    Not supported in clojurescript.\n\n                     :exit-on-close - Shutdown JVM  when sketch is closed.\n                                      Not supported in clojurescript.\n\n                     :resizable - Makes sketch resizable.\n                                  Not supported in clojurescript.\n\n                     :no-safe-fns - Do not catch and print exceptions thrown\n                                    inside functions provided to sketch (like\n                                    draw, mouse-click, key-pressed and\n                                    other). By default all exceptions thrown\n                                    inside these functions are catched. This\n                                    prevents sketch from breaking when bad\n                                    function was provided and allows you to\n                                    fix it and reload it on fly. You can\n                                    disable this behaviour by enabling\n                                    :no-safe-fns feature.\n                                    Not supported in clojurescript.\n\n                     :present - Switch to present mode (fullscreen without\n                                borders, OS panels). You may want to use\n                                this feature together with :size :fullscreen.\n                                Not supported in clojurescript.\n\n                     :no-start - Disables autostart if sketch was created using\n                                 defsketch macro. To start sketch you have to\n                                 call function created defsketch.\n                                 Supported only in clojurescript.\n\n                     :global-key-events - Allows a sketch to receive any\n                                          keyboard event sent to the page,\n                                          regardless of whether the canvas it is\n                                          loaded in has focus or not.\n                                          Supported only in clojurescript.\n\n                     Usage example: :features [:keep-on-top :present]\n\n   :bgcolor        - Sets background color for unused space in present mode.\n                     Color is specified in hex format: #XXXXXX.\n                     Example: :bgcolor \"#00FFFF\" (cyan background)\n                     Not supported in clojurescript.\n\n   :display        - Sets what display should be used by this sketch.\n                     Displays are numbered starting from 0. Example: :display 1.\n                     Not supported in clojurescript.\n\n   :setup          - A function to be called once when setting the sketch up.\n\n   :draw           - A function to be repeatedly called at most n times per\n                     second where n is the target frame-rate set for\n                     the visualisation.\n\n   :host           - String id of canvas element or DOM element itself.\n                     Specifies host for the sketch. Must be specified in sketch,\n                     may be omitted in defsketch. If ommitted in defsketch,\n                     :host is set to the name of the sketch. If element with\n                     specified id is not found on the page and page is empty -\n                     new canvas element will be created. Used in clojurescript.\n\n   :focus-gained   - Called when the sketch gains focus.\n                     Not supported in clojurescript.\n\n   :focus-lost     - Called when the sketch loses focus.\n                     Not supported in clojurescript.\n\n   :mouse-entered  - Called when the mouse enters the sketch window.\n\n   :mouse-exited   - Called when the mouse leaves the sketch window\n\n   :mouse-pressed  - Called every time a mouse button is pressed.\n\n   :mouse-released - Called every time a mouse button is released.\n\n   :mouse-clicked  - called once after a mouse button has been pressed\n                     and then released.\n\n   :mouse-moved    - Called every time the mouse moves and a button is\n                     not pressed.\n\n   :mouse-dragged  - Called every time the mouse moves and a button is\n                     pressed.\n\n   :mouse-wheel    - Called every time mouse wheel is rotated.\n                     Takes 1 argument - wheel rotation, an int.\n                     Negative values if the mouse wheel was rotated\n                     up/away from the user, and positive values\n                     if the mouse wheel was rotated down/ towards the user\n\n   :key-pressed    - Called every time any key is pressed.\n\n   :key-released   - Called every time any key is released.\n\n   :key-typed      - Called once every time non-modifier keys are\n                     pressed.\n\n   :on-close       - Called once, when sketch is closed\n                     Not supported in clojurescript.\n\n   :middleware     - Vector of middleware to be applied to the sketch.\n                     Middleware will be applied in the same order as in comp\n                     function: [f g] will be applied as (f (g options)).\n\n   :settings       - cousin of :setup. A function to be called once when\n                     setting sketch up. Should be used only for (smooth) and\n                     (no-smooth). Due to Processing limitations these functions\n                     cannot be used neither in :setup nor in :draw.\n                     Not supported in clojurescript. In clojurescript smooth\n                     can be used anywhere.",
+  "Define and start a sketch and bind it to a var with the symbol\n  app-name. If any of the options to the various callbacks are\n  symbols, it wraps them in a call to var to ensure they aren't\n  inlined and that redefinitions to the original fns are reflected in\n  the visualisation.\n\n  Available options:\n\n   :size           - A vector of width and height for the sketch or :fullscreen.\n                     Defaults to [500 300]. If you're using :fullscreen you may\n                     want to enable present mode - :features [:present]\n\n   :renderer       - Specifies the renderer type. One of :p2d, :p3d, :java2d,\n                     :opengl, :pdf). Defaults to :java2d. :dxf renderer\n                     can't be used as sketch renderer. Use begin-raw method\n                     instead. In clojurescript only :p2d and :p3d renderers\n                     are supported.\n\n   :output-file    - Specifies an output file path. Only used in :pdf mode.\n                     Not supported in clojurescript.\n\n   :title          - A string which will be displayed at the top of\n                     the sketch window. Not supported in clojurescript.\n\n   :features       - A vector of keywords customizing sketch behaviour.\n                     Supported features:\n\n                     :keep-on-top - Sketch window will always be above other\n                                    windows. Note: some platforms might not\n                                    support always-on-top windows.\n                                    Not supported in clojurescript.\n\n                     :exit-on-close - Shutdown JVM  when sketch is closed.\n                                      Not supported in clojurescript.\n\n                     :resizable - Makes sketch resizable.\n                                  Not supported in clojurescript.\n\n                     :no-safe-fns - Do not catch and print exceptions thrown\n                                    inside functions provided to sketch (like\n                                    draw, mouse-click, key-pressed and\n                                    other). By default all exceptions thrown\n                                    inside these functions are catched. This\n                                    prevents sketch from breaking when bad\n                                    function was provided and allows you to\n                                    fix it and reload it on fly. You can\n                                    disable this behaviour by enabling\n                                    :no-safe-fns feature.\n                                    Not supported in clojurescript.\n\n                     :present - Switch to present mode (fullscreen without\n                                borders, OS panels). You may want to use\n                                this feature together with :size :fullscreen.\n                                Not supported in clojurescript.\n\n                     :no-start - Disables autostart if sketch was created using\n                                 defsketch macro. To start sketch you have to\n                                 call function created defsketch.\n                                 Supported only in clojurescript.\n\n                     :global-key-events - Allows a sketch to receive any\n                                          keyboard event sent to the page,\n                                          regardless of whether the canvas it is\n                                          loaded in has focus or not.\n                                          Supported only in clojurescript.\n\n                     Usage example: :features [:keep-on-top :present]\n\n   :bgcolor        - Sets background color for unused space in present mode.\n                     Color is specified in hex format: #XXXXXX.\n                     Example: :bgcolor \"#00FFFF\" (cyan background)\n                     Not supported in clojurescript.\n\n   :display        - Sets what display should be used by this sketch.\n                     Displays are numbered starting from 0. Example: :display 1.\n                     Not supported in clojurescript.\n\n   :setup          - A function to be called once when setting the sketch up.\n\n   :draw           - A function to be repeatedly called at most n times per\n                     second where n is the target frame-rate set for\n                     the visualisation.\n\n   :host           - String id of canvas element or DOM element itself.\n                     Specifies host for the sketch. Must be specified in sketch,\n                     may be omitted in defsketch. If ommitted in defsketch,\n                     :host is set to the name of the sketch. If element with\n                     specified id is not found on the page and page is empty -\n                     new canvas element will be created. Used in clojurescript.\n\n   :focus-gained   - Called when the sketch gains focus.\n                     Not supported in clojurescript.\n\n   :focus-lost     - Called when the sketch loses focus.\n                     Not supported in clojurescript.\n\n   :mouse-entered  - Called when the mouse enters the sketch window.\n\n   :mouse-exited   - Called when the mouse leaves the sketch window\n\n   :mouse-pressed  - Called every time a mouse button is pressed.\n\n   :mouse-released - Called every time a mouse button is released.\n\n   :mouse-clicked  - called once after a mouse button has been pressed\n                     and then released.\n\n   :mouse-moved    - Called every time the mouse moves and a button is\n                     not pressed.\n\n   :mouse-dragged  - Called every time the mouse moves and a button is\n                     pressed.\n\n   :mouse-wheel    - Called every time mouse wheel is rotated.\n                     Takes 1 argument - wheel rotation, an int.\n                     Negative values if the mouse wheel was rotated\n                     up/away from the user, and positive values\n                     if the mouse wheel was rotated down/ towards the user\n\n   :key-pressed    - Called every time any key is pressed.\n\n   :key-released   - Called every time any key is released.\n\n   :key-typed      - Called once every time non-modifier keys are\n                     pressed.\n\n   :on-close       - Called once, when sketch is closed\n                     Not supported in clojurescript.\n\n   :middleware     - Vector of middleware to be applied to the sketch.\n                     Middleware will be applied in the same order as in comp\n                     function: [f g] will be applied as (f (g options)).\n\n   :settings       - cousin of :setup. A function to be called once when\n                     setting sketch up. Should be used only for (smooth) and\n                     (no-smooth). Due to Processing limitations these functions\n                     cannot be used neither in :setup nor in :draw.",
   :what :macro},
  no-stroke
  {:args ({:value [], :type :both}),
@@ -1685,12 +1750,12 @@
   :docstring "Sets the color used to fill shapes.",
   :what :fn},
  with-translation
- {:args #{[translation-vector & body]},
+ {:args ({:value [translation-vector & body], :type :both}),
   :category "Transform",
   :added "1.0",
   :name with-translation,
   :subcategory "Utility Macros",
-  :type :clj,
+  :type :both,
   :processing-name nil,
   :requires-bindings true,
   :link nil,
@@ -1944,6 +2009,19 @@
   :link "http://www.processing.org/reference/ortho_.html",
   :docstring
   "Sets an orthographic projection and defines a parallel clipping\n  volume. All objects with the same dimension appear the same size,\n  regardless of whether they are near or far from the camera. The\n  parameters to this function specify the clipping volume where left\n  and right are the minimum and maximum x values, top and bottom are\n  the minimum and maximum y values, and near and far are the minimum\n  and maximum z values. If no parameters are given, the default is\n  used: (ortho 0 width 0 height -10 10)",
+  :what :fn},
+ no-clip
+ {:args #{[]},
+  :category "Rendering",
+  :added "2.4.0",
+  :name no-clip,
+  :subcategory nil,
+  :type :clj,
+  :processing-name "noClip()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/noClip_.html",
+  :docstring
+  "Disables the clipping previously started by the clip() function.",
   :what :fn},
  prc-println
  {:args #{[msg]},
@@ -2564,12 +2642,12 @@
   "Converts a byte, char, int, or color to a String containing the\n  equivalent hexadecimal notation. For example color(0, 102, 153) will\n  convert to the String \"FF006699\". This function can help make your\n  geeky debugging sessions much happier. ",
   :what :fn},
  with-fill
- {:args #{[fill-args & body]},
+ {:args ({:value [fill-args & body], :type :both}),
   :category "Color",
   :added "1.7",
   :name with-fill,
   :subcategory "Utility Macros",
-  :type :clj,
+  :type :both,
   :processing-name nil,
   :requires-bindings true,
   :link nil,
@@ -2770,12 +2848,12 @@
   "Sets a perspective matrix defined through the parameters. Works\n  like glFrustum, except it wipes out the current perspective matrix\n  rather than muliplying itself with it.",
   :what :fn},
  with-rotation
- {:args #{[rotation & body]},
+ {:args ({:value [rotation & body], :type :both}),
   :category "Transform",
   :added "1.0",
   :name with-rotation,
   :subcategory "Utility Macros",
-  :type :clj,
+  :type :both,
   :processing-name nil,
   :requires-bindings true,
   :link nil,
@@ -3175,7 +3253,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/noSmooth_.html",
   :docstring
-  "Draws all geometry with jagged (aliased) edges. Clojure: must be\n  called inside :settings function. ClojureScript: can be called\n  anywhere.",
+  "Draws all geometry with jagged (aliased) edges. Must be called inside\n  :settings handler.",
   :what :fn},
  alpha
  {:args ({:value [color], :type :both}),
