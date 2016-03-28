@@ -19,7 +19,7 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
   })(window,document,'ga');
 
-  ga('create', 'UA-51485241-2', 'auto');
+  ga('create', 'UA-51485241-2', {'siteSpeedSampleRate': 100});
   ga('send', 'pageview');
   window.onerror = function(message) {
     ga('send', 'exception', {
