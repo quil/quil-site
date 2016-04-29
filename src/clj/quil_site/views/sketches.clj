@@ -2,7 +2,7 @@
   (:require [quil-site.views.page :refer [page]]
             [hiccup.page :as p]))
 
-(defn sketch-page [id]
+(defn sketch-page [id local?]
   (page {:tab :create
          :type :sketch
          :container-class "container-fluid"
@@ -42,7 +42,8 @@
           [:img#sketch-loading {:src "/img/sketch_loading.gif"}]
           [:div.hidden
            [:textarea#source
-            {:data-sketch-id id}]]]
+            {:data-sketch-id id
+             :data-is-local (str local?)}]]]
          [:div#result-content
           {:style "width: 0px;"}
           [:iframe {:src "/iframe.html"

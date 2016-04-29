@@ -3,13 +3,16 @@
             [quil-site.parser :as p]
             [jayq.core :as j]
             [clojure.string :as cstr]
-            [cljs.pprint :as pprint]))
+            [cljs.pprint :as pprint]
+            [goog.crypt :as crypt])
+  (:import goog.crypt.Sha256))
 
 (enable-console-print!)
 
 (def editor (atom nil))
 (def result-pane-size (atom [0 0]))
 (def scroll-width 20)
+(def local-storage-expiration (* 24 60 60 1000))
 
 (defn report-action
   ([action]
@@ -18,6 +21,20 @@
    (report-action action label nil))
   ([action label value]
    (js/ga "send" "event" "sketch" action label value)))
+
+(defn clean-local-storage []
+  (try
+    (doseq [key (doall (map #(.key js/localStorage %)
+                            (range (.-length js/localStorage))))
+            :when (cstr/starts-with? key "local_")]
+      (let [creation-date (some->> (.getItem js/localStorage key)
+                                   (.parse js/JSON)
+                                   (js->clj)
+                                   (#(get % "time")))]
+        (when (and creation-date
+                   (> (- (.now js/Date) creation-date)
+                      local-storage-expiration))
+          (.removeItem js/localStorage key))))))
 
 (defn hide-result-pane []
   (let [width (.-offsetWidth (.querySelector js/document "#source-content"))]
@@ -82,11 +99,28 @@
     (j/val (j/$ "#share-dialog input") url)
     (.modal (j/$ "#share-dialog") "show")))
 
+(defn set-url [path code]
+  (when (not= path (.-pathname js/location))
+      (.pushState js/history
+                  #js {:source code} "" path)))
+
 (defn update-url [resp]
   (let [path (str "/sketches/show/" (:id resp))]
-    (when (not= path (.-pathname js/location))
-      (.pushState js/history
-                  #js {:source (:cljs resp)} "" path))))
+    (set-url path (:cljs resp))))
+
+(defn save-code-local []
+  (try
+    (let [code (.getValue @editor)
+          sha256 (Sha256.)
+          hash (do (.update sha256 code)
+                   (crypt/byteArrayToHex (.digest sha256)))]
+      (.setItem js/localStorage
+                (str "local_" hash)
+                (.stringify js/JSON
+                            #js {:source code
+                                 :time (.now js/Date)}))
+      (set-url (str "/sketches/local/" hash)
+               code))))
 
 (defn share []
   (save-code
@@ -103,11 +137,11 @@
    (let [start (.now js/Date)]
      (c/run code (fn [res]
                    (report-action "compile-time" nil (- (.now js/Date) start))
-                   (save-code update-url)
                    (cond (:error res) (set-status {:type :errors})
                          (not (empty? (:warnings res))) (set-status {:type :warnings})
                          :default (set-status {:type :ok}))
-                   (set-errors (remove nil? (conj (:warnings res) (:error res)))))))))
+                   (set-errors (remove nil? (conj (:warnings res) (:error res))))
+                   (save-code-local))))))
 
 (defn cursor-to-point [cursor]
   [(.-line cursor) (.-ch cursor)])
@@ -135,7 +169,7 @@
            :start (:start res)}
           res))
       (do
-        (report-action "compil" "sel")
+        (report-action "compile" "sel")
         {:value user-selection
          :start (cursor-to-point (.getCursor editor "from"))}))))
 
@@ -184,6 +218,21 @@
            (j/remove-class (j/$ "#source-content > div") "hidden")
            (.setValue @editor source))))
 
+(defn load-source-from-server [id]
+  (j/ajax
+   {:url (str "/sketches/info/" id)
+    :method "GET"
+    :success #(set-editor-source (.-cljs %))}))
+
+(defn load-source-from-local-storage [id]
+  (if-let [source (some->> (str "local_" id)
+                           (.getItem js/localStorage)
+                           (.parse js/JSON)
+                           (js->clj)
+                          (#(% "source")))]
+    (set-editor-source source)
+    (load-source-from-server "basic")))
+
 (defn init []
   (.registerHelper
    js/CodeMirror "lint" "clojure"
@@ -213,10 +262,12 @@
             :matchBrackets true
             :autoCloseBrackets true
             :extraKeys #js {"Ctrl-Enter" compile-selected}}))
-  (j/ajax
-   {:url (str "/sketches/info/" (j/data (j/$ "#source") "sketch-id"))
-    :method "GET"
-    :success #(set-editor-source (.-cljs %))})
+
+  (let [id (j/data (j/$ "#source") "sketch-id")
+        local (j/data (j/$ "#source") "is-local")]
+    (if local
+      (load-source-from-local-storage id)
+      (load-source-from-server id)))
 
   (j/on (j/$ "#send") "click" #(do
                                  (compile)
@@ -248,7 +299,8 @@
                      (fn [event] (when-let [source (.-source (.-state event))]
                                    (set-editor-source source ))))
 
-  (.tooltip (j/$ "[data-toggle=\"tooltip\"") #js {:container "body"}))
+  (.tooltip (j/$ "[data-toggle=\"tooltip\"") #js {:container "body"})
+  (clean-local-storage))
 
 
 (j/$ init)

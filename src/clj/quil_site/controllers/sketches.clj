@@ -101,7 +101,8 @@
 
 (defroutes routes
   (context "/sketches" []
-    (GET "/create" [] (views/sketch-page "basic"))
+    (GET "/create" [] (views/sketch-page "basic" false))
     (GET "/info/:id" [id] (sketch-info id))
-    (GET "/show/:id" [id] (views/sketch-page id))
+    (GET "/show/:id" [id] (views/sketch-page id false))
+    (GET "/local/:id" [id] (views/sketch-page id true))
     (POST "/create" req (create-sketch (:body req)))))
