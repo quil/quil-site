@@ -74,10 +74,10 @@
             [:li "Build the project: "[:code "lein cljsbuild once"]]
             [:li "Open " [:code "index.html"]]]]]
 
-         [:p "Check out tutorials for using Quil in "
+         [:p "If you're new to Clojure check out "
+          (link-to "https://github.com/quil/quil/wiki/Installing" "this tutorial")
+          " or tutorial for "
           (link-to "https://github.com/quil/quil/wiki/Dynamic-Workflow-%28for-LightTable%29" "Light Table")
-          " and general "
-          (link-to "https://github.com/quil/quil/wiki/Dynamic-Workflow-%28for-REPL%29" "REPL")
           "."]]
 
         [:div.section
