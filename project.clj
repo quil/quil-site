@@ -101,7 +101,9 @@
                             :heart {:output-to "public/js/examples/heart.js"
                                     :entries #{quil-site.examples.heart}}
                             :golden-ratio-flower {:output-to "public/js/examples/golden_ratio_flower.js"
-                                                  :entries #{quil-site.examples.golden-ratio-flower}}}}}
+                                                  :entries #{quil-site.examples.golden-ratio-flower}}
+                            :floating-graph {:output-to "public/js/examples/floating_graph.js"
+                                                  :entries #{quil-site.examples.floating-graph}}}}}
                 {:source-paths ["src/cljs/editor"]
                  :compiler
                  {:output-to "public/js/editor.js"

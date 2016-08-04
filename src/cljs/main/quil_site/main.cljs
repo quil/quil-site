@@ -109,7 +109,7 @@
 (def available-examples
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
    "leaf" "colorjoy" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
-   "geometric twinkle" "heart" "golden ratio flower"])
+   "geometric twinkle" "heart" "golden ratio flower" "floating graph"])
 
 (defn get-examples-to-show []
   (let [url (goog.Uri. js/document.URL)
