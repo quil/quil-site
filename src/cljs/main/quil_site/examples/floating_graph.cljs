@@ -71,14 +71,6 @@
         (update-in [n1-label :siblings] conj n2-label)
         (update-in [n2-label :siblings] conj n1-label))))
 
-(defn extract-edges
-  "get a set of edges given a node-map"
-  [nodes]
-  (set (for [node nodes
-             sibling-label (:siblings node)]
-         #{(:label node) sibling-label})))
-
-
 ;;;
 ;;; quil state manipulation and drawing
 ;;;
@@ -129,8 +121,8 @@
                     (range node-count))
         nodes (into {} (for [label labels]
                          [label (create-random-node label)]))
-        create-random-edge #(take 2 (shuffle labels))
-        edges (repeatedly edge-count create-random-edge)
+        create-random-edge #(->> labels shuffle (take 2) sort)
+        edges (distinct (repeatedly edge-count create-random-edge))
         nodes (reduce add-edge nodes edges)
         state (infer-new-search-state :dfs nodes)]
     (assoc state
@@ -140,7 +132,8 @@
                     :bfs (q/color 225 150 225)
                     :visiting (q/color 0)
                     :edge (q/color 240 150)
-                    :untouched (q/color 240 150)})))
+                    :untouched (q/color 240 150)}
+           :edges edges)))
 
 (defn update-movement
   "apply changes to velocity, position, and size"
@@ -216,8 +209,7 @@
   (-> state update-movement update-colors))
 
 (defn draw-edges [state]
-  (let [{:keys [nodes colors]} state
-        edges (extract-edges (vals nodes))]
+  (let [{:keys [nodes colors edges]} state]
     (q/fill (:edge colors)) ; set fill as edge color
     ;; draw each edge as a quad. Determine points using some mathematical math.
     (doseq [edge edges]
