@@ -19,7 +19,7 @@
                    (into (sorted-map)))
              categories)))
 
-(def all-fns (edn/read-string (slurp "api-2.4.0.clj")))
+(def all-fns (edn/read-string (slurp "api-2.5.0.clj")))
 
 (def fns-by-categories (split-into-categories all-fns))
 

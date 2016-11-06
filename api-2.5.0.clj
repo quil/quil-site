@@ -2794,6 +2794,19 @@
   :docstring
   "Draws a line (a direct path between two points) to the screen. The\n  version of line with four parameters draws the line in 2D. To color\n  a line, use the stroke function. A line cannot be filled, therefore\n  the fill method will not affect the color of a line. 2D lines are\n  drawn with a width of one pixel by default, but this can be changed\n  with the stroke-weight function. The version with six parameters\n  allows the line to be placed anywhere within XYZ space. ",
   :what :fn},
+ do-record
+ {:args ({:value [graphics & body], :type :both}),
+  :category "Output",
+  :added "2.5",
+  :name do-record,
+  :subcategory "Files",
+  :type :both,
+  :processing-name nil,
+  :requires-bindings true,
+  :link nil,
+  :docstring
+  "Macro for drawing on graphics which saves result in the file at the end.\n  Similar to 'with-graphics' macro. do-record assumed to be used with :pdf\n  graphics. Example:\n\n  (q/do-record (q/create-graphics 200 200 :pdf \"output.pdf\")\n    (q/fill 250 0 0)\n    (q/ellipse 100 100 150 150))\n  ",
+  :what :macro},
  red
  {:args ({:value [c], :type :both}),
   :category "Color",
