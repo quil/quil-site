@@ -751,6 +751,18 @@
   :docstring
   "Returns a string representing the binary value of an int, char or\n  byte. When converting an int to a string, it is possible to specify\n  the number of digits used.",
   :what :fn},
+ random-2d
+ {:args ({:value [], :type :both}),
+  :category "Math",
+  :added "2.6",
+  :name random-2d,
+  :subcategory "Random",
+  :type :both,
+  :processing-name "random2d()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/random2d_.html",
+  :docstring "Returns a new 2D unit vector in a random direction",
+  :what :fn},
  pop-matrix
  {:args ({:value [], :type :both}),
   :category "Transform",
@@ -1272,6 +1284,18 @@
   :link "http://www.processing.org/reference/copy_.html",
   :docstring
   "Copies a region of pixels from the one image to another. If src-img\n  is not specified it defaults to current-graphics. If dest-img is not\n  specified - it defaults to current-graphics. If the source\n  and destination regions aren't the same size, it will automatically\n  resize the source pixels to fit the specified target region. No\n  alpha information is used in the process, however if the source\n  image has an alpha channel set, it will be copied as well. ",
+  :what :fn},
+ random-3d
+ {:args ({:value [], :type :both}),
+  :category "Math",
+  :added "2.6",
+  :name random-3d,
+  :subcategory "Random",
+  :type :both,
+  :processing-name "random3d()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/random3d_.html",
+  :docstring "Returns a new 3D unit vector in a random direction",
   :what :fn},
  constrain-float
  {:args #{[amt low high]},
