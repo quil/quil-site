@@ -1,14 +1,12 @@
 # cache
 
-A Clojure library designed to ... well, that part is up to you.
+Generates cache for self-hosted cljs to use on http://quil.info/sketches/create
 
 ## Usage
 
-FIXME
+Run
+```shell
+lein run -m cache.core/run
+```
 
-## License
-
-Copyright © 2016 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+And copy `core-cache.edn` and `quil-cache.edn` to `public` folder of quil-site.
