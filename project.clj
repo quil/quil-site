@@ -85,7 +85,7 @@
                             :leaf {:output-to "public/js/examples/leaf.js"
                                    :entries #{quil-site.examples.leaf}}
                             :colorjoy {:output-to "public/js/examples/colorjoy.js"
-                                   :entries #{quil-site.examples.colorjoy}}
+                                       :entries #{quil-site.examples.colorjoy}}
                             :nanoscopic {:output-to "public/js/examples/nanoscopic.js"
                                          :entries #{quil-site.examples.nanoscopic}}
                             :spaceship {:output-to "public/js/examples/spaceship.js"
@@ -103,7 +103,9 @@
                             :golden-ratio-flower {:output-to "public/js/examples/golden_ratio_flower.js"
                                                   :entries #{quil-site.examples.golden-ratio-flower}}
                             :floating-graph {:output-to "public/js/examples/floating_graph.js"
-                                                  :entries #{quil-site.examples.floating-graph}}}}}
+                                             :entries #{quil-site.examples.floating-graph}}
+                            :game-of-life {:output-to "public/js/examples/game_of_life.js"
+                                           :entries #{quil-site.examples.game-of-life}}}}}
                 {:source-paths ["src/cljs/editor"]
                  :compiler
                  {:output-to "public/js/editor.js"
