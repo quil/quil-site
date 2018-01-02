@@ -105,7 +105,9 @@
                             :floating-graph {:output-to "public/js/examples/floating_graph.js"
                                              :entries #{quil-site.examples.floating-graph}}
                             :game-of-life {:output-to "public/js/examples/game_of_life.js"
-                                           :entries #{quil-site.examples.game-of-life}}}}}
+                                           :entries #{quil-site.examples.game-of-life}}
+                            :ten-print {:output-to "public/js/examples/ten_print.js"
+                                        :entries #{quil-site.examples.ten-print}}}}}
                 {:source-paths ["src/cljs/editor"]
                  :compiler
                  {:output-to "public/js/editor.js"

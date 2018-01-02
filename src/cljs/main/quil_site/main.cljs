@@ -71,7 +71,7 @@
                      (classes/add pause-button "invisible")))))
 
 (defn run-example [example host]
-  (let [{:keys [name author run-fn interactive?]} example
+  (let [{:keys [name author run-fn interactive? display-name]} example
         link (example-name->link name)]
     (when interactive?
       (classes/remove (query-selector host ".glyphicon.hidden")
@@ -79,7 +79,7 @@
     (dom/setProperties (query-selector host "a")
                        #js {"href" link})
     (dom/setTextContent (query-selector host ".name")
-                        name)
+                        display-name)
     (dom/setTextContent (query-selector host ".author")
                         (str "by " author))
     (let [sketch (run-fn (query-selector host "canvas") 200)]
@@ -87,13 +87,14 @@
         (setup-play-pause-functionality host sketch)))))
 
 (defn register-example! [name author run-fn &
-                         {:keys [interactive?]
+                         {:keys [interactive? display-name]
                           :or {interactive? false}
                           :as st}]
   (let [example (assoc st
                        :name name
                        :author author
-                       :run-fn run-fn)]
+                       :run-fn run-fn
+                       :display-name (or display-name name))]
     (if-let [host (@examples name)]
       (run-example example host)
       (swap! examples assoc name example))))
@@ -110,7 +111,7 @@
   ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
    "leaf" "colorjoy" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
    "geometric twinkle" "heart" "golden ratio flower" "floating graph"
-   "game of life"])
+   "game of life" "ten print"])
 
 (defn get-examples-to-show []
   (let [url (goog.Uri. js/document.URL)
