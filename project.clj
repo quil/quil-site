@@ -78,6 +78,8 @@
                                         :entries #{quil-site.examples.dry-paint}}
                             :emerald {:output-to "public/js/examples/emerald.js"
                                       :entries #{quil-site.examples.emerald}}
+                            :matrix {:output-to "public/js/examples/matrix.js"
+                                     :entries #{quil-site.examples.matrix}}
                             :equilibrium {:output-to "public/js/examples/equilibrium.js"
                                           :entries #{quil-site.examples.equilibrium}}
                             :hyper {:output-to "public/js/examples/hyper.js"
