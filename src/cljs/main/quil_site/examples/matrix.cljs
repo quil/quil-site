@@ -5,7 +5,8 @@
 
 
 (def katakana "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン")
-(def glyph-size 12)
+(def font-family "sans-serif")
+(def glyph-size 14)
 (def min-drops 1)
 (def max-drops 30)
 
@@ -19,6 +20,8 @@
 (defn setup []
   (q/frame-rate 20)
   (q/background 0)
+
+  (q/text-font (q/create-font font-family glyph-size))
 
   (repeatedly min-drops gen-raindrop))
 
