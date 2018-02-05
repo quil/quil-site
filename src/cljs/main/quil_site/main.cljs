@@ -108,7 +108,7 @@
            tooltips)))
 
 (def available-examples
-  ["dancer" "dry paint" "emerald" "equilibrium" "hyper"
+  ["dancer" "dry paint" "emerald" "matrix" "equilibrium" "hyper"
    "leaf" "colorjoy" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
    "geometric twinkle" "heart" "golden ratio flower" "floating graph"
    "game of life" "ten print"])
