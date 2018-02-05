@@ -53,7 +53,7 @@
     (let [c (.charAt ^String (:text raindrop) (:index raindrop))
           y (* glyph-size (:index raindrop))]
       (if-not(:eol raindrop)
-        (q/text c (:x raindrop) y glyph-size (q/height))))))
+        (q/text c (:x raindrop) y)))))
 
 (defn run-sketch [host size] ;DELETE
  (q/sketch
