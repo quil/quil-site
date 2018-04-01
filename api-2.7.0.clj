@@ -754,14 +754,14 @@
  random-2d
  {:args ({:value [], :type :both}),
   :category "Math",
-  :added "2.6",
+  :added "2.6.1",
   :name random-2d,
   :subcategory "Random",
   :type :both,
-  :processing-name "random2d()",
+  :processing-name nil,
   :requires-bindings true,
-  :link "http://www.processing.org/reference/random2d_.html",
-  :docstring "Returns a new 2D unit vector in a random direction",
+  :link nil,
+  :docstring "Returns a new 2D unit vector with a random direction",
   :what :fn},
  pop-matrix
  {:args ({:value [], :type :both}),
@@ -1288,14 +1288,14 @@
  random-3d
  {:args ({:value [], :type :both}),
   :category "Math",
-  :added "2.6",
+  :added "2.6.1",
   :name random-3d,
   :subcategory "Random",
   :type :both,
-  :processing-name "random3d()",
+  :processing-name nil,
   :requires-bindings true,
-  :link "http://www.processing.org/reference/random3d_.html",
-  :docstring "Returns a new 3D unit vector in a random direction",
+  :link nil,
+  :docstring "Returns a new 3D unit vector with a random direction",
   :what :fn},
  constrain-float
  {:args #{[amt low high]},
@@ -2601,6 +2601,17 @@
   :docstring
   "Disables filling geometry. If both no-stroke and no-fill are called,\n  nothing will be drawn to the screen.",
   :what :fn},
+ resize-sketch
+ {:require-bindings true,
+  :category "Environment",
+  :added "2.7.0",
+  :args ({:value [width height], :type :both}),
+  :name resize-sketch,
+  :docstring
+  "Resizes sketch.\n  Note about ClojureScript version: if canvas element is resized by external\n  reasons (for example from js on a page then you still need to call this\n  method in order to tell Quil that size has changed. Currently there is no\n  good way to automatically detect that size of <canvas> element changed.",
+  :what :fn,
+  :link nil,
+  :type :both},
  year
  {:args ({:value [], :type :both}),
   :category "Input",
