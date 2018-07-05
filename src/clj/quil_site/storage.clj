@@ -29,9 +29,7 @@
 
 (defn- get-object [id]
   (let [url (str base-firebase-url "/" id ".json")]
-    (:body (http/get url
-                     {:as :json
-                      :query-params query-params}))))
+    (:body (http/get url {:as :json}))))
 
 
 (defn- save-source-in-firebase [source]
