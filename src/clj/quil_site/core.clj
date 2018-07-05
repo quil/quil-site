@@ -14,6 +14,7 @@
 (defroutes app
   (GET "/" [] (about-page))
   (GET "/examples" [] (examples-page))
+  (GET "/favicon.ico" [] {:status 204})
   sketches/routes
   api/routes
   (files "/out-main" {:root "out-main"})

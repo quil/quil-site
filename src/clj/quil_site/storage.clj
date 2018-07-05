@@ -5,39 +5,43 @@
             [clojure.java.io :as io]
             [pandect.algo.sha256 :as sha256]))
 
+;;; keys.clj contains necessary keys for connecting to
+;;; Firebase. It should contain :url, :path and :access-token
+;;; params. To generate :access-token follow this tutorial:
+;;; https://firebase.google.com/docs/database/rest/auth?authuser=0
 (def keys-map (try (edn/read-string (slurp "keys.clj"))
                    (catch Exception e {})))
 
-(def url (str (:url keys-map "local")
-              "/"
-              (:path keys-map "sketchesDev")))
+(def base-firebase-url (str (:url keys-map "local")
+                   "/"
+                   (:path keys-map "sketchesDev")))
 
 (def local-url "local/sketchesDev")
 (def local-db (atom {}))
 (def local-id (atom 1))
 
-(defn- create-object [object]
-  (-> (str url ".json")
-    (http/post {:body (generate-string object)
-                :as :json})
-    :body
-    :name))
-
-(defn- find-object-by-hash [object]
-  (:body (http/get (str url ".json")
-                   {:query-params {"orderBy" "\"hash\""
-                                   "equalTo" (str \" (:hash object) \")}
-                    :as :json})))
+(defn- create-object [id object]
+  (let [url (str base-firebase-url "/" id ".json?print=pretty")
+        query-params {"print" "silent"
+                      "access_token" (:access-token keys-map)}]
+   (->(http/put url {:body (generate-string object)
+                     :as :json
+                     :query-params query-params})
+       :body
+       :name)))
 
 (defn- get-object [id]
-  (:body (http/get (str url "/" id ".json") {:as :json})))
+  (let [url (str base-firebase-url "/" id ".json")
+        query-params {"access_token" (:access-token keys-map)}]
+    (:body (http/get url
+                     {:as :json
+                      :query-params query-params}))))
+
 
 (defn- save-source-in-firebase [source]
-  (let [obj {:source source
-             :hash (sha256/sha256 source)}]
-    (if-let [existing-id (-> obj find-object-by-hash first first)]
-      (name existing-id)
-      (create-object obj))))
+  (let [id (sha256/sha256 source)]
+    (create-object id {:source source} )
+    id))
 
 (defn- load-source-from-firebase [id]
   (try
@@ -54,12 +58,12 @@
   (@local-db id))
 
 (defn save-source [source]
-  (if (= url local-url)
+  (if (= base-firebase-url local-url)
     (save-source-local source)
     (save-source-in-firebase source)))
 
 (defn load-source [id]
-  (if (= url local-url)
+  (if (= base-firebase-url local-url)
     (load-source-local id)
     (load-source-from-firebase id)))
 
@@ -68,8 +72,6 @@
   (create-object {:source "worldddd" :hash "12345"})
 
   (get-object "fSv6r7DNPd")
-
-  (find-object-by-hash {:source "sdf" :hash "12345"})
 
   (save-source "sdfff")
 
