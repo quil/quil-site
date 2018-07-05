@@ -6,9 +6,7 @@
             [pandect.algo.sha256 :as sha256]))
 
 ;;; keys.clj contains necessary keys for connecting to
-;;; Firebase. It should contain :url, :path and :access-token
-;;; params. To generate :access-token follow this tutorial:
-;;; https://firebase.google.com/docs/database/rest/auth?authuser=0
+;;; Firebase. It should contain :url, :path.
 (def keys-map (try (edn/read-string (slurp "keys.clj"))
                    (catch Exception e {})))
 
@@ -22,8 +20,7 @@
 
 (defn- create-object [id object]
   (let [url (str base-firebase-url "/" id ".json?print=pretty")
-        query-params {"print" "silent"
-                      "access_token" (:access-token keys-map)}]
+        query-params {"print" "silent"}]
    (->(http/put url {:body (generate-string object)
                      :as :json
                      :query-params query-params})
@@ -31,8 +28,7 @@
        :name)))
 
 (defn- get-object [id]
-  (let [url (str base-firebase-url "/" id ".json")
-        query-params {"access_token" (:access-token keys-map)}]
+  (let [url (str base-firebase-url "/" id ".json")]
     (:body (http/get url
                      {:as :json
                       :query-params query-params}))))
