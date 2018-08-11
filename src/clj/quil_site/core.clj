@@ -20,6 +20,7 @@
   (files "/out-main" {:root "out-main"})
   (files "/out-editor" {:root "out-editor"})
   (files "/out-preload" {:root "out-preload"})
+  (files "/out-snippets" {:root "out-snippets"})
   (files "/"))
 
 (defn dump-request [handler]

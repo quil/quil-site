@@ -119,17 +119,28 @@
       [:div.col-md-5.col-xs-12
        [:dl
         [:dt "Works only inside sketch functions?"] [:dd (:binding? fields)]
-        [:dt "Original Processing method"] [:dd (:original-name fields)]]]]]))
+        [:dt "Original Processing method"] [:dd (:original-name fields)]]]]
+     [:div.row
+      [:div.col-xs-12.snippet
+       [:dl
+        [:dt "Example"]
+        [:dd {:data-function-name name}]]]]]))
 
 (defn- render-function-index [{:keys [name type what]}]
   (render-type-specific :p.function (link name nil name)
                         type what))
 
+(defn page-options [name]
+  {:type :api
+   :tab :api
+   :title (str "Quil API " name)
+   :css-files ["/css/codemirror-5.12.css"]
+   :js-files ["/js/api.js"
+              "/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
+              "/js/snippets.js"]})
+
 (defn api-category [cat subcats]
-  (page {:type :api
-         :tab :api
-         :title (str "Quil API " cat)
-         :js-files ["/js/api.js"]}
+  (page (page-options cat)
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
          [:li.active cat]]
@@ -141,10 +152,7 @@
         (map render-function (subcats nil))))
 
 (defn api-subcategory [cat subcat fns]
-  (page {:type :api
-         :tab :api
-         :title (str "Quil API " subcat)
-         :js-files ["/js/api.js"]}
+  (page (page-options subcat)
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
          [:li (link cat)]

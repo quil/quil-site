@@ -8,7 +8,7 @@
                  [hiccup "1.0.5"]
                  [ring "1.6.3"]
                  [ring/ring-json "0.4.0"]
-                 [quil "2.7.1"]
+                 [quil "2.7.2-SNAPSHOT"]
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/tools.reader "1.2.2"]
                  [org.clojure/core.cache "0.7.1"]
@@ -17,6 +17,7 @@
                  [cheshire "5.8.0"]
                  [pandect "0.6.1"]
                  [jayq "2.5.5"]
+                 [zprint "0.4.10"]
 
                  [org.clojure/clojurescript "1.10.238"]]
 
@@ -30,6 +31,7 @@
   :clean-targets ["public/js/main.js"
                   "public/js/preload.js"
                   "public/js/editor.js"
+                  "public/js/snippets.js"
                   "public/js/examples"
                   "target"
                   "out-main"
@@ -58,6 +60,14 @@
                   :main "quil-site.editor"
                   :optimizations :none
                   :dump-core false
+                  :pretty-print true}}
+                {:source-paths ["src/cljs/snippets"]
+                 :compiler
+                 {:output-to "public/js/snippets.js"
+                  :output-dir "out-snippets"
+                  :asset-path "/out-snippets"
+                  :main "quil-site.snippets"
+                  :optimizations :none
                   :pretty-print true}}]}}
              :prod
              {:cljsbuild
@@ -114,6 +124,14 @@
                  :compiler
                  {:output-to "public/js/editor.js"
                   :optimizations :simple
+                  :pretty-print false
+                  :static-fns true
+                  :dump-core false
+                  :closure-defines {"goog.DEBUG" false}}}
+                {:source-paths ["src/cljs/snippets"]
+                 :compiler
+                 {:output-to "public/js/snippets.js"
+                  :optimizations :advanced
                   :pretty-print false
                   :static-fns true
                   :dump-core false

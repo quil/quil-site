@@ -166,6 +166,16 @@ body .container.api a {
     margin-top: 10px;
 }
 
+.api .CodeMirror {
+    height: auto;
+    background: none;
+}
+
+.api .CodeMirror pre {
+    padding: 0;
+}
+
+
 .about .features dd {
     margin-bottom: 10px;
 }

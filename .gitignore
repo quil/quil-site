@@ -18,5 +18,6 @@ public/js/examples
 public/js/main.js
 public/js/editor.js
 public/js/preload.js
+public/js/snippets.js
 keys.clj
 out-*
