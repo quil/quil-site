@@ -135,7 +135,7 @@ body .container.api a {
 .api .function-doc {
     background-color: #f7f8fa;
     margin: 10px 0px;
-    padding: 10px 0px 10px 10px;
+    padding: 10px 10px 10px 10px;
 }
 
 .api .function-doc dl {
@@ -168,7 +168,7 @@ body .container.api a {
 
 .api .CodeMirror {
     height: auto;
-    background: none;
+    /*    background: none; */
 }
 
 .api .CodeMirror pre {

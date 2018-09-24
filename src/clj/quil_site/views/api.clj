@@ -3,7 +3,16 @@
             [hiccup.page :as p]
             [hiccup.element :as e]
             [hiccup.util :as u]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [zprint.core :as zp]))
+
+(def ^:private zprint-options
+  {:parse-string-all? true
+   :fn-map {"q/with-translation" :arg1-force-nl
+            "q/with-graphics" :arg1-force-nl
+            "q/with-fill" :arg1-force-nl
+            "q/with-stroke" :arg1-force-nl
+            "q/with-rotation" :arg1-force-nl}})
 
 (def ^:private index-page-columns
   [["Color" "Typography"]
@@ -12,6 +21,11 @@
    ["Shape"]
    ["Lights, Camera" "Environment"]
    ["Input" "Output" "Structure" "Middleware"]])
+
+(defn- pretty-print-snippet-code [code]
+  (let [; Remove first and last parentheses
+        code (subs code 1 (dec (count code)))]
+    (zp/zprint-str code 80 zprint-options)))
 
 (defn as-url [str]
   (-> str
@@ -85,7 +99,58 @@
        (map #(string/replace % #"^  " ""))
        (string/join "\n")))
 
-(defn- render-function [fn]
+(defn- get-snippets-for-function
+  "Given snippets and function prepares snippets specific for this function
+  for rendering. Output example:
+
+  {\"clj\" [\"code 1\" \"code 2\"]
+   \"cljs\" [\"code 3\"]}"
+  [fn-name snippets]
+  (let [{clj-snippets :clj
+         cljs-snippets :cljs} (group-by :target (snippets (str fn-name)))
+        get-pretty-printed-code
+        (fn [snippets] (->> snippets (map :draw) (map pretty-print-snippet-code)))
+        clj-pretty-printed (get-pretty-printed-code clj-snippets)
+        cljs-pretty-printed (get-pretty-printed-code cljs-snippets)]
+    (if (= clj-pretty-printed cljs-pretty-printed)
+      {"clj/cljs" clj-pretty-printed}
+      {"clj" clj-pretty-printed
+       "cljs" cljs-pretty-printed})))
+
+(defn- render-snippets [fn-name snippets]
+  ; process only if snippets are not empty.
+  (if-not (= snippets {"clj/cljs" '()})
+    (let [render-snippet (fn [code]
+                           [:div.snippet {:data-function-name fn-name}
+                            [:pre code]])]
+      [:div.row
+       [:div.col-xs-12
+        [:dl
+         [:dt "Example"]
+         [:dd
+          (if-let [shared-snippets (snippets "clj/cljs")]
+            ; If all snippets are both shared then we
+            ; render snippets as it is.
+            (map render-snippet shared-snippets)
+
+            ; If snippets differ for different targets
+            ; then render snippets for each target
+            ; separately.
+            (for [[target snippets] snippets
+                  :when (not (empty? snippets))]
+              [:div.panel.panel-default
+               [:div.panel-heading
+                (if (= target "clj")
+                  "clojure specific"
+                  "clojurescript specific")]
+               [:ul.list-group
+                (for [snippet snippets]
+                  [:li.list-group-item
+                   (render-snippet snippet)])]]))]]]])
+    nil))
+
+(defn- render-function [fn snippets]
+  (def snp snippets )
   (let [{:keys [name args subcategory docstring link type what
                 processing-name requires-bindings category ns]} fn
         args (map #(if (vector? %) {:value % :type :both} %)
@@ -120,11 +185,8 @@
        [:dl
         [:dt "Works only inside sketch functions?"] [:dd (:binding? fields)]
         [:dt "Original Processing method"] [:dd (:original-name fields)]]]]
-     [:div.row
-      [:div.col-xs-12.snippet
-       [:dl
-        [:dt "Example"]
-        [:dd {:data-function-name name}]]]]]))
+     (render-snippets name
+                      (get-snippets-for-function name snippets))]))
 
 (defn- render-function-index [{:keys [name type what]}]
   (render-type-specific :p.function (link name nil name)
@@ -135,11 +197,10 @@
    :tab :api
    :title (str "Quil API " name)
    :css-files ["/css/codemirror-5.12.css"]
-   :js-files ["/js/api.js"
-              "/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
-              "/js/snippets.js"]})
+   :js-files ["/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
+              "/js/api.js"]})
 
-(defn api-category [cat subcats]
+(defn api-category [cat subcats snippets]
   (page (page-options cat)
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
@@ -149,9 +210,9 @@
           [:h4.subcategory (link subcat (str cat "/" subcat))])
         [:div.function-index
          (map render-function-index (subcats nil))]
-        (map render-function (subcats nil))))
+        (map #(render-function % snippets) (subcats nil))))
 
-(defn api-subcategory [cat subcat fns]
+(defn api-subcategory [cat subcat fns snippets]
   (page (page-options subcat)
         [:ol.breadcrumb
          [:li (e/link-to "/api" "Index")]
@@ -159,4 +220,4 @@
          [:li.active subcat]]
         [:div.function-index
          (map render-function-index fns)]
-        (map render-function fns)))
+        (map #(render-function % snippets) fns)))

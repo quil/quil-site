@@ -19,9 +19,19 @@
                    (into (sorted-map)))
              categories)))
 
+(defn group-snippets-by-function [snippets]
+  (->> (for [snippet snippets
+             fn (:fns snippet)]
+         (assoc snippet :fn fn))
+       (group-by :fn)))
+
 (def all-fns (edn/read-string (slurp "api-2.7.0.clj")))
 
+(def snippets (edn/read-string (slurp "snippets.clj")))
+
 (def fns-by-categories (split-into-categories all-fns))
+
+(def snippets-by-function (group-snippets-by-function snippets))
 
 (def url->full (->> (concat (keys fns-by-categories)
                             (mapcat keys (vals fns-by-categories)))
@@ -35,10 +45,12 @@
     (GET "/:category" [category]
          (let [category (url->full category)]
           (views/api-category category
-                              (fns-by-categories category))))
+                              (fns-by-categories category)
+                              snippets-by-function)))
     (GET "/:category/:subcategory" [category subcategory]
          (let [category (url->full category)
                subcategory (url->full subcategory)]
           (views/api-subcategory category subcategory
                                  (get-in fns-by-categories
-                                         [category subcategory]))))))
+                                         [category subcategory])
+                                 snippets-by-function)))))

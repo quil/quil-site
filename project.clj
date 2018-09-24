@@ -31,7 +31,6 @@
   :clean-targets ["public/js/main.js"
                   "public/js/preload.js"
                   "public/js/editor.js"
-                  "public/js/snippets.js"
                   "public/js/examples"
                   "target"
                   "out-main"
@@ -60,14 +59,6 @@
                   :main "quil-site.editor"
                   :optimizations :none
                   :dump-core false
-                  :pretty-print true}}
-                {:source-paths ["src/cljs/snippets"]
-                 :compiler
-                 {:output-to "public/js/snippets.js"
-                  :output-dir "out-snippets"
-                  :asset-path "/out-snippets"
-                  :main "quil-site.snippets"
-                  :optimizations :none
                   :pretty-print true}}]}}
              :prod
              {:cljsbuild
@@ -124,14 +115,6 @@
                  :compiler
                  {:output-to "public/js/editor.js"
                   :optimizations :simple
-                  :pretty-print false
-                  :static-fns true
-                  :dump-core false
-                  :closure-defines {"goog.DEBUG" false}}}
-                {:source-paths ["src/cljs/snippets"]
-                 :compiler
-                 {:output-to "public/js/snippets.js"
-                  :optimizations :advanced
                   :pretty-print false
                   :static-fns true
                   :dump-core false
