@@ -6,6 +6,7 @@
             [quil-site.views.sketches :as views]
             [quil-site.examples :refer [get-example-source]]
             [quil-site.storage :as s]
+            [quil-site.snippets :as snippets]
             [clojure.core.cache :as c]
             [pandect.algo.sha256 :as sha256]))
 
@@ -51,6 +52,10 @@
   (let [name (subs id (count "example_"))]
     (get-example-source name)))
 
+(defn get-snippet [id]
+  (let [name (subs id (count "snippet_"))]
+    (snippets/get-snippet-as-full-sketch-source name)))
+
 (defn get-id-for-source [source]
   (let [hash (sha256/sha256 source)]
     (if-let [id (c/lookup @id-caches hash)]
@@ -63,6 +68,7 @@
 (defn get-source-for-id [id]
   (cond
     (.startsWith id "example_") (get-example id)
+    (.startsWith id "snippet_") (get-snippet id)
     (= id "basic") test-source
     :default (s/load-source id)))
 

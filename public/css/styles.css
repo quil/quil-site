@@ -168,11 +168,14 @@ body .container.api a {
 
 .api .CodeMirror {
     height: auto;
-    /*    background: none; */
 }
 
 .api .CodeMirror pre {
     padding: 0;
+}
+
+.api .snippet:not(:first-child) {
+    margin-top: 20px;
 }
 
 

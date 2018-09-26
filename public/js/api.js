@@ -1,11 +1,13 @@
 function initSnippets() {
     const snippets = Array.from(document.querySelectorAll('.snippet'));
     snippets.forEach((snippetDiv) => {
-        const code = snippetDiv.querySelector('pre').textContent;
+        const preEl = snippetDiv.querySelector('pre');
         snippetDiv.querySelector('pre').classList.add('hidden');
-        new CodeMirror(snippetDiv, {
+        new CodeMirror((editor) => {
+            preEl.parentElement.replaceChild(editor, preEl);
+        }, {
             mode: 'clojure',
-            value: code,
+            value: preEl.textContent,
             matchBrackets: true,
             readOnly: true,
             viewportMargin: Infinity,
