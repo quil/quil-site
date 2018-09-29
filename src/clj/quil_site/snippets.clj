@@ -25,7 +25,10 @@
 (defn pretty-print-snippet-code [code]
   (let [; Remove first and last parentheses
         code (subs code 1 (dec (count code)))]
-    (zp/zprint-str code 80 zprint-options)))
+    (-> (zp/zprint-str code 80 zprint-options)
+        ; Convert all (comment "foo") lines into
+        ; comment ; foo.
+        (string/replace #"\(comment \"(.+)\"\)\n" "; $1\n"))))
 
 (def snippets-by-function (group-snippets-by-function snippets))
 

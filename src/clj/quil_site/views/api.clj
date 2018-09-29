@@ -114,7 +114,7 @@
                               [:a {:href (str "/sketches/show/snippet_"
                                               (as-url fn-name)
                                               (if (zero? index) "" (str "_" index)))}
-                               "try me"])])]
+                               "try example"])])]
       [:div.row
        [:div.col-xs-12
         [:dl
@@ -215,3 +215,4 @@
         [:div.function-index
          (map render-function-index fns)]
         (map render-function  fns)))
+
