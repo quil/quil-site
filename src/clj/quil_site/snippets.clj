@@ -27,8 +27,11 @@
         code (subs code 1 (dec (count code)))]
     (-> (zp/zprint-str code 80 zprint-options)
         ; Convert all (comment "foo") lines into
-        ; comment ; foo.
-        (string/replace #"\(comment \"(.+)\"\)\n" "; $1\n"))))
+        ; comment ; foo. Also handle cases like
+        ; (let [_ (commment "foo")
+        ;       abc 123]
+        ; It'll remove _ as well.
+        (string/replace #"(_ )?\(comment \"(.+)\"\)\n" "; $2\n"))))
 
 (def snippets-by-function (group-snippets-by-function snippets))
 
