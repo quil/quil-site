@@ -12,7 +12,7 @@ And open [http://localhost:8080](http://localhost:8080).
 
 ## License
 
-Copyright © 2014 Quil
+Copyright © 2018 Quil
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
