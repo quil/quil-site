@@ -31,7 +31,7 @@
         ; (let [_ (commment "foo")
         ;       abc 123]
         ; It'll remove _ as well.
-        (string/replace #"(_ )?\(comment \"(.+)\"\)\n" "; $2\n"))))
+        (string/replace #"(_ )?\(comment \"(.*)\"\)\n" "; $2\n"))))
 
 (def snippets-by-function (group-snippets-by-function snippets))
 

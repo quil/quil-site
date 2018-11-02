@@ -86,6 +86,28 @@
        (map #(string/replace % #"^  " ""))
        (string/join "\n")))
 
+(defn- get-pretty-printed-snippet-code
+  "Function that convers snippet map to a string with its code. If snippet contains
+  both setup and draw parts we concatenate them into single string separating
+  by comments so that user can visually differentiate them."
+  [snippet]
+  (let [draw-code (:draw snippet)
+        code (if (= (:setup snippet) "()")
+               ; no setup function for snippet, only draw
+               draw-code
+               ; both setup and draw provided. Render them in single code string.
+               (str "(
+                     (comment \"\")
+                     (comment \"setup\")
+                     (comment \"\")"
+                    (:setup snippet)
+                    "(comment \"\")
+                     (comment \"draw\")
+                     (comment \"\")"
+                    (subs draw-code 1 (dec (count draw-code)))
+                    ")"))]
+    (snippets/pretty-print-snippet-code code)))
+
 (defn- get-snippets-for-function
   "Given snippets and function prepares snippets specific for this function
   for rendering. Output example:
@@ -95,10 +117,8 @@
   [fn-name]
   (let [{clj-snippets :clj
          cljs-snippets :cljs} (group-by :target (snippets/snippets-by-function (str fn-name)))
-        get-pretty-printed-code
-        (fn [snippets] (->> snippets (map :draw) (map snippets/pretty-print-snippet-code)))
-        clj-pretty-printed (get-pretty-printed-code clj-snippets)
-        cljs-pretty-printed (get-pretty-printed-code cljs-snippets)]
+        clj-pretty-printed (map get-pretty-printed-snippet-code clj-snippets)
+        cljs-pretty-printed (map get-pretty-printed-snippet-code cljs-snippets)]
     (if (= clj-pretty-printed cljs-pretty-printed)
       {"clj/cljs" clj-pretty-printed}
       {"clj" clj-pretty-printed
