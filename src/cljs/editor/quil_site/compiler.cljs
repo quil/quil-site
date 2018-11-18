@@ -79,12 +79,12 @@
                                          {:type type
                                           :env env
                                           :extra extra}))]
-     (cjs/compile-str @state source nil
-                      {:load load-macros-ns
-                       :eval cjs/js-eval
-                       :verbose false}
-                      #(cb (assoc % :warnings
-                                  (map convert-warning @warnings)))))))
+      (cjs/compile-str @state source nil
+                       {:load load-macros-ns
+                        :eval cjs/js-eval
+                        :verbose false}
+                       #(cb (assoc % :warnings
+                                   (map convert-warning @warnings)))))))
 
 (defn run [source cb]
   (compile source (fn [res]

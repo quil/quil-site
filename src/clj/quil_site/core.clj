@@ -41,8 +41,6 @@
 
 (comment
 
- (def server (run-jetty #(handler %) {:port 8080 :join? false}))
+  (def server (run-jetty #(handler %) {:port 8080 :join? false}))
 
- (.stop server)
-
-)
+  (.stop server))

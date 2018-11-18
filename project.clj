@@ -37,7 +37,8 @@
                   "out-editor"
                   "out-preload"]
 
-  :plugins [[lein-cljsbuild "1.1.7"]]
+  :plugins [[lein-cljsbuild "1.1.7"]
+            [lein-cljfmt "0.5.7"]]
 
   :profiles {:dev
 

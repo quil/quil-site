@@ -11,8 +11,8 @@
                    (catch Exception e {})))
 
 (def base-firebase-url (str (:url keys-map "local")
-                   "/"
-                   (:path keys-map "sketchesDev")))
+                            "/"
+                            (:path keys-map "sketchesDev")))
 
 (def local-url "local/sketchesDev")
 (def local-db (atom {}))
@@ -21,20 +21,19 @@
 (defn- create-object [id object]
   (let [url (str base-firebase-url "/" id ".json?print=pretty")
         query-params {"print" "silent"}]
-   (->(http/put url {:body (generate-string object)
-                     :as :json
-                     :query-params query-params})
-       :body
-       :name)))
+    (-> (http/put url {:body (generate-string object)
+                       :as :json
+                       :query-params query-params})
+        :body
+        :name)))
 
 (defn- get-object [id]
   (let [url (str base-firebase-url "/" id ".json")]
     (:body (http/get url {:as :json}))))
 
-
 (defn- save-source-in-firebase [source]
   (let [id (sha256/sha256 source)]
-    (create-object id {:source source} )
+    (create-object id {:source source})
     id))
 
 (defn- load-source-from-firebase [id]
@@ -71,7 +70,4 @@
 
   (do
     (require 'quil-site.controllers.sketches)
-    (def source quil-site.controllers.sketches/test-source))
-
-
-  )
+    (def source quil-site.controllers.sketches/test-source)))

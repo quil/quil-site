@@ -8,7 +8,7 @@
 
 (def ^:private index-page-columns
   [["Color" "Typography"]
-   ["Image" "Transform" "Rendering" ]
+   ["Image" "Transform" "Rendering"]
    ["Math" "Data" "State"]
    ["Shape"]
    ["Lights, Camera" "Environment"]
@@ -24,17 +24,17 @@
 
 (defn- link
   ([to]
-    (link to to))
+   (link to to))
   ([text to]
-     (link text to nil))
+   (link text to nil))
   ([text to anchor]
-     (let [page (if to
-                  (str "/api/" (as-url to))
-                  "")]
-      (e/link-to (if anchor
-                   (str page "#" (as-url anchor))
-                   page)
-                 (u/escape-html text)))))
+   (let [page (if to
+                (str "/api/" (as-url to))
+                "")]
+     (e/link-to (if anchor
+                  (str page "#" (as-url anchor))
+                  page)
+                (u/escape-html text)))))
 
 (defn- render-type-specific [host content type what]
   (if (and (= what :fn) (not= type :both))
@@ -45,8 +45,8 @@
                        " version.")
           type (clojure.core/name type)]
       [host [:span {:title tooltip}
-                    content
-                    [:sup type]]])
+             content
+             [:sup type]]])
     [host content]))
 
 (defn- render-subcategory-index [cat subcat fns]
@@ -56,8 +56,8 @@
                                          (str cat "/" subcat)
                                          cat)
                                        name)]
-                    (render-type-specific :p.function fn-link
-                                          type what)))
+                     (render-type-specific :p.function fn-link
+                                           type what)))
                  fns)]
     (if subcat
       (cons [:h4.subcategory (link subcat (str cat "/" subcat))]
@@ -172,7 +172,7 @@
         fields {:arguments
                 (for [{:keys [value type]} args]
                   (render-type-specific :span.arg [:code (pr-str value)]
-                                         type what))
+                                        type what))
 
                 :docstring
                 [:pre.docstring (trim-docstring docstring)]

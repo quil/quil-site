@@ -33,12 +33,12 @@
   (context "/api" []
     (GET "/" [] (views/api-index fns-by-categories))
     (GET "/:category" [category]
-         (let [category (url->full category)]
-          (views/api-category category
-                              (fns-by-categories category))))
+      (let [category (url->full category)]
+        (views/api-category category
+                            (fns-by-categories category))))
     (GET "/:category/:subcategory" [category subcategory]
-         (let [category (url->full category)
-               subcategory (url->full subcategory)]
-          (views/api-subcategory category subcategory
-                                 (get-in fns-by-categories
-                                         [category subcategory]))))))
+      (let [category (url->full category)
+            subcategory (url->full subcategory)]
+        (views/api-subcategory category subcategory
+                               (get-in fns-by-categories
+                                       [category subcategory]))))))

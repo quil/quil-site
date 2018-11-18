@@ -43,9 +43,7 @@
             [:dt "2D and 3D"]
             [:dd "Quil provides several renderers that allows to draw in 2D, 3D and even in PDF."]
             [:dt "Based on " (link-to "http://processing.org" "Processing")]
-            [:dd "More than 200 various drawing functions."]
-
-            ]]
+            [:dd "More than 200 various drawing functions."]]]
           [:div.col-md-6.col-xs-12
            [:dl.features
             [:dt "Live reloading"]
@@ -71,7 +69,7 @@
            [:ol
             [:li "Create project: " [:code "lein new quil-cljs my-sketch"]]
             [:li [:code "cd my-sketch"]]
-            [:li "Build the project: "[:code "lein cljsbuild once"]]
+            [:li "Build the project: " [:code "lein cljsbuild once"]]
             [:li "Open " [:code "index.html"]]]]]
 
          [:p "If you're new to Clojure check out "

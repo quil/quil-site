@@ -16,7 +16,7 @@
 
 (defn report-action
   ([action]
-   (report-action action nil ))
+   (report-action action nil))
   ([action label]
    (report-action action label nil))
   ([action label value]
@@ -84,14 +84,14 @@
 
 (defn save-code [cb]
   (let [code (.getValue @editor)]
-   (j/ajax
-    {:url "/sketches/create"
-     :method "POST"
-     :data (.stringify js/JSON #js {:cljs code})
-     :contentType "application/json"
-     :success (fn [resp]
-                (let [resp (js->clj resp :keywordize-keys true)]
-                  (cb resp)))})))
+    (j/ajax
+     {:url "/sketches/create"
+      :method "POST"
+      :data (.stringify js/JSON #js {:cljs code})
+      :contentType "application/json"
+      :success (fn [resp]
+                 (let [resp (js->clj resp :keywordize-keys true)]
+                   (cb resp)))})))
 
 (defn show-share-dialog [resp]
   (let [path (str "/sketches/show/" (:id resp))
@@ -101,8 +101,8 @@
 
 (defn set-url [path code]
   (when (not= path (.-pathname js/location))
-      (.pushState js/history
-                  #js {:source code} "" path)))
+    (.pushState js/history
+                #js {:source code} "" path)))
 
 (defn update-url [resp]
   (let [path (str "/sketches/show/" (:id resp))]
@@ -229,7 +229,7 @@
                            (.getItem js/localStorage)
                            (.parse js/JSON)
                            (js->clj)
-                          (#(% "source")))]
+                           (#(% "source")))]
     (set-editor-source source)
     (load-source-from-server "basic")))
 
@@ -254,14 +254,14 @@
            js/CodeMirror
            (first (j/$ "#source"))
            #js
-           {:mode "clojure"
-            :lineNumbers true
-            :gutters #js ["CodeMirror-lint-markers"]
-            :lint #js {:options #js {:cljsErrors #js []}}
-            :viewportMargin js/Infinity
-            :matchBrackets true
-            :autoCloseBrackets true
-            :extraKeys #js {"Ctrl-Enter" compile-selected}}))
+            {:mode "clojure"
+             :lineNumbers true
+             :gutters #js ["CodeMirror-lint-markers"]
+             :lint #js {:options #js {:cljsErrors #js []}}
+             :viewportMargin js/Infinity
+             :matchBrackets true
+             :autoCloseBrackets true
+             :extraKeys #js {"Ctrl-Enter" compile-selected}}))
 
   (let [id (j/data (j/$ "#source") "sketch-id")
         local (j/data (j/$ "#source") "is-local")]
@@ -273,8 +273,8 @@
                                  (compile)
                                  (report-action "compile" "all")))
   (j/on (j/$ "#reset") "click" #(do
-                                 (reset-iframe)
-                                 (report-action "reset")))
+                                  (reset-iframe)
+                                  (report-action "reset")))
   (j/on (j/$ "#share") "click" share)
   (j/on (j/$ "body") "click" "#share-dialog input" #(this-as el (.select el)))
   (j/on (j/$ js/window) "message"
@@ -286,22 +286,21 @@
   (hide-result-pane)
   (j/on (j/$ "#result-content") "mouseenter" show-result-pane)
   (j/on (j/$ "#hide") "click" #(do
-                                (hide-result-pane)
-                                (report-action "hide")))
+                                 (hide-result-pane)
+                                 (report-action "hide")))
   (.on js/CodeMirror @editor "mousedown" #(do
                                             (hide-result-pane)
                                             (.popover (j/$ "#share") "destroy")))
   (.on js/CodeMirror @editor "touchstart" #(do
-                                            (hide-result-pane)
-                                            (.popover (j/$ "#share") "destroy")))
+                                             (hide-result-pane)
+                                             (.popover (j/$ "#share") "destroy")))
   (.addEventListener js/window
                      "popstate"
                      (fn [event] (when-let [source (.-source (.-state event))]
-                                   (set-editor-source source ))))
+                                   (set-editor-source source))))
 
   (.tooltip (j/$ "[data-toggle=\"tooltip\"") #js {:container "body"})
   (clean-local-storage))
-
 
 (j/$ init)
 

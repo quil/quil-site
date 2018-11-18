@@ -67,7 +67,7 @@
    (let [js-files (concat ["//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
                            "/js/bootstrap.min.js"]
                           (:js-files opts []))]
-       (apply p/include-js js-files))])
+     (apply p/include-js js-files))])
 
 (defn page [opts & content]
   (p/html5 {:lang "en"}
