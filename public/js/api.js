@@ -18,9 +18,28 @@ function initSnippets() {
 
 function initTooltips() {
   $('.api-index .function span').tooltip({placement: 'bottom'});
+  $('.api-index .report-example').tooltip({placement: 'bottom'});
+}
+
+function sendReportExampleEvent(event) {
+    const element = event.target;
+    window.ga('send', 'event', 'api', 'report-example', element.dataset.functionName);
+    window.ga(() => {
+        element.classList.remove('btn-primary', 'btn-default');
+        element.classList.add('btn-success');
+        element.innerText = element.dataset.reportedText;
+        element.disabled = 'disabled';
+    });
+}
+
+function initReportExampleButtons() {
+    Array.from(document.querySelectorAll('.report-example')).forEach((reportElement) => {
+        reportElement.addEventListener('click', sendReportExampleEvent);
+    })
 }
 
 $(function() {
     initTooltips();
     initSnippets();
+    initReportExampleButtons();
 });

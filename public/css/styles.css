@@ -178,6 +178,11 @@ body .container.api a {
     margin-top: 20px;
 }
 
+.api .try-example.btn {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
 
 .about .features dd {
     margin-bottom: 10px;

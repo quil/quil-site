@@ -108,6 +108,10 @@
                     ")"))]
     (snippets/pretty-print-snippet-code code)))
 
+(def report-button-tooltip
+  (str "Reports that the example has issues: unclear, confusing, not working or anything else. "
+       "If you want to provide more details please file a bug on Quil github repo."))
+
 (defn- get-snippets-for-function
   "Given snippets and function prepares snippets specific for this function
   for rendering. Output example:
@@ -125,21 +129,39 @@
        "cljs" cljs-pretty-printed})))
 
 (defn- render-snippets [fn-name snippets]
-  ; process only if snippets are not empty.
-  (if-not (= snippets {"clj/cljs" '()})
-    (let [render-snippet (fn [code index target]
-                           [:div.snippet {:data-function-name fn-name}
-                            [:pre code]
-                            (when-not (= target "clj")
-                              [:a {:href (str "/sketches/show/snippet_"
-                                              (as-url fn-name)
-                                              (if (zero? index) "" (str "_" index)))}
-                               "try example"])])]
-      [:div.row
-       [:div.col-xs-12
-        [:dl
-         [:dt "Example"]
-         [:dd
+  [:div.row
+   [:div.col-xs-12
+    [:dl
+     [:dt "Example"]
+
+     [:dd
+
+      (if (= snippets {"clj/cljs" '()})
+        [:p "There are no examples for this function. You can request examples which will help us to prioritize this funciton."
+         [:br]
+         [:button.btn.btn-primary.btn-xs.report-example
+          {:type "button"
+           :data-function-name fn-name
+           :data-reported-text "requested"}
+          "request example"]]
+
+      ; process only if snippets are not empty.
+        (let [render-snippet (fn [code index target]
+                               [:div.snippet {:data-function-name fn-name}
+                                [:pre code]
+                                (when-not (= target "clj")
+                                  [:a.btn.btn-primary.btn-xs.try-example
+                                   {:href (str "/sketches/show/snippet_"
+                                               (as-url fn-name)
+                                               (if (zero? index) "" (str "_" index)))}
+                                   "try example"])
+                                [:button.btn.btn-default.btn-xs.report-example
+                                 {:type "button"
+                                  :data-function-name (str fn-name "_" index)
+                                  :data-reported-text "reported"
+                                  :title report-button-tooltip}
+                                 "report example"]])]
+
           (if-let [shared-snippets (snippets "clj/cljs")]
             ; If all snippets are both shared then we
             ; render snippets as it is.
@@ -161,8 +183,7 @@
                 (map-indexed (fn [ind snippet]
                                [:li.list-group-item
                                 (render-snippet snippet ind target)])
-                             snippets)]]))]]]])
-    nil))
+                             snippets)]]))))]]]])
 
 (defn- render-function [fn]
   (let [{:keys [name args subcategory docstring link type what
