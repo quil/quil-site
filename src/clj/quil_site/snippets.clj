@@ -12,7 +12,7 @@
          (assoc snippet :fn fn))
        (group-by :fn)))
 
-(def ^:private snippets (edn/read-string (slurp "snippets-data.clj")))
+(def ^:private snippets (edn/read-string (slurp "snippets-data-2.8.0.clj")))
 
 (def ^:private zprint-options
   {:parse-string-all? true

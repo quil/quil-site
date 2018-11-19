@@ -255,23 +255,6 @@
   :docstring
   "Array containing the values for all the pixels in the display\n  window or image. This array is therefore the size of the display window. If\n  this array is modified, the update-pixels fn must be called to update\n  the changes. Calls .loadPixels before obtaining the pixel array.",
   :what :fn},
- stroke-float
- {:args
-  ({:value [gray], :type :both}
-   {:value [x y z a], :type :both}
-   {:value [x y z], :type :both}
-   {:value [gray alpha], :type :both}),
-  :category "Color",
-  :added "1.0",
-  :name stroke-float,
-  :subcategory "Setting",
-  :type :both,
-  :processing-name "stroke()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/stroke_.html",
-  :docstring
-  "Sets the color used to draw lines and borders around\n  shapes. Converts all args to floats",
-  :what :fn},
  font-available?
  {:args #{[font-str]},
   :category "Typography",
@@ -324,23 +307,6 @@
   :docstring
   "Restores the default shaders. Code that runs after (reset-shader) will\n  not be affected by previously defined shaders. Optional 'kind' parameter -\n  type of shader, either :points, :lines, or :triangles",
   :what :fn},
- fill-float
- {:args
-  ({:value [gray], :type :both}
-   {:value [r g b], :type :both}
-   {:value [r g b alpha], :type :both}
-   {:value [gray alpha], :type :both}),
-  :category "Color",
-  :added "1.0",
-  :name fill-float,
-  :subcategory "Setting",
-  :type :both,
-  :processing-name "fill()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/fill_.html",
-  :docstring
-  "Sets the color used to fill shapes. For example, (fill 204 102 0),\n  will specify that all subsequent shapes will be filled with orange.",
-  :what :fn},
  rect
  {:args
   ({:value [x y width height r], :type :both}
@@ -380,7 +346,7 @@
   "Calculates the natural logarithm (the base-e logarithm) of a\n  number. This function expects the values greater than 0.0.",
   :what :fn},
  with-stroke
- {:args ({:value [stroke-args & body], :type :both}),
+ {:args ({:value [stroke & body], :type :both}),
   :category "Color",
   :added "1.7",
   :name with-stroke,
@@ -390,21 +356,8 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "Temporarily set the stroke color for the body of this macro.\n   The code outside of with-stroke form will have the previous stroke color set.\n\n   The stroke color has to be in a vector!\n   Example: (with-stroke [255] ...)\n            (with-stroke [10 80 98] ...)",
+  "Temporarily set the stroke color for the body of this macro.\n   The code outside of with-stroke form will have the previous stroke color set.\n\n   A stroke argument of nil disables the stroke.\n\n   Example: (with-stroke 255 ...)\n            (with-stroke [10 80 98] ...)\n            (with-stroke nil ...)",
   :what :macro},
- ambient-float
- {:args ({:value [gray], :type :both} {:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name ambient-float,
-  :subcategory "Material Properties",
-  :type :both,
-  :processing-name "ambient()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/ambient_.html",
-  :docstring
-  "Sets the ambient reflectance for shapes drawn to the screen. This\n  is combined with the ambient light component of environment. The\n  color components set through the parameters define the\n  reflectance. For example in the default color mode, setting x=255,\n  y=126, z=0, would cause all the red light to reflect and half of the\n  green light to reflect. Used in combination with emissive, specular,\n  and shininess in setting the material properties of shapes.",
-  :what :fn},
  key-modifiers
  {:args #{[]},
   :category "Input",
@@ -495,20 +448,6 @@
   :link "http://www.processing.org/reference/texture_.html",
   :docstring
   "Sets a texture to be applied to vertex points. The texture fn must\n  be called between begin-shape and end-shape and before any calls to\n  vertex.\n\n  When textures are in use, the fill color is ignored. Instead, use\n  tint to specify the color of the texture as it is applied to the\n  shape.",
-  :what :fn},
- stroke-int
- {:args
-  ({:value [rgb alpha], :type :both} {:value [rgb], :type :both}),
-  :category "Color",
-  :added "1.0",
-  :name stroke-int,
-  :subcategory "Setting",
-  :type :both,
-  :processing-name "stroke()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/stroke_.html",
-  :docstring
-  "Sets the color used to draw lines and borders around\n  shapes. Converts rgb to int and alpha to a float.",
   :what :fn},
  print-camera
  {:args ({:value [], :type :both}),
@@ -669,7 +608,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/noLoop_.html",
   :docstring
-  "Stops Processing from continuously executing the code within\n  draw. If start-loop is called, the code in draw will begin to run\n  continuously again. If using no-loop in setup, it should be the last\n  line inside the block.\n\n  When no-loop is used, it's not possible to manipulate or access the\n  screen inside event handling functions such as mouse-pressed or\n  key-pressed. Instead, use those functions to call redraw or\n  loop which will run draw, which can update the screen\n  properly. This means that when no-loop has been called, no drawing\n  can happen, and functions like save-frame may not be used.\n\n  Note that if the sketch is resized, redraw will be called to\n  update the sketch, even after no-oop has been\n  specified. Otherwise, the sketch would enter an odd state until\n  loop was called.",
+  "Stops Processing from continuously executing the code within\n  draw. If start-loop is called, the code in draw will begin to run\n  continuously again. If using no-loop in setup, it should be the last\n  line inside the block.\n\n  When no-loop is used, it's not possible to manipulate or access the\n  screen inside event handling functions such as mouse-pressed or\n  key-pressed. Instead, use those functions to call redraw or\n  loop which will run draw, which can update the screen\n  properly. This means that when no-loop has been called, no drawing\n  can happen, and functions like save-frame may not be used.\n\n  Note that if the sketch is resized, redraw will be called to\n  update the sketch, even after no-loop has been\n  specified. Otherwise, the sketch would enter an odd state until\n  loop was called.",
   :what :fn},
  minute
  {:args ({:value [], :type :both}),
@@ -789,19 +728,6 @@
   :docstring
   "Calculates the closest int value that is greater than or equal to\n  the value of the parameter. For example, (ceil 9.03) returns the\n  value 10.",
   :what :fn},
- abs-int
- {:args #{[n]},
-  :category "Math",
-  :added "1.0",
-  :name abs-int,
-  :subcategory "Calculation",
-  :type :clj,
-  :processing-name "abs()",
-  :requires-bindings false,
-  :link "http://www.processing.org/reference/abs_.html",
-  :docstring
-  "Calculates the absolute value (magnitude) of a number. The absolute\n  value of a number is always positive. Takes and returns an int.",
-  :what :fn},
  key-code
  {:args ({:value [], :type :both}),
   :category "Input",
@@ -853,20 +779,6 @@
   :link "http://www.processing.org/reference/hue_.html",
   :docstring "Extracts the hue value from a color.",
   :what :fn},
- background-int
- {:args
-  ({:value [rgb alpha], :type :both} {:value [rgb], :type :both}),
-  :category "Color",
-  :added "1.0",
-  :name background-int,
-  :subcategory "Setting",
-  :type :both,
-  :processing-name "background()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/background_.html",
-  :docstring
-  "Sets the color used for the background of the Processing\n  window. The default background is light gray. In the draw function,\n  the background color is used to clear the display window at the\n  beginning of each frame.\n\n  It is not possible to use transparency (alpha) in background colors\n  with the main drawing surface, however they will work properly with\n  create-graphics. Converts rgb to an int and alpha to a float.",
-  :what :fn},
  start-loop
  {:args ({:value [], :type :both}),
   :category "Structure",
@@ -892,19 +804,6 @@
   :link "http://www.processing.org/reference/curveVertex_.html",
   :docstring
   "Specifies vertex coordinates for curves. This function may only be\n  used between begin-shape and end-shape and only when there is no\n  mode keyword specified to begin-shape. The first and last points in a\n  series of curve-vertex lines will be used to guide the beginning and\n  end of a the curve. A minimum of four points is required to draw a\n  tiny curve between the second and third points. Adding a fifth point\n  with curve-vertex will draw the curve between the second, third, and\n  fourth points. The curve-vertex function is an implementation of\n  Catmull-Rom splines.",
-  :what :fn},
- constrain-int
- {:args #{[amt low high]},
-  :category "Math",
-  :added "1.0",
-  :name constrain-int,
-  :subcategory "Calculation",
-  :type :clj,
-  :processing-name "constrain()",
-  :requires-bindings false,
-  :link "http://www.processing.org/reference/constrain_.html",
-  :docstring
-  "Constrains a value to not exceed a maximum and minimum value. All\n  args are cast to ints.",
   :what :fn},
  state-atom
  {:args ({:value [], :type :both}),
@@ -1036,19 +935,6 @@
   :link "http://www.processing.org/reference/hour_.html",
   :docstring "Returns the current hour as a value from 0 - 23.",
   :what :fn},
- fill-int
- {:args
-  ({:value [rgb alpha], :type :both} {:value [rgb], :type :both}),
-  :category "Color",
-  :added "1.0",
-  :name fill-int,
-  :subcategory "Setting",
-  :type :both,
-  :processing-name "fill()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/fill_.html",
-  :docstring "Sets the color used to fill shapes.",
-  :what :fn},
  atan
  {:args ({:value [n], :type :both}),
   :category "Math",
@@ -1128,10 +1014,10 @@
   :what :fn},
  stroke
  {:args
-  ({:value [x y z a], :type :both}
-   {:value [rgb alpha], :type :both}
-   {:value [rgb], :type :both}
-   {:value [x y z], :type :both}),
+  ({:value [gray], :type :both}
+   {:value [x y z alpha], :type :both}
+   {:value [x y z], :type :both}
+   {:value [gray alpha], :type :both}),
   :category "Color",
   :added "1.0",
   :name stroke,
@@ -1141,7 +1027,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/stroke_.html",
   :docstring
-  "Sets the color used to draw lines and borders around shapes. This\n  color is either specified in terms of the RGB or HSB color depending\n  on the current color-mode (the default color space is RGB, with\n  each value in the range from 0 to 255).",
+  "Sets the color used to draw lines and borders around shapes. This\n  color is either specified in terms of the RGB or HSB color depending\n  on the current color-mode (the default color space is RGB, with\n  each value in the range from 0 to 255).\n  If nil is passed it removes any fill color; equivalent to (no-stroke).",
   :what :fn},
  mouse-pressed?
  {:args ({:value [], :type :both}),
@@ -1297,19 +1183,6 @@
   :link nil,
   :docstring "Returns a new 3D unit vector with a random direction",
   :what :fn},
- constrain-float
- {:args #{[amt low high]},
-  :category "Math",
-  :added "1.0",
-  :name constrain-float,
-  :subcategory "Calculation",
-  :type :clj,
-  :processing-name "constrain()",
-  :requires-bindings false,
-  :link "http://www.processing.org/reference/constrain_.html",
-  :docstring
-  "Constrains a value to not exceed a maximum and minimum value. All\n  args are cast to floats.",
-  :what :fn},
  begin-shape
  {:args ({:value [mode], :type :both} {:value [], :type :both}),
   :category "Shape",
@@ -1401,7 +1274,7 @@
   "A triangle is a plane created by connecting three points. The first\n  two arguments specify the first point, the middle two arguments\n  specify the second point, and the last two arguments specify the\n  third point.",
   :what :fn},
  emissive
- {:args ({:value [r g b], :type :both} {:value [c], :type :both}),
+ {:args ({:value [gray], :type :both} {:value [r g b], :type :both}),
   :category "Lights, Camera",
   :added "1.0",
   :name emissive,
@@ -1625,7 +1498,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "Define and start a sketch and bind it to a var with the symbol\n  app-name. If any of the options to the various callbacks are\n  symbols, it wraps them in a call to var to ensure they aren't\n  inlined and that redefinitions to the original fns are reflected in\n  the visualisation.\n\n  Available options:\n\n   :size           - A vector of width and height for the sketch or :fullscreen.\n                     Defaults to [500 300]. If you're using :fullscreen you may\n                     want to enable present mode - :features [:present]\n\n   :renderer       - Specifies the renderer type. One of :p2d, :p3d, :java2d,\n                     :opengl, :pdf). Defaults to :java2d. :dxf renderer\n                     can't be used as sketch renderer. Use begin-raw method\n                     instead. In clojurescript only :p2d and :p3d renderers\n                     are supported.\n\n   :output-file    - Specifies an output file path. Only used in :pdf mode.\n                     Not supported in clojurescript.\n\n   :title          - A string which will be displayed at the top of\n                     the sketch window. Not supported in clojurescript.\n\n   :features       - A vector of keywords customizing sketch behaviour.\n                     Supported features:\n\n                     :keep-on-top - Sketch window will always be above other\n                                    windows. Note: some platforms might not\n                                    support always-on-top windows.\n                                    Not supported in clojurescript.\n\n                     :exit-on-close - Shutdown JVM  when sketch is closed.\n                                      Not supported in clojurescript.\n\n                     :resizable - Makes sketch resizable.\n                                  Not supported in clojurescript.\n\n                     :no-safe-fns - Do not catch and print exceptions thrown\n                                    inside functions provided to sketch (like\n                                    draw, mouse-click, key-pressed and\n                                    other). By default all exceptions thrown\n                                    inside these functions are catched. This\n                                    prevents sketch from breaking when bad\n                                    function was provided and allows you to\n                                    fix it and reload it on fly. You can\n                                    disable this behaviour by enabling\n                                    :no-safe-fns feature.\n                                    Not supported in clojurescript.\n\n                     :present - Switch to present mode (fullscreen without\n                                borders, OS panels). You may want to use\n                                this feature together with :size :fullscreen.\n                                Not supported in clojurescript.\n\n                     :no-start - Disables autostart if sketch was created using\n                                 defsketch macro. To start sketch you have to\n                                 call function created defsketch.\n                                 Supported only in clojurescript.\n\n                     :global-key-events - Allows a sketch to receive any\n                                          keyboard event sent to the page,\n                                          regardless of whether the canvas it is\n                                          loaded in has focus or not.\n                                          Supported only in clojurescript.\n\n                     Usage example: :features [:keep-on-top :present]\n\n   :bgcolor        - Sets background color for unused space in present mode.\n                     Color is specified in hex format: #XXXXXX.\n                     Example: :bgcolor \"#00FFFF\" (cyan background)\n                     Not supported in clojurescript.\n\n   :display        - Sets what display should be used by this sketch.\n                     Displays are numbered starting from 0. Example: :display 1.\n                     Not supported in clojurescript.\n\n   :setup          - A function to be called once when setting the sketch up.\n\n   :draw           - A function to be repeatedly called at most n times per\n                     second where n is the target frame-rate set for\n                     the visualisation.\n\n   :host           - String id of canvas element or DOM element itself.\n                     Specifies host for the sketch. Must be specified in sketch,\n                     may be omitted in defsketch. If ommitted in defsketch,\n                     :host is set to the name of the sketch. If element with\n                     specified id is not found on the page and page is empty -\n                     new canvas element will be created. Used in clojurescript.\n\n   :focus-gained   - Called when the sketch gains focus.\n                     Not supported in clojurescript.\n\n   :focus-lost     - Called when the sketch loses focus.\n                     Not supported in clojurescript.\n\n   :mouse-entered  - Called when the mouse enters the sketch window.\n\n   :mouse-exited   - Called when the mouse leaves the sketch window\n\n   :mouse-pressed  - Called every time a mouse button is pressed.\n\n   :mouse-released - Called every time a mouse button is released.\n\n   :mouse-clicked  - called once after a mouse button has been pressed\n                     and then released.\n\n   :mouse-moved    - Called every time the mouse moves and a button is\n                     not pressed.\n\n   :mouse-dragged  - Called every time the mouse moves and a button is\n                     pressed.\n\n   :mouse-wheel    - Called every time mouse wheel is rotated.\n                     Takes 1 argument - wheel rotation, an int.\n                     Negative values if the mouse wheel was rotated\n                     up/away from the user, and positive values\n                     if the mouse wheel was rotated down/ towards the user\n\n   :key-pressed    - Called every time any key is pressed.\n\n   :key-released   - Called every time any key is released.\n\n   :key-typed      - Called once every time non-modifier keys are\n                     pressed.\n\n   :on-close       - Called once, when sketch is closed\n                     Not supported in clojurescript.\n\n   :middleware     - Vector of middleware to be applied to the sketch.\n                     Middleware will be applied in the same order as in comp\n                     function: [f g] will be applied as (f (g options)).\n\n   :settings       - cousin of :setup. A function to be called once when\n                     setting sketch up. Should be used only for (smooth) and\n                     (no-smooth). Due to Processing limitations these functions\n                     cannot be used neither in :setup nor in :draw.",
+  "Define and start a sketch and bind it to a var with the symbol\n  app-name. If any of the options to the various callbacks are\n  symbols, it wraps them in a call to var to ensure they aren't\n  inlined and that redefinitions to the original fns are reflected in\n  the visualisation.\n\n  Available options:\n\n   :size           - A vector of width and height for the sketch or :fullscreen.\n                     Defaults to [500 300]. If you're using :fullscreen you may\n                     want to enable present mode - :features [:present].\n                     :fullscreen size works only in Clojure. In ClojureScript\n                     all sketches are support fullscreen when you press F11.\n\n   :renderer       - Specifies the renderer type. One of :p2d, :p3d, :java2d,\n                     :opengl, :pdf). Defaults to :java2d. :dxf renderer\n                     can't be used as sketch renderer. Use begin-raw method\n                     instead. In clojurescript only :p2d and :p3d renderers\n                     are supported.\n\n   :output-file    - Specifies an output file path. Only used in :pdf mode.\n                     Not supported in clojurescript.\n\n   :title          - A string which will be displayed at the top of\n                     the sketch window. Not supported in clojurescript.\n\n   :features       - A vector of keywords customizing sketch behaviour.\n                     Supported features:\n\n                     :keep-on-top - Sketch window will always be above other\n                                    windows. Note: some platforms might not\n                                    support always-on-top windows.\n                                    Not supported in clojurescript.\n\n                     :exit-on-close - Shutdown JVM  when sketch is closed.\n                                      Not supported in clojurescript.\n\n                     :resizable - Makes sketch resizable.\n                                  Not supported in clojurescript.\n\n                     :no-safe-fns - Do not catch and print exceptions thrown\n                                    inside functions provided to sketch (like\n                                    draw, mouse-click, key-pressed and\n                                    other). By default all exceptions thrown\n                                    inside these functions are catched. This\n                                    prevents sketch from breaking when bad\n                                    function was provided and allows you to\n                                    fix it and reload it on fly. You can\n                                    disable this behaviour by enabling\n                                    :no-safe-fns feature.\n                                    Not supported in clojurescript.\n\n                     :present - Switch to present mode (fullscreen without\n                                borders, OS panels). You may want to use\n                                this feature together with :size :fullscreen.\n                                Not supported in ClojureScript. In ClojureScript\n                                fullscreen is enabled by pressing F11 and it's\n                                enabled on all sketches automatically.\n\n                     :no-start - Disables autostart if sketch was created using\n                                 defsketch macro. To start sketch you have to\n                                 call function created defsketch.\n                                 Supported only in ClojureScript.\n\n                     :global-key-events - Allows a sketch to receive any\n                                          keyboard event sent to the page,\n                                          regardless of whether the canvas it is\n                                          loaded in has focus or not.\n                                          Supported only in ClojureScript.\n\n                     Usage example: :features [:keep-on-top :present]\n\n   :bgcolor        - Sets background color for unused space in present mode.\n                     Color is specified in hex format: #XXXXXX.\n                     Example: :bgcolor \"#00FFFF\" (cyan background)\n                     Not supported in ClojureScript.\n\n   :display        - Sets what display should be used by this sketch.\n                     Displays are numbered starting from 0. Example: :display 1.\n                     Not supported in ClojureScript.\n\n   :setup          - A function to be called once when setting the sketch up.\n\n   :draw           - A function to be repeatedly called at most n times per\n                     second where n is the target frame-rate set for\n                     the visualisation.\n\n   :host           - String id of canvas element or DOM element itself.\n                     Specifies host for the sketch. Must be specified in sketch,\n                     may be omitted in defsketch. If ommitted in defsketch,\n                     :host is set to the name of the sketch. If element with\n                     specified id is not found on the page and page is empty -\n                     new canvas element will be created. Used in ClojureScript.\n\n   :focus-gained   - Called when the sketch gains focus.\n                     Not supported in ClojureScript.\n\n   :focus-lost     - Called when the sketch loses focus.\n                     Not supported in ClojureScript.\n\n   :mouse-entered  - Called when the mouse enters the sketch window.\n\n   :mouse-exited   - Called when the mouse leaves the sketch window\n\n   :mouse-pressed  - Called every time a mouse button is pressed.\n\n   :mouse-released - Called every time a mouse button is released.\n\n   :mouse-clicked  - called once after a mouse button has been pressed\n                     and then released.\n\n   :mouse-moved    - Called every time the mouse moves and a button is\n                     not pressed.\n\n   :mouse-dragged  - Called every time the mouse moves and a button is\n                     pressed.\n\n   :mouse-wheel    - Called every time mouse wheel is rotated.\n                     Takes 1 argument - wheel rotation, an int.\n                     Negative values if the mouse wheel was rotated\n                     up/away from the user, and positive values\n                     if the mouse wheel was rotated down/ towards the user\n\n   :key-pressed    - Called every time any key is pressed.\n\n   :key-released   - Called every time any key is released.\n\n   :key-typed      - Called once every time non-modifier keys are\n                     pressed.\n\n   :on-close       - Called once, when sketch is closed\n                     Not supported in ClojureScript.\n\n   :middleware     - Vector of middleware to be applied to the sketch.\n                     Middleware will be applied in the same order as in comp\n                     function: [f g] will be applied as (f (g options)).\n\n   :settings       - cousin of :setup. A function to be called once when\n                     setting sketch up. Should be used only for (smooth) and\n                     (no-smooth). Due to Processing limitations these functions\n                     cannot be used neither in :setup nor in :draw.",
   :what :macro},
  no-stroke
  {:args ({:value [], :type :both}),
@@ -1759,10 +1632,10 @@
   :what :fn},
  fill
  {:args
-  ({:value [r g b], :type :both}
-   {:value [rgb alpha], :type :both}
-   {:value [rgb], :type :both}
-   {:value [r g b a], :type :both}),
+  ({:value [gray], :type :both}
+   {:value [r g b], :type :both}
+   {:value [r g b alpha], :type :both}
+   {:value [gray alpha], :type :both}),
   :category "Color",
   :added "1.0",
   :name fill,
@@ -1771,7 +1644,8 @@
   :processing-name "fill()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/fill_.html",
-  :docstring "Sets the color used to fill shapes.",
+  :docstring
+  "Sets the color used to fill shapes. For example, if you run fill(204, 102, 0),\n  all subsequent shapes will be filled with orange.  This function casts all input as a float.\n  If nil is passed it removes any fill color; equivalent to (no-fill).",
   :what :fn},
  with-translation
  {:args ({:value [translation-vector & body], :type :both}),
@@ -1811,20 +1685,6 @@
   :link "http://www.processing.org/reference/PImage_mask_.html",
   :docstring
   "Masks part of an image from displaying by loading another image and\n  using it as an alpha channel.  This mask image should only contain\n  grayscale data, but only the blue color channel is used. The mask\n  image needs to be the same size as the image to which it is\n  applied.\n\n  If single argument function is used - masked image is sketch itself\n  or graphics if used inside with-graphics macro. If you're passing\n  graphics to this function - it works only with :p3d and :opengl renderers.\n\n  This method is useful for creating dynamically generated alpha\n  masks.",
-  :what :fn},
- emissive-float
- {:args
-  ({:value [r g b], :type :both} {:value [float-val], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name emissive-float,
-  :subcategory "Material Properties",
-  :type :both,
-  :processing-name "emissive()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/emissive_.html",
-  :docstring
-  "Sets the emissive color of the material used for drawing shapes\n drawn to the screen. Used in combination with ambient, specular, and\n shininess in setting the material properties of shapes. Converts all\n args to floats",
   :what :fn},
  green
  {:args ({:value [col], :type :both}),
@@ -1905,20 +1765,6 @@
   :docstring
   "Returns the ascent of the current font at its current size. This\n  information is useful for determining the height of the font above\n  the baseline. For example, adding the text-ascent and text-descent\n  values will give you the total height of the line.",
   :what :fn},
- tint-int
- {:args
-  ({:value [rgb alpha], :type :both} {:value [rgb], :type :both}),
-  :category "Image",
-  :added "1.0",
-  :name tint-int,
-  :subcategory "Loading & Displaying",
-  :type :both,
-  :processing-name "tint()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/tint_.html",
-  :docstring
-  "Sets the fill value for displaying images. Images can be tinted to\n  specified colors or made transparent by setting the alpha.\n\n  To make an image transparent, but not change it's color, use white\n  as the tint color and specify an alpha value. For instance,\n  tint(255, 128) will make an image 50% transparent (unless\n  colorMode() has been used).\n\n  The value for the parameter gray must be less than or equal to the\n  current maximum value as specified by colorMode(). The default\n  maximum value is 255.\n\n  Also used to control the coloring of textures in 3D.",
-  :what :fn},
  shininess
  {:args ({:value [shine], :type :both}),
   :category "Lights, Camera",
@@ -1970,23 +1816,6 @@
   :link "http://www.processing.org/reference/month_.html",
   :docstring "Returns the current month as a value from 1 - 12.",
   :what :fn},
- tint-float
- {:args
-  ({:value [gray], :type :both}
-   {:value [r g b], :type :both}
-   {:value [r g b a], :type :both}
-   {:value [gray alpha], :type :both}),
-  :category "Image",
-  :added "1.0",
-  :name tint-float,
-  :subcategory "Loading & Displaying",
-  :type :both,
-  :processing-name "tint()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/tint_.html",
-  :docstring
-  "Sets the fill value for displaying images. Images can be tinted to\n  specified colors or made transparent by setting the alpha.\n\n  To make an image transparent, but not change it's color, use white\n  as the tint color and specify an alpha value. For instance,\n  tint(255, 128) will make an image 50% transparent (unless\n  colorMode() has been used).\n\n  The value for the parameter gray must be less than or equal to the\n  current maximum value as specified by colorMode(). The default\n  maximum value is 255.\n\n  Also used to control the coloring of textures in 3D.",
-  :what :fn},
  width
  {:args ({:value [], :type :both}),
   :category "Environment",
@@ -2003,10 +1832,10 @@
   :what :fn},
  background
  {:args
-  ({:value [r g b], :type :both}
-   {:value [rgb alpha], :type :both}
-   {:value [rgb], :type :both}
-   {:value [r g b a], :type :both}),
+  ({:value [gray], :type :both}
+   {:value [r g b], :type :both}
+   {:value [r g b a], :type :both}
+   {:value [gray alpha], :type :both}),
   :category "Color",
   :added "1.0",
   :name background,
@@ -2391,10 +2220,10 @@
   :what :fn},
  tint
  {:args
-  ({:value [r g b], :type :both}
-   {:value [rgb alpha], :type :both}
-   {:value [rgb], :type :both}
-   {:value [r g b a], :type :both}),
+  ({:value [gray], :type :both}
+   {:value [r g b], :type :both}
+   {:value [r g b a], :type :both}
+   {:value [gray alpha], :type :both}),
   :category "Image",
   :added "1.0",
   :name tint,
@@ -2509,19 +2338,6 @@
   :link "http://www.processing.org/reference/background_.html",
   :docstring
   "Specify an image to be used as the background for a sketch. Its\n  width and height must be the same size as the sketch window. Images\n  used as background will ignore the current tint setting.",
-  :what :fn},
- abs-float
- {:args #{[n]},
-  :category "Math",
-  :added "1.0",
-  :name abs-float,
-  :subcategory "Calculation",
-  :type :clj,
-  :processing-name "abs()",
-  :requires-bindings false,
-  :link "http://www.processing.org/reference/abs_.html",
-  :docstring
-  "Calculates the absolute value (magnitude) of a number. The absolute\n  value of a number is always positive. Takes and returns a float.",
   :what :fn},
  load-shape
  {:args ({:value [filename], :type :both}),
@@ -2677,7 +2493,7 @@
   "Converts a byte, char, int, or color to a String containing the\n  equivalent hexadecimal notation. For example color(0, 102, 153) will\n  convert to the String \"FF006699\". This function can help make your\n  geeky debugging sessions much happier. ",
   :what :fn},
  with-fill
- {:args ({:value [fill-args & body], :type :both}),
+ {:args ({:value [fill & body], :type :both}),
   :category "Color",
   :added "1.7",
   :name with-fill,
@@ -2687,7 +2503,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "Temporarily set the fill color for the body of this macro.\n   The code outside of with-fill form will have the previous fill color set.\n\n   The fill color has to be in a vector!\n   Example: (with-fill [255] ...)\n            (with-fill [10 80 98] ...)",
+  "Temporarily set the fill color for the body of this macro.\n   The code outside of with-fill form will have the previous fill color set.\n\n   A fill argument of nil disables the fill.\n\n   Example: (with-fill 255 ...)\n            (with-fill [10 80 98] ...)\n            (with-fill nil ...)",
   :what :macro},
  no-cursor
  {:args ({:value [], :type :both}),
@@ -2742,7 +2558,7 @@
   :requires-bindings false,
   :link "http://www.processing.org/reference/abs_.html",
   :docstring
-  "Calculates the absolute value (magnitude) of a number. The\n  absolute value of a number is always positive. Dynamically casts to\n  an int or float appropriately",
+  "Calculates the absolute value (magnitude) of a number. The\n  absolute value of a number is always positive. Dynamically casts to\n  an int or float appropriately for Clojure.",
   :what :fn},
  pop-style
  {:args ({:value [], :type :both}),
@@ -2769,23 +2585,6 @@
   :link "http://www.processing.org/reference/focused.html",
   :docstring
   "Returns a boolean value representing whether the applet has focus.",
-  :what :fn},
- background-float
- {:args
-  ({:value [gray], :type :both}
-   {:value [r g b], :type :both}
-   {:value [r g b a], :type :both}
-   {:value [gray alpha], :type :both}),
-  :category "Color",
-  :added "1.0",
-  :name background-float,
-  :subcategory "Setting",
-  :type :both,
-  :processing-name "background()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/background_.html",
-  :docstring
-  "Sets the color used for the background of the Processing\n  window. The default background is light gray. In the draw function,\n  the background color is used to clear the display window at the\n  beginning of each frame.\n\n  It is not possible to use transparency (alpha) in background colors\n  with the main drawing surface, however they will work properly with\n  create-graphics. Converts args to floats.",
   :what :fn},
  text-mode
  {:args ({:value [mode], :type :both}),
@@ -2906,7 +2705,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "Performs body with rotation, restores current transformation on exit.\n  Accepts a vector [angle] or [angle x-axis y-axis z-axis].\n\n  Example:\n    (with-rotation [angle]\n      (vertex 1 2))",
+  "Performs body with rotation, restores current transformation on exit.\n  Accepts a vector [angle] or [angle x y z].\n\n  When 4 arguments provides it produces a rotation of angle degrees\n  around the vector x y z. Check examples for to better understand.\n  This rotation follows the right-hand rule, so if the vector x y z points\n  toward the user, the rotation will be counterclockwise.\n\n  Example:\n    (with-rotation [angle]\n      (vertex 1 2))",
   :what :macro},
  print-matrix
  {:args ({:value [], :type :both}),
@@ -3000,6 +2799,18 @@
   :link "http://www.processing.org/reference/lights_.html",
   :docstring
   "Sets the default ambient light, directional light, falloff, and\n  specular values. The defaults are:\n\n  (ambient-light 128 128 128)\n  (directional-light 128 128 128 0 0 -1)\n  (light-falloff 1 0 0)\n  (light-specular 0 0 0).\n\n  Lights need to be included in the draw to remain persistent in a\n  looping program. Placing them in the setup of a looping program\n  will cause them to only have an effect the first time through the\n  loop.",
+  :what :fn},
+ looping?
+ {:args ({:value [], :type :both}),
+  :category "Environment",
+  :added "2.7.2",
+  :name looping?,
+  :subcategory nil,
+  :type :both,
+  :processing-name "isLooping()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/isLooping_.html",
+  :docstring "Returns whether the sketch is looping.",
   :what :fn},
  filter-shader
  {:args #{[shader-obj]},
@@ -3136,19 +2947,6 @@
   :docstring
   "Given an x, y, z coordinate, returns its z value.\n   This value can be used to determine if an x, y, z coordinate is in\n   front or in back of another (x, y, z) coordinate. The units are\n   based on how the zbuffer is set up, and don't relate to anything\n   'real'. They're only useful for in comparison to another value\n   obtained from screen-z, or directly out of the zbuffer",
   :what :fn},
- ambient-int
- {:args ({:value [rgb], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name ambient-int,
-  :subcategory "Material Properties",
-  :type :both,
-  :processing-name "ambient()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/ambient_.html",
-  :docstring
-  "Sets the ambient reflectance for shapes drawn to the screen. This\n  is combined with the ambient light component of environment. The rgb\n  color components set define the reflectance. Used in combination\n  with emissive, specular, and shininess in setting the material\n  properties of shapes.",
-  :what :fn},
  ellipse
  {:args ({:value [x y width height], :type :both}),
   :category "Shape",
@@ -3261,7 +3059,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/rotate_.html",
   :docstring
-  "Rotates a shape the amount specified by the angle parameter. Angles\n  should be specified in radians (values from 0 to TWO-PI) or\n  converted to radians with the radians function.\n\n  Objects are always rotated around their relative position to the\n  origin and positive numbers rotate objects in a clockwise\n  direction. Transformations apply to everything that happens after\n  and subsequent calls to the function accumulates the effect. For\n  example, calling (rotate HALF-PI) and then (rotate HALF-PI) is the\n  same as (rotate PI). All tranformations are reset when draw begins\n  again.\n\n  Technically, rotate multiplies the current transformation matrix by\n  a rotation matrix. This function can be further controlled by the\n  push-matrix and pop-matrix.",
+  "Rotates a shape the amount specified by the angle parameter. Angles\n  should be specified in radians (values from 0 to TWO-PI) or\n  converted to radians with the radians function.\n\n  Objects are always rotated around their relative position to the\n  origin and positive numbers rotate objects in a clockwise\n  direction. Transformations apply to everything that happens after\n  and subsequent calls to the function accumulates the effect. For\n  example, calling (rotate HALF-PI) and then (rotate HALF-PI) is the\n  same as (rotate PI). All tranformations are reset when draw begins\n  again.\n\n  Technically, rotate multiplies the current transformation matrix by\n  a rotation matrix. This function can be further controlled by the\n  push-matrix and pop-matrix.\n\n  When 4 arguments provides it produces a rotation of angle degrees\n  around the vector x y z. Check examples for to better understand.\n  This rotation follows the right-hand rule, so if the vector x y z points\n  toward the user, the rotation will be counterclockwise.",
   :what :fn},
  set-pixel
  {:args
@@ -3361,7 +3159,7 @@
   "Loads a font into a variable of type PFont. To load correctly,\n  fonts must be located in the data directory of the current sketch.\n  To create a font to use with Processing use the create-font fn.\n\n  Like load-image and other methods that load data, the load-font fn\n  should not be used inside draw, because it will slow down the sketch\n  considerably, as the font will be re-loaded from the disk (or\n  network) on each frame.\n\n  For most renderers, Processing displays fonts using the .vlw font\n  format, which uses images for each letter, rather than defining them\n  through vector data. When hint :enable-native-fonts is used with the\n  JAVA2D renderer, the native version of a font will be used if it is\n  installed on the user's machine.\n\n  Using create-font (instead of load-font) enables vector data to be\n  used with the JAVA2D (default) renderer setting. This can be helpful\n  when many font sizes are needed, or when using any renderer based on\n  JAVA2D, such as the PDF library.",
   :what :fn},
  ambient
- {:args ({:value [rgb], :type :both} {:value [x y z], :type :both}),
+ {:args ({:value [gray], :type :both} {:value [r g b], :type :both}),
   :category "Lights, Camera",
   :added "1.0",
   :name ambient,
@@ -3464,19 +3262,6 @@
   :link "http://www.processing.org/reference/noLights_.html",
   :docstring
   "Disable all lighting. Lighting is turned off by default and enabled\n  with the lights fn. This function can be used to disable lighting so\n  that 2D geometry (which does not require lighting) can be drawn\n  after a set of lighted 3D geometry.",
-  :what :fn},
- emissive-int
- {:args ({:value [int-val], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name emissive-int,
-  :subcategory "Material Properties",
-  :type :both,
-  :processing-name "emissive()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/emissive_.html",
-  :docstring
-  "Sets the emissive color of the material used for drawing shapes\n  drawn to the screen. Used in combination with ambient, specular, and\n  shininess in setting the material properties of shapes. Converts all\n  args to ints",
   :what :fn},
  point
  {:args ({:value [x y], :type :both} {:value [x y z], :type :both}),

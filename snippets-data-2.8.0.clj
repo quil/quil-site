@@ -1,25 +1,17 @@
-({:fns ["lerp-color"],
+({:fns [],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "use-hex-colors",
+  :opts {:settings nil},
+  :draw
+  "((q/lerp-color 4278255360 4278190335 0.5) (q/hue 4279312947) (q/saturation 4279312947) (q/brightness 4279312947) (q/red 4279312947) (q/green 4279312947) (q/blue 4279312947) (q/blend-color 4278255360 4294901760 :blend) (q/background 4279312947))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["lerp-color"],
   :ns "quil.snippets.color.creating-and-reading",
   :name "lerp-color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/lerp-color 4278255360 4278190335 0.5) (let [c1 (q/color 255 0 0) c2 (q/color 0 0 255)] (dotimes [i 6] (q/fill (q/lerp-color c1 c2 (/ i 5))) (q/rect (* i 70) (* i 70) 100 100))))",
-  :setup "()",
-  :target :cljs}
- {:fns ["current-stroke"],
-  :ns "quil.snippets.color.creating-and-reading",
-  :name "current-stroke",
-  :opts {:settings nil},
-  :draw
-  "((q/background 255) (q/stroke 255 0 0) (q/rect 0 0 100 100) (let [cur-stroke (q/current-stroke)] (q/stroke 0 0 255) (q/rect 70 70 100 100) (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
-  :setup "()",
-  :target :cljs}
- {:fns ["current-fill"],
-  :ns "quil.snippets.color.creating-and-reading",
-  :name "current-fill",
-  :opts {:settings nil},
-  :draw
-  "((q/background 255) (q/fill 255 0 0) (q/rect 0 0 100 100) (let [cur-fill (q/current-fill)] (q/fill 0 0 255) (q/rect 70 70 100 100) (q/fill cur-fill) (q/rect 140 140 100 100)))",
+  "((q/background 255) (let [c1 (q/color 255 0 0) c2 (q/color 0 0 255)] (comment \"draw colors that transition from c1 to c2\") (dotimes [i 6] (q/fill (q/lerp-color c1 c2 (/ i 5))) (q/rect (* i 70) (* i 70) 100 100))))",
   :setup "()",
   :target :cljs}
  {:fns ["color-mode"],
@@ -27,7 +19,15 @@
   :name "color-mode",
   :opts {:settings nil},
   :draw
-  "((q/color-mode :rgb 255) (q/background 255) (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100) (q/color-mode :rgb 42) (q/fill 42 42 0 20) (q/rect 70 70 100 100) (q/color-mode :hsb 5 10 20) (q/fill 5 10 20) (q/rect 140 140 100 100) (q/color-mode :rgb 5 10 20 30) (q/fill 5 10 0 15) (q/rect 210 210 100 100))",
+  "((q/color-mode :rgb 255) (q/background 255) (comment \"use HSB and draw red\") (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100) (comment \"use HSB with different max and draw dark green\") (q/color-mode :hsb 5 10 20) (q/fill 2 10 5) (q/rect 70 70 100 100) (comment \"use RGB with 42 max value and draw 75% transparent blue\") (q/color-mode :rgb 40) (q/fill 0 0 40 30) (q/rect 140 140 100 100) (comment \"use RGB with different max values and draw semitransparent cyan\") (q/color-mode :rgb 5 10 20 30) (q/fill 0 10 20 15) (q/rect 210 210 100 100))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["color-mode"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "color-mode-hsb",
+  :opts {:settings nil},
+  :draw
+  "((q/color-mode :rgb 255) (q/background 255) (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["color"],
@@ -35,23 +35,55 @@
   :name "color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill (q/color 0)) (q/rect 0 0 100 100) (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
+  "((q/background 255) (comment \"black\") (q/fill (q/color 0)) (q/rect 0 0 100 100) (comment \"semitransparent gray\") (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (comment \"purple\") (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (comment \"semitransparent cyan\") (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
   :setup "()",
   :target :cljs}
- {:fns ["hue" "saturation" "brightness"],
+ {:fns ["brightness"],
   :ns "quil.snippets.color.creating-and-reading",
-  :name "hue-saturation-brightness",
+  :name "brightness",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/hue 4279312947) (q/saturation 4279312947) (q/brightness 4279312947) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/hue col) 255 255) (q/rect 70 70 100 100) (q/fill 255 (q/saturation col) 255) (q/rect 140 140 100 100) (q/fill 255 255 (q/brightness col)) (q/rect 210 210 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill 255 255 (q/brightness col)) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
- {:fns ["red" "green" "blue"],
+ {:fns ["saturation"],
   :ns "quil.snippets.color.creating-and-reading",
-  :name "red-green-blue",
+  :name "saturation",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/red 4279312947) (q/green 4279312947) (q/blue 4279312947) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/red col) 0 0) (q/rect 70 70 100 100) (q/fill 0 (q/green col) 0) (q/rect 140 140 100 100) (q/fill 0 0 (q/blue col)) (q/rect 210 210 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill 255 (q/saturation col) 255) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["hue"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "hue",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/hue col) 255 255) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["blue"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "blue",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill 0 0 (q/blue col)) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["green"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "green",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill 0 (q/green col) 0) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["red"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "red",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/red col) 0 0) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["blend-color"],
@@ -59,7 +91,7 @@
   :name "blend-color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/blend-color 4278255360 4294901760 :blend) (let [c1 (q/color 255 100 20 50) c2 (q/color 40 200 255 200) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 3 modes)] (q/fill c1) (q/rect 0 0 70 70) (q/fill c2) (q/rect 100 0 70 70) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (q/fill (q/blend-color c1 c2 mode))) (q/rect (* col 100) (* (inc row) 100) 70 70)))))",
+  "((q/background 255) (let [_ (comment \"very transparent red\") c1 (q/color 255 100 20 50) _ (comment \"not very transparent blue\") c2 (q/color 40 200 255 200) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 3 modes)] (comment \"draw 2 rectangles with colors c1 and c2\") (q/fill c1) (q/rect 0 0 70 70) (q/fill c2) (q/rect 100 0 70 70) (comment \"draw all possible blended colors\") (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (q/fill (q/blend-color c1 c2 mode))) (q/rect (* col 100) (* (inc row) 100) 70 70)))))",
   :setup "()",
   :target :cljs}
  {:fns ["alpha"],
@@ -67,7 +99,7 @@
   :name "alpha",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/alpha 4278255360) (let [semi-red (q/color 255 0 0 120) alph (q/alpha semi-red) semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 0 0 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [_ (comment \"create semitransparent red\") semi-red (q/color 255 0 0 120) _ (comment \"extract alpha value from it\") alph (q/alpha semi-red) _ (comment \"create semitransparent blue using the alpha\") semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 0 0 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["text-width"],
@@ -107,7 +139,7 @@
   :name "text-align",
   :opts {:settings nil},
   :draw
-  "((q/fill 0) (q/stroke 255 0 0) (q/stroke-weight 5) (let [h-align [:left :center :right] v-align [:top :bottom :center :baseline]] (doseq [ind (range (count h-align)) :let [x 50 y (+ 20 (* ind 50))]] (q/text-align (h-align ind)) (q/text (name (h-align ind)) x y) (q/point x y)) (doseq [ind-h (range (count h-align)) ind-v (range (count v-align)) :let [x (+ 70 (* ind-v 100)) y (+ 250 (* ind-h 50)) h-al (h-align ind-h) v-al (v-align ind-v) txt (str (name h-al) \"+\" (name v-al))]] (q/text-align h-al v-al) (q/text txt x y) (q/point x y))))",
+  "((q/fill 0) (q/stroke 255 0 0) (q/stroke-weight 5) (let [h-align [:left :center :right] v-align [:top :bottom :center :baseline]] (comment \"text-align with single argument\") (doseq [ind (range (count h-align)) :let [x 50 y (+ 20 (* ind 50))]] (q/text-align (h-align ind)) (q/text (name (h-align ind)) x y) (q/point x y)) (comment \"text-align with multiple arguments\") (doseq [ind-h (range (count h-align)) ind-v (range (count v-align)) :let [x (+ 70 (* ind-v 100)) y (+ 250 (* ind-h 50)) h-al (h-align ind-h) v-al (v-align ind-v) txt (str (name h-al) \"+\" (name v-al))]] (q/text-align h-al v-al) (q/text txt x y) (q/point x y))))",
   :setup "()",
   :target :cljs}
  {:fns ["set-image"],
@@ -115,7 +147,23 @@
   :name "set-image",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/ellipse 50 50 90 90)) (q/set-image 10 10 gr)))",
+  "((q/background 255) (let [im (q/create-image 100 100 :rgb)] (comment \"draw gradient on the image\") (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (comment \"draw image on sketch\") (q/set-image 10 10 im)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["pixels" "update-pixels"],
+  :ns "quil.snippets.image.pixels",
+  :name "pixels-update-pixels",
+  :opts {:renderer :p2d, :settings nil},
+  :draw
+  "((q/background 255) (let [size 50 gr (q/create-graphics size size :p2d)] (comment \"draw red circle on the graphics\") (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/ellipse (/ size 2) (/ size 2) (* size (/ 2 3)) (* size (/ 2 3)))) (comment \"draw original graphics\") (q/image gr 0 0) (comment \"get pixels of the graphics and copy\") (comment \"the first half of all pixels to the second half\") (let [px (q/pixels gr) half (/ (* size size) 2)] (dotimes [i half] (aset px (+ i half) (aget px i)))) (q/update-pixels gr) (q/image gr (+ size 20) 0) (comment \"get pixels of the sketch itself and copy\") (comment \"the first half of all pixels to the second half\") (let [px (q/pixels) half (/ (* (q/width) (q/height)) 10)] (dotimes [i half] (aset px (+ i half) (aget px i)))) (q/update-pixels)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["get-pixel"],
+  :ns "quil.snippets.image.pixels",
+  :name "get-pixel",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [gr (q/create-graphics 100 100)] (comment \"draw circle on the graphics\") (q/with-graphics gr (q/background 255) (q/fill 127 255 180) (q/ellipse 50 50 70 70)) (comment \"draw original graphics\") (q/image gr 0 0) (comment \"copy graphics and draw it\") (q/image (q/get-pixel gr) 0 120) (comment \"use get-pixel to get color of specific pixel\") (comment \"and draw square\") (q/fill (q/get-pixel gr 50 50)) (q/rect 120 120 100 100) (comment \"use get-pixel to copy part of the graphics\") (q/image (q/get-pixel gr 0 0 50 50) 240 120) (comment \"use get-pixel to copy part of the sketch itself\") (q/image (q/get-pixel) 400 400) (q/fill (q/get-pixel 50 50)) (q/rect 120 240 100 100) (q/image (q/get-pixel 0 0 50 50) 240 240)))",
   :setup "()",
   :target :cljs}
  {:fns ["display-filter"],
@@ -123,7 +171,7 @@
   :name "display-filter",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) dest (q/create-graphics 100 100)] (q/with-graphics dest (q/image orig 0 0) (apply q/display-filter mode)) (q/image dest (* col 120) (* 120 (inc row))))))))",
+  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (comment \"draw 10x10 square from circles of different color\") (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (comment \"apply different filters, four filters per row\") (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) dest (q/create-graphics 100 100)] (q/with-graphics dest (q/image orig 0 0) (apply q/display-filter mode)) (q/image dest (* col 120) (* 120 (inc row))))))))",
   :setup "()",
   :target :cljs}
  {:fns ["image-filter"],
@@ -131,7 +179,23 @@
   :name "image-filter",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) clone (q/get-pixel orig)] (apply q/image-filter clone mode) (q/image clone (* col 120) (* 120 (inc row))))))))",
+  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (comment \"draw 10x10 square from circles of different color\") (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (comment \"apply different filters, four filters per row\") (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) clone (q/get-pixel orig)] (apply q/image-filter clone mode) (q/image clone (* col 120) (* 120 (inc row))))))))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["copy"],
+  :ns "quil.snippets.image.pixels",
+  :name "copy",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [im (q/create-image 100 100 :rgb)] (comment \" gradient on the image\") (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (comment \"draw original image\") (q/image im 0 0) (comment \"copy left top quarter to the right top quarter\") (q/copy im im [0 0 50 50] [50 0 50 50]) (comment \"copy the whole image to the sketch, essentially just draw it\") (q/copy im [0 0 100 100] [120 0 100 100]) (comment \"copy top left 50x50 square of sketch \") (comment \"to the 100x100 square at [240, 0] position\") (q/copy [0 0 50 50] [240 0 100 100])))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["blend"],
+  :ns "quil.snippets.image.pixels",
+  :name "blend",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255 100 20 50) (let [gr (q/create-graphics 50 50) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 5 modes)] (comment \"draw 3 circles of different color on the graphics\") (q/with-graphics gr (q/background 40 200 255 200) (q/fill 255 0 0) (q/ellipse 12 12 20 20) (q/fill 0 255 0) (q/ellipse 38 12 20 20) (q/fill 0 0 255) (q/ellipse 25 38 20 20)) (comment \"all possible blended modes\") (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (comment \"blend with sketch itself\") (q/blend 400 0 50 50 (* col 55) (* row 55) 50 50 mode) (comment \"blend with graphics\") (q/blend gr 0 0 50 50 (* col 55) (+ 170 (* row 55)) 50 50 mode) (comment \"blend graphics to graphics\") (q/blend gr (q/current-graphics) 0 0 50 50 (* col 55) (+ 340 (* row 55)) 50 50 mode))))))",
   :setup "()",
   :target :cljs}
  {:fns ["millis" "seconds" "minute" "hour" "day" "month" "year"],
@@ -322,32 +386,41 @@
   :name "tint",
   :opts {:settings nil},
   :draw
-  "((q/background 127) (q/tint 4279312947) (q/no-tint) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 25 25 40 40) (q/fill 255 0 0) (q/ellipse 75 25 40 40) (q/fill 0 255 0) (q/ellipse 25 75 40 40) (q/fill 0 0 255) (q/ellipse 75 75 40 40)) (q/no-tint) (q/image gr 0 0) (q/tint 127) (q/image gr 120 0) (q/tint 255 127) (q/image gr 240 0) (q/tint 200 127 180) (q/image gr 0 120) (q/tint 200 127 180 127) (q/image gr 120 120)))",
+  "((q/background 127) (let [gr (q/create-graphics 100 100)] (comment \"draw 4 circles of different color on the graphics\") (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 25 25 40 40) (q/fill 255 0 0) (q/ellipse 75 25 40 40) (q/fill 0 255 0) (q/ellipse 25 75 40 40) (q/fill 0 0 255) (q/ellipse 75 75 40 40)) (comment \"apply different types of tint\") (q/no-tint) (q/image gr 0 0) (q/tint 127) (q/image gr 120 0) (q/tint 255 127) (q/image gr 240 0) (q/tint 200 127 180) (q/image gr 0 120) (q/tint 200 127 180 127) (q/image gr 120 120)))",
   :setup "()",
   :target :cljs}
- {:fns ["image"],
+ {:fns ["request-image"],
   :ns "quil.snippets.image.loading-and-displaying",
   :name "request-image",
   :opts {:settings nil},
   :draw
   "((if (zero? (.-width (q/state :image))) (q/text \"Loading\" 10 10) (q/image (q/state :image) 0 0)))",
   :setup
-  "(q/set-state! :image (q/request-image \"https://github.com/quil/quil/raw/master/dev-resources/quil.png\"))",
+  "(q/set-state! :image (q/request-image \"https://dummyimage.com/100x100/2c3e50/ffffff.png\"))",
   :target :cljs}
  {:fns ["no-tint"],
   :ns "quil.snippets.image.loading-and-displaying",
   :name "no-tint",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 50 50 70 70)) (q/image gr 0 0) (q/tint 127 255 255) (q/image gr 100 0) (q/no-tint) (q/image gr 200 0)))",
+  "((q/background 255) (comment \"create graphics with white circle\") (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 50 50 70 70)) (comment \"apply cyan tint\") (q/image gr 0 0) (q/tint 127 255 255) (q/image gr 100 0) (comment \"remove tint\") (q/no-tint) (q/image gr 200 0)))",
   :setup "()",
+  :target :cljs}
+ {:fns ["load-image"],
+  :ns "quil.snippets.image.loading-and-displaying",
+  :name "load-image",
+  :opts {:settings nil},
+  :draw
+  "((let [im (q/state :image)] (comment \"image is loaded once its width is non-zero\") (when-not (zero? (.-width im)) (q/image im 0 0))))",
+  :setup
+  "(let [_ (comment \"create url to load image 100x100\") url (str \"https://dummyimage.com/100x100/2c3e50/ffffff.png\")] (q/set-state! :image (q/load-image url)))",
   :target :cljs}
  {:fns ["image-mode"],
   :ns "quil.snippets.image.loading-and-displaying",
   :name "image-mode",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/fill 0 0 255) (q/stroke 0 0 255) (q/rect 0 0 100 100)) (q/stroke-weight 10) (q/image-mode :corner) (q/image gr 50 50) (q/point 50 50) (q/image-mode :center) (q/image gr 250 100) (q/point 250 100) (q/image-mode :corners) (q/image gr 350 50 400 150) (q/point 350 50) (q/point 400 150)))",
+  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/fill 0 0 255) (q/stroke 0 0 255) (q/rect 0 0 100 100)) (q/stroke-weight 10) (comment \"use :corner mode\") (q/image-mode :corner) (q/image gr 50 50) (q/point 50 50) (comment \"use :center mode\") (q/image-mode :center) (q/image gr 250 100) (q/point 250 100) (comment \"use :corners mode\") (q/image-mode :corners) (q/image gr 350 50 400 150) (q/point 350 50) (q/point 400 150)))",
   :setup "()",
   :target :cljs}
  {:fns ["image"],
@@ -355,7 +428,7 @@
   :name "image",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 70 70)] (q/with-graphics gr (q/ellipse 35 35 70 70)) (q/image gr 0 0) (q/image gr 100 0 100 70)))",
+  "((q/background 255) (comment \"create graphics with circle\") (let [gr (q/create-graphics 70 70)] (q/with-graphics gr (q/ellipse 35 35 70 70)) (comment \"draw graphics twice\") (q/image gr 0 0) (q/image gr 100 0 100 70)))",
   :setup "()",
   :target :cljs}
  {:fns ["shape-mode"],
@@ -484,6 +557,14 @@
   :opts {:renderer :p3d, :settings nil},
   :draw
   "((let [hints [:enable-async-saveframe :disable-async-saveframe :enable-depth-test :disable-depth-test :enable-depth-sort :disable-depth-sort :enable-opengl-errors :disable-opengl-errors :enable-depth-mask :disable-depth-mask :enable-optimized-stroke :disable-optimized-stroke :enable-stroke-perspective :disable-stroke-perspective :enable-stroke-pure :disable-stroke-pure :enable-texture-mipmaps :disable-texture-mipmaps]] (doseq [h hints] (q/hint h))) (q/ellipse 250 250 400 200))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["create-graphics"],
+  :ns "quil.snippets.image.rendering",
+  :name "create-graphics",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 80 40)) (q/image gr 0 0)))",
   :setup "()",
   :target :cljs}
  {:fns ["sphere-detail"],
@@ -650,7 +731,7 @@
   :name "stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/stroke-weight 10) (q/stroke 120) (q/rect 0 0 100 100) (q/stroke 80 120) (q/rect 70 70 100 100) (q/stroke 0 255 0) (q/rect 140 140 100 100) (q/stroke 255 0 0 120) (q/rect 210 210 100 100) (q/stroke 4278255360) (q/rect 280 280 100 100))",
+  "((q/background 255) (q/stroke-weight 10) (comment \"grey\") (q/stroke 120) (q/rect 0 0 100 100) (comment \"semitransparent light grey\") (q/stroke 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/stroke 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/stroke 255 0 0 120) (q/rect 210 210 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["no-stroke"],
@@ -658,7 +739,7 @@
   :name "no-stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 120) (q/stroke 0) (q/rect 0 0 100 100) (q/no-stroke) (q/rect 70 70 100 100))",
+  "((q/background 255) (comment \"set stroke to black\") (q/fill 120) (q/stroke 0) (q/rect 0 0 100 100) (comment \"remove stroke, no border around square\") (q/no-stroke) (q/rect 70 70 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["no-fill"],
@@ -666,7 +747,7 @@
   :name "no-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/stroke 0) (q/fill 120) (q/rect 0 0 100 100) (q/no-fill) (q/rect 70 70 100 100))",
+  "((q/background 255) (comment \"set background to grey\") (q/stroke 0) (q/fill 120) (q/rect 0 0 100 100) (comment \"remove background, only border left\") (q/no-fill) (q/rect 70 70 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["fill"],
@@ -674,7 +755,7 @@
   :name "fill",
   :opts {:settings nil},
   :draw
-  "((q/background 0 0 255) (q/fill 120) (q/rect 0 0 100 100) (q/fill 80 120) (q/rect 70 70 100 100) (q/fill 0 255 0) (q/rect 140 140 100 100) (q/fill 255 0 0 120) (q/rect 210 210 100 100) (q/fill 4278255360) (q/rect 280 280 100 100))",
+  "((comment \"blue background\") (q/background 0 0 255) (comment \"grey\") (q/fill 120) (q/rect 0 0 100 100) (comment \"semitransparent light grey\") (q/fill 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/fill 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/fill 255 0 0 120) (q/rect 210 210 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["background-image"],
@@ -682,15 +763,16 @@
   :name "background-image",
   :opts {:settings nil},
   :draw
-  "((let [gr (q/create-graphics (q/width) (q/height))] (q/with-graphics gr (q/background 0 90 120) (q/ellipse 250 250 300 300)) (q/background-image gr)))",
-  :setup "()",
+  "((let [im (q/state :image)] (comment \"check if image is loaded by checking its size matches sketch size\") (when (= (.-width im) (q/width)) (q/background-image im))))",
+  :setup
+  "(let [size (str (q/width) \"x\" (q/height)) _ (comment \"create url to image to used as background\") url (str \"https://dummyimage.com/\" size \"/2c3e50/ffffff.png\")] (q/set-state! :image (q/load-image url)))",
   :target :cljs}
  {:fns ["background"],
   :ns "quil.snippets.color.setting",
   :name "background",
   :opts {:settings nil},
   :draw
-  "((q/background 255 0 0) (q/background 4279312947) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 120)) (q/image gr 0 0) (q/with-graphics gr (q/background 70 120)) (q/image gr 70 70) (q/with-graphics gr (q/background 0 255 255)) (q/image gr 140 140) (q/with-graphics gr (q/background 0 0 255 120)) (q/image gr 210 210)))",
+  "((comment \"red\") (q/background 255 0 0) (let [_ (comment \"create graphics to test backgrounds\") gr (q/create-graphics 100 100)] (q/with-graphics gr (comment \"grey\") (q/background 120)) (q/image gr 0 0) (q/with-graphics gr (comment \"light-grey transparent\") (q/background 70 120)) (q/image gr 70 70) (q/with-graphics gr (comment \"cyan\") (q/background 0 255 255)) (q/image gr 140 140) (q/with-graphics gr (comment \"semitransparent blue\") (q/background 0 0 255 120)) (q/image gr 210 210)))",
   :setup "()",
   :target :cljs}
  {:fns ["print-projection"],
@@ -923,6 +1005,22 @@
   "((q/background 0) (q/camera 150 150 150 0 0 0 0 0 -1) (q/ambient-light 255 127 127) (q/ambient 255 127 0) (q/box 100) (q/translate 0 100 0) (q/ambient 127) (q/sphere 40))",
   :setup "()",
   :target :cljs}
+ {:fns ["with-stroke"],
+  :ns "quil.snippets.color.utility-macros",
+  :name "with-stroke",
+  :opts {:settings nil},
+  :draw
+  "((comment \"set fill to white, stroke to black and draw a square\") (q/fill 255) (q/stroke-weight 10) (q/stroke 0) (q/rect 30 30 60 60) (comment \"set border to red and draw 2 squares\") (q/with-stroke [255 0 0] (q/rect 60 60 90 90) (q/rect 90 90 120 120)) (comment \"draw another square, should have black borders\") (q/rect 120 120 150 150))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["with-fill"],
+  :ns "quil.snippets.color.utility-macros",
+  :name "with-fill",
+  :opts {:settings nil},
+  :draw
+  "((comment \"set fill to white and draw a square\") (q/fill 255) (q/rect 30 30 60 60) (comment \"set fill to red and draw 2 squares\") (q/with-fill [255 0 0] (q/rect 60 60 90 90) (q/rect 90 90 120 120)) (comment \"draw square, it'll use white color\") (q/rect 120 120 150 150))",
+  :setup "()",
+  :target :cljs}
  {:fns ["random-3d"],
   :ns "quil.snippets.math.random",
   :name "random-3d",
@@ -995,12 +1093,20 @@
   "((q/fill 0) (q/text (q/state :text) 10 20) (q/text (str \"Full state: \" (q/state)) 10 40))",
   :setup "(q/set-state! :text \"I'm state!\" :year (q/year))",
   :target :cljs}
- {:fns ["create-image"],
+ {:fns ["resize"],
+  :ns "quil.snippets.image",
+  :name "resize-image",
+  :opts {:settings nil},
+  :draw
+  "((comment \"create image and draw gradient on it\") (let [im (q/create-image 100 100 :rgb)] (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (q/image im 0 0) (comment \"resize image from 100x100 to 50x50 and draw again\") (q/resize im 50 50) (q/image im 100 100)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["create-image" "set-pixel"],
   :ns "quil.snippets.image",
   :name "create-image",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [im (q/create-image 100 100 :rgb)] (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (q/image im 0 0) (q/image im 50 50)))",
+  "((q/background 255) (comment \"create image and draw gradient on it\") (let [im (q/create-image 100 100 :rgb)] (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (comment \"draw image twice\") (q/image im 0 0) (q/image im 50 50)))",
   :setup "()",
   :target :cljs}
  {:fns ["no-cursor"],
@@ -1076,18 +1182,42 @@
   :target :cljs}
  {:fns ["with-translation"],
   :ns "quil.snippets.transform.utility-macros",
-  :name "with-translation",
+  :name "with-translation-3d",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 255) (q/stroke 0) (comment \"set camera and draw XYZ axis\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/line 0 0 0 100 0 0) (q/line 0 0 0 0 100 0) (q/line 0 0 0 0 0 100) (q/fill 0) (q/text \"x\" 100 0 0) (q/text \"y\" 0 100 0) (q/text \"z\" 0 0 100) (q/no-fill) (q/stroke 255 0 0) (comment \"draw 3 boxes using with-translation\") (q/box 50) (q/with-translation [100 0 0] (q/box 50)) (q/with-translation [100 0 100] (q/box 50)))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["with-translation"],
+  :ns "quil.snippets.transform.utility-macros",
+  :name "with-translation-2d",
   :opts {:settings nil},
   :draw
-  "((q/translate 10 10) (q/rect 0 0 50 50) (q/with-translation [150 0] (q/rect 0 0 50 50)) (q/with-translation [0 150] (q/rect 0 0 50 50)))",
+  "((q/background 255) (q/rect 0 0 50 50) (q/with-translation [150 0] (q/rect 0 0 50 50)) (q/with-translation [150 150] (q/rect 0 0 50 50)))",
   :setup "()",
   :target :cljs}
  {:fns ["with-rotation"],
   :ns "quil.snippets.transform.utility-macros",
-  :name "with-rotation",
+  :name "with-rotation-3d-around-xy",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (q/translate 0 0 100) (q/with-rotation [1] (q/box 50)) (q/translate 100 0 -100) (q/with-rotation [1 1 0 0] (q/box 50)) (q/translate -100 100 0) (q/with-rotation [1 0 1 0] (q/box 50)))",
+  "((q/background 255) (q/stroke 0) (comment \"set camera and draw XYZ axis\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/line 0 0 0 100 0 0) (q/line 0 0 0 0 100 0) (q/line 0 0 0 0 0 100) (q/fill 0) (q/text \"x\" 100 0 0) (q/text \"y\" 0 100 0) (q/text \"z\" 0 0 100) (q/no-fill) (q/stroke 255 0 0) (comment \"draw box without rotation\") (q/box 50) (comment \"draw box with 45° rotation around \") (comment \"[1, 1, 0] vector.\") (q/with-translation [100 0 0] (q/with-rotation [(/ q/PI 4) 1 1 0] (q/box 50))))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["with-rotation"],
+  :ns "quil.snippets.transform.utility-macros",
+  :name "with-rotation-3d-around-x",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 255) (q/stroke 0) (comment \"set camera and draw XYZ axis\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/line 0 0 0 100 0 0) (q/line 0 0 0 0 100 0) (q/line 0 0 0 0 0 100) (q/fill 0) (q/text \"x\" 100 0 0) (q/text \"y\" 0 100 0) (q/text \"z\" 0 0 100) (q/no-fill) (q/stroke 255 0 0) (comment \"draw box without rotation\") (q/box 50) (comment \"draw box with 45° rotation around \") (comment \"[1, 0, 0] vector.\") (q/with-translation [100 0 0] (q/with-rotation [(/ q/PI 4) 1 0 0] (q/box 50))))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["with-rotation"],
+  :ns "quil.snippets.transform.utility-macros",
+  :name "with-rotation-2d",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (comment \"draw rectangle without rotation\") (q/with-translation [50 50] (q/rect 0 0 100 200)) (comment \"draw rectangle with 45° rotation\") (q/with-translation [300 50] (q/with-rotation [(/ q/PI 4)] (q/rect 0 0 100 200))))",
   :setup "()",
   :target :cljs}
  {:fns ["curve-tightness"],
@@ -1237,7 +1367,7 @@
   :name "text",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/camera 50 50 50 0 0 0 0 0 -1) (q/line 0 0 0 0 0 20) (q/line 0 0 0 0 20 0) (q/line 0 0 0 20 0 0) (q/text \"2D\" 0 15) (q/rotate-x (- q/HALF-PI)) (q/text \"3D\" 0 -5 0) (q/rotate-y q/HALF-PI) (q/rect-mode :corners) (q/text \"box\" -30 0 30 -15))",
+  "((q/background 255) (q/fill 0) (q/camera 50 50 50 0 0 0 0 0 -1) (comment \"draw x/y/z axis\") (q/line 0 0 0 0 0 20) (q/line 0 0 0 0 20 0) (q/line 0 0 0 20 0 0) (comment \"draw text '2D'\") (q/text \"2D\" 0 15) (q/rotate-x (- q/HALF-PI)) (comment \"draw text '3D'\") (q/text \"3D\" 0 -5 0) (comment \"draw text 'box'\") (q/rotate-y q/HALF-PI) (q/rect-mode :corners) (q/text \"box\" -30 0 30 -15))",
   :setup "()",
   :target :cljs}
  {:fns ["create-font"],
@@ -1245,7 +1375,7 @@
   :name "create-font",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/text-font (q/create-font \"Courier New\" 30)) (q/text \"(print :hello)\" 20 50) (q/text-font (q/create-font \"Georgia\" 30 true)) (q/text \"(print :hello)\" 20 100) (q/text \"(print :hello)\" 20 150))",
+  "((q/background 255) (q/fill 0) (comment \"create font by name and size\") (q/text-font (q/create-font \"Courier New\" 30)) (q/text \"(print :hello)\" 20 50) (comment \"create font by name and size and using smooth\") (q/text-font (q/create-font \"Georgia\" 30 true)) (q/text \"(print :hello)\" 20 100))",
   :setup "()",
   :target :cljs}
  {:fns ["available-fonts"],
@@ -1253,7 +1383,7 @@
   :name "available-fonts",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/text-size 7) (doseq [[col fonts] (->> (q/available-fonts) (partition-all 50) (map-indexed vector)) [row font] (map-indexed vector fonts)] (q/text font (+ 20 (* col 100)) (+ 20 (* row 10)))))",
+  "((q/background 255) (q/fill 0) (q/text-size 10) (doseq [[col fonts] (->> (q/available-fonts) (partition-all 50) (map-indexed vector)) [row font] (map-indexed vector fonts)] (q/text font (+ 20 (* col 100)) (+ 20 (* row 10)))))",
   :setup "()",
   :target :cljs}
  {:fns ["text-descent"],
@@ -1301,7 +1431,7 @@
   :name "text",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/camera 50 50 50 0 0 0 0 0 -1) (q/line 0 0 0 0 0 20) (q/line 0 0 0 0 20 0) (q/line 0 0 0 20 0 0) (q/text \"2D\" 0 15) (q/rotate-x (- q/HALF-PI)) (q/text \"3D\" 0 -5 0) (q/rotate-y q/HALF-PI) (q/rect-mode :corners) (q/text \"box\" -30 0 30 -15))",
+  "((q/background 255) (q/fill 0) (q/camera 50 50 50 0 0 0 0 0 -1) (comment \"draw x/y/z axis\") (q/line 0 0 0 0 0 20) (q/line 0 0 0 0 20 0) (q/line 0 0 0 20 0 0) (comment \"draw text '2D'\") (q/text \"2D\" 0 15) (q/rotate-x (- q/HALF-PI)) (comment \"draw text '3D'\") (q/text \"3D\" 0 -5 0) (comment \"draw text 'box'\") (q/rotate-y q/HALF-PI) (q/rect-mode :corners) (q/text \"box\" -30 0 30 -15))",
   :setup "()",
   :target :clj}
  {:fns ["load-font"],
@@ -1325,7 +1455,7 @@
   :name "create-font",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/text-font (q/create-font \"Courier New\" 30)) (q/text \"(print :hello)\" 20 50) (q/text-font (q/create-font \"Georgia\" 30 true)) (q/text \"(print :hello)\" 20 100) (q/text-font (q/create-font \"Georgia\" 30 false (char-array \"what is it for?\"))) (q/text \"(print :hello)\" 20 150))",
+  "((q/background 255) (q/fill 0) (comment \"create font by name and size\") (q/text-font (q/create-font \"Courier New\" 30)) (q/text \"(print :hello)\" 20 50) (comment \"create font by name and size and using smooth\") (q/text-font (q/create-font \"Georgia\" 30 true)) (q/text \"(print :hello)\" 20 100) (comment \"create font using with all parameters\") (q/text-font (q/create-font \"Georgia\" 30 false (char-array \"what is it for?\"))) (q/text \"(print :hello)\" 20 150))",
   :setup "()",
   :target :clj}
  {:fns ["available-fonts"],
@@ -1333,7 +1463,7 @@
   :name "available-fonts",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/text-size 7) (doseq [[col fonts] (->> (q/available-fonts) (partition-all 50) (map-indexed vector)) [row font] (map-indexed vector fonts)] (q/text font (+ 20 (* col 100)) (+ 20 (* row 10)))))",
+  "((q/background 255) (q/fill 0) (q/text-size 10) (doseq [[col fonts] (->> (q/available-fonts) (partition-all 50) (map-indexed vector)) [row font] (map-indexed vector fonts)] (q/text font (+ 20 (* col 100)) (+ 20 (* row 10)))))",
   :setup "()",
   :target :clj}
  {:fns ["text-width"],
@@ -1373,23 +1503,47 @@
   :name "text-align",
   :opts {:settings nil},
   :draw
-  "((q/fill 0) (q/stroke 255 0 0) (q/stroke-weight 5) (let [h-align [:left :center :right] v-align [:top :bottom :center :baseline]] (doseq [ind (range (count h-align)) :let [x 50 y (+ 20 (* ind 50))]] (q/text-align (h-align ind)) (q/text (name (h-align ind)) x y) (q/point x y)) (doseq [ind-h (range (count h-align)) ind-v (range (count v-align)) :let [x (+ 70 (* ind-v 100)) y (+ 250 (* ind-h 50)) h-al (h-align ind-h) v-al (v-align ind-v) txt (str (name h-al) \"+\" (name v-al))]] (q/text-align h-al v-al) (q/text txt x y) (q/point x y))))",
+  "((q/fill 0) (q/stroke 255 0 0) (q/stroke-weight 5) (let [h-align [:left :center :right] v-align [:top :bottom :center :baseline]] (comment \"text-align with single argument\") (doseq [ind (range (count h-align)) :let [x 50 y (+ 20 (* ind 50))]] (q/text-align (h-align ind)) (q/text (name (h-align ind)) x y) (q/point x y)) (comment \"text-align with multiple arguments\") (doseq [ind-h (range (count h-align)) ind-v (range (count v-align)) :let [x (+ 70 (* ind-v 100)) y (+ 250 (* ind-h 50)) h-al (h-align ind-h) v-al (v-align ind-v) txt (str (name h-al) \"+\" (name v-al))]] (q/text-align h-al v-al) (q/text txt x y) (q/point x y))))",
   :setup "()",
   :target :clj}
  {:fns ["with-translation"],
   :ns "quil.snippets.transform.utility-macros",
-  :name "with-translation",
+  :name "with-translation-3d",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 255) (q/stroke 0) (comment \"set camera and draw XYZ axis\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/line 0 0 0 100 0 0) (q/line 0 0 0 0 100 0) (q/line 0 0 0 0 0 100) (q/fill 0) (q/text \"x\" 100 0 0) (q/text \"y\" 0 100 0) (q/text \"z\" 0 0 100) (q/no-fill) (q/stroke 255 0 0) (comment \"draw 3 boxes using with-translation\") (q/box 50) (q/with-translation [100 0 0] (q/box 50)) (q/with-translation [100 0 100] (q/box 50)))",
+  :setup "()",
+  :target :clj}
+ {:fns ["with-translation"],
+  :ns "quil.snippets.transform.utility-macros",
+  :name "with-translation-2d",
   :opts {:settings nil},
   :draw
-  "((q/translate 10 10) (q/rect 0 0 50 50) (q/with-translation [150 0] (q/rect 0 0 50 50)) (q/with-translation [0 150] (q/rect 0 0 50 50)))",
+  "((q/background 255) (q/rect 0 0 50 50) (q/with-translation [150 0] (q/rect 0 0 50 50)) (q/with-translation [150 150] (q/rect 0 0 50 50)))",
   :setup "()",
   :target :clj}
  {:fns ["with-rotation"],
   :ns "quil.snippets.transform.utility-macros",
-  :name "with-rotation",
+  :name "with-rotation-3d-around-xy",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (q/translate 0 0 100) (q/with-rotation [1] (q/box 50)) (q/translate 100 0 -100) (q/with-rotation [1 1 0 0] (q/box 50)) (q/translate -100 100 0) (q/with-rotation [1 0 1 0] (q/box 50)))",
+  "((q/background 255) (q/stroke 0) (comment \"set camera and draw XYZ axis\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/line 0 0 0 100 0 0) (q/line 0 0 0 0 100 0) (q/line 0 0 0 0 0 100) (q/fill 0) (q/text \"x\" 100 0 0) (q/text \"y\" 0 100 0) (q/text \"z\" 0 0 100) (q/no-fill) (q/stroke 255 0 0) (comment \"draw box without rotation\") (q/box 50) (comment \"draw box with 45° rotation around \") (comment \"[1, 1, 0] vector.\") (q/with-translation [100 0 0] (q/with-rotation [(/ q/PI 4) 1 1 0] (q/box 50))))",
+  :setup "()",
+  :target :clj}
+ {:fns ["with-rotation"],
+  :ns "quil.snippets.transform.utility-macros",
+  :name "with-rotation-3d-around-x",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 255) (q/stroke 0) (comment \"set camera and draw XYZ axis\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/line 0 0 0 100 0 0) (q/line 0 0 0 0 100 0) (q/line 0 0 0 0 0 100) (q/fill 0) (q/text \"x\" 100 0 0) (q/text \"y\" 0 100 0) (q/text \"z\" 0 0 100) (q/no-fill) (q/stroke 255 0 0) (comment \"draw box without rotation\") (q/box 50) (comment \"draw box with 45° rotation around \") (comment \"[1, 0, 0] vector.\") (q/with-translation [100 0 0] (q/with-rotation [(/ q/PI 4) 1 0 0] (q/box 50))))",
+  :setup "()",
+  :target :clj}
+ {:fns ["with-rotation"],
+  :ns "quil.snippets.transform.utility-macros",
+  :name "with-rotation-2d",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (comment \"draw rectangle without rotation\") (q/with-translation [50 50] (q/rect 0 0 100 200)) (comment \"draw rectangle with 45° rotation\") (q/with-translation [300 50] (q/with-rotation [(/ q/PI 4)] (q/rect 0 0 100 200))))",
   :setup "()",
   :target :clj}
  {:fns ["vertex"],
@@ -2161,7 +2315,7 @@
   :name "with-stroke",
   :opts {:settings nil},
   :draw
-  "((q/fill 255) (q/stroke-weight 10) (q/rect 30 30 60 60) (q/with-stroke [255 0 0] (q/rect 60 60 90 90) (q/rect 90 90 120 120)) (q/rect 120 120 150 150))",
+  "((comment \"set fill to white, stroke to black and draw a square\") (q/fill 255) (q/stroke-weight 10) (q/stroke 0) (q/rect 30 30 60 60) (comment \"set border to red and draw 2 squares\") (q/with-stroke [255 0 0] (q/rect 60 60 90 90) (q/rect 90 90 120 120)) (comment \"draw another square, should have black borders\") (q/rect 120 120 150 150))",
   :setup "()",
   :target :clj}
  {:fns ["with-fill"],
@@ -2169,7 +2323,7 @@
   :name "with-fill",
   :opts {:settings nil},
   :draw
-  "((q/fill 255) (q/rect 30 30 60 60) (q/with-fill [255 0 0] (q/rect 60 60 90 90) (q/rect 90 90 120 120)) (q/rect 120 120 150 150))",
+  "((comment \"set fill to white and draw a square\") (q/fill 255) (q/rect 30 30 60 60) (comment \"set fill to red and draw 2 squares\") (q/with-fill [255 0 0] (q/rect 60 60 90 90) (q/rect 90 90 120 120)) (comment \"draw square, it'll use white color\") (q/rect 120 120 150 150))",
   :setup "()",
   :target :clj}
  {:fns ["clear"],
@@ -2177,7 +2331,7 @@
   :name "clear",
   :opts {:renderer :p2d, :settings nil},
   :draw
-  "((let [g (q/create-graphics 200 200 :p2d)] (q/background 255) (q/with-graphics g (q/fill 255 0 0) (q/rect 25 25 150 150)) (q/image g 0 0) (q/with-graphics g (q/clear) (q/fill 0 255 0) (q/ellipse 100 100 150 150)) (q/image g 50 50) (q/with-graphics g (q/clear) (q/fill 0 0 255) (q/triangle 25 25 175 25 25 175)) (q/image g 100 100)))",
+  "((comment \"reusing the same graphics to draw 3 things\") (let [g (q/create-graphics 200 200 :p2d)] (q/background 255) (comment \"draw red square\") (q/with-graphics g (q/fill 255 0 0) (q/rect 25 25 150 150)) (q/image g 0 0) (comment \"draw circle without clearing\") (comment \"red square is still present\") (q/with-graphics g (q/fill 0 255 0) (q/ellipse 100 100 150 150)) (q/image g 50 50) (comment \"draw triangle but with clear\") (q/with-graphics g (q/clear) (q/fill 0 0 255) (q/triangle 25 25 175 25 25 175)) (q/image g 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["stroke"],
@@ -2185,7 +2339,7 @@
   :name "stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/stroke-weight 10) (q/stroke 120) (q/rect 0 0 100 100) (q/stroke 80 120) (q/rect 70 70 100 100) (q/stroke 0 255 0) (q/rect 140 140 100 100) (q/stroke 255 0 0 120) (q/rect 210 210 100 100) (q/stroke 4278255360) (q/rect 280 280 100 100))",
+  "((q/background 255) (q/stroke-weight 10) (comment \"grey\") (q/stroke 120) (q/rect 0 0 100 100) (comment \"semitransparent light grey\") (q/stroke 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/stroke 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/stroke 255 0 0 120) (q/rect 210 210 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["no-stroke"],
@@ -2193,7 +2347,7 @@
   :name "no-stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 120) (q/stroke 0) (q/rect 0 0 100 100) (q/no-stroke) (q/rect 70 70 100 100))",
+  "((q/background 255) (comment \"set stroke to black\") (q/fill 120) (q/stroke 0) (q/rect 0 0 100 100) (comment \"remove stroke, no border around square\") (q/no-stroke) (q/rect 70 70 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["no-fill"],
@@ -2201,7 +2355,7 @@
   :name "no-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/stroke 0) (q/fill 120) (q/rect 0 0 100 100) (q/no-fill) (q/rect 70 70 100 100))",
+  "((q/background 255) (comment \"set background to grey\") (q/stroke 0) (q/fill 120) (q/rect 0 0 100 100) (comment \"remove background, only border left\") (q/no-fill) (q/rect 70 70 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["fill"],
@@ -2209,7 +2363,7 @@
   :name "fill",
   :opts {:settings nil},
   :draw
-  "((q/background 0 0 255) (q/fill 120) (q/rect 0 0 100 100) (q/fill 80 120) (q/rect 70 70 100 100) (q/fill 0 255 0) (q/rect 140 140 100 100) (q/fill 255 0 0 120) (q/rect 210 210 100 100) (q/fill 4278255360) (q/rect 280 280 100 100))",
+  "((comment \"blue background\") (q/background 0 0 255) (comment \"grey\") (q/fill 120) (q/rect 0 0 100 100) (comment \"semitransparent light grey\") (q/fill 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/fill 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/fill 255 0 0 120) (q/rect 210 210 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["background-image"],
@@ -2217,15 +2371,24 @@
   :name "background-image",
   :opts {:settings nil},
   :draw
-  "((let [gr (q/create-graphics (q/width) (q/height))] (q/with-graphics gr (q/background 0 90 120) (q/ellipse 250 250 300 300)) (q/background-image gr)))",
-  :setup "()",
+  "((let [im (q/state :image)] (comment \"check if image is loaded by checking its size matches sketch size\") (when (= (.-width im) (q/width)) (q/background-image im))))",
+  :setup
+  "(let [size (str (q/width) \"x\" (q/height)) _ (comment \"create url to image to used as background\") url (str \"https://dummyimage.com/\" size \"/2c3e50/ffffff.png\")] (q/set-state! :image (q/load-image url)))",
   :target :clj}
  {:fns ["background"],
   :ns "quil.snippets.color.setting",
   :name "background",
   :opts {:settings nil},
   :draw
-  "((q/background 255 0 0) (q/background 4279312947) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 120)) (q/image gr 0 0) (q/with-graphics gr (q/background 70 120)) (q/image gr 70 70) (q/with-graphics gr (q/background 0 255 255)) (q/image gr 140 140) (q/with-graphics gr (q/background 0 0 255 120)) (q/image gr 210 210)))",
+  "((comment \"red\") (q/background 255 0 0) (let [_ (comment \"create graphics to test backgrounds\") gr (q/create-graphics 100 100)] (q/with-graphics gr (comment \"grey\") (q/background 120)) (q/image gr 0 0) (q/with-graphics gr (comment \"light-grey transparent\") (q/background 70 120)) (q/image gr 70 70) (q/with-graphics gr (comment \"cyan\") (q/background 0 255 255)) (q/image gr 140 140) (q/with-graphics gr (comment \"semitransparent blue\") (q/background 0 0 255 120)) (q/image gr 210 210)))",
+  :setup "()",
+  :target :clj}
+ {:fns [],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "use-hex-colors",
+  :opts {:settings nil},
+  :draw
+  "((q/lerp-color 4278255360 4278190335 0.5) (q/hue 4279312947) (q/saturation 4279312947) (q/brightness 4279312947) (q/red 4279312947) (q/green 4279312947) (q/blue 4279312947) (q/blend-color 4278255360 4294901760 :blend) (q/background 4279312947))",
   :setup "()",
   :target :clj}
  {:fns ["lerp-color"],
@@ -2233,7 +2396,7 @@
   :name "lerp-color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/lerp-color 4278255360 4278190335 0.5) (let [c1 (q/color 255 0 0) c2 (q/color 0 0 255)] (dotimes [i 6] (q/fill (q/lerp-color c1 c2 (/ i 5))) (q/rect (* i 70) (* i 70) 100 100))))",
+  "((q/background 255) (let [c1 (q/color 255 0 0) c2 (q/color 0 0 255)] (comment \"draw colors that transition from c1 to c2\") (dotimes [i 6] (q/fill (q/lerp-color c1 c2 (/ i 5))) (q/rect (* i 70) (* i 70) 100 100))))",
   :setup "()",
   :target :clj}
  {:fns ["current-stroke"],
@@ -2241,7 +2404,7 @@
   :name "current-stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/stroke 255 0 0) (q/rect 0 0 100 100) (let [cur-stroke (q/current-stroke)] (q/stroke 0 0 255) (q/rect 70 70 100 100) (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
+  "((q/background 255) (comment \"set to red\") (q/stroke 255 0 0) (q/rect 0 0 100 100) (let [_ (comment \"remember current color\") cur-stroke (q/current-stroke)] (comment \"change to blue\") (q/stroke 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["current-fill"],
@@ -2249,7 +2412,7 @@
   :name "current-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 255 0 0) (q/rect 0 0 100 100) (let [cur-fill (q/current-fill)] (q/fill 0 0 255) (q/rect 70 70 100 100) (q/fill cur-fill) (q/rect 140 140 100 100)))",
+  "((q/background 255) (comment \"set to red\") (q/fill 255 0 0) (q/rect 0 0 100 100) (let [_ (comment \"remember current color\") cur-fill (q/current-fill)] (comment \"change to blue\") (q/fill 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/fill cur-fill) (q/rect 140 140 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["color-mode"],
@@ -2257,7 +2420,15 @@
   :name "color-mode",
   :opts {:settings nil},
   :draw
-  "((q/color-mode :rgb 255) (q/background 255) (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100) (q/color-mode :rgb 42) (q/fill 42 42 0 20) (q/rect 70 70 100 100) (q/color-mode :hsb 5 10 20) (q/fill 5 10 20) (q/rect 140 140 100 100) (q/color-mode :rgb 5 10 20 30) (q/fill 5 10 0 15) (q/rect 210 210 100 100))",
+  "((q/color-mode :rgb 255) (q/background 255) (comment \"use HSB and draw red\") (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100) (comment \"use HSB with different max and draw dark green\") (q/color-mode :hsb 5 10 20) (q/fill 2 10 5) (q/rect 70 70 100 100) (comment \"use RGB with 42 max value and draw 75% transparent blue\") (q/color-mode :rgb 40) (q/fill 0 0 40 30) (q/rect 140 140 100 100) (comment \"use RGB with different max values and draw semitransparent cyan\") (q/color-mode :rgb 5 10 20 30) (q/fill 0 10 20 15) (q/rect 210 210 100 100))",
+  :setup "()",
+  :target :clj}
+ {:fns ["color-mode"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "color-mode-hsb",
+  :opts {:settings nil},
+  :draw
+  "((q/color-mode :rgb 255) (q/background 255) (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["color"],
@@ -2265,23 +2436,55 @@
   :name "color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill (q/color 0)) (q/rect 0 0 100 100) (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
+  "((q/background 255) (comment \"black\") (q/fill (q/color 0)) (q/rect 0 0 100 100) (comment \"semitransparent gray\") (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (comment \"purple\") (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (comment \"semitransparent cyan\") (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
   :setup "()",
   :target :clj}
- {:fns ["hue" "saturation" "brightness"],
+ {:fns ["brightness"],
   :ns "quil.snippets.color.creating-and-reading",
-  :name "hue-saturation-brightness",
+  :name "brightness",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/hue 4279312947) (q/saturation 4279312947) (q/brightness 4279312947) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/hue col) 255 255) (q/rect 70 70 100 100) (q/fill 255 (q/saturation col) 255) (q/rect 140 140 100 100) (q/fill 255 255 (q/brightness col)) (q/rect 210 210 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill 255 255 (q/brightness col)) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
- {:fns ["red" "green" "blue"],
+ {:fns ["saturation"],
   :ns "quil.snippets.color.creating-and-reading",
-  :name "red-green-blue",
+  :name "saturation",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/red 4279312947) (q/green 4279312947) (q/blue 4279312947) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/red col) 0 0) (q/rect 70 70 100 100) (q/fill 0 (q/green col) 0) (q/rect 140 140 100 100) (q/fill 0 0 (q/blue col)) (q/rect 210 210 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill 255 (q/saturation col) 255) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :clj}
+ {:fns ["hue"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "hue",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (q/color-mode :hsb) (let [col (q/color 100 230 100)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/hue col) 255 255) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :clj}
+ {:fns ["blue"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "blue",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill 0 0 (q/blue col)) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :clj}
+ {:fns ["green"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "green",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill 0 (q/green col) 0) (q/rect 70 70 100 100)))",
+  :setup "()",
+  :target :clj}
+ {:fns ["red"],
+  :ns "quil.snippets.color.creating-and-reading",
+  :name "red",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (let [col (q/color 123 50 220)] (q/fill col) (q/rect 0 0 100 100) (q/fill (q/red col) 0 0) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["blend-color"],
@@ -2289,7 +2492,7 @@
   :name "blend-color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/blend-color 4278255360 4294901760 :blend) (let [c1 (q/color 255 100 20 50) c2 (q/color 40 200 255 200) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 3 modes)] (q/fill c1) (q/rect 0 0 70 70) (q/fill c2) (q/rect 100 0 70 70) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (q/fill (q/blend-color c1 c2 mode))) (q/rect (* col 100) (* (inc row) 100) 70 70)))))",
+  "((q/background 255) (let [_ (comment \"very transparent red\") c1 (q/color 255 100 20 50) _ (comment \"not very transparent blue\") c2 (q/color 40 200 255 200) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 3 modes)] (comment \"draw 2 rectangles with colors c1 and c2\") (q/fill c1) (q/rect 0 0 70 70) (q/fill c2) (q/rect 100 0 70 70) (comment \"draw all possible blended colors\") (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (q/fill (q/blend-color c1 c2 mode))) (q/rect (* col 100) (* (inc row) 100) 70 70)))))",
   :setup "()",
   :target :clj}
  {:fns ["alpha"],
@@ -2297,7 +2500,7 @@
   :name "alpha",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/alpha 4278255360) (let [semi-red (q/color 255 0 0 120) alph (q/alpha semi-red) semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 0 0 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [_ (comment \"create semitransparent red\") semi-red (q/color 255 0 0 120) _ (comment \"extract alpha value from it\") alph (q/alpha semi-red) _ (comment \"create semitransparent blue using the alpha\") semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 0 0 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["tint"],
@@ -2305,24 +2508,24 @@
   :name "tint",
   :opts {:settings nil},
   :draw
-  "((q/background 127) (q/tint 4279312947) (q/no-tint) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 25 25 40 40) (q/fill 255 0 0) (q/ellipse 75 25 40 40) (q/fill 0 255 0) (q/ellipse 25 75 40 40) (q/fill 0 0 255) (q/ellipse 75 75 40 40)) (q/no-tint) (q/image gr 0 0) (q/tint 127) (q/image gr 120 0) (q/tint 255 127) (q/image gr 240 0) (q/tint 200 127 180) (q/image gr 0 120) (q/tint 200 127 180 127) (q/image gr 120 120)))",
+  "((q/background 127) (let [gr (q/create-graphics 100 100)] (comment \"draw 4 circles of different color on the graphics\") (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 25 25 40 40) (q/fill 255 0 0) (q/ellipse 75 25 40 40) (q/fill 0 255 0) (q/ellipse 25 75 40 40) (q/fill 0 0 255) (q/ellipse 75 75 40 40)) (comment \"apply different types of tint\") (q/no-tint) (q/image gr 0 0) (q/tint 127) (q/image gr 120 0) (q/tint 255 127) (q/image gr 240 0) (q/tint 200 127 180) (q/image gr 0 120) (q/tint 200 127 180 127) (q/image gr 120 120)))",
   :setup "()",
   :target :clj}
- {:fns ["image"],
+ {:fns ["request-image"],
   :ns "quil.snippets.image.loading-and-displaying",
   :name "request-image",
   :opts {:settings nil},
   :draw
   "((if (zero? (.-width (q/state :image))) (q/text \"Loading\" 10 10) (q/image (q/state :image) 0 0)))",
   :setup
-  "(q/set-state! :image (q/request-image \"https://github.com/quil/quil/raw/master/dev-resources/quil.png\"))",
+  "(q/set-state! :image (q/request-image \"https://dummyimage.com/100x100/2c3e50/ffffff.png\"))",
   :target :clj}
  {:fns ["no-tint"],
   :ns "quil.snippets.image.loading-and-displaying",
   :name "no-tint",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 50 50 70 70)) (q/image gr 0 0) (q/tint 127 255 255) (q/image gr 100 0) (q/no-tint) (q/image gr 200 0)))",
+  "((q/background 255) (comment \"create graphics with white circle\") (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0) (q/fill 255) (q/ellipse 50 50 70 70)) (comment \"apply cyan tint\") (q/image gr 0 0) (q/tint 127 255 255) (q/image gr 100 0) (comment \"remove tint\") (q/no-tint) (q/image gr 200 0)))",
   :setup "()",
   :target :clj}
  {:fns ["mask-image"],
@@ -2330,15 +2533,7 @@
   :name "mask-image",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100 :p3d) gr2 (q/create-graphics 100 100 :p3d) mask (q/create-graphics 100 100 :p3d)] (q/with-graphics gr (q/background 0 0 255) (q/stroke-weight 3) (q/stroke 255 0 0) (q/line 0 0 100 100) (q/line 0 100 100 0)) (q/with-graphics gr2 (q/background 255) (q/stroke 0 255 0) (q/stroke-weight 5) (q/line 0 50 100 50) (q/line 50 0 50 100)) (q/with-graphics mask (q/background 0) (q/stroke-weight 5) (q/no-fill) (q/stroke 255) (q/ellipse 50 50 10 10) (q/stroke 200) (q/ellipse 50 50 30 30) (q/stroke 150) (q/ellipse 50 50 50 50) (q/stroke 100) (q/ellipse 50 50 70 70) (q/stroke 50) (q/ellipse 50 50 90 90)) (q/image gr 20 20) (q/image mask 140 20) (q/mask-image gr mask) (q/image gr 260 20) (q/image gr2 20 140) (q/image mask 140 140) (q/with-graphics gr2 (q/mask-image mask)) (q/image gr2 260 140)))",
-  :setup "()",
-  :target :clj}
- {:fns ["resize"],
-  :ns "quil.snippets.image.loading-and-displaying",
-  :name "resize-image",
-  :opts {:settings nil},
-  :draw
-  "((let [im (q/load-image \"https://github.com/quil/quil/raw/master/dev-resources/quil.png\")] (q/image im 0 0) (q/resize im 50 50) (q/image im 0 0)))",
+  "((q/background 255) (comment \"define 2 graphics and mask to apply to them\") (let [gr (q/create-graphics 100 100 :p3d) gr2 (q/create-graphics 100 100 :p3d) mask (q/create-graphics 100 100 :p3d)] (comment \"first graphic is blue square with red crossing\") (q/with-graphics gr (q/background 0 0 255) (q/stroke-weight 3) (q/stroke 255 0 0) (q/line 0 0 100 100) (q/line 0 100 100 0)) (comment \"second graphic is green cross\") (q/with-graphics gr2 (q/background 255) (q/stroke 0 255 0) (q/stroke-weight 5) (q/line 0 50 100 50) (q/line 50 0 50 100)) (comment \"mask is grey circles\") (q/with-graphics mask (q/background 0) (q/stroke-weight 5) (q/no-fill) (q/stroke 255) (q/ellipse 50 50 10 10) (q/stroke 200) (q/ellipse 50 50 30 30) (q/stroke 150) (q/ellipse 50 50 50 50) (q/stroke 100) (q/ellipse 50 50 70 70) (q/stroke 50) (q/ellipse 50 50 90 90)) (comment \"draw first graphic, mask and graphic with mask applied\") (q/image gr 20 20) (q/image mask 140 20) (q/mask-image gr mask) (q/image gr 260 20) (comment \"draw second graphic, mask and graphic with mask applied\") (q/image gr2 20 140) (q/image mask 140 140) (q/with-graphics gr2 (q/mask-image mask)) (q/image gr2 260 140)))",
   :setup "()",
   :target :clj}
  {:fns ["load-image"],
@@ -2346,15 +2541,16 @@
   :name "load-image",
   :opts {:settings nil},
   :draw
-  "((let [im (q/load-image \"https://github.com/quil/quil/raw/master/dev-resources/quil.png\")] (q/image im 0 0)))",
-  :setup "()",
+  "((let [im (q/state :image)] (comment \"image is loaded once its width is non-zero\") (when-not (zero? (.-width im)) (q/image im 0 0))))",
+  :setup
+  "(let [_ (comment \"create url to load image 100x100\") url (str \"https://dummyimage.com/100x100/2c3e50/ffffff.png\")] (q/set-state! :image (q/load-image url)))",
   :target :clj}
  {:fns ["image-mode"],
   :ns "quil.snippets.image.loading-and-displaying",
   :name "image-mode",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/fill 0 0 255) (q/stroke 0 0 255) (q/rect 0 0 100 100)) (q/stroke-weight 10) (q/image-mode :corner) (q/image gr 50 50) (q/point 50 50) (q/image-mode :center) (q/image gr 250 100) (q/point 250 100) (q/image-mode :corners) (q/image gr 350 50 400 150) (q/point 350 50) (q/point 400 150)))",
+  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/fill 0 0 255) (q/stroke 0 0 255) (q/rect 0 0 100 100)) (q/stroke-weight 10) (comment \"use :corner mode\") (q/image-mode :corner) (q/image gr 50 50) (q/point 50 50) (comment \"use :center mode\") (q/image-mode :center) (q/image gr 250 100) (q/point 250 100) (comment \"use :corners mode\") (q/image-mode :corners) (q/image gr 350 50 400 150) (q/point 350 50) (q/point 400 150)))",
   :setup "()",
   :target :clj}
  {:fns ["image"],
@@ -2362,15 +2558,7 @@
   :name "image",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 70 70)] (q/with-graphics gr (q/ellipse 35 35 70 70)) (q/image gr 0 0) (q/image gr 100 0 100 70)))",
-  :setup "()",
-  :target :clj}
- {:fns ["set-pixel"],
-  :ns "quil.snippets.image.pixels",
-  :name "set-pixel",
-  :opts {:renderer :p2d, :settings nil},
-  :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 255)) (doseq [i (range 30) j (range 30)] (q/set-pixel gr i j (q/color (* 7 i) (* 7 j) 0))) (q/image gr 0 0) (doseq [i (range 30) j (range 30)] (q/set-pixel (+ 40 i) (+ 40 j) (q/color 0 (* 7 i) (* 7 j))))))",
+  "((q/background 255) (comment \"create graphics with circle\") (let [gr (q/create-graphics 70 70)] (q/with-graphics gr (q/ellipse 35 35 70 70)) (comment \"draw graphics twice\") (q/image gr 0 0) (q/image gr 100 0 100 70)))",
   :setup "()",
   :target :clj}
  {:fns ["set-image"],
@@ -2378,7 +2566,7 @@
   :name "set-image",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/ellipse 50 50 90 90)) (q/set-image 10 10 gr)))",
+  "((q/background 255) (let [im (q/create-image 100 100 :rgb)] (comment \"draw gradient on the image\") (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (comment \"draw image on sketch\") (q/set-image 10 10 im)))",
   :setup "()",
   :target :clj}
  {:fns ["pixels" "update-pixels"],
@@ -2386,7 +2574,7 @@
   :name "pixels-update-pixels",
   :opts {:renderer :p2d, :settings nil},
   :draw
-  "((q/background 255) (let [size 50 gr (q/create-graphics size size :p2d)] (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/ellipse (/ size 2) (/ size 3) (* size 2/3) (* size 2/3))) (q/image gr 0 0) (let [px (q/pixels gr) half (/ (* size size) 2)] (dotimes [i half] (aset-int px (+ i half) (aget px i)))) (q/update-pixels gr) (q/image gr (+ size 20) 0) (let [px (q/pixels) half (/ (* (q/width) (q/height)) 10)] (dotimes [i half] (aset-int px (+ i half) (aget px i)))) (q/update-pixels)))",
+  "((q/background 255) (let [size 50 gr (q/create-graphics size size :p2d)] (comment \"draw red circle on the graphics\") (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/ellipse (/ size 2) (/ size 2) (* size (/ 2 3)) (* size (/ 2 3)))) (comment \"draw original graphics\") (q/image gr 0 0) (comment \"get pixels of the graphics and copy\") (comment \"the first half of all pixels to the second half\") (let [px (q/pixels gr) half (/ (* size size) 2)] (dotimes [i half] (aset-int px (+ i half) (aget px i)))) (q/update-pixels gr) (q/image gr (+ size 20) 0) (comment \"get pixels of the sketch itself and copy\") (comment \"the first half of all pixels to the second half\") (let [px (q/pixels) half (/ (* (q/width) (q/height)) 10)] (dotimes [i half] (aset-int px (+ i half) (aget px i)))) (q/update-pixels)))",
   :setup "()",
   :target :clj}
  {:fns ["get-pixel"],
@@ -2394,7 +2582,7 @@
   :name "get-pixel",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 255) (q/fill 127 255 180) (q/ellipse 50 50 70 70)) (q/image gr 0 0) (q/image (q/get-pixel gr) 0 120) (q/fill (q/get-pixel gr 50 50)) (q/rect 120 120 100 100) (q/image (q/get-pixel gr 0 0 50 50) 240 120) (q/image (q/get-pixel) 400 400) (q/fill (q/get-pixel 50 50)) (q/rect 120 240 100 100) (q/image (q/get-pixel 0 0 50 50) 240 240)))",
+  "((q/background 255) (let [gr (q/create-graphics 100 100)] (comment \"draw circle on the graphics\") (q/with-graphics gr (q/background 255) (q/fill 127 255 180) (q/ellipse 50 50 70 70)) (comment \"draw original graphics\") (q/image gr 0 0) (comment \"copy graphics and draw it\") (q/image (q/get-pixel gr) 0 120) (comment \"use get-pixel to get color of specific pixel\") (comment \"and draw square\") (q/fill (q/get-pixel gr 50 50)) (q/rect 120 120 100 100) (comment \"use get-pixel to copy part of the graphics\") (q/image (q/get-pixel gr 0 0 50 50) 240 120) (comment \"use get-pixel to copy part of the sketch itself\") (q/image (q/get-pixel) 400 400) (q/fill (q/get-pixel 50 50)) (q/rect 120 240 100 100) (q/image (q/get-pixel 0 0 50 50) 240 240)))",
   :setup "()",
   :target :clj}
  {:fns ["filter-shader"],
@@ -2410,7 +2598,7 @@
   :name "display-filter",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) dest (q/create-graphics 100 100)] (q/with-graphics dest (q/image orig 0 0) (apply q/display-filter mode)) (q/image dest (* col 120) (* 120 (inc row))))))))",
+  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (comment \"draw 10x10 square from circles of different color\") (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (comment \"apply different filters, four filters per row\") (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) dest (q/create-graphics 100 100)] (q/with-graphics dest (q/image orig 0 0) (apply q/display-filter mode)) (q/image dest (* col 120) (* 120 (inc row))))))))",
   :setup "()",
   :target :clj}
  {:fns ["image-filter"],
@@ -2418,7 +2606,7 @@
   :name "image-filter",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) clone (q/get-pixel orig)] (apply q/image-filter clone mode) (q/image clone (* col 120) (* 120 (inc row))))))))",
+  "((q/background 255) (let [orig (q/create-graphics 100 100) modes [[:threshold] [:threshold 0.7] [:gray] [:invert] [:posterize 20] [:blur] [:blur 3] [:opaque] [:erode] [:dilate]] splitted (partition-all 4 modes)] (comment \"draw 10x10 square from circles of different color\") (q/with-graphics orig (q/color-mode :rgb 1.0) (q/background 1) (q/no-stroke) (q/ellipse-mode :corner) (doseq [r (range 0 1 0.1) b (range 0 1 0.1)] (q/fill r 0 b) (q/ellipse (* r 100) (* b 100) 10 10))) (comment \"apply different filters, four filters per row\") (q/image orig 0 0) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col) clone (q/get-pixel orig)] (apply q/image-filter clone mode) (q/image clone (* col 120) (* 120 (inc row))))))))",
   :setup "()",
   :target :clj}
  {:fns ["copy"],
@@ -2426,7 +2614,7 @@
   :name "copy",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 0 0 255) (q/stroke-weight 5) (q/stroke 0 255 0) (q/no-fill) (q/ellipse 50 50 10 10) (q/ellipse 50 50 50 50) (q/ellipse 50 50 90 90) (q/stroke 255 0 0) (q/line 0 0 100 100) (q/line 100 0 0 100)) (let [im (.copy gr)] (q/image im 0 0) (q/copy im im [0 0 50 50] [50 0 50 50]) (q/copy im [0 0 100 100] [120 0 100 100]) (q/copy [0 0 50 50] [240 0 100 100]))))",
+  "((q/background 255) (let [im (q/create-image 100 100 :rgb)] (comment \" gradient on the image\") (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (comment \"draw original image\") (q/image im 0 0) (comment \"copy left top quarter to the right top quarter\") (q/copy im im [0 0 50 50] [50 0 50 50]) (comment \"copy the whole image to the sketch, essentially just draw it\") (q/copy im [0 0 100 100] [120 0 100 100]) (comment \"copy top left 50x50 square of sketch \") (comment \"to the 100x100 square at [240, 0] position\") (q/copy [0 0 50 50] [240 0 100 100])))",
   :setup "()",
   :target :clj}
  {:fns ["blend"],
@@ -2434,7 +2622,7 @@
   :name "blend",
   :opts {:settings nil},
   :draw
-  "((q/background 255 100 20 50) (let [gr (q/create-graphics 50 50) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 5 modes)] (q/with-graphics gr (q/background 40 200 255 200) (q/fill 255 0 0) (q/ellipse 12 12 20 20) (q/fill 0 255 0) (q/ellipse 38 12 20 20) (q/fill 0 0 255) (q/ellipse 25 38 20 20)) (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (q/blend 400 0 50 50 (* col 55) (* row 55) 50 50 mode) (q/blend gr 0 0 50 50 (* col 55) (+ 170 (* row 55)) 50 50 mode) (q/blend gr (q/current-graphics) 0 0 50 50 (* col 55) (+ 340 (* row 55)) 50 50 mode))))))",
+  "((q/background 255 100 20 50) (let [gr (q/create-graphics 50 50) modes [:blend :add :subtract :darkest :lightest :difference :exclusion :multiply :screen :overlay :hard-light :soft-light :dodge :burn] splitted (partition-all 5 modes)] (comment \"draw 3 circles of different color on the graphics\") (q/with-graphics gr (q/background 40 200 255 200) (q/fill 255 0 0) (q/ellipse 12 12 20 20) (q/fill 0 255 0) (q/ellipse 38 12 20 20) (q/fill 0 0 255) (q/ellipse 25 38 20 20)) (comment \"all possible blended modes\") (dotimes [row (count splitted)] (dotimes [col (count (nth splitted row))] (let [mode (nth (nth splitted row) col)] (comment \"blend with sketch itself\") (q/blend 400 0 50 50 (* col 55) (* row 55) 50 50 mode) (comment \"blend with graphics\") (q/blend gr 0 0 50 50 (* col 55) (+ 170 (* row 55)) 50 50 mode) (comment \"blend graphics to graphics\") (q/blend gr (q/current-graphics) 0 0 50 50 (* col 55) (+ 340 (* row 55)) 50 50 mode))))))",
   :setup "()",
   :target :clj}
  {:fns ["create-graphics"],
@@ -2442,7 +2630,7 @@
   :name "create-graphics",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 80 40)) (q/image gr 0 0)) (let [gr (q/create-graphics 100 100 :java2d)] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 40 80)) (q/image gr 100 100)) (let [gr (q/create-graphics 100 100 :pdf \"generated/create-graphics.pdf\")] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 80 40) (.dispose gr))))",
+  "((q/background 255) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 80 40)) (q/image gr 0 0)) (comment \"use different renderer\") (let [gr (q/create-graphics 100 100 :java2d)] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 40 80)) (q/image gr 100 100)) (comment \"write output to pdf file\") (let [gr (q/create-graphics 100 100 :pdf \"generated/create-graphics.pdf\")] (q/with-graphics gr (q/background 127) (q/ellipse 50 50 80 40) (.dispose gr))))",
   :setup "()",
   :target :clj}
  {:fns ["blend-mode"],
@@ -2748,11 +2936,19 @@
   "((q/background 255) (q/fill 0) (q/text (str (q/current-frame-rate)) 10 20) (q/text (str (q/target-frame-rate)) 10 40))",
   :setup "()",
   :target :clj}
- {:fns ["create-image"],
+ {:fns ["resize"],
+  :ns "quil.snippets.image",
+  :name "resize-image",
+  :opts {:settings nil},
+  :draw
+  "((comment \"create image and draw gradient on it\") (let [im (q/create-image 100 100 :rgb)] (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (q/image im 0 0) (comment \"resize image from 100x100 to 50x50 and draw again\") (q/resize im 50 50) (q/image im 100 100)))",
+  :setup "()",
+  :target :clj}
+ {:fns ["create-image" "set-pixel"],
   :ns "quil.snippets.image",
   :name "create-image",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [im (q/create-image 100 100 :rgb)] (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (q/image im 0 0) (q/image im 50 50)))",
+  "((q/background 255) (comment \"create image and draw gradient on it\") (let [im (q/create-image 100 100 :rgb)] (dotimes [x 100] (dotimes [y 100] (q/set-pixel im x y (q/color (* 2 x) (* 2 y) (+ x y))))) (comment \"draw image twice\") (q/image im 0 0) (q/image im 50 50)))",
   :setup "()",
   :target :clj})
