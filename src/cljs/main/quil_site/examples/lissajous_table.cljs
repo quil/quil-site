@@ -124,6 +124,7 @@
    :host host
    :size [size size]
    :setup setup
-   :draw draw)) ;DELETE
+   :draw draw)
+) ;DELETE
 
 (quil-site.main/register-example! "lissajous table" "Mochamad Lucky Pradana" run-sketch) ;DELETE
