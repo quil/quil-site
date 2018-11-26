@@ -11,15 +11,15 @@
 
 (defn query-selector
   ([element selector]
-     (.querySelector element selector))
+   (.querySelector element selector))
   ([selector]
-     (query-selector js/document selector)))
+   (query-selector js/document selector)))
 
 (defn query-selector-all
   ([element selector]
-     (.querySelectorAll element selector))
+   (.querySelectorAll element selector))
   ([selector]
-     (query-selector-all js/document selector)))
+   (query-selector-all js/document selector)))
 
 (defn num-of-visible-examples []
   (let [size (dom/getViewportSize)
@@ -52,7 +52,7 @@
   (boolean (query-selector ".container.examples-page")))
 
 (defn setup-play-pause-functionality [host sketch]
-  (pause-after-next-frame sketch )
+  (pause-after-next-frame sketch)
   (let [play-button (query-selector host ".play")
         pause-button (query-selector host ".pause")]
     (classes/remove play-button "hidden")
@@ -108,10 +108,26 @@
            tooltips)))
 
 (def available-examples
-  ["dancer" "dry paint" "emerald" "matrix" "equilibrium" "hyper"
-   "leaf" "colorjoy" "nanoscopic" "spaceship" "tailspin" "waves" "tree"
-   "geometric twinkle" "heart" "golden ratio flower" "floating graph"
-   "game of life" "ten print"])
+  ["dancer"
+   "dry paint"
+   "emerald"
+   "matrix"
+   "equilibrium"
+   "hyper"
+   "leaf"
+   "colorjoy"
+   "nanoscopic"
+   "spaceship"
+   "tailspin"
+   "waves"
+   "tree"
+   "geometric twinkle"
+   "heart"
+   "golden ratio flower"
+   "floating graph"
+   "game of life"
+   "ten print"
+   "lissajous table"])
 
 (defn get-examples-to-show []
   (let [url (goog.Uri. js/document.URL)
@@ -163,6 +179,6 @@
 ; note that this code should not run under :advanced optimizations
 (when goog/DEBUG
   (doseq [example available-examples
-          :let [namespace (str "quil_site.examples."(cstr/replace example " " "_"))]]
+          :let [namespace (str "quil_site.examples." (cstr/replace example " " "_"))]]
     ((aget js/goog "require") namespace)))
 

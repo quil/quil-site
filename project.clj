@@ -111,7 +111,9 @@
                             :game-of-life {:output-to "public/js/examples/game_of_life.js"
                                            :entries #{quil-site.examples.game-of-life}}
                             :ten-print {:output-to "public/js/examples/ten_print.js"
-                                        :entries #{quil-site.examples.ten-print}}}}}
+                                        :entries #{quil-site.examples.ten-print}}
+                            :lissajous-table {:output-to "public/js/examples/lissajous_table.js"
+                                              :entries #{quil-site.examples.lissajous-table}}}}}
                 {:source-paths ["src/cljs/editor"]
                  :compiler
                  {:output-to "public/js/editor.js"
