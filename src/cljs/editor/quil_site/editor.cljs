@@ -263,6 +263,10 @@
              :autoCloseBrackets true
              :extraKeys #js {"Ctrl-Enter" compile-selected}}))
 
+   (.init
+    js/parinferCodeMirror
+    @editor)
+
   (let [id (j/data (j/$ "#source") "sketch-id")
         local (j/data (j/$ "#source") "is-local")]
     (if local
@@ -303,4 +307,3 @@
   (clean-local-storage))
 
 (j/$ init)
-

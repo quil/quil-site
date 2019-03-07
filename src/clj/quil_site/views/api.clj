@@ -231,8 +231,13 @@
   {:type :api
    :tab :api
    :title (str "Quil API " name)
-   :css-files ["/css/codemirror-5.12.css"]
-   :js-files ["/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
+   :css-files ["/css/codemirror-5.12.css"
+               "/css/parinfer.css"]
+   :js-files ["/js/codemirror-5.12.js"
+              "/js/codemirror-5.12_clojure.js"
+              "/js/codemirror-5.12_lint.js"
+              "/js/parinfer.js"
+              "/js/parinfer-codemirror.js"
               "/js/api.js"]})
 
 (defn api-category [cat subcats]
@@ -256,4 +261,3 @@
         [:div.function-index
          (map render-function-index fns)]
         (map render-function  fns)))
-
