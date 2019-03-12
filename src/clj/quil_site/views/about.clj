@@ -19,7 +19,7 @@
             [:div.example
              [:div.name]
              [:div.author]
-             [:canvas]
+             [:div.canvas-container]
              [:div.footer
               [:span.glyphicon.glyphicon-sort.hidden
                {:data-toggle "tooltip"

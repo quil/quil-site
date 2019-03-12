@@ -13,7 +13,6 @@
            [:div.name]
            [:div.author]
            [:div.canvas-container
-            [:canvas]
             [:div.play.hidden]]
            [:div.footer
             [:span.glyphicon.glyphicon-sort.hidden

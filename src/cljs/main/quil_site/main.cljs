@@ -52,7 +52,7 @@
   (boolean (query-selector ".container.examples-page")))
 
 (defn setup-play-pause-functionality [host sketch]
-  (pause-after-next-frame sketch)
+  ;; (pause-after-next-frame sketch)
   (let [play-button (query-selector host ".play")
         pause-button (query-selector host ".pause")]
     (classes/remove play-button "hidden")
@@ -89,7 +89,7 @@
                         display-name)
     (dom/setTextContent (query-selector host ".author")
                         (str "by " author))
-    (let [sketch (run-fn (query-selector host "canvas") 200)]
+    (let [sketch (run-fn (query-selector host ".canvas-container") 200)]
       (when (should-start-paused?)
         (setup-play-pause-functionality host sketch)))))
 
