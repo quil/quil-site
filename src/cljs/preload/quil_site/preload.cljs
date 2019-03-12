@@ -11,7 +11,7 @@
                                        :keywordize-keys true)]
     (when (= type "eval")
       (js/eval source)
-      (let [canvas (.querySelector js/document "#host")]
+      (let [canvas (.querySelector js/document "canvas")]
         (.postMessage (.-top js/window)
                       #js {:type "resize-iframe"
                            :width (.-width canvas)
@@ -20,7 +20,7 @@
 
 (.addEventListener js/window EventType/MESSAGE handle-message)
 
-(.addEventListener (.querySelector js/document "canvas")
+(.addEventListener (.querySelector js/document "div#host")
                    "click"
                    #(.focus (.querySelector (.-document (.-top js/window))
                                             "iframe")))
