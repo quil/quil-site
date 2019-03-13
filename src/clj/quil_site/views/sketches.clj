@@ -10,11 +10,7 @@
          :css-files ["/css/codemirror-5.12.css"
                      "/css/codemirror-5.12-lint.css"
                      "/css/parinfer.css"]
-         :js-files ["/js/codemirror-5.12.js"
-                    "/js/codemirror-5.12_clojure.js"
-                    "/js/codemirror-5.12_lint.js"
-                    "/js/parinfer.js"
-                    "/js/parinfer-codemirror.js"
+         :js-files ["/js/codemirror-5.12_clojure_lint_parinfer.min.js"
                     "/js/editor.js"]}
 
         [:div
