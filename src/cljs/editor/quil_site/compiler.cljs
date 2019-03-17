@@ -31,8 +31,13 @@
 
 (def cached-macros (atom {}))
 
-(set! js/Processing
-      #js {"prototype" #js {"PConstants" #js {}}})
+; need to mock p5.prototype as during compilation
+; cljs needs to evaluate quil.core$macros namespace and
+; there it needs to prepare map of all constants and constants
+; defined on p5.prototype. But we don't need to provide real
+; values of constants as they are not used in macros and used in functions.
+(set! js/p5
+      #js {"prototype" #js {}})
 (set! js/window #js {})
 
 (fetch-file! "/quil-cache.edn"

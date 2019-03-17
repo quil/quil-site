@@ -21,3 +21,4 @@ public/js/preload.js
 public/js/snippets.js
 keys.clj
 out-*
+.ds_store

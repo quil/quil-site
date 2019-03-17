@@ -16,7 +16,9 @@
                   :type :error
                   :line line
                   :column (dec column)}
-                 (recur (ex-cause error)))))
+                 (if-let [cause (ex-cause error)]
+                   (recur cause)
+                   {:message (ex-message error)}))))
      :clj {}))
 
 (defn dec-point [[a b]]
