@@ -8,8 +8,9 @@
          :container-class "container-fluid"
          :title (str "Quil " id)
          :css-files ["/css/codemirror-5.12.css"
-                     "/css/codemirror-5.12-lint.css"]
-         :js-files ["/js/codemirror-5.12-clojure_lint_matchbrackets_closebrackets.js"
+                     "/css/codemirror-5.12-lint.css"
+                     "/css/parinfer.css"]
+         :js-files ["/js/codemirror-5.12_clojure_lint_matchbrackets_parinfer.min.js"
                     "/js/editor.js"]}
 
         [:div
