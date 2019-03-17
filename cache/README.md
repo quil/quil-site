@@ -18,10 +18,10 @@ If you are not familiar with self-hosted cljs - read "Getting started" articles:
 This tool performs the following steps:
 
 1. Runs `src/clj/cache/core.clj` which does the following
-  1. Compiles `src/cljs/cache/core.cljs` into JS.
-  2. Starts static file server that can serve raw Quil source files.
-  3. Runs NodeJS on the compiled `core.cljs` file.
+    1. Compiles `src/cljs/cache/core.cljs` into JS.
+    2. Starts static file server that can serve raw Quil source files.
+    3. Runs NodeJS on the compiled `core.cljs` file.
 2. NodeJS running on the compiled `core.cljs` does the following:
-  1. Compiles `quil.core` namespace and stores cache in `caches` atom.
-  2. Compiles `quil.sketch` namespace and stores caches in `caches` atom.
-  3. Writes quil-related cache in `quil-cache.edn` file and cljs-core related cache to `core-cache.edn`.
+    1. Compiles `quil.core` namespace and stores cache in `caches` atom.
+    2. Compiles `quil.sketch` namespace and stores caches in `caches` atom.
+    3. Writes quil-related cache in `quil-cache.edn` file and cljs-core related cache to `core-cache.edn`.
