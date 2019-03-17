@@ -229,5 +229,5 @@
   :middleware [m/fun-mode])
 ) ;DELETE
 
-(quil-site.main/register-example! "nanoscopic" "Erik Svedäng" run-sketch :interactive? true) ;DELETE
+(quil-site.main/register-example! "nanoscopic" "Erik Svedäng" run-sketch :interactive? true :white-play-button? true) ;DELETE
 

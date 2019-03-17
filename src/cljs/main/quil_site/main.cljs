@@ -71,11 +71,18 @@
                      (classes/add pause-button "invisible")))))
 
 (defn run-example [example host]
-  (let [{:keys [name author run-fn interactive? display-name]} example
+  (let [{:keys [name
+                author
+                run-fn
+                interactive?
+                display-name
+                white-play-button?]} example
         link (example-name->link name)]
     (when interactive?
       (classes/remove (query-selector host ".glyphicon.hidden")
                       "hidden"))
+    (when white-play-button?
+      (classes/add (query-selector host ".play") "white"))
     (dom/setProperties (query-selector host "a")
                        #js {"href" link})
     (dom/setTextContent (query-selector host ".name")
@@ -88,7 +95,8 @@
 
 (defn register-example! [name author run-fn &
                          {:keys [interactive? display-name]
-                          :or {interactive? false}
+                          :or {interactive? false
+                               white-play-button? false}
                           :as st}]
   (let [example (assoc st
                        :name name

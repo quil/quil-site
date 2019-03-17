@@ -15,8 +15,8 @@
 (def rules (atom nil))
 
 (defn generate-speeds
-  "Generates angle speeds for n circles. Speed is an integer. All speeds 
-  will be unique. If n > 6 then speeds will be 1, 2, ..., n otherwise 
+  "Generates angle speeds for n circles. Speed is an integer. All speeds
+  will be unique. If n > 6 then speeds will be 1, 2, ..., n otherwise
   speeds will be randomly selected from 1 to 6. This is done so that
   on small n we get random circles on each sketch run."
   [n]
@@ -110,7 +110,7 @@
     (doseq [r (range (:rows @rules))
             c (range (:columns @rules))]
       (let [{:keys [x y points]} (nth (nth (:curves @rules) r) c)]
-        ; add current point to the curve list. We add new point only if 
+        ; add current point to the curve list. We add new point only if
         ; we haven't done a full 2PI iteration after which curve repeats
         ; so no point to store new points.
         (when (<= angle q/TWO-PI)
@@ -127,4 +127,4 @@
    :draw draw)
 ) ;DELETE
 
-(quil-site.main/register-example! "lissajous table" "Mochamad Lucky Pradana" run-sketch) ;DELETE
+(quil-site.main/register-example! "lissajous table" "Mochamad Lucky Pradana" run-sketch :white-play-button? true) ;DELETE

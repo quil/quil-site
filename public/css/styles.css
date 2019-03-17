@@ -248,6 +248,10 @@ body .container.api a {
     opacity: 0.5;
 }
 
+.example .canvas-container .play.white {
+    background-image: url("/img/play_white.png");
+}
+
 .example .canvas-container .play:hover {
     opacity: 1;
     cursor: pointer;

@@ -65,4 +65,4 @@
    :middleware [m/fun-mode])
  ) ;DELETE
 
-(quil-site.main/register-example! "matrix" "Hyunwoo Nam" run-sketch) ;DELETE
+(quil-site.main/register-example! "matrix" "Hyunwoo Nam" run-sketch :white-play-button? true) ;DELETE

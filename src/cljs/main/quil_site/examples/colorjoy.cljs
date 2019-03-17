@@ -37,5 +37,5 @@
   :draw draw)
 ) ;DELETE
 
-(quil-site.main/register-example! "colorjoy" "Abe Pazos" run-sketch) ;DELETE
+(quil-site.main/register-example! "colorjoy" "Abe Pazos" run-sketch :white-play-button? true) ;DELETE
 

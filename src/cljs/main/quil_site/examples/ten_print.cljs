@@ -37,4 +37,4 @@
  :middleware [m/fun-mode])
   ) ;DELETE
 
-(quil-site.main/register-example! "ten print" "Mochamad Lucky Pradana" run-sketch :display-name "10 print") ;DELETE
+(quil-site.main/register-example! "ten print" "Mochamad Lucky Pradana" run-sketch :display-name "10 print" :white-play-button? true) ;DELETE
