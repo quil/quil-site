@@ -10,7 +10,7 @@
          :css-files ["/css/codemirror-5.12.css"
                      "/css/codemirror-5.12-lint.css"
                      "/css/parinfer.css"]
-         :js-files ["/js/codemirror-5.12_clojure_lint_parinfer.min.js"
+         :js-files ["/js/codemirror-5.12_clojure_lint_matchbrackets_parinfer.min.js"
                     "/js/editor.js"]}
 
         [:div

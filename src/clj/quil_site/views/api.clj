@@ -233,7 +233,7 @@
    :title (str "Quil API " name)
    :css-files ["/css/codemirror-5.12.css"
                "/css/parinfer.css"]
-   :js-files ["/js/codemirror-5.12_clojure_lint_parinfer.min.js"
+   :js-files ["/js/codemirror-5.12_clojure_lint_matchbrackets_parinfer.min.js"
               "/js/api.js"]})
 
 (defn api-category [cat subcats]
