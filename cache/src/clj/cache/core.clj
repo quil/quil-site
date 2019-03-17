@@ -51,6 +51,8 @@
 (defn run [& args]
   (let [server (start-server)]
     (build-cljs (= (first args) "watch"))
+    (println "built cljs, running node")
     (stream-sh "node" "main.js")
+    (println "node finished")
     (.stop server)
     (System/exit 0)))

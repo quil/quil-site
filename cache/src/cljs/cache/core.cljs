@@ -18,8 +18,9 @@
       (.on "end" #(cb @buffer)))))
 
 (def ignore-lib
-  #{"org.processingjs.Processing"
-    "clojure.string"
+  #{"clojure.string"
+    "cljsjs.p5"
+    "goog.style"
     "goog.dom"
     "goog.events"
     "goog.events.EventType"})
@@ -109,14 +110,13 @@
                                (cb res)))))))
 
 
-(set! js/Processing
-      #js {"prototype" #js {"PConstants" #js {}}})
 (set! js/window #js {})
 
 (def block (str (cstr/join \newline (repeat 3 "#################"))
                 \newline))
 
 (defn write-caches [f]
+  (println "Writing caches")
   (let [sk-cache ((-> f :state deref :cljs.analyzer/namespaces) 'quil.sketch)]
     (swap! caches assoc {:name 'quil.sketch :macros false} {:cache (strip-cache sk-cache)
                                                             :source ""}))
@@ -150,7 +150,7 @@
             (quil.core/defsketch my
               :size [500 500])"
            #(do
-              (println "!@#!@#@!#@!#")
+              (println "Finished compiling quil.core")
               (cb))))
 
 (defn compile-quil-sketch [cb]
@@ -158,10 +158,12 @@
   (println "Compiling quil.sketch")
   (reset! load-quil-sketch true)
   (compile "(ns my.foo (:require [quil.sketch])) (+ 1 1)"
-           cb))
+           #(do
+              (println "Finished compiling quil.sketch")
+              (cb %)
+              )))
 
 (defn -main [& args]
-  (println "Hello world!")
   (reset! cljs.js/*loaded* #{'clojure.string})
   (compile-quil-core #(compile-quil-sketch write-caches)))
 
