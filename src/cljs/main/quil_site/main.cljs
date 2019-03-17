@@ -81,8 +81,6 @@
     (when interactive?
       (classes/remove (query-selector host ".glyphicon.hidden")
                       "hidden"))
-    (when white-play-button?
-      (classes/add (query-selector host ".play") "white"))
     (dom/setProperties (query-selector host "a")
                        #js {"href" link})
     (dom/setTextContent (query-selector host ".name")
@@ -91,7 +89,9 @@
                         (str "by " author))
     (let [sketch (run-fn (query-selector host ".canvas-container") 200)]
       (when (should-start-paused?)
-        (setup-play-pause-functionality host sketch)))))
+        (setup-play-pause-functionality host sketch))
+        (when white-play-button?
+          (classes/add (query-selector host ".play") "white")))))
 
 (defn register-example! [name author run-fn &
                          {:keys [interactive? display-name]

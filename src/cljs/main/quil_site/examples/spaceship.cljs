@@ -17,7 +17,7 @@
 
 (defn load-image [image]
   (let [path (str "/img/spaceship/" (name image) ".png")]
-    (q/request-image path)))
+    (q/load-image path)))
 
 (defn draw-image [state k [x y]]
   (q/image (get-in state [:images k]) x y))
