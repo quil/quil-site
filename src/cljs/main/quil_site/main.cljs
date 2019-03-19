@@ -39,20 +39,10 @@
   (->> (cstr/replace name " " "-")
        (str "/sketches/show/example_")))
 
-(defn pause-after-next-frame [sketch]
-  (let [real-sketch (aget (aget sketch "externals") "sketch")
-        set-on-frame-end #(aset real-sketch "onFrameEnd" %)]
-    (set-on-frame-end
-     (fn []
-       (q/with-sketch sketch
-         (q/no-loop))
-       (set-on-frame-end (fn []))))))
-
 (defn should-start-paused? []
   (boolean (query-selector ".container.examples-page")))
 
 (defn setup-play-pause-functionality [host sketch]
-  ;; (pause-after-next-frame sketch)
   (let [play-button (query-selector host ".play")
         pause-button (query-selector host ".pause")]
     (classes/remove play-button "hidden")
@@ -66,7 +56,8 @@
                      (classes/remove pause-button "invisible")))
     (events/listen pause-button EventType/CLICK
                    (fn []
-                     (pause-after-next-frame sketch)
+                     (q/with-sketch sketch
+                       (q/no-loop))
                      (classes/remove play-button "hidden")
                      (classes/add pause-button "invisible")))))
 
@@ -89,9 +80,11 @@
                         (str "by " author))
     (let [sketch (run-fn (query-selector host ".canvas-container") 200)]
       (when (should-start-paused?)
+        (q/with-sketch sketch
+          (q/no-loop))
         (setup-play-pause-functionality host sketch))
-        (when white-play-button?
-          (classes/add (query-selector host ".play") "white")))))
+      (when white-play-button?
+        (classes/add (query-selector host ".play") "white")))))
 
 (defn register-example! [name author run-fn &
                          {:keys [interactive? display-name]
