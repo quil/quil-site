@@ -11,18 +11,30 @@
   :docstring
   "Rotates a shape around the x-axis the amount specified by the angle\n  parameter. Angles should be specified in radians (values from 0 to\n  (* PI 2)) or converted to radians with the radians function. Objects\n  are always rotated around their relative position to the origin and\n  positive numbers rotate objects in a counterclockwise\n  direction. Transformations apply to everything that happens after\n  and subsequent calls to the function accumulates the effect. For\n  example, calling (rotate-x HALF-PI) and then (rotate-x HALF-PI) is\n  the same as (rotate-x PI). If rotate-x is called within the draw fn,\n  the transformation is reset when the loop begins again. This\n  function requires either the :p3d or :opengl renderer.",
   :what :fn},
+ set-uniform
+ {:args #{[shader uniform-name data]},
+  :category "Shader",
+  :added "3.0.0",
+  :name set-uniform,
+  :subcategory nil,
+  :type :cljs,
+  :requires-bindings true,
+  :link nil,
+  :docstring
+  "Set a uniform variables inside a shader to modify the effect\n     while the program is running.",
+  :what :fn},
  print-projection
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Lights, Camera",
   :added "1.0",
   :name print-projection,
   :subcategory "Camera",
-  :type :both,
+  :type :clj,
   :processing-name "printProjection()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/printProjection_.html",
   :docstring
-  "Prints the current projection matrix to std out. Useful for\n  debugging",
+  "Prints the current projection matrix to std out. Useful for\n     debugging",
   :what :fn},
  screen-height
  {:args #{[]},
@@ -75,7 +87,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/filter_.html",
   :docstring
-  "Originally named filter in Processing Language.\n  Filters the display window with the specified mode and level.\n  Level defines the quality of the filter and mode may be one of the\n  following keywords:\n\n  :threshold - converts the image to black and white pixels depending\n               if they are above or below the threshold defined by\n               the level parameter. The level must be between\n               0.0 (black) and 1.0 (white). If no level is specified,\n               0.5 is used.\n  :gray      - converts any colors in the image to grayscale\n               equivalents. Doesn't work with level.\n  :invert    - sets each pixel to its inverse value. Doesn't work with\n               level.\n  :posterize - limits each channel of the image to the number of\n               colors specified as the level parameter. The parameter can\n               be set to values between 2 and 255, but results are most\n               noticeable in the lower ranges.\n  :blur      - executes a Guassian blur with the level parameter\n               specifying the extent of the blurring. If no level\n               parameter is used, the blur is equivalent to Guassian\n               blur of radius 1.\n  :opaque    - sets the alpha channel to entirely opaque. Doesn't work\n               with level.\n  :erode     - reduces the light areas. Doesn't work with level.\n  :dilate    - increases the light areas.  Doesn't work with level.",
+  "Originally named filter in Processing Language.\n  Filters the display window with the specified mode and level.\n  Level defines the quality of the filter and mode may be one of the\n  following keywords:\n\n  :threshold - converts the image to black and white pixels depending\n               if they are above or below the threshold defined by\n               the level parameter. The level must be between\n               0.0 (black) and 1.0 (white). If no level is specified,\n               0.5 is used.\n  :gray      - converts any colors in the image to grayscale\n               equivalents. Doesn't work with level.\n  :invert    - sets each pixel to its inverse value. Doesn't work with\n               level.\n  :posterize - limits each channel of the image to the number of\n               colors specified as the level parameter. The parameter can\n               be set to values between 2 and 255, but results are most\n               noticeable in the lower ranges.\n  :blur      - executes a Gaussian blur with the level parameter\n               specifying the extent of the blurring. If no level\n               parameter is used, the blur is equivalent to Gaussian\n               blur of radius 1.\n  :opaque    - sets the alpha channel to entirely opaque. Doesn't work\n               with level.\n  :erode     - reduces the light areas. Doesn't work with level.\n  :dilate    - increases the light areas.  Doesn't work with level.",
   :what :fn},
  rotate-z
  {:args ({:value [angle], :type :both}),
@@ -120,7 +132,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/blend_.html",
   :docstring
-  "Blends a region of pixels from one image into another with full alpha\n  channel support. If src is not specified it defaults to current-graphics.\n  If dest is not specified it defaults to current-graphics.\n\n  Note: blend-mode function is recommended to use instead of this one.\n\n  Available blend modes are:\n\n  :blend      - linear interpolation of colours: C = A*factor + B\n  :add        - additive blending with white clip:\n                                            C = min(A*factor + B, 255)\n  :subtract   - subtractive blending with black clip:\n                                            C = max(B - A*factor, 0)\n  :darkest    - only the darkest colour succeeds:\n                                            C = min(A*factor, B)\n  :lightest   - only the lightest colour succeeds:\n                                            C = max(A*factor, B)\n  :difference - subtract colors from underlying image.\n  :exclusion  - similar to :difference, but less extreme.\n  :multiply   - Multiply the colors, result will always be darker.\n  :screen     - Opposite multiply, uses inverse values of the colors.\n  :overlay    - A mix of :multiply and :screen. Multiplies dark values\n                and screens light values.\n  :hard-light - :screen when greater than 50% gray, :multiply when\n                lower.\n  :soft-light - Mix of :darkest and :lightest. Works like :overlay,\n                but not as harsh.\n  :dodge      - Lightens light tones and increases contrast, ignores\n                darks.\n                Called \"Color Dodge\" in Illustrator and Photoshop.\n  :burn       - Darker areas are applied, increasing contrast, ignores\n                lights. Called \"Color Burn\" in Illustrator and\n                Photoshop.",
+  "Blends a region of pixels from one image into another with full alpha\n  channel support. If src is not specified it defaults to current-graphics.\n  If dest is not specified it defaults to current-graphics.\n\n  Note: blend-mode function is recommended to use instead of this one.\n\n  Available blend modes are:\n\n  :blend      - linear interpolation of colours: C = A*factor + B\n  :add        - additive blending with white clip:\n                                            C = min(A*factor + B, 255)\n  :darkest    - only the darkest colour succeeds:\n                                            C = min(A*factor, B)\n  :lightest   - only the lightest colour succeeds:\n                                            C = max(A*factor, B)\n  :difference - subtract colors from underlying image.\n  :exclusion  - similar to :difference, but less extreme.\n  :multiply   - Multiply the colors, result will always be darker.\n  :screen     - Opposite multiply, uses inverse values of the colors.\n  :overlay    - A mix of :multiply and :screen. Multiplies dark values\n                and screens light values.\n  :hard-light - :screen when greater than 50% gray, :multiply when\n                lower.\n  :soft-light - Mix of :darkest and :lightest. Works like :overlay,\n                but not as harsh.\n  :dodge      - Lightens light tones and increases contrast, ignores\n                darks.\n                Called \"Color Dodge\" in Illustrator and Photoshop.\n  :burn       - Darker areas are applied, increasing contrast, ignores\n                lights. Called \"Color Burn\" in Illustrator and\n                Photoshop.\n\n  In clj the following blend modes are also supported:\n  :subtract   - subtractive blending with black clip:\n                                            C = max(B - A*factor, 0)\n\n  In cljs the following blend modes are also supported:\n  :replace    - the pixels entirely replace the others and don't utilize\n                alpha (transparency) values.",
   :what :fn},
  frame-count
  {:args ({:value [], :type :both}),
@@ -147,18 +159,17 @@
   :docstring
   "All subsequent calls of any drawing function will draw on given\n  graphics. 'with-graphics' cannot be nested (you can draw simultaneously\n  only on 1 graphics)",
   :what :macro},
- model-y
- {:args ({:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name model-y,
-  :subcategory "Coordinates",
+ loaded?
+ {:args ({:value [object], :type :both}),
+  :category "Environment",
+  :added "3.0.0",
+  :name loaded?,
+  :subcategory nil,
   :type :both,
-  :processing-name "modelY()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/modelY_.html",
-  :docstring
-  "Returns the three-dimensional x, y, z position in model space. This\n  returns the y value for a given coordinate based on the current set\n  of transformations (scale, rotate, translate, etc.) The y value can\n  be used to place an object in space relative to the location of the\n  original point once the transformations are no longer in use.",
+  :processing-name nil,
+  :requires-bindings false,
+  :link nil,
+  :docstring "Returns true if object is loaded.",
   :what :fn},
  set-image
  {:args ({:value [x y src], :type :both}),
@@ -174,35 +185,34 @@
   "Writes an image directly into the display window. The x and y\n  parameters define the coordinates for the upper-left corner of the\n  image.",
   :what :fn},
  shape-mode
- {:args ({:value [mode], :type :both}),
+ {:args #{[mode]},
   :category "Shape",
   :added "1.0",
   :name shape-mode,
   :subcategory "Loading & Displaying",
-  :type :both,
+  :type :clj,
   :processing-name "shapeMode()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/shapeMode_.html",
   :docstring
-  "Modifies the location from which shapes draw. Available modes are\n  :corner, :corners and :center. Default is :corner.\n\n  :corner  - specifies the location to be the upper left corner of the\n             shape and uses the third and fourth parameters of shape\n             to specify the width and height.\n\n  :corners - uses the first and second parameters of shape to set\n             the location of one corner and uses the third and fourth\n             parameters to set the opposite corner.\n\n  :center  - draws the shape from its center point and uses the third\n             and forth parameters of shape to specify the width and\n             height. ",
+  "Modifies the location from which shapes draw. Available modes are\n     :corner, :corners and :center. Default is :corner.\n\n     :corner  - specifies the location to be the upper left corner of the\n                shape and uses the third and fourth parameters of shape\n                to specify the width and height.\n\n     :corners - uses the first and second parameters of shape to set\n                the location of one corner and uses the third and fourth\n                parameters to set the opposite corner.\n\n     :center  - draws the shape from its center point and uses the third\n                and forth parameters of shape to specify the width and\n                height. ",
   :what :fn},
  cursor-image
- {:args
-  ({:value [img hx hy], :type :both} {:value [img], :type :both}),
+ {:args #{[img hx hy] [img]},
   :category "Environment",
   :added "1.0",
   :name cursor-image,
   :subcategory nil,
-  :type :both,
+  :type :clj,
   :processing-name "cursor()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/cursor_.html",
   :docstring
-  "Set the cursor to a predefined image. The horizontal and vertical\n  active spots of the cursor may be specified with hx and hy.\n  It is recommended to make the size 16x16 or 32x32 pixels.",
+  "Set the cursor to a predefined image. The horizontal and vertical\n     active spots of the cursor may be specified with hx and hy.\n     It is recommended to make the size 16x16 or 32x32 pixels.",
   :what :fn},
  create-graphics
  {:args
-  ({:value [w h renderer path], :type :both}
+  ({:value [w h renderer path], :type :clj}
    {:value [w h], :type :both}
    {:value [w h renderer], :type :both}),
   :category "Image",
@@ -280,19 +290,6 @@
   :link "http://www.processing.org/reference/constrain_.html",
   :docstring
   "Constrains a value to not exceed a maximum and minimum value.",
-  :what :fn},
- screen-y
- {:args ({:value [x y], :type :both} {:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name screen-y,
-  :subcategory "Coordinates",
-  :type :both,
-  :processing-name "screenY()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/screenY_.html",
-  :docstring
-  "Takes a three-dimensional x, y, z position and returns the y value\n  for where it will appear on a (two-dimensional) screen, once\n  affected by translate, scale or any other transformations",
   :what :fn},
  reset-shader
  {:args #{[kind] []},
@@ -372,17 +369,17 @@
   "Set of key modifiers that were pressed when event happened.\n  Possible modifiers :ctrl, :alt, :shift, :meta. Not available in\n  ClojureScript.",
   :what :fn},
  end-raw
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Output",
   :added "1.0",
   :name end-raw,
   :subcategory "Files",
-  :type :both,
+  :type :clj,
   :processing-name "endRaw()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/endRaw_.html",
   :docstring
-  "Complement to begin-raw; they must always be used together. See\n  the begin-raw docstring for details.",
+  "Complement to begin-raw; they must always be used together. See\n     the begin-raw docstring for details.",
   :what :fn},
  radians
  {:args ({:value [degrees], :type :both}),
@@ -423,6 +420,19 @@
   :docstring
   "The inverse of cos, returns the arc cosine of a value. This\n  function expects the values in the range of -1 to 1 and values are\n  returned in the range 0 to Math/PI (3.1415927).",
   :what :fn},
+ angle-mode
+ {:args #{[mode]},
+  :category "Math",
+  :added "2.8.0",
+  :name angle-mode,
+  :subcategory "Trigonometry",
+  :type :cljs,
+  :processing-name "angleMode()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/angleMode_.html",
+  :docstring
+  "Sets the current mode of p5 to given mode. Default mode is :radians.",
+  :what :fn},
  bezier-detail
  {:args ({:value [detail], :type :both}),
   :category "Shape",
@@ -450,12 +460,12 @@
   "Sets a texture to be applied to vertex points. The texture fn must\n  be called between begin-shape and end-shape and before any calls to\n  vertex.\n\n  When textures are in use, the fill color is ignored. Instead, use\n  tint to specify the color of the texture as it is applied to the\n  shape.",
   :what :fn},
  print-camera
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Lights, Camera",
   :added "1.0",
   :name print-camera,
   :subcategory "Camera",
-  :type :both,
+  :type :clj,
   :processing-name "printCamera()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/printCamera_.html",
@@ -489,17 +499,18 @@
   "Calculates the angle (in radians) from a specified point to the\n  coordinate origin as measured from the positive x-axis. Values are\n  returned as a float in the range from PI to -PI. The atan2 function\n  is most often used for orienting geometry to the position of the\n  cursor. Note: The y-coordinate of the point is the first parameter\n  and the x-coordinate is the second due to the structure of\n  calculating the tangent.",
   :what :fn},
  shader
- {:args #{[shader kind] [shader]},
+ {:args
+  ({:value [shader kind], :type :clj} {:value [shader], :type :both}),
   :category "Rendering",
   :added "2.0",
   :name shader,
   :subcategory "Shaders",
-  :type :clj,
+  :type :both,
   :processing-name "shader()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/shader_.html",
   :docstring
-  "Applies the shader specified by the parameters. It's compatible with the :p2d\n  and :p3drenderers, but not with the default :java2d renderer. Optional 'kind'\n  parameter - type of shader, either :points, :lines, or :triangles",
+  "Applies the shader specified by the parameters. It's compatible with the :p2d\n  and :p3d renderers, but not with the default :java2d renderer.\n  In clj mode you can pass an optional 'kind' parameter that specifies\n  the type of shader, either :points, :lines, or :triangles",
   :what :fn},
  millis
  {:args ({:value [], :type :both}),
@@ -555,10 +566,11 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/colorMode_.html",
   :docstring
-  "Changes the way Processing interprets color data. Available modes\n  are :rgb and :hsb.By default, the parameters for fill, stroke,\n  background, and color are defined by values between 0 and 255 using\n  the :rgb color model. The color-mode fn is used to change the\n  numerical range used for specifying colors and to switch color\n  systems. For example, calling\n  (color-mode :rgb 1.0) will specify that values are specified between\n  0 and 1. The limits for defining colors are altered by setting the\n  parameters range1, range2, range3, and range 4.",
+  "Changes the way Processing interprets color data. Available modes\n  are :rgb and :hsb (and :hsl in clojurescript).\n  By default, the parameters for fill, stroke,\n  background, and color are defined by values between 0 and 255 using\n  the :rgb color model. The color-mode fn is used to change the\n  numerical range used for specifying colors and to switch color\n  systems. For example, calling\n  (color-mode :rgb 1.0) will specify that values are specified between\n  0 and 1. The limits for defining colors are altered by setting the\n  parameters range1, range2, range3, and range 4.",
   :what :fn},
  create-image
- {:args ({:value [w h format], :type :both}),
+ {:args
+  ({:value [w h format], :type :clj} {:value [w h], :type :cljs}),
   :category "Image",
   :added "1.0",
   :name create-image,
@@ -568,7 +580,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/createImage_.html",
   :docstring
-  "Creates a new PImage (the datatype for storing images). This\n  provides a fresh buffer of pixels to play with. Set the size of the\n  buffer with the width and height parameters. The format parameter\n  defines how the pixels are stored. See the PImage reference for more\n  information.\n\n  Possible formats: :rgb, :argb, :alpha (grayscale alpha channel)\n\n  Prefer using create-image over initialising new PImage instances\n  directly.",
+  "Creates a new datatype for storing images (PImage for clj and\n  Image for cljs). This provides a fresh buffer of pixels to play\n  with. Set the size of the buffer with the width and height\n  parameters.\n\n  In clj the format parameter defines how the pixels are stored.\n  See the PImage reference for more information.\n  Possible formats: :rgb, :argb, :alpha (grayscale alpha channel)\n\n  Prefer using create-image over initialising new PImage (or Image)\n  instances directly.",
   :what :fn},
  sq
  {:args ({:value [a], :type :both}),
@@ -638,7 +650,7 @@
  {:args
   ({:value [s x1 y1 x2 y2], :type :both}
    {:value [s x y], :type :both}
-   {:value [s x y z], :type :both}),
+   {:value [s x y z], :type :clj}),
   :category "Typography",
   :added "1.0",
   :name text,
@@ -648,28 +660,28 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/text_.html",
   :docstring
-  "Draws text to the screen in the position specified by the x and y\n  parameters and the optional z parameter. A default font will be used\n  unless a font is set with the text-font fn. Change the color of the\n  text with the fill fn. The text displays in relation to the\n  text-align fn, which gives the option to draw to the left, right, and\n  center of the coordinates.\n\n  The x1, y1, x2 and y2 parameters define a\n  rectangular area to display within and may only be used with string\n  data. For text drawn inside a rectangle, the coordinates are\n  interpreted based on the current rect-mode setting.",
+  "Draws text to the screen in the position specified by the x and y\n  parameters (and the optional z parameter in clj). A default font will be used\n  unless a font is set with the text-font fn. Change the color of the\n  text with the fill fn. The text displays in relation to the\n  text-align fn, which gives the option to draw to the left, right, and\n  center of the coordinates.\n\n  The x1, y1, x2 and y2 parameters define a\n  rectangular area to display within and may only be used with string\n  data. For text drawn inside a rectangle, the coordinates are\n  interpreted based on the current rect-mode setting.",
   :what :fn},
  available-fonts
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Typography",
   :added "1.0",
   :name available-fonts,
   :subcategory "Loading & Displaying",
-  :type :both,
+  :type :clj,
   :processing-name "PFont.list()",
   :requires-bindings false,
   :link "http://www.processing.org/reference/PFont_list_.html",
   :docstring
-  "A sequence of strings representing the fonts on this system\n  available for use.\n\n  Because of limitations in Java, not all fonts can be used and some\n  might work with one operating system and not others. When sharing a\n  sketch with other people or posting it on the web, you may need to\n  include a .ttf or .otf version of your font in the data directory of\n  the sketch because other people might not have the font installed on\n  their computer. Only fonts that can legally be distributed should be\n  included with a sketch.",
+  "A sequence of strings representing the fonts on this system\n    available for use.\n\n    Because of limitations in Java, not all fonts can be used and some\n    might work with one operating system and not others. When sharing a\n    sketch with other people or posting it on the web, you may need to\n    include a .ttf or .otf version of your font in the data directory of\n    the sketch because other people might not have the font installed on\n    their computer. Only fonts that can legally be distributed should be\n    included with a sketch.",
   :what :fn},
  clear
- {:args #{[]},
+ {:args ({:value [], :type :both}),
   :category "Color",
   :added "2.4.0",
   :name clear,
   :subcategory "Setting",
-  :type :clj,
+  :type :both,
   :processing-name "clear()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/clear_.html",
@@ -713,7 +725,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/popMatrix_.html",
   :docstring
-  "Pops the current transformation matrix off the matrix\n  stack. Understanding pushing and popping requires understanding the\n  concept of a matrix stack. The push-matrix fn saves the current\n  coordinate system to the stack and pop-matrix restores the prior\n  coordinate system. push-matrix and pop-matrix are used in conjuction\n  with the other transformation methods and may be embedded to control\n  the scope of the transformations.",
+  "Pops the current transformation matrix off the matrix\n  stack. Understanding pushing and popping requires understanding the\n  concept of a matrix stack. The push-matrix fn saves the current\n  coordinate system to the stack and pop-matrix restores the prior\n  coordinate system. push-matrix and pop-matrix are used in conjunction\n  with the other transformation methods and may be embedded to control\n  the scope of the transformations.",
   :what :fn},
  ceil
  {:args ({:value [n], :type :both}),
@@ -754,19 +766,6 @@
   :docstring
   "Generates a hollow ball made from tessellated triangles.",
   :what :fn},
- request-image
- {:args ({:value [filename], :type :both}),
-  :category "Image",
-  :added "1.0",
-  :name request-image,
-  :subcategory "Loading & Displaying",
-  :type :both,
-  :processing-name "requestImage()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/requestImage_.html",
-  :docstring
-  "This function load images on a separate thread so that your sketch\n  does not freeze while images load during setup. While the image is\n  loading, its width and height will be 0. If an error occurs while\n  loading the image, its width and height will be set to -1. You'll\n  know when the image has loaded properly because its width and height\n  will be greater than 0. Asynchronous image loading (particularly\n  when downloading from a server) can dramatically improve\n  performance.",
-  :what :fn},
  hue
  {:args ({:value [col], :type :both}),
   :category "Color",
@@ -791,6 +790,18 @@
   :link "http://www.processing.org/reference/loop_.html",
   :docstring
   "Causes Processing to continuously execute the code within\n  draw. If no-loop is called, the code in draw stops executing.",
+  :what :fn},
+ orbit-control
+ {:args #{[]},
+  :category "Lights, Camera",
+  :added "3.0.0",
+  :name orbit-control,
+  :subcategory "Camera",
+  :type :cljs,
+  :processing-name "orbitControl()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/orbitControl_.html",
+  :docstring "Allows the camera to orbit around a target using mouse.",
   :what :fn},
  curve-vertex
  {:args ({:value [x y], :type :both} {:value [x y z], :type :both}),
@@ -1055,12 +1066,12 @@
   :docstring "true if any key is currently pressed, false otherwise.",
   :what :fn},
  display-density
- {:args #{[display] []},
+ {:args ({:value [display], :type :both} {:value [], :type :both}),
   :category "Environment",
   :added "2.4.0",
   :name display-density,
   :subcategory nil,
-  :type :clj,
+  :type :both,
   :processing-name "displayDensity()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/displayDensity_.html",
@@ -1093,15 +1104,15 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/clip_.html",
   :docstring
-  "Limits the rendering to the boundaries of a rectangle defined by\n  the parameters. The boundaries are drawn based on the state of\n  the (image-mode) fuction, either :corner, :corners, or :center.\n  To disable use (no-clip).",
+  "Limits the rendering to the boundaries of a rectangle defined by\n  the parameters. The boundaries are drawn based on the state of\n  the (image-mode) function, either :corner, :corners, or :center.\n  To disable use (no-clip).",
   :what :fn},
  pixel-density
- {:args #{[density]},
+ {:args ({:value [density], :type :both}),
   :category "Environment",
   :added "2.4.0",
   :name pixel-density,
   :subcategory nil,
-  :type :clj,
+  :type :both,
   :processing-name "pixelDensity()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/pixelDensity_.html",
@@ -1138,8 +1149,9 @@
  {:args
   ({:value
     [n00 n01 n02 n03 n10 n11 n12 n13 n20 n21 n22 n23 n30 n31 n32 n33],
-    :type :both}
-   {:value [n00 n01 n02 n10 n11 n12], :type :clj}),
+    :type :clj}
+   {:value [n00 n01 n02 n10 n11 n12], :type :clj}
+   {:value [a b c d e f], :type :cljs}),
   :category "Transform",
   :added "1.0",
   :name apply-matrix,
@@ -1149,7 +1161,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/applyMatrix_.html",
   :docstring
-  "Multiplies the current matrix by the one specified through the\n  parameters. This is very slow because it will try to calculate the\n  inverse of the transform, so avoid it whenever possible. The\n  equivalent function in OpenGL is glMultMatrix().",
+  "Multiplies the current matrix by the one specified through the\n  parameters. This is very slow because it will try to calculate the\n  inverse of the transform, so avoid it whenever possible. The\n  equivalent function in OpenGL is glMultMatrix().\n\n  Note that cljs has only 2d version and arguments differ see\n  https://p5js.org/reference/#/p5/applyMatrix",
   :what :fn},
  copy
  {:args
@@ -1169,7 +1181,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/copy_.html",
   :docstring
-  "Copies a region of pixels from the one image to another. If src-img\n  is not specified it defaults to current-graphics. If dest-img is not\n  specified - it defaults to current-graphics. If the source\n  and destination regions aren't the same size, it will automatically\n  resize the source pixels to fit the specified target region. No\n  alpha information is used in the process, however if the source\n  image has an alpha channel set, it will be copied as well. ",
+  "Copies a region of pixels from one image to another. If src-img\n  is not specified it defaults to current-graphics. If dest-img is not\n  specified - it defaults to current-graphics. If the source\n  and destination regions aren't the same size, it will automatically\n  resize the source pixels to fit the specified target region. No\n  alpha information is used in the process, however if the source\n  image has an alpha channel set, it will be copied as well. ",
   :what :fn},
  random-3d
  {:args ({:value [], :type :both}),
@@ -1274,12 +1286,12 @@
   "A triangle is a plane created by connecting three points. The first\n  two arguments specify the first point, the middle two arguments\n  specify the second point, and the last two arguments specify the\n  third point.",
   :what :fn},
  emissive
- {:args ({:value [gray], :type :both} {:value [r g b], :type :both}),
+ {:args #{[gray] [r g b]},
   :category "Lights, Camera",
   :added "1.0",
   :name emissive,
   :subcategory "Material Properties",
-  :type :both,
+  :type :clj,
   :processing-name "emissive()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/emissive_.html",
@@ -1313,12 +1325,12 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/color_.html",
   :docstring
-  "Creates an integer representation of a color The parameters are\n  interpreted as RGB or HSB values depending on the current\n  color-mode. The default mode is RGB values from 0 to 255 and\n  therefore, the function call (color 255 204 0) will return a bright\n  yellow. Args are cast to floats.\n\n  r - red or hue value\n  g - green or saturation value\n  b - blue or brightness value\n  a - alpha value",
+  "Creates an integer representation of a color. The parameters are\n  interpreted as RGB or HSB values depending on the current\n  color-mode. The default mode is RGB values from 0 to 255 and\n  therefore, the function call (color 255 204 0) will return a bright\n  yellow. Args are cast to floats.\n\n  r - red or hue value\n  g - green or saturation value\n  b - blue or brightness value\n  a - alpha value",
   :what :fn},
  arc
  {:args
   ({:value [x y width height start stop], :type :both}
-   {:value [x y width height start stop mode], :type :clj}),
+   {:value [x y width height start stop mode], :type :both}),
   :category "Shape",
   :added "1.0",
   :name arc,
@@ -1370,7 +1382,7 @@
   :docstring "Current horizontal coordinate of the mouse.",
   :what :fn},
  mag
- {:args ({:value [a b c], :type :both} {:value [a b], :type :both}),
+ {:args ({:value [a b c], :type :clj} {:value [a b], :type :both}),
   :category "Math",
   :added "1.0",
   :name mag,
@@ -1407,19 +1419,6 @@
   :link "http://www.processing.org/reference/map_.html",
   :docstring
   "Re-maps a number from one range to another.\n\n  Numbers outside the range are not clamped to 0 and 1, because\n  out-of-range values are often intentional and useful.",
-  :what :fn},
- model-x
- {:args ({:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name model-x,
-  :subcategory "Coordinates",
-  :type :both,
-  :processing-name "modelX()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/modelX_.html",
-  :docstring
-  "Returns the three-dimensional x, y, z position in model space. This\n  returns the x value for a given coordinate based on the current set\n  of transformations (scale, rotate, translate, etc.) The x value can\n  be used to place an object in space relative to the location of the\n  original point once the transformations are no longer in use.",
   :what :fn},
  sqrt
  {:args ({:value [a], :type :both}),
@@ -1486,7 +1485,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/scale_.html",
   :docstring
-  "Increases or decreases the size of a shape by expanding and\n  contracting vertices. Objects always scale from their relative\n  origin to the coordinate system. Scale values are specified as\n  decimal percentages. For example, the function call (scale 2)\n  increases the dimension of a shape by 200%. Transformations apply to\n  everything that happens after and subsequent calls to the function\n  multiply the effect. For example, calling (scale 2) and then\n  (scale 1.5) is the same as (scale 3). If scale is called within\n  draw, the transformation is reset when the loop begins again. Using\n  this fuction with the z parameter requires specfying :p3d or :opengl\n  as the renderer. This function can be further controlled by\n  push-matrix and pop-matrix.",
+  "Increases or decreases the size of a shape by expanding and\n  contracting vertices. Objects always scale from their relative\n  origin to the coordinate system. Scale values are specified as\n  decimal percentages. For example, the function call (scale 2)\n  increases the dimension of a shape by 200%. Transformations apply to\n  everything that happens after and subsequent calls to the function\n  multiply the effect. For example, calling (scale 2) and then\n  (scale 1.5) is the same as (scale 3). If scale is called within\n  draw, the transformation is reset when the loop begins again. Using\n  this function with the z parameter requires specifying :p3d or :opengl\n  as the renderer. This function can be further controlled by\n  push-matrix and pop-matrix.",
   :what :fn},
  defsketch
  {:args ({:value [app-name & options], :type :both}),
@@ -1498,7 +1497,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "Define and start a sketch and bind it to a var with the symbol\n  app-name. If any of the options to the various callbacks are\n  symbols, it wraps them in a call to var to ensure they aren't\n  inlined and that redefinitions to the original fns are reflected in\n  the visualisation.\n\n  Available options:\n\n   :size           - A vector of width and height for the sketch or :fullscreen.\n                     Defaults to [500 300]. If you're using :fullscreen you may\n                     want to enable present mode - :features [:present].\n                     :fullscreen size works only in Clojure. In ClojureScript\n                     all sketches are support fullscreen when you press F11.\n\n   :renderer       - Specifies the renderer type. One of :p2d, :p3d, :java2d,\n                     :opengl, :pdf). Defaults to :java2d. :dxf renderer\n                     can't be used as sketch renderer. Use begin-raw method\n                     instead. In clojurescript only :p2d and :p3d renderers\n                     are supported.\n\n   :output-file    - Specifies an output file path. Only used in :pdf mode.\n                     Not supported in clojurescript.\n\n   :title          - A string which will be displayed at the top of\n                     the sketch window. Not supported in clojurescript.\n\n   :features       - A vector of keywords customizing sketch behaviour.\n                     Supported features:\n\n                     :keep-on-top - Sketch window will always be above other\n                                    windows. Note: some platforms might not\n                                    support always-on-top windows.\n                                    Not supported in clojurescript.\n\n                     :exit-on-close - Shutdown JVM  when sketch is closed.\n                                      Not supported in clojurescript.\n\n                     :resizable - Makes sketch resizable.\n                                  Not supported in clojurescript.\n\n                     :no-safe-fns - Do not catch and print exceptions thrown\n                                    inside functions provided to sketch (like\n                                    draw, mouse-click, key-pressed and\n                                    other). By default all exceptions thrown\n                                    inside these functions are catched. This\n                                    prevents sketch from breaking when bad\n                                    function was provided and allows you to\n                                    fix it and reload it on fly. You can\n                                    disable this behaviour by enabling\n                                    :no-safe-fns feature.\n                                    Not supported in clojurescript.\n\n                     :present - Switch to present mode (fullscreen without\n                                borders, OS panels). You may want to use\n                                this feature together with :size :fullscreen.\n                                Not supported in ClojureScript. In ClojureScript\n                                fullscreen is enabled by pressing F11 and it's\n                                enabled on all sketches automatically.\n\n                     :no-start - Disables autostart if sketch was created using\n                                 defsketch macro. To start sketch you have to\n                                 call function created defsketch.\n                                 Supported only in ClojureScript.\n\n                     :global-key-events - Allows a sketch to receive any\n                                          keyboard event sent to the page,\n                                          regardless of whether the canvas it is\n                                          loaded in has focus or not.\n                                          Supported only in ClojureScript.\n\n                     Usage example: :features [:keep-on-top :present]\n\n   :bgcolor        - Sets background color for unused space in present mode.\n                     Color is specified in hex format: #XXXXXX.\n                     Example: :bgcolor \"#00FFFF\" (cyan background)\n                     Not supported in ClojureScript.\n\n   :display        - Sets what display should be used by this sketch.\n                     Displays are numbered starting from 0. Example: :display 1.\n                     Not supported in ClojureScript.\n\n   :setup          - A function to be called once when setting the sketch up.\n\n   :draw           - A function to be repeatedly called at most n times per\n                     second where n is the target frame-rate set for\n                     the visualisation.\n\n   :host           - String id of canvas element or DOM element itself.\n                     Specifies host for the sketch. Must be specified in sketch,\n                     may be omitted in defsketch. If ommitted in defsketch,\n                     :host is set to the name of the sketch. If element with\n                     specified id is not found on the page and page is empty -\n                     new canvas element will be created. Used in ClojureScript.\n\n   :focus-gained   - Called when the sketch gains focus.\n                     Not supported in ClojureScript.\n\n   :focus-lost     - Called when the sketch loses focus.\n                     Not supported in ClojureScript.\n\n   :mouse-entered  - Called when the mouse enters the sketch window.\n\n   :mouse-exited   - Called when the mouse leaves the sketch window\n\n   :mouse-pressed  - Called every time a mouse button is pressed.\n\n   :mouse-released - Called every time a mouse button is released.\n\n   :mouse-clicked  - called once after a mouse button has been pressed\n                     and then released.\n\n   :mouse-moved    - Called every time the mouse moves and a button is\n                     not pressed.\n\n   :mouse-dragged  - Called every time the mouse moves and a button is\n                     pressed.\n\n   :mouse-wheel    - Called every time mouse wheel is rotated.\n                     Takes 1 argument - wheel rotation, an int.\n                     Negative values if the mouse wheel was rotated\n                     up/away from the user, and positive values\n                     if the mouse wheel was rotated down/ towards the user\n\n   :key-pressed    - Called every time any key is pressed.\n\n   :key-released   - Called every time any key is released.\n\n   :key-typed      - Called once every time non-modifier keys are\n                     pressed.\n\n   :on-close       - Called once, when sketch is closed\n                     Not supported in ClojureScript.\n\n   :middleware     - Vector of middleware to be applied to the sketch.\n                     Middleware will be applied in the same order as in comp\n                     function: [f g] will be applied as (f (g options)).\n\n   :settings       - cousin of :setup. A function to be called once when\n                     setting sketch up. Should be used only for (smooth) and\n                     (no-smooth). Due to Processing limitations these functions\n                     cannot be used neither in :setup nor in :draw.",
+  "Define and start a sketch and bind it to a var with the symbol\n  app-name. If any of the options to the various callbacks are\n  symbols, it wraps them in a call to var to ensure they aren't\n  inlined and that redefinitions to the original fns are reflected in\n  the visualisation.\n\n  Available options:\n\n   :size           - A vector of width and height for the sketch or :fullscreen.\n                     Defaults to [500 300]. If you're using :fullscreen you may\n                     want to enable present mode - :features [:present].\n                     :fullscreen size works only in Clojure. In ClojureScript\n                     all sketches are support fullscreen when you press F11.\n\n   :renderer       - Specifies the renderer type. One of :p2d, :p3d, :java2d,\n                     :opengl, :pdf, :svg). Defaults to :java2d. :dxf renderer\n                     can't be used as sketch renderer. Use begin-raw method\n                     instead. In clojurescript only :p2d and :p3d renderers\n                     are supported.\n\n   :output-file    - Specifies an output file path. Only used in :pdf and :svg modes.\n                     Not supported in clojurescript. When writing to a file, call\n                     `(q/exit)` at the end of the draw call to end the sketch and not\n                     write repeatedly to the file.\n\n   :title          - A string which will be displayed at the top of\n                     the sketch window. Not supported in clojurescript.\n\n   :features       - A vector of keywords customizing sketch behaviour.\n                     Supported features:\n\n                     :keep-on-top - Sketch window will always be above other\n                                    windows. Note: some platforms might not\n                                    support always-on-top windows.\n                                    Not supported in clojurescript.\n\n                     :exit-on-close - Shutdown JVM  when sketch is closed.\n                                      Not supported in clojurescript.\n\n                     :resizable - Makes sketch resizable.\n                                  Not supported in clojurescript.\n\n                     :no-safe-fns - Do not catch and print exceptions thrown\n                                    inside functions provided to sketch (like\n                                    draw, mouse-click, key-pressed and\n                                    other). By default all exceptions thrown\n                                    inside these functions are caught. This\n                                    prevents sketch from breaking when bad\n                                    function was provided and allows you to\n                                    fix it and reload it on fly. You can\n                                    disable this behaviour by enabling\n                                    :no-safe-fns feature.\n                                    Not supported in clojurescript.\n\n                     :present - Switch to present mode (fullscreen without\n                                borders, OS panels). You may want to use\n                                this feature together with :size :fullscreen.\n                                Not supported in ClojureScript. In ClojureScript\n                                fullscreen is enabled by pressing F11 and it's\n                                enabled on all sketches automatically.\n\n                     :no-start - Disables autostart if sketch was created using\n                                 defsketch macro. To start sketch you have to\n                                 call function created defsketch.\n                                 Supported only in ClojureScript.\n\n                     :global-key-events - Allows a sketch to receive any\n                                          keyboard event sent to the page,\n                                          regardless of whether the canvas it is\n                                          loaded in has focus or not.\n                                          Supported only in ClojureScript.\n\n                     Usage example: :features [:keep-on-top :present]\n\n   :bgcolor        - Sets background color for unused space in present mode.\n                     Color is specified in hex format: #XXXXXX.\n                     Example: :bgcolor \"#00FFFF\" (cyan background)\n                     Not supported in ClojureScript.\n\n   :display        - Sets what display should be used by this sketch.\n                     Displays are numbered starting from 0. Example: :display 1.\n                     Not supported in ClojureScript.\n\n   :setup          - A function to be called once when setting the sketch up.\n\n   :draw           - A function to be repeatedly called at most n times per\n                     second where n is the target frame-rate set for\n                     the visualisation.\n\n   :host           - String id of canvas element or DOM element itself.\n                     Specifies host for the sketch. Must be specified in sketch,\n                     may be omitted in defsketch. If omitted in defsketch,\n                     :host is set to the name of the sketch. If element with\n                     specified id is not found on the page and page is empty -\n                     new canvas element will be created. Used in ClojureScript.\n\n   :focus-gained   - Called when the sketch gains focus.\n                     Not supported in ClojureScript.\n\n   :focus-lost     - Called when the sketch loses focus.\n                     Not supported in ClojureScript.\n\n   :mouse-entered  - Called when the mouse enters the sketch window.\n\n   :mouse-exited   - Called when the mouse leaves the sketch window\n\n   :mouse-pressed  - Called every time a mouse button is pressed.\n\n   :mouse-released - Called every time a mouse button is released.\n\n   :mouse-clicked  - called once after a mouse button has been pressed\n                     and then released.\n\n   :mouse-moved    - Called every time the mouse moves and a button is\n                     not pressed.\n\n   :mouse-dragged  - Called every time the mouse moves and a button is\n                     pressed.\n\n   :mouse-wheel    - Called every time mouse wheel is rotated.\n                     Takes 1 argument - wheel rotation, an int.\n                     Negative values if the mouse wheel was rotated\n                     up/away from the user, and positive values\n                     if the mouse wheel was rotated down/ towards the user\n\n   :key-pressed    - Called every time any key is pressed.\n\n   :key-released   - Called every time any key is released.\n\n   :key-typed      - Called once every time non-modifier keys are\n                     pressed.\n\n   :on-close       - Called once, when sketch is closed\n                     Not supported in ClojureScript.\n\n   :middleware     - Vector of middleware to be applied to the sketch.\n                     Middleware will be applied in the same order as in comp\n                     function: [f g] will be applied as (f (g options)).\n\n   :settings       - cousin of :setup. A function to be called once when\n                     setting sketch up. Should be used only for (smooth) and\n                     (no-smooth). Due to Processing limitations these functions\n                     cannot be used neither in :setup nor in :draw.",
   :what :macro},
  no-stroke
  {:args ({:value [], :type :both}),
@@ -1513,19 +1512,6 @@
   :docstring
   "Disables drawing the stroke (outline). If both no-stroke and\n  no-fill are called, nothing will be drawn to the screen.",
   :what :fn},
- end-camera
- {:args ({:value [], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name end-camera,
-  :subcategory "Camera",
-  :type :both,
-  :processing-name "endCamera()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/endCamera_.html",
-  :docstring
-  "Unsets the matrix mode from the camera matrix. See begin-camera.",
-  :what :fn},
  random-seed
  {:args ({:value [w], :type :both}),
   :category "Math",
@@ -1539,31 +1525,30 @@
   :docstring
   "Sets the seed value for random. By default, random produces\n  different results each time the program is run. Set the value\n  parameter to a constant to return the same pseudo-random numbers\n  each time the software is run.",
   :what :fn},
- model-z
- {:args ({:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name model-z,
-  :subcategory "Coordinates",
-  :type :both,
-  :processing-name "modelZ()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/modelZ_.html",
-  :docstring
-  "Returns the three-dimensional x, y, z position in model space. This\n  returns the z value for a given coordinate based on the current set\n  of transformations (scale, rotate, translate, etc.) The z value can\n  be used to place an object in space relative to the location of the\n  original point once the transformations are no longer in use.",
-  :what :fn},
  light-specular
- {:args ({:value [r g b], :type :both}),
+ {:args #{[r g b]},
   :category "Lights, Camera",
   :added "1.0",
   :name light-specular,
   :subcategory "Lights",
-  :type :both,
+  :type :clj,
   :processing-name "lightSpecular()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/lightSpecular_.html",
   :docstring
-  "Sets the specular color for lights. Like fill, it affects only the\n  elements which are created after it in the code. Specular refers to\n  light which bounces off a surface in a perferred direction (rather\n  than bouncing in all directions like a diffuse light) and is used\n  for creating highlights. The specular quality of a light interacts\n  with the specular material qualities set through the specular and\n  shininess functions.",
+  "Sets the specular color for lights. Like fill, it affects only the\n  elements which are created after it in the code. Specular refers to\n  light which bounces off a surface in a preferred direction (rather\n  than bouncing in all directions like a diffuse light) and is used\n  for creating highlights. The specular quality of a light interacts\n  with the specular material qualities set through the specular and\n  shininess functions.",
+  :what :fn},
+ plane
+ {:args #{[width height]},
+  :category "Shape",
+  :added "3.0.0",
+  :name plane,
+  :subcategory "3D Primitives",
+  :type :cljs,
+  :processing-name "plane()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/plane_.html",
+  :docstring "Draw a plane with given a width and height.",
   :what :fn},
  key-as-keyword
  {:args ({:value [], :type :both}),
@@ -1579,17 +1564,17 @@
   "Returns a keyword representing the currently pressed key. Modifier\n  keys are represented as: :up, :down, :left, :right, :alt, :control,\n  :shift, :command, :f1-24",
   :what :fn},
  blend-mode
- {:args #{[mode]},
+ {:args ({:value [mode], :type :both}),
   :category "Image",
   :added "2.0",
   :name blend-mode,
   :subcategory "Rendering",
-  :type :clj,
+  :type :both,
   :processing-name "blendMode()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/blendMode_.html",
   :docstring
-  "Blends the pixels in the display window according to the defined mode.\n  There is a choice of the following modes to blend the source pixels (A)\n  with the ones of pixels already in the display window (B):\n\n  :blend      - linear interpolation of colours: C = A*factor + B\n  :add        - additive blending with white clip:\n                                            C = min(A*factor + B, 255)\n  :subtract   - subtractive blending with black clip:\n                                            C = max(B - A*factor, 0)\n  :darkest    - only the darkest colour succeeds:\n                                            C = min(A*factor, B)\n  :lightest   - only the lightest colour succeeds:\n                                            C = max(A*factor, B)\n  :exclusion  - similar to :difference, but less extreme.\n  :multiply   - Multiply the colors, result will always be darker.\n  :screen     - Opposite multiply, uses inverse values of the colors.\n  :replace    - the pixels entirely replace the others and don't utilize\n                alpha (transparency) values\n\n  Note: :hard-light, :soft-light, :dodge, :overlay, :dodge, :burn, :difference\n  modes are not supported by this function.\n\n  factor is alpha value of pixel being drawed",
+  "Blends the pixels in the display window according to the defined mode.\n  There is a choice of the following modes to blend the source pixels (A)\n  with the ones of pixels already in the display window (B):\n\n  :blend      - linear interpolation of colours: C = A*factor + B\n  :add        - additive blending with white clip:\n                                            C = min(A*factor + B, 255)\n  :subtract   - subtractive blending with black clip:\n                                            C = max(B - A*factor, 0)\n  :darkest    - only the darkest colour succeeds:\n                                            C = min(A*factor, B)\n  :lightest   - only the lightest colour succeeds:\n                                            C = max(A*factor, B)\n  :difference - subtract colors from underlying image.\n  :exclusion  - similar to :difference, but less extreme.\n  :multiply   - Multiply the colors, result will always be darker.\n  :screen     - Opposite multiply, uses inverse values of the colors.\n  :replace    - the pixels entirely replace the others and don't utilize\n                alpha (transparency) values.\n  :overlay    - mix of :multiply and :screen. Multiplies dark values,\n                and screens light values.\n  :hard-light - :screen when greater than 50% gray, :multiply when lower.\n  :soft-light - mix of :darkest and :lightest. Works like :overlay, but\n                not as harsh.\n  :dodge      - lightens light tones and increases contrast, ignores darks.\n  :burn       - darker areas are applied, increasing contrast, ignores\n                lights.\n\n  Note: in clj :hard-light, :soft-light, :overlay, :dodge, :burn\n  modes are not supported. In cljs :subtract mode is not supported.\n\n  factor is the alpha value of the pixel being drawn",
   :what :fn},
  dist
  {:args
@@ -1645,7 +1630,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/fill_.html",
   :docstring
-  "Sets the color used to fill shapes. For example, if you run fill(204, 102, 0),\n  all subsequent shapes will be filled with orange.  This function casts all input as a float.\n  If nil is passed it removes any fill color; equivalent to (no-fill).",
+  "Sets the color used to fill shapes. For example, if you run (fill 204 102 0),\n  all subsequent shapes will be filled with orange.  This function casts all input as a float.\n  If nil is passed it removes any fill color; equivalent to (no-fill).",
   :what :fn},
  with-translation
  {:args ({:value [translation-vector & body], :type :both}),
@@ -1674,17 +1659,18 @@
   "Replaces the current matrix with the identity matrix. The\n  equivalent function in OpenGL is glLoadIdentity()",
   :what :fn},
  mask-image
- {:args #{[img mask] [mask]},
+ {:args
+  ({:value [img mask], :type :both} {:value [mask], :type :both}),
   :category "Image",
   :added "1.0",
   :name mask-image,
   :subcategory "Loading & Displaying",
-  :type :clj,
+  :type :both,
   :processing-name "PImage.mask()",
   :requires-bindings false,
   :link "http://www.processing.org/reference/PImage_mask_.html",
   :docstring
-  "Masks part of an image from displaying by loading another image and\n  using it as an alpha channel.  This mask image should only contain\n  grayscale data, but only the blue color channel is used. The mask\n  image needs to be the same size as the image to which it is\n  applied.\n\n  If single argument function is used - masked image is sketch itself\n  or graphics if used inside with-graphics macro. If you're passing\n  graphics to this function - it works only with :p3d and :opengl renderers.\n\n  This method is useful for creating dynamically generated alpha\n  masks.",
+  "Masks part of an image from displaying by loading another image and\n  using it as an alpha channel.  This mask image should only contain\n  grayscale data. The mask image needs to be the same size as the image\n  to which it is applied.\n\n  If single argument function is used - masked image is sketch itself\n  or graphics if used inside with-graphics macro. If you're passing\n  graphics to this function - it works only with :p3d and :opengl renderers.\n\n  This method is useful for creating dynamically generated alpha\n  masks.",
   :what :fn},
  green
  {:args ({:value [col], :type :both}),
@@ -1766,12 +1752,12 @@
   "Returns the ascent of the current font at its current size. This\n  information is useful for determining the height of the font above\n  the baseline. For example, adding the text-ascent and text-descent\n  values will give you the total height of the line.",
   :what :fn},
  shininess
- {:args ({:value [shine], :type :both}),
+ {:args #{[shine]},
   :category "Lights, Camera",
   :added "1.0",
   :name shininess,
   :subcategory "Material Properties",
-  :type :both,
+  :type :clj,
   :processing-name "shininess()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/shininess_.html",
@@ -1802,7 +1788,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/ellipseMode_.html",
   :docstring
-  "Modifies the origin of the ellispse according to the specified mode:\n\n  :center  - specifies the location of the ellipse as\n             the center of the shape. (Default).\n  :radius  - similar to center, but the width and height parameters to\n             ellipse specify the radius of the ellipse, rather than the\n             diameter.\n  :corner  - draws the shape from the upper-left corner of its bounding\n             box.\n  :corners - uses the four parameters to ellipse to set two opposing\n             corners of the ellipse's bounding box.",
+  "Modifies the origin of the ellipse according to the specified mode:\n\n  :center  - specifies the location of the ellipse as\n             the center of the shape. (Default).\n  :radius  - similar to center, but the width and height parameters to\n             ellipse specify the radius of the ellipse, rather than the\n             diameter.\n  :corner  - draws the shape from the upper-left corner of its bounding\n             box.\n  :corners - uses the four parameters to ellipse to set two opposing\n             corners of the ellipse's bounding box.",
   :what :fn},
  month
  {:args ({:value [], :type :both}),
@@ -1924,20 +1910,20 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/specular_.html",
   :docstring
-  "Sets the specular color of the materials used for shapes drawn to\n  the screen, which sets the color of hightlights. Specular refers to\n  light which bounces off a surface in a perferred direction (rather\n  than bouncing in all directions like a diffuse light). Used in\n  combination with emissive, ambient, and shininess in setting\n  the material properties of shapes.",
+  "Sets the specular color of the materials used for shapes drawn to\n  the screen, which sets the color of highlights. Specular refers to\n  light which bounces off a surface in a preferred direction (rather\n  than bouncing in all directions like a diffuse light). Used in\n  combination with emissive, ambient, and shininess in setting\n  the material properties of shapes.",
   :what :fn},
  save-frame
- {:args ({:value [], :type :both} {:value [name], :type :both}),
+ {:args #{[] [name]},
   :category "Output",
   :added "1.0",
   :name save-frame,
   :subcategory "Image",
-  :type :both,
+  :type :clj,
   :processing-name "saveFrame()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/saveFrame_.html",
   :docstring
-  "Saves an image identical to the current display window as a\n  file. May be called multple times - each file saved will have a\n  unique name. Name and image formate may be modified by passing a\n  string parameter of the form \"foo-####.ext\" where foo- can be any\n  arbitrary string, #### will be replaced with the current frame id\n  and .ext is one of .tiff, .targa, .png, .jpeg or .jpg\n\n  Examples:\n  (save-frame)\n  (save-frame \"pretty-pic-####.jpg\")",
+  "Saves an image identical to the current display window as a\n  file. May be called multiple times - each file saved will have a\n  unique name. Name and image format may be modified by passing a\n  string parameter of the form \"foo-####.ext\" where foo- can be any\n  arbitrary string, #### will be replaced with the current frame id\n  and .ext is one of .tiff, .targa, .png, .jpeg or .jpg\n\n  Examples:\n  (save-frame)\n     (save-frame \"pretty-pic-####.jpg\")",
   :what :fn},
  cursor
  {:args ({:value [], :type :both} {:value [cursor-mode], :type :both}),
@@ -1950,7 +1936,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/cursor_.html",
   :docstring
-  "Sets the cursor to a predefined symbol or makes it\n  visible if already hidden (after no-cursor was called).\n\n  Available modes: :arrow, :cross, :hand, :move, :text, :wait\n\n  See cursor-image for specifying a generic image as the cursor\n  symbol.",
+  "Sets the cursor to a predefined symbol or makes it\n  visible if already hidden (after no-cursor was called).\n\n  Available modes: :arrow, :cross, :hand, :move, :text, :wait\n\n  See cursor-image for specifying a generic image as the cursor\n  symbol (clj only).",
   :what :fn},
  noise
  {:args
@@ -1997,12 +1983,12 @@
   "Specifies vertex coordinates for Bezier curves. Each call to\n  bezier-vertex defines the position of two control points and one\n  anchor point of a Bezier curve, adding a new segment to a line or\n  shape. The first time bezier-vertex is used within a begin-shape\n  call, it must be prefaced with a call to vertex to set the first\n  anchor point. This function must be used between begin-shape and\n  end-shape and only when there is no parameter specified to\n  begin-shape.",
   :what :fn},
  light-falloff
- {:args ({:value [constant linear quadratic], :type :both}),
+ {:args #{[constant linear quadratic]},
   :category "Lights, Camera",
   :added "1.0",
   :name light-falloff,
   :subcategory "Lights",
-  :type :both,
+  :type :clj,
   :processing-name "lightFalloff()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/lightFalloff_.html",
@@ -2022,7 +2008,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/noiseDetail_.html",
   :docstring
-  "Adjusts the character and level of detail produced by the Perlin\n  noise function. Similar to harmonics in physics, noise is computed\n  over several octaves. Lower octaves contribute more to the output\n  signal and as such define the overal intensity of the noise, whereas\n  higher octaves create finer grained details in the noise\n  sequence. By default, noise is computed over 4 octaves with each\n  octave contributing exactly half than its predecessor, starting at\n  50% strength for the 1st octave. This falloff amount can be changed\n  by adding an additional function parameter. Eg. a falloff factor of\n  0.75 means each octave will now have 75% impact (25% less) of the\n  previous lower octave. Any value between 0.0 and 1.0 is valid,\n  however note that values greater than 0.5 might result in greater\n  than 1.0 values returned by noise.\n\n  By changing these parameters, the signal created by the noise\n  function can be adapted to fit very specific needs and\n  characteristics.",
+  "Adjusts the character and level of detail produced by the Perlin\n  noise function. Similar to harmonics in physics, noise is computed\n  over several octaves. Lower octaves contribute more to the output\n  signal and as such define the overall intensity of the noise, whereas\n  higher octaves create finer grained details in the noise\n  sequence. By default, noise is computed over 4 octaves with each\n  octave contributing exactly half than its predecessor, starting at\n  50% strength for the 1st octave. This falloff amount can be changed\n  by adding an additional function parameter. Eg. a falloff factor of\n  0.75 means each octave will now have 75% impact (25% less) of the\n  previous lower octave. Any value between 0.0 and 1.0 is valid,\n  however note that values greater than 0.5 might result in greater\n  than 1.0 values returned by noise.\n\n  By changing these parameters, the signal created by the noise\n  function can be adapted to fit very specific needs and\n  characteristics.",
   :what :fn},
  save
  {:args ({:value [filename], :type :both}),
@@ -2048,7 +2034,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/curvePoint_.html",
   :docstring
-  "Evalutes the curve at point t for points a, b, c, d. The parameter\n  t varies between 0 and 1, a and d are points on the curve, and b c\n  and are the control points. This can be done once with the x\n  coordinates and a second time with the y coordinates to get the\n  location of a curve at t.",
+  "Evaluates the curve at point t for points a, b, c, d. The parameter\n  t varies between 0 and 1, a and d are points on the curve, and b c\n  and are the control points. This can be done once with the x\n  coordinates and a second time with the y coordinates to get the\n  location of a curve at t.",
   :what :fn},
  state
  {:args ({:value [], :type :both} {:value [key], :type :both}),
@@ -2075,7 +2061,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/loadShader_.html",
   :docstring
-  "Loads a shader into the PShader object. Shaders are compatible with the\n  P2D and P3D renderers, but not with the default renderer.",
+  "Loads a shader into the PShader object for clj and Shader object for\n  cljs. In clj mode shaders are\n  compatible with the P2D and P3D renderers, but not with the default\n  renderer. In cljs mode shaders are compatible with the P3D renderer.",
   :what :fn},
  resize
  {:args ({:value [img w h], :type :both}),
@@ -2090,19 +2076,6 @@
   :link "http://processing.org/reference/PImage_resize_.html",
   :docstring
   "Resize the image to a new width and height.\n  To make the image scale proportionally, use 0 as the value for the wide or\n  high parameter. For instance, to make the width of an image 150 pixels,\n  and change the height using the same proportion, use resize(150, 0).\n\n  Even though a PGraphics is technically a PImage, it is not possible\n  to rescale the image data found in a PGraphics.\n  (It's simply not possible to do this consistently across renderers:\n  technically infeasible with P3D, or what would it even do with PDF?)\n  If you want to resize PGraphics content, first get a copy of its image data\n  using the get() method, and call resize() on the PImage that is returned.",
-  :what :fn},
- normal
- {:args ({:value [nx ny nz], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name normal,
-  :subcategory "Lights",
-  :type :both,
-  :processing-name "normal()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/normal_.html",
-  :docstring
-  "Sets the current normal vector. This is for drawing three\n  dimensional shapes and surfaces and specifies a vector perpendicular\n  to the surface of the shape which determines how lighting affects\n  it. Processing attempts to automatically assign normals to shapes,\n  but since that's imperfect, this is a better option when you want\n  more control. This function is identical to glNormal3f() in OpenGL.",
   :what :fn},
  perspective
  {:args
@@ -2132,12 +2105,12 @@
   :docstring "Returns the current second as a value from 0 - 59.",
   :what :fn},
  hint
- {:args ({:value [hint-type], :type :both}),
+ {:args #{[hint-type]},
   :category "Rendering",
   :added "1.0",
   :name hint,
   :subcategory nil,
-  :type :both,
+  :type :clj,
   :processing-name "hint()",
   :processing-link nil,
   :requires-bindings true,
@@ -2146,18 +2119,17 @@
   "Set various hints and hacks for the renderer. This is used to\n  handle obscure rendering features that cannot be implemented in a\n  consistent manner across renderers. Many options will often graduate\n  to standard features instead of hints over time.\n\n  Options:\n\n  :enable-native-fonts - Use the native version fonts when they are\n    installed, rather than the bitmapped version from a .vlw\n    file. This is useful with the default (or JAVA2D) renderer\n    setting, as it will improve font rendering speed. This is not\n    enabled by default, because it can be misleading while testing\n    because the type will look great on your machine (because you have\n    the font installed) but lousy on others' machines if the identical\n    font is unavailable. This option can only be set per-sketch, and\n    must be called before any use of text-font.\n\n  :disable-native-fonts - Disables native font support.\n\n  :disable-depth-test - Disable the zbuffer, allowing you to draw on\n    top of everything at will. When depth testing is disabled, items\n    will be drawn to the screen sequentially, like a painting. This\n    hint is most often used to draw in 3D, then draw in 2D on top of\n    it (for instance, to draw GUI controls in 2D on top of a 3D\n    interface). Starting in release 0149, this will also clear the\n    depth buffer. Restore the default with :enable-depth-test\n    but note that with the depth buffer cleared, any 3D drawing that\n    happens later in draw will ignore existing shapes on the screen.\n\n  :enable-depth-test - Enables the zbuffer.\n\n  :enable-depth-sort - Enable primitive z-sorting of triangles and\n    lines in :p3d and :opengl rendering modes. This can slow\n    performance considerably, and the algorithm is not yet perfect.\n\n  :disable-depth-sort - Disables hint :enable-depth-sort\n\n  :disable-opengl-errors - Speeds up the OPENGL renderer setting\n     by not checking for errors while running.\n\n  :enable-opengl-errors - Turns on OpenGL error checking\n\n  :enable-depth-mask\n  :disable-depth-mask\n\n  :enable-optimized-stroke\n  :disable-optimized-stroke\n  :enable-retina-pixels\n  :disable-retina-pixels\n  :enable-stroke-perspective\n  :disable-stroke-perspective\n  :enable-stroke-pure\n  :disable-stroke-pure\n  :enable-texture-mipmaps\n  :disable-texture-mipmaps\n",
   :what :fn},
  sphere-detail
- {:args
-  ({:value [ures vres], :type :both} {:value [res], :type :both}),
+ {:args #{[ures vres] [res]},
   :category "Shape",
   :added "1.0",
   :name sphere-detail,
   :subcategory "3D Primitives",
-  :type :both,
+  :type :clj,
   :processing-name "sphereDetail()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/sphereDetail_.html",
   :docstring
-  "Controls the detail used to render a sphere by adjusting the number\n  of vertices of the sphere mesh. The default resolution is 30, which\n  creates a fairly detailed sphere definition with vertices every\n  360/30 = 12 degrees. If you're going to render a great number of\n  spheres per frame, it is advised to reduce the level of detail using\n  this function. The setting stays active until sphere-detail is\n  called again with a new parameter and so should not be called prior\n  to every sphere statement, unless you wish to render spheres with\n  different settings, e.g. using less detail for smaller spheres or\n  ones further away from the camera. To controla the detail of the\n  horizontal and vertical resolution independently, use the version of\n  the functions with two parameters.",
+  "Controls the detail used to render a sphere by adjusting the number\n  of vertices of the sphere mesh. The default resolution is 30, which\n  creates a fairly detailed sphere definition with vertices every\n  360/30 = 12 degrees. If you're going to render a great number of\n  spheres per frame, it is advised to reduce the level of detail using\n  this function. The setting stays active until sphere-detail is\n  called again with a new parameter and so should not be called prior\n  to every sphere statement, unless you wish to render spheres with\n  different settings, e.g. using less detail for smaller spheres or\n  ones further away from the camera. To control the detail of the\n  horizontal and vertical resolution independently, use the version of\n  the functions with two parameters.",
   :what :fn},
  vertex
  {:args
@@ -2177,29 +2149,28 @@
   "All shapes are constructed by connecting a series of\n  vertices. vertex is used to specify the vertex coordinates for\n  points, lines, triangles, quads, and polygons and is used\n  exclusively within the begin-shape and end-shape fns.\n\n  Drawing a vertex in 3D using the z parameter requires the :p3d or\n  :opengl renderers to be used.\n\n  This function is also used to map a texture onto the geometry. The\n  texture fn declares the texture to apply to the geometry and the u\n  and v coordinates set define the mapping of this texture to the\n  form. By default, the coordinates used for u and v are specified in\n  relation to the image's size in pixels, but this relation can be\n  changed with texture-mode.",
   :what :fn},
  delay-frame
- {:args ({:value [freeze-ms], :type :both}),
+ {:args #{[freeze-ms]},
   :category "Structure",
   :added "1.0",
   :name delay-frame,
   :subcategory nil,
-  :type :both,
+  :type :clj,
   :processing-name "delay()",
   :processing-link nil,
   :requires-bindings true,
   :link nil,
   :docstring
-  "Forces the program to stop running for a specified time. Delay\n  times are specified in thousandths of a second, therefore the\n  function call (delay 3000) will stop the program for three\n  seconds. Because the screen is updated only at the end of draw,\n  the program may appear to 'freeze', because the screen will not\n  update when the delay fn is used. This function has no affect\n  inside setup.",
+  "Forces the program to stop running for a specified time. Delay\n     times are specified in thousandths of a second, therefore the\n     function call (delay 3000) will stop the program for three\n     seconds. Because the screen is updated only at the end of draw,\n     the program may appear to 'freeze', because the screen will not\n     update when the delay fn is used. This function has no affect\n     inside setup.",
   :what :fn},
  spot-light
  {:args
-  ({:value [r g b x y z nx ny nz angle concentration], :type :both}
-   {:value [[r g b] [x y z] [nx ny nz] angle concentration],
-    :type :both}),
+  #{[r g b x y z nx ny nz angle concentration]
+    [[r g b] [x y z] [nx ny nz] angle concentration]},
   :category "Lights, Camera",
   :added "1.0",
   :name spot-light,
   :subcategory "Lights",
-  :type :both,
+  :type :clj,
   :processing-name "spotLight()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/spotLight_.html",
@@ -2286,19 +2257,6 @@
   :docstring
   "Converts a String representation of a hexadecimal number to its\n  equivalent integer value.",
   :what :fn},
- begin-camera
- {:args ({:value [], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name begin-camera,
-  :subcategory "Camera",
-  :type :both,
-  :processing-name "beginCamera()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/beginCamera_.html",
-  :docstring
-  "Sets the matrix mode to the camera matrix so calls such as\n  translate, rotate, apply-matrix and reset-matrix affect the\n  camera. begin-camera should always be used with a following\n  end-camera and pairs of begin-camera and end-camera cannot be\n  nested.\n\n  For most situations the camera function will be sufficient.",
-  :what :fn},
  text-num
  {:args
   ({:value [num x y], :type :both} {:value [num x y z], :type :both}),
@@ -2349,21 +2307,22 @@
   :processing-name "loadShape()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/loadShape_.html",
-  :docstring "Load a geometry from a file as a PShape.",
+  :docstring
+  "Load a geometry from a file as a PShape in clj, and a Geometry\n  in cljs.",
   :what :fn},
  blend-color
- {:args ({:value [c1 c2 mode], :type :both}),
+ {:args #{[c1 c2 mode]},
   :category "Color",
   :added "1.0",
   :name blend-color,
   :subcategory "Creating & Reading",
-  :type :both,
+  :type :clj,
   :processing-name "blendColor()",
   :processing-link nil,
   :requires-bindings false,
   :link nil,
   :docstring
-  "Blends two color values together based on the blending mode given specified\n  with the mode keyword.\n\n  Available blend modes are:\n\n  :blend      - linear interpolation of colours: C = A*factor + B\n  :add        - additive blending with white clip:\n                                            C = min(A*factor + B, 255)\n  :subtract   - subtractive blending with black clip:\n                                            C = max(B - A*factor, 0)\n  :darkest    - only the darkest colour succeeds:\n                                            C = min(A*factor, B)\n  :lightest   - only the lightest colour succeeds:\n                                            C = max(A*factor, B)\n  :difference - subtract colors from underlying image.\n  :exclusion  - similar to :difference, but less extreme.\n  :multiply   - Multiply the colors, result will always be darker.\n  :screen     - Opposite multiply, uses inverse values of the colors.\n  :overlay    - A mix of :multiply and :screen. Multiplies dark values\n                and screens light values.\n  :hard-light - :screen when greater than 50% gray, :multiply when\n                lower.\n  :soft-light - Mix of :darkest and :lightest. Works like :overlay,\n                but not as harsh.\n  :dodge      - Lightens light tones and increases contrast, ignores\n                darks.\n                Called \"Color Dodge\" in Illustrator and Photoshop.\n  :burn       - Darker areas are applied, increasing contrast, ignores\n                lights. Called \"Color Burn\" in Illustrator and\n                Photoshop.",
+  "Blends two color values together based on the blending mode given specified\n     with the mode keyword.\n\n     Available blend modes are:\n\n     :blend      - linear interpolation of colours: C = A*factor + B\n     :add        - additive blending with white clip:\n                                               C = min(A*factor + B, 255)\n     :subtract   - subtractive blending with black clip:\n                                               C = max(B - A*factor, 0)\n     :darkest    - only the darkest colour succeeds:\n                                               C = min(A*factor, B)\n     :lightest   - only the lightest colour succeeds:\n                                               C = max(A*factor, B)\n     :difference - subtract colors from underlying image.\n     :exclusion  - similar to :difference, but less extreme.\n     :multiply   - Multiply the colors, result will always be darker.\n     :screen     - Opposite multiply, uses inverse values of the colors.\n     :overlay    - A mix of :multiply and :screen. Multiplies dark values\n                   and screens light values.\n     :hard-light - :screen when greater than 50% gray, :multiply when\n                   lower.\n     :soft-light - Mix of :darkest and :lightest. Works like :overlay,\n                   but not as harsh.\n     :dodge      - Lightens light tones and increases contrast, ignores\n                   darks.\n                   Called \"Color Dodge\" in Illustrator and Photoshop.\n     :burn       - Darker areas are applied, increasing contrast, ignores\n                   lights. Called \"Color Burn\" in Illustrator and\n                   Photoshop.",
   :what :fn},
  texture-wrap
  {:args #{[mode]},
@@ -2424,7 +2383,7 @@
   :args ({:value [width height], :type :both}),
   :name resize-sketch,
   :docstring
-  "Resizes sketch.\n  Note about ClojureScript version: if canvas element is resized by external\n  reasons (for example from js on a page then you still need to call this\n  method in order to tell Quil that size has changed. Currently there is no\n  good way to automatically detect that size of <canvas> element changed.",
+  "Resizes sketch.\n  Note about ClojureScript version: if div element is resized by external\n  reasons (for example from js on a page then you still need to call this\n  method in order to tell Quil that size has changed. Currently there is no\n  good way to automatically detect that size of <div> element changed.",
   :what :fn,
   :link nil,
   :type :both},
@@ -2505,6 +2464,21 @@
   :docstring
   "Temporarily set the fill color for the body of this macro.\n   The code outside of with-fill form will have the previous fill color set.\n\n   A fill argument of nil disables the fill.\n\n   Example: (with-fill 255 ...)\n            (with-fill [10 80 98] ...)\n            (with-fill nil ...)",
   :what :macro},
+ ellipsoid
+ {:args
+  #{[radius-x radius-y radius-z] [radius-x radius-y radius-z detail-x]
+    [radius-x radius-y radius-z detail-x detail-y]},
+  :category "Shape",
+  :added "3.0.0",
+  :name ellipsoid,
+  :subcategory "3D Primitives",
+  :type :cljs,
+  :processing-name "ellipsoid()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/ellipsoid_.html",
+  :docstring
+  "Draw an ellipsoid with given radius\n       Optional parameters:\n         detail-x: number of segments, the more segments the smoother geometry default is 24\n         detail-y: number of segments, the more segments the smoother geometry default is 16",
+  :what :fn},
  no-cursor
  {:args ({:value [], :type :both}),
   :category "Environment",
@@ -2519,20 +2493,17 @@
   "Hides the cursor from view. Will not work when running the in full\n  screen (Present) mode.",
   :what :fn},
  create-font
- {:args
-  ({:value [name size smooth charset], :type :both}
-   {:value [name size smooth], :type :both}
-   {:value [name size], :type :both}),
+ {:args #{[name size smooth charset] [name size smooth] [name size]},
   :category "Typography",
   :added "1.0",
   :name create-font,
   :subcategory "Loading & Displaying",
-  :type :both,
+  :type :clj,
   :processing-name "createFont()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/createFont_.html",
   :docstring
-  "Dynamically converts a font to the format used by Processing (a\n  PFont) from either a font name that's installed on the computer, or\n  from a .ttf or .otf file inside the sketches 'data' folder. This\n  function is an advanced feature for precise control.\n\n  Use available-fonts to obtain the names for the fonts recognized by\n  the computer and are compatible with this function.\n\n  The size parameter states the font size you want to generate. The\n  smooth parameter specifies if the font should be antialiased or not,\n  and the charset parameter is an array of chars that specifies the\n  characters to generate.\n\n  This function creates a bitmapped version of a font It loads a font\n  by name, and converts it to a series of images based on the size of\n  the font. When possible, the text function will use a native font\n  rather than the bitmapped version created behind the scenes with\n  create-font. For instance, when using the default renderer\n  setting (JAVA2D), the actual native version of the font will be\n  employed by the sketch, improving drawing quality and\n  performance. With the :p2d, :p3d, and :opengl renderer settings, the\n  bitmapped version will be used. While this can drastically improve\n  speed and appearance, results are poor when exporting if the sketch\n  does not include the .otf or .ttf file, and the requested font is\n  not available on the machine running the sketch.",
+  "Dynamically converts a font to the format used by Processing (a\n     PFont) from either a font name that's installed on the computer, or\n     from a .ttf or .otf file inside the sketches 'data' folder. This\n     function is an advanced feature for precise control.\n\n     Use available-fonts to obtain the names for the fonts recognized by\n     the computer and are compatible with this function.\n\n     The size parameter states the font size you want to generate. The\n     smooth parameter specifies if the font should be antialiased or not,\n     and the charset parameter is an array of chars that specifies the\n     characters to generate.\n\n     This function creates a bitmapped version of a font It loads a font\n     by name, and converts it to a series of images based on the size of\n     the font. When possible, the text function will use a native font\n     rather than the bitmapped version created behind the scenes with\n     create-font. For instance, when using the default renderer\n     setting (JAVA2D), the actual native version of the font will be\n     employed by the sketch, improving drawing quality and\n     performance. With the :p2d, :p3d, and :opengl renderer settings, the\n     bitmapped version will be used. While this can drastically improve\n     speed and appearance, results are poor when exporting if the sketch\n     does not include the .otf or .ttf file, and the requested font is\n     not available on the machine running the sketch.",
   :what :fn},
  current-graphics
  {:args ({:value [], :type :both}),
@@ -2587,17 +2558,32 @@
   "Returns a boolean value representing whether the applet has focus.",
   :what :fn},
  text-mode
- {:args ({:value [mode], :type :both}),
+ {:args #{[mode]},
   :category "Typography",
   :added "1.0",
   :name text-mode,
   :subcategory "Attributes",
-  :type :both,
+  :type :clj,
   :processing-name "textMode()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/textMode_.html",
   :docstring
-  "Sets the way text draws to the screen - available modes\n  are :model and :shape\n\n  In the default configuration (the :model mode), it's possible to\n  rotate, scale, and place letters in two and three dimensional space.\n\n  The :shape mode draws text using the glyph outlines of individual\n  characters rather than as textures. This mode is only supported with\n  the PDF and OPENGL renderer settings. With the PDF renderer, you\n  must specify the :shape text-mode before any other drawing occurs.\n  If the outlines are not available, then :shape will be ignored and\n  :model will be used instead.\n\n  The :shape option in OPENGL mode can be combined with begin-raw to\n  write vector-accurate text to 2D and 3D output files, for instance\n  DXF or PDF. :shape is not currently optimized for OPENGL, so if\n  recording shape data, use :model until you're ready to capture the\n  geometry with begin-raw.",
+  "Sets the way text draws to the screen - available modes\n     are :model and :shape\n\n     In the default configuration (the :model mode), it's possible to\n     rotate, scale, and place letters in two and three dimensional space.\n\n     The :shape mode draws text using the glyph outlines of individual\n     characters rather than as textures. This mode is only supported with\n     the PDF and OPENGL renderer settings. With the PDF renderer, you\n     must specify the :shape text-mode before any other drawing occurs.\n     If the outlines are not available, then :shape will be ignored and\n     :model will be used instead.\n\n     The :shape option in OPENGL mode can be combined with begin-raw to\n     write vector-accurate text to 2D and 3D output files, for instance\n     DXF or PDF. :shape is not currently optimized for OPENGL, so if\n     recording shape data, use :model until you're ready to capture the\n     geometry with begin-raw.",
+  :what :fn},
+ torus
+ {:args
+  #{[radius tube-radius] [radius tube-radius detail-x]
+    [radius tube-radius detail-x detail-y]},
+  :category "Shape",
+  :added "3.0.0",
+  :name torus,
+  :subcategory "3D Primitives",
+  :type :cljs,
+  :processing-name "torus()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/torus_.html",
+  :docstring
+  "Draw a torus with given radius and tube radius.\n      Optional parameters:\n        detail-x: number of segments, the more segments the smoother geometry default is 24\n        detail-y: number of segments, the more segments the smoother geometry default is 16",
   :what :fn},
  image-mode
  {:args ({:value [mode], :type :both}),
@@ -2626,7 +2612,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/line_.html",
   :docstring
-  "Draws a line (a direct path between two points) to the screen. The\n  version of line with four parameters draws the line in 2D. To color\n  a line, use the stroke function. A line cannot be filled, therefore\n  the fill method will not affect the color of a line. 2D lines are\n  drawn with a width of one pixel by default, but this can be changed\n  with the stroke-weight function. The version with six parameters\n  allows the line to be placed anywhere within XYZ space. ",
+  "Draws a line (a direct path between two points) to the screen. The\n  version of line with four parameters draws the line in 2D. To color\n  a line, use the stroke function. A line cannot be filled, therefore\n  the fill method will not affect the color of a line. 2D lines are\n  drawn with a width of one pixel by default, but this can be changed\n  with the stroke-weight function. The version with six parameters\n  allows the line to be placed anywhere within XYZ space.",
   :what :fn},
  do-record
  {:args ({:value [graphics & body], :type :both}),
@@ -2682,17 +2668,17 @@
   "Extracts the blue value from a color, scaled to match current color-mode.\n  Returns a float.",
   :what :fn},
  frustum
- {:args ({:value [left right bottom top near far], :type :both}),
+ {:args #{[left right bottom top near far]},
   :category "Lights, Camera",
   :added "1.0",
   :name frustum,
   :subcategory "Camera",
-  :type :both,
+  :type :clj,
   :processing-name "frustum()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/frustum_.html",
   :docstring
-  "Sets a perspective matrix defined through the parameters. Works\n  like glFrustum, except it wipes out the current perspective matrix\n  rather than muliplying itself with it.",
+  "Sets a perspective matrix defined through the parameters. Works\n  like glFrustum, except it wipes out the current perspective matrix\n  rather than multiplying itself with it.\n  https://en.wikipedia.org/wiki/Frustum",
   :what :fn},
  with-rotation
  {:args ({:value [rotation & body], :type :both}),
@@ -2708,12 +2694,12 @@
   "Performs body with rotation, restores current transformation on exit.\n  Accepts a vector [angle] or [angle x y z].\n\n  When 4 arguments provides it produces a rotation of angle degrees\n  around the vector x y z. Check examples for to better understand.\n  This rotation follows the right-hand rule, so if the vector x y z points\n  toward the user, the rotation will be counterclockwise.\n\n  Example:\n    (with-rotation [angle]\n      (vertex 1 2))",
   :what :macro},
  print-matrix
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Transform",
   :added "1.0",
   :name print-matrix,
   :subcategory nil,
-  :type :both,
+  :type :clj,
   :processing-name "printMatrix()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/printMatrix_.html",
@@ -2761,18 +2747,18 @@
   :docstring
   "A quad is a quadrilateral, a four sided polygon. It is similar to a\n  rectangle, but the angles between its edges are not constrained to\n  be ninety degrees. The first pair of parameters (x1,y1) sets the\n  first vertex and the subsequent pairs should proceed clockwise or\n  counter-clockwise around the defined shape.",
   :what :fn},
- screen-x
- {:args ({:value [x y], :type :both} {:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name screen-x,
-  :subcategory "Coordinates",
-  :type :both,
-  :processing-name "screenX()",
+ text-style
+ {:args #{[style]},
+  :category "Typography",
+  :added "2.8.0",
+  :name text-style,
+  :subcategory "Attributes",
+  :type :cljs,
+  :processing-name "textStyle()",
   :requires-bindings true,
-  :link "http://www.processing.org/reference/screenX_.html",
+  :link "http://www.processing.org/reference/textStyle_.html",
   :docstring
-  "Takes a three-dimensional x, y, z position and returns the x value\n  for where it will appear on a (two-dimensional) screen, once\n  affected by translate, scale or any other transformations",
+  "Sets/gets the style of the text for system fonts to :normal, :italic,\n     or :bold. Note: this may be is overridden by CSS styling. For\n     non-system fonts (opentype, truetype, etc.) please load styled fonts\n     instead.",
   :what :fn},
  navigation-3d
  {:args ({:value [options], :type :both}),
@@ -2788,17 +2774,31 @@
   "Enables navigation in 3D space. Similar to how it is done in\n  shooters: WASD navigation, space is go up, drag mouse to look around.\n  This middleware requires fun-mode.\n\n\n  Navigation\n\n  * Drag mouse to look around. You can change settings to bind\n    mouse-moved instead of mouse-dragged to look around. See\n    customization info below.\n\n  * Keyboard:\n    * w - go forward\n    * s - go backward\n    * a - strafe left\n    * d - strafe right\n    * space - go up\n    * z - go down, can't bind to ctrl, limitation of Processing\n\n\n  Customization\n\n  You can customize this middleware by providing map as\n  :navigation-3d option in defsketch/sketch. Map can have following\n  optional keys:\n\n  :position - vector of 3 numbers, initial camera position. Default\n              is the same as in 'camera' function.\n\n  :straight - vector of 3 numbers, direction you'll be looking at.\n              Default is [0 0 -1] (looking down).\n\n  :up - vector of 3 numbers, 'up' direction. Default is [0 1 0].\n\n  :pixels-in-360 - number, mouse sensitivity. Defines how many pixels\n                   you need to move/drag you mouse to rotate 360 degrees.\n                   The less the number the more sensitive is mouse.\n                   Default is 1000.\n\n  :step-size - number, number of pixels you move on each key event (wasd).\n               Default is 20.\n\n  :rotate-on - keyword, either :mouse-dragged or :mouse-moved. Specifies\n               on which mouse event camera should rotate. Default is\n               :mouse-dragged.\n\n\n  Accessing position information from sketch\n\n  navigation-3d uses fun-mode under the hood  so all position-related\n  information is stored in the state map. It means that you can access in\n  draw/update/any handler and modify it if you need to. Position\n  information is a map which is stored under :navigation-3d key in the\n  state map. Position consists of 3 values: :position, :straight and :up.\n  See \"Customization\" section above for more details.\n\n  Usage example:\n\n  (q/defsketch my-sketch\n    ...\n    :middleware [m/fun-mode m/navigation-3d])\n\n  See wiki article for more(?) details:\n  https://github.com/quil/quil/wiki/Navigation-3D",
   :what :fn},
  lights
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Lights, Camera",
   :added "1.0",
   :name lights,
   :subcategory "Lights",
-  :type :both,
+  :type :clj,
   :processing-name "lights()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/lights_.html",
   :docstring
   "Sets the default ambient light, directional light, falloff, and\n  specular values. The defaults are:\n\n  (ambient-light 128 128 128)\n  (directional-light 128 128 128 0 0 -1)\n  (light-falloff 1 0 0)\n  (light-specular 0 0 0).\n\n  Lights need to be included in the draw to remain persistent in a\n  looping program. Placing them in the setup of a looping program\n  will cause them to only have an effect the first time through the\n  loop.",
+  :what :fn},
+ cylinder
+ {:args
+  #{[radius height]
+    [radius height detail-x detail-y bottom-cap top-cap]},
+  :category "Shape",
+  :added "3.0.0",
+  :name cylinder,
+  :subcategory "3D Primitives",
+  :type :cljs,
+  :processing-name "cylinder()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/cylinder_.html",
+  :docstring "Draw a cylinder with given radius and height.",
   :what :fn},
  looping?
  {:args ({:value [], :type :both}),
@@ -2876,6 +2876,34 @@
   :docstring
   "Calculates the sine of an angle. This function expects the values\n  of the angle parameter to be provided in radians (values from 0 to\n  6.28). A float within the range -1 to 1 is returned.",
   :what :fn},
+ cone
+ {:args
+  #{[radius height] [radius height detail-x detail-y]
+    [radius height detail-x detail-y cap] [radius height detail-x]},
+  :category "Shape",
+  :added "3.0.0",
+  :name cone,
+  :subcategory "3D Primitives",
+  :type :cljs,
+  :processing-name "cone()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/cone_.html",
+  :docstring
+  "Draw a cone with given radius and height.\n      Optional parameters:\n        detail-x: number of segments, the more segments the smoother geometry default is 24\n        detail-y: number of segments, the more segments the smoother geometry default is 24\n        cap:      whether to draw the base of the cone",
+  :what :fn},
+ lightness
+ {:args #{[c]},
+  :category "Color",
+  :added "3.0.0",
+  :name lightness,
+  :subcategory "Creating & Reading",
+  :type :cljs,
+  :processing-name "lightness()",
+  :requires-bindings true,
+  :link "http://www.processing.org/reference/lightness_.html",
+  :docstring
+  "Extracts the HSL lightness value from a color or pixel array.",
+  :what :fn},
  current-stroke
  {:args ({:value [], :type :both}),
   :category "Color",
@@ -2907,8 +2935,8 @@
   :what :fn},
  shape
  {:args
-  ({:value [sh x y width height], :type :both}
-   {:value [sh x y], :type :both}
+  ({:value [sh x y width height], :type :clj}
+   {:value [sh x y], :type :clj}
    {:value [sh], :type :both}),
   :category "Shape",
   :added "1.0",
@@ -2933,19 +2961,6 @@
   :link "http://www.processing.org/reference/textDescent_.html",
   :docstring
   "Returns descent of the current font at its current size. This\n  information is useful for determining the height of the font below\n  the baseline. For example, adding the text-ascent and text-descent\n  values will give you the total height of the line.",
-  :what :fn},
- screen-z
- {:args ({:value [x y z], :type :both}),
-  :category "Lights, Camera",
-  :added "1.0",
-  :name screen-z,
-  :subcategory "Coordinates",
-  :type :both,
-  :processing-name "screenZ()",
-  :requires-bindings true,
-  :link "http://www.processing.org/reference/screenZ_.html",
-  :docstring
-  "Given an x, y, z coordinate, returns its z value.\n   This value can be used to determine if an x, y, z coordinate is in\n   front or in back of another (x, y, z) coordinate. The units are\n   based on how the zbuffer is set up, and don't relate to anything\n   'real'. They're only useful for in comparison to another value\n   obtained from screen-z, or directly out of the zbuffer",
   :what :fn},
  ellipse
  {:args ({:value [x y width height], :type :both}),
@@ -2986,7 +3001,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/PImage_filter_.html",
   :docstring
-  "Originally named filter in Processing Language.\n  Filters given image with the specified mode and level.\n  Level defines the quality of the filter and mode may be one of\n  the following keywords:\n\n  :threshold - converts the image to black and white pixels depending\n               if they are above or below the threshold defined by\n               the level parameter. The level must be between\n               0.0 (black) and 1.0 (white). If no level is specified,\n               0.5 is used.\n  :gray      - converts any colors in the image to grayscale\n               equivalents. Doesn't work with level.\n  :invert    - sets each pixel to its inverse value. Doesn't work with\n               level.\n  :posterize - limits each channel of the image to the number of\n               colors specified as the level parameter. The parameter can\n               be set to values between 2 and 255, but results are most\n               noticeable in the lower ranges.\n  :blur      - executes a Guassian blur with the level parameter\n               specifying the extent of the blurring. If no level\n               parameter is used, the blur is equivalent to Guassian\n               blur of radius 1.\n  :opaque    - sets the alpha channel to entirely opaque. Doesn't work\n               with level.\n  :erode     - reduces the light areas. Doesn't work with level.\n  :dilate    - increases the light areas.  Doesn't work with level.",
+  "Originally named filter in Processing Language.\n  Filters given image with the specified mode and level.\n  Level defines the quality of the filter and mode may be one of\n  the following keywords:\n\n  :threshold - converts the image to black and white pixels depending\n               if they are above or below the threshold defined by\n               the level parameter. The level must be between\n               0.0 (black) and 1.0 (white). If no level is specified,\n               0.5 is used.\n  :gray      - converts any colors in the image to grayscale\n               equivalents. Doesn't work with level.\n  :invert    - sets each pixel to its inverse value. Doesn't work with\n               level.\n  :posterize - limits each channel of the image to the number of\n               colors specified as the level parameter. The parameter can\n               be set to values between 2 and 255, but results are most\n               noticeable in the lower ranges.\n  :blur      - executes a Gaussian blur with the level parameter\n               specifying the extent of the blurring. If no level\n               parameter is used, the blur is equivalent to Gaussian\n               blur of radius 1.\n  :opaque    - sets the alpha channel to entirely opaque. Doesn't work\n               with level.\n  :erode     - reduces the light areas. Doesn't work with level.\n  :dilate    - increases the light areas.  Doesn't work with level.",
   :what :fn},
  random
  {:args ({:value [max], :type :both} {:value [min max], :type :both}),
@@ -3002,12 +3017,12 @@
   "Generates random numbers. Each time the random function is called,\n  it returns an unexpected value within the specified range. If one\n  parameter is passed to the function it will return a float between\n  zero and the value of the high parameter. The function call (random\n  5) returns values between 0 and 5 (starting at zero, up to but not\n  including 5). If two parameters are passed, it will return a float\n  with a value between the parameters. The function call\n  (random -5 10.2) returns values starting at -5 up to (but not\n  including) 10.2.",
   :what :fn},
  texture-mode
- {:args ({:value [mode], :type :both}),
+ {:args #{[mode]},
   :category "Shape",
   :added "1.0",
   :name texture-mode,
   :subcategory "Vertex",
-  :type :both,
+  :type :clj,
   :processing-name "textureMode()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/textureMode_.html",
@@ -3015,7 +3030,7 @@
   "Sets the coordinate space for texture mapping. There are two\n  options, :image and :normal.\n\n  :image refers to the actual coordinates of the image and :normal\n  refers to a normalized space of values ranging from 0 to 1. The\n  default mode is :image. In :image, if an image is 100 x 200 pixels,\n  mapping the image onto the entire size of a quad would require the\n  points (0,0) (0,100) (100,200) (0,200). The same mapping in\n  NORMAL_SPACE is (0,0) (0,1) (1,1) (0,1).",
   :what :fn},
  redraw
- {:args ({:value [], :type :both}),
+ {:args ({:value [n], :type :cljs} {:value [], :type :both}),
   :category "Structure",
   :added "1.0",
   :name redraw,
@@ -3025,7 +3040,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/redraw_.html",
   :docstring
-  "Executes the code within the draw fn one time. This functions\n  allows the program to update the display window only when necessary,\n  for example when an event registered by mouse-pressed or\n  key-pressed occurs.\n\n  In structuring a program, it only makes sense to call redraw\n  within events such as mouse-pressed. This is because redraw does\n  not run draw immediately (it only sets a flag that indicates an\n  update is needed).\n\n  Calling redraw within draw has no effect because draw is\n  continuously called anyway.",
+  "Executes the code within the draw fn one time (or n times in cljs). This function\n  allows the program to update the display window only when necessary,\n  for example when an event registered by mouse-pressed or\n  key-pressed occurs.\n\n  In structuring a program, it only makes sense to call redraw\n  within events such as mouse-pressed. This is because redraw does\n  not run draw immediately (it only sets a flag that indicates an\n  update is needed).\n\n  Calling redraw within draw has no effect because draw is\n  continuously called anyway.",
   :what :fn},
  get-pixel
  {:args
@@ -3059,7 +3074,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/rotate_.html",
   :docstring
-  "Rotates a shape the amount specified by the angle parameter. Angles\n  should be specified in radians (values from 0 to TWO-PI) or\n  converted to radians with the radians function.\n\n  Objects are always rotated around their relative position to the\n  origin and positive numbers rotate objects in a clockwise\n  direction. Transformations apply to everything that happens after\n  and subsequent calls to the function accumulates the effect. For\n  example, calling (rotate HALF-PI) and then (rotate HALF-PI) is the\n  same as (rotate PI). All tranformations are reset when draw begins\n  again.\n\n  Technically, rotate multiplies the current transformation matrix by\n  a rotation matrix. This function can be further controlled by the\n  push-matrix and pop-matrix.\n\n  When 4 arguments provides it produces a rotation of angle degrees\n  around the vector x y z. Check examples for to better understand.\n  This rotation follows the right-hand rule, so if the vector x y z points\n  toward the user, the rotation will be counterclockwise.",
+  "Rotates a shape the amount specified by the angle parameter. Angles\n  should be specified in radians (values from 0 to TWO-PI) or\n  converted to radians with the radians function.\n\n  Objects are always rotated around their relative position to the\n  origin and positive numbers rotate objects in a clockwise\n  direction. Transformations apply to everything that happens after\n  and subsequent calls to the function accumulates the effect. For\n  example, calling (rotate HALF-PI) and then (rotate HALF-PI) is the\n  same as (rotate PI). All transformations are reset when draw begins\n  again.\n\n  Technically, rotate multiplies the current transformation matrix by\n  a rotation matrix. This function can be further controlled by the\n  push-matrix and pop-matrix.\n\n  When 4 arguments provides it produces a rotation of angle degrees\n  around the vector x y z. Check examples for to better understand.\n  This rotation follows the right-hand rule, so if the vector x y z points\n  toward the user, the rotation will be counterclockwise.",
   :what :fn},
  set-pixel
  {:args
@@ -3086,7 +3101,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/pushMatrix_.html",
   :docstring
-  "Pushes the current transformation matrix onto the matrix\n  stack. Understanding push-matrix and pop-matrix requires\n  understanding the concept of a matrix stack. The push-matrix\n  function saves the current coordinate system to the stack and\n  pop-matrix restores the prior coordinate system. push-matrix and\n  pop-matrix are used in conjuction with the other transformation\n  methods and may be embedded to control the scope of the\n  transformations.",
+  "Pushes the current transformation matrix onto the matrix\n  stack. Understanding push-matrix and pop-matrix requires\n  understanding the concept of a matrix stack. The push-matrix\n  function saves the current coordinate system to the stack and\n  pop-matrix restores the prior coordinate system. push-matrix and\n  pop-matrix are used in conjunction with the other transformation\n  methods and may be embedded to control the scope of the\n  transformations.",
   :what :fn},
  no-smooth
  {:args ({:value [], :type :both}),
@@ -3127,7 +3142,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/camera_.html",
   :docstring
-  "Sets the position of the camera through setting the eye position,\n  the center of the scene, and which axis is facing upward. Moving the\n  eye position and the direction it is pointing (the center of the\n  scene) allows the images to be seen from different angles. The\n  version without any parameters sets the camera to the default\n  position, pointing to the center of the display window with the Y\n  axis as up. The default values are:\n\n  eyeX:     (/ (width) 2.0)\n  eyeY:     (/ (height) 2.0)\n  eyeZ:     (/ (/ (height) 2.0) (tan (/ (* Math/PI 60.0) 360.0)))\n  centerX:  (/ (width) 2.0)\n  centerY:  (/ (height) 2.0)\n  centerZ:  0\n  upX:      0\n  upY:      1\n  upZ:      0\n\n  Similar imilar to gluLookAt() in OpenGL, but it first clears the\n  current camera settings.",
+  "Sets the position of the camera through setting the eye position,\n  the center of the scene, and which axis is facing upward. Moving the\n  eye position and the direction it is pointing (the center of the\n  scene) allows the images to be seen from different angles. The\n  version without any parameters sets the camera to the default\n  position, pointing to the center of the display window with the Y\n  axis as up. The default values are:\n\n  eyeX:     (/ (width) 2.0)\n  eyeY:     (/ (height) 2.0)\n  eyeZ:     (/ (/ (height) 2.0) (tan (/ (* Math/PI 60.0) 360.0)))\n  centerX:  (/ (width) 2.0)\n  centerY:  (/ (height) 2.0)\n  centerZ:  0\n  upX:      0\n  upY:      1\n  upZ:      0\n\n  Similar to gluLookAt() in OpenGL, but it first clears the\n  current camera settings.",
   :what :fn},
  translate
  {:args
@@ -3222,7 +3237,7 @@
   :requires-bindings true,
   :link "http://www.processing.org/reference/image_.html",
   :docstring
-  "Displays images to the screen. Processing currently works with GIF,\n  JPEG, and Targa images. The color of an image may be modified with\n  the tint function and if a GIF has transparency, it will maintain\n  its transparency. The img parameter specifies the image to display\n  and the x and y parameters define the location of the image from its\n  upper-left corner. The image is displayed at its original size\n  unless the width and height parameters specify a different size. The\n  image-mode fn changes the way the parameters work. A call to\n  (image-mode :corners) will change the width and height parameters to\n  define the x and y values of the opposite corner of the image.\n\n  Starting with release 0124, when using the default (JAVA2D)\n  renderer, smooth will also improve image quality of resized\n  images.",
+  "Displays images to the screen. Processing currently works with GIF,\n  JPEG, and Targa images. The color of an image may be modified with\n  the tint function and if a GIF has transparency, it will maintain\n  its transparency. The img parameter specifies the image to display\n  and the x and y parameters define the location of the image from its\n  upper-left corner. The image is displayed at its original size\n  unless the width and height parameters specify a different size. The\n  image-mode fn changes the way the parameters work. A call to\n  (image-mode :corners) will change the width and height parameters to\n   define the x and y values of the opposite corner of the image.",
   :what :fn},
  unbinary
  {:args ({:value [str-val], :type :both}),
@@ -3251,12 +3266,12 @@
   "Removes the current fill value for displaying images and reverts to\n  displaying images with their original hues.",
   :what :fn},
  no-lights
- {:args ({:value [], :type :both}),
+ {:args #{[]},
   :category "Lights, Camera",
   :added "1.0",
   :name no-lights,
   :subcategory "Lights",
-  :type :both,
+  :type :clj,
   :processing-name "noLights()",
   :requires-bindings true,
   :link "http://www.processing.org/reference/noLights_.html",
