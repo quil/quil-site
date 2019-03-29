@@ -196,7 +196,7 @@
                                         type what))
 
                 :docstring
-                [:pre.docstring (trim-docstring docstring)]
+                [:div.docstring (trim-docstring docstring)]
 
                 :binding?
                 (if requires-bindings "Yes" "No")
