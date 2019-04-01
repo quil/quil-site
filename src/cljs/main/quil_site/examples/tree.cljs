@@ -94,7 +94,7 @@
          :branches (vec branches)
          :time 0
          :end-time end-time
-         :buffer (q/create-graphics (q/width) (q/height) :java2d)))))
+         :buffer (q/create-graphics (q/width) (q/height) :p2d)))))
 
 (defn setup []
   (generate-state

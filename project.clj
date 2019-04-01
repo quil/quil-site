@@ -8,7 +8,7 @@
                  [hiccup "1.0.5"]
                  [ring "1.6.3"]
                  [ring/ring-json "0.4.0"]
-                 [quil "3.0.0-SNAPSHOT"]
+                 [quil "3.0.0"]
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/tools.reader "1.2.2"]
                  [org.clojure/core.cache "0.7.1"]
