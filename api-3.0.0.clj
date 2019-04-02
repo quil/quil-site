@@ -9,7 +9,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/rotateX_.html",
   :docstring
-  "<p>Rotates a shape around the x-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0 to\n(* PI 2)) or converted to radians with the <a href=\"radians\">radians</a> function. Objects\nare always rotated around their relative position to the origin and\npositive numbers rotate objects in a counterclockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate-x HALF-PI)</code> and then <code>(rotate-x HALF-PI)</code> is\nthe same as <code>(rotate-x PI)</code>. If <a href=\"rotate-x\">rotate-x</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction requires either the <code>:p3d</code> or <code>:opengl</code> renderer.</p>\n",
+  "<p>Rotates a shape around the x-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0 to\n(* PI 2)) or converted to radians with the <a href=\"/api/math/trigonometry#radians\">radians</a> function. Objects\nare always rotated around their relative position to the origin and\npositive numbers rotate objects in a counterclockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate-x HALF-PI)</code> and then <code>(rotate-x HALF-PI)</code> is\nthe same as <code>(rotate-x PI)</code>. If <a href=\"/api/transform#rotate-x\">rotate-x</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction requires either the <code>:p3d</code> or <code>:opengl</code> renderer.</p>\n",
   :what :fn},
  set-uniform
  {:args #{[shader uniform-name data]},
@@ -74,7 +74,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/text_.html",
   :docstring
-  "<p>Draws a char to the screen in the specified position. See the\n<a href=\"text\">text</a> function for more details.</p>\n",
+  "<p>Draws a char to the screen in the specified position. See the\n<a href=\"/api/typography/loading-and-displaying#text\">text</a> function for more details.</p>\n",
   :what :fn},
  display-filter
  {:args
@@ -101,7 +101,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/rotateZ_.html",
   :docstring
-  "<p>Rotates a shape around the z-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0\nto (* PI 2)) or converted to radians with the <a href=\"radians\">radians</a> function.\nObjects are always rotated around their relative position to the\norigin and positive numbers rotate objects in a counterclockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate-z HALF-PI)</code> and then <code>(rotate-z HALF-PI)</code> is\nthe same as <code>(rotate-z PI)</code>. If <a href=\"rotate-y\">rotate-y</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction requires either the <code>:p3d</code> or <code>:opengl</code> renderer.</p>\n",
+  "<p>Rotates a shape around the z-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0\nto (* PI 2)) or converted to radians with the <a href=\"/api/math/trigonometry#radians\">radians</a> function.\nObjects are always rotated around their relative position to the\norigin and positive numbers rotate objects in a counterclockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate-z HALF-PI)</code> and then <code>(rotate-z HALF-PI)</code> is\nthe same as <code>(rotate-z PI)</code>. If <a href=\"/api/transform#rotate-y\">rotate-y</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction requires either the <code>:p3d</code> or <code>:opengl</code> renderer.</p>\n",
   :what :fn},
  random-gaussian
  {:args ({:value [], :type :both}),
@@ -114,7 +114,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/randomGaussian_.html",
   :docstring
-  "<p>Returns a <code>float</code> from a random series of numbers having a mean of 0 and\nstandard deviation of 1. Each time the <a href=\"random-gaussian\">random-gaussian</a> function is called,\nit returns a number fitting a Gaussian, or normal, distribution.\nThere is theoretically no minimum or maximum value that <a href=\"random-gaussian\">random-gaussian</a>\nmight return. Rather, there is just a very low probability that values far\nfrom the mean will be returned; and a higher probability that numbers near\nthe mean will be returned.</p>\n",
+  "<p>Returns a <code>float</code> from a random series of numbers having a mean of 0 and\nstandard deviation of 1. Each time the <a href=\"/api/math/random#random-gaussian\">random-gaussian</a> function is called,\nit returns a number fitting a Gaussian, or normal, distribution.\nThere is theoretically no minimum or maximum value that <a href=\"/api/math/random#random-gaussian\">random-gaussian</a>\nmight return. Rather, there is just a very low probability that values far\nfrom the mean will be returned; and a higher probability that numbers near\nthe mean will be returned.</p>\n",
   :what :fn},
  blend
  {:args
@@ -133,7 +133,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/blend_.html",
   :docstring
-  "<p>Blends a region of pixels from one image into another with full alpha\nchannel support. If <code>src</code> is not specified it defaults to <a href=\"current-graphics\">current-graphics</a>.\nIf dest is not specified it defaults to <a href=\"current-graphics\">current-graphics</a>.</p>\n<p>Note: it is recommended to use the <a href=\"blend-mode\">blend-mode</a> function instead of this one.</p>\n<p>Available blend modes are:</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:overlay</code>    - A mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - Mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay,\nbut not as harsh.</li>\n<li><code>:dodge</code>      - Lightens light tones and increases contrast, ignores\ndarks.\nCalled &quot;Color Dodge&quot; in Illustrator and Photoshop.</li>\n<li><code>:burn</code>       - Darker areas are applied, increasing contrast, ignores\nlights. Called &quot;Color Burn&quot; in Illustrator and\nPhotoshop.</li>\n</ul>\n<p>In clj the following blend modes are also supported:\n<code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</p>\n<p>In cljs the following blend modes are also supported:\n<code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</p>\n",
+  "<p>Blends a region of pixels from one image into another with full alpha\nchannel support. If <code>src</code> is not specified it defaults to <a href=\"/api/environment#current-graphics\">current-graphics</a>.\nIf dest is not specified it defaults to <a href=\"/api/environment#current-graphics\">current-graphics</a>.</p>\n<p>Note: it is recommended to use the <a href=\"/api/image/rendering#blend-mode\">blend-mode</a> function instead of this one.</p>\n<p>Available blend modes are:</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:overlay</code>    - A mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - Mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay,\nbut not as harsh.</li>\n<li><code>:dodge</code>      - Lightens light tones and increases contrast, ignores\ndarks.\nCalled &quot;Color Dodge&quot; in Illustrator and Photoshop.</li>\n<li><code>:burn</code>       - Darker areas are applied, increasing contrast, ignores\nlights. Called &quot;Color Burn&quot; in Illustrator and\nPhotoshop.</li>\n</ul>\n<p>In clj the following blend modes are also supported:\n<code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</p>\n<p>In cljs the following blend modes are also supported:\n<code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</p>\n",
   :what :fn},
  frame-count
  {:args ({:value [], :type :both}),
@@ -158,7 +158,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "<p>All subsequent calls of any drawing function will draw on given\ngraphics. <a href=\"with-graphics\">with-graphics</a> cannot be nested (you can draw simultaneously\nonly on 1 graphics)</p>\n",
+  "<p>All subsequent calls of any drawing function will draw on given\ngraphics. <a href=\"/api/rendering#with-graphics\">with-graphics</a> cannot be nested (you can draw simultaneously\nonly on 1 graphics)</p>\n",
   :what :macro},
  loaded?
  {:args ({:value [object], :type :both}),
@@ -225,7 +225,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/createGraphics_.html",
   :docstring
-  "<p>Creates and returns a new <code>PGraphics</code> object of the types <code>:p2d</code>, <code>:p3d</code>,\n<code>:java2d</code>, <code>:pdf</code>. By default <code>:java2d</code> is used. Use this class if you\nneed to draw into an off-screen graphics buffer. It's not possible\nto use <a href=\"create-graphics\">create-graphics</a> with the <code>:opengl</code> renderer, because it doesn't\nallow offscreen use. The <code>:pdf</code> renderer requires the filename parameter.</p>\n<p>Note: don't use <a href=\"create-graphics\">create-graphics</a> in draw in clojurescript, it leaks memory.\nYou should create graphic in setup and reuse it in draw instead of creating\na new one.</p>\n<p>It's important to call any drawing commands between <code>(.beginDraw graphics)</code> and\n<code>(.endDraw graphics)</code> statements or use <a href=\"with-graphics\">with-graphics</a> macro. This is also true\nfor any commands that affect drawing, such as <a href=\"smooth\">smooth</a> or <a href=\"color-mode\">color-mode</a>.</p>\n<p>If you're using <code>:pdf</code> renderer - don't forget to call <code>(.dispose graphics)</code>\nas last command inside <a href=\"with-graphics\">with-graphics</a> macro, otherwise graphics won't be\nsaved.</p>\n<p>Unlike the main drawing surface which is completely opaque, surfaces\ncreated with <a href=\"create-graphics\">create-graphics</a> can have transparency. This makes it\npossible to draw into a graphics and maintain the alpha channel. By\nusing save to write a <code>PNG</code> or <code>TGA</code> file, the transparency of the\ngraphics object will be honored.</p>\n",
+  "<p>Creates and returns a new <code>PGraphics</code> object of the types <code>:p2d</code>, <code>:p3d</code>,\n<code>:java2d</code>, <code>:pdf</code>. By default <code>:java2d</code> is used. Use this class if you\nneed to draw into an off-screen graphics buffer. It's not possible\nto use <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> with the <code>:opengl</code> renderer, because it doesn't\nallow offscreen use. The <code>:pdf</code> renderer requires the filename parameter.</p>\n<p>Note: don't use <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> in draw in clojurescript, it leaks memory.\nYou should create graphic in setup and reuse it in draw instead of creating\na new one.</p>\n<p>It's important to call any drawing commands between <code>(.beginDraw graphics)</code> and\n<code>(.endDraw graphics)</code> statements or use <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. This is also true\nfor any commands that affect drawing, such as <a href=\"/api/shape/attributes#smooth\">smooth</a> or <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>.</p>\n<p>If you're using <code>:pdf</code> renderer - don't forget to call <code>(.dispose graphics)</code>\nas last command inside <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro, otherwise graphics won't be\nsaved.</p>\n<p>Unlike the main drawing surface which is completely opaque, surfaces\ncreated with <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> can have transparency. This makes it\npossible to draw into a graphics and maintain the alpha channel. By\nusing save to write a <code>PNG</code> or <code>TGA</code> file, the transparency of the\ngraphics object will be honored.</p>\n",
   :what :fn},
  update-pixels
  {:args ({:value [img], :type :both} {:value [], :type :both}),
@@ -238,7 +238,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/updatePixels_.html",
   :docstring
-  "<p>Updates the display window or image with the data in the pixels array.\nUse in conjunction with <a href=\"pixels\">pixels</a>. If you're only reading pixels from\nthe array, there's no need to call <a href=\"update-pixels\">update-pixels</a> unless there are\nchanges.</p>\n<p>Certain renderers may or may not seem to require <a href=\"pixels\">pixels</a> or\n<a href=\"update-pixels\">update-pixels</a>. However, the rule is that any time you want to\nmanipulate the <code>pixels</code> array, you must first call <a href=\"pixels\">pixels</a>, and\nafter changes have been made, call <a href=\"update-pixels\">update-pixels</a>. Even if the\nrenderer may not seem to use this function in the current Processing\nrelease, this will always be subject to change.</p>\n",
+  "<p>Updates the display window or image with the data in the pixels array.\nUse in conjunction with <a href=\"/api/image/pixels#pixels\">pixels</a>. If you're only reading pixels from\nthe array, there's no need to call <a href=\"/api/image/pixels#update-pixels\">update-pixels</a> unless there are\nchanges.</p>\n<p>Certain renderers may or may not seem to require <a href=\"/api/image/pixels#pixels\">pixels</a> or\n<a href=\"/api/image/pixels#update-pixels\">update-pixels</a>. However, the rule is that any time you want to\nmanipulate the <code>pixels</code> array, you must first call <a href=\"/api/image/pixels#pixels\">pixels</a>, and\nafter changes have been made, call <a href=\"/api/image/pixels#update-pixels\">update-pixels</a>. Even if the\nrenderer may not seem to use this function in the current Processing\nrelease, this will always be subject to change.</p>\n",
   :what :fn},
  text-size
  {:args ({:value [size], :type :both}),
@@ -251,7 +251,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/textSize_.html",
   :docstring
-  "<p>Sets the current font size. This size will be used in all\nsubsequent calls to the <a href=\"text\">text</a> function. Font size is measured in\nunits of pixels.</p>\n",
+  "<p>Sets the current font size. This size will be used in all\nsubsequent calls to the <a href=\"/api/typography/loading-and-displaying#text\">text</a> function. Font size is measured in\nunits of pixels.</p>\n",
   :what :fn},
  pixels
  {:args ({:value [img], :type :both} {:value [], :type :both}),
@@ -264,7 +264,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/pixels.html",
   :docstring
-  "<p>Array containing the values for all the pixels in the display\nwindow or image. This array is therefore the size of the display window. If\nthis array is modified, the <a href=\"update-pixels\">update-pixels</a> function must be called to\nupdate the changes. Calls <code>.loadPixels</code> before obtaining the pixel array.</p>\n",
+  "<p>Array containing the values for all the pixels in the display\nwindow or image. This array is therefore the size of the display window. If\nthis array is modified, the <a href=\"/api/image/pixels#update-pixels\">update-pixels</a> function must be called to\nupdate the changes. Calls <code>.loadPixels</code> before obtaining the pixel array.</p>\n",
   :what :fn},
  font-available?
  {:args #{[font-str]},
@@ -303,7 +303,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/resetShader_.html",
   :docstring
-  "<p>Restores the default shaders. Code that runs after <a href=\"reset-shader\">reset-shader</a> will\nnot be affected by previously defined shaders. Optional <code>kind</code> parameter -\ntype of shader, either <code>:points</code>, <code>:lines</code>, or <code>:triangles</code></p>\n",
+  "<p>Restores the default shaders. Code that runs after <a href=\"/api/rendering/shaders#reset-shader\">reset-shader</a> will\nnot be affected by previously defined shaders. Optional <code>kind</code> parameter -\ntype of shader, either <code>:points</code>, <code>:lines</code>, or <code>:triangles</code></p>\n",
   :what :fn},
  rect
  {:args
@@ -328,7 +328,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/rect_.html",
   :docstring
-  "<p>Draws a rectangle to the screen. A rectangle is a four-sided shape\nwith every angle at ninety degrees. By default, the first two\nparameters set the location of the upper-left corner, the third\nsets the width, and the fourth sets the height. These parameters\nmay be changed with <a href=\"rect-mode\">rect-mode</a>.</p>\n<p>To draw a rounded rectangle, add a fifth parameter, which is used as\nthe radius value for all four corners. To use a different radius value\nfor each corner, include eight parameters.</p>\n",
+  "<p>Draws a rectangle to the screen. A rectangle is a four-sided shape\nwith every angle at ninety degrees. By default, the first two\nparameters set the location of the upper-left corner, the third\nsets the width, and the fourth sets the height. These parameters\nmay be changed with <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a>.</p>\n<p>To draw a rounded rectangle, add a fifth parameter, which is used as\nthe radius value for all four corners. To use a different radius value\nfor each corner, include eight parameters.</p>\n",
   :what :fn},
  log
  {:args ({:value [val], :type :both}),
@@ -354,7 +354,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "<p>Temporarily set the stroke color for the body of this macro.\nThe code outside of the <a href=\"with-stroke\">with-stroke</a> form will have the previous\nstroke color set.</p>\n<p>A stroke argument of nil disables the stroke.</p>\n<p>Examples:</p>\n<pre><code class=\"language-clojure\">(with-stroke 255 ...)\n(with-stroke [10 80 98] ...)\n(with-stroke nil ...)\n</code></pre>\n",
+  "<p>Temporarily set the stroke color for the body of this macro.\nThe code outside of the <a href=\"/api/color/utility-macros#with-stroke\">with-stroke</a> form will have the previous\nstroke color set.</p>\n<p>A stroke argument of nil disables the stroke.</p>\n<p>Examples:</p>\n<pre><code class=\"language-clojure\">(with-stroke 255 ...)\n(with-stroke [10 80 98] ...)\n(with-stroke nil ...)\n</code></pre>\n",
   :what :macro},
  key-modifiers
  {:args #{[]},
@@ -380,7 +380,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/endRaw_.html",
   :docstring
-  "<p>Complement to <a href=\"begin-raw\">begin-raw</a>; they must always be used together. See\nthe <a href=\"begin-raw\">begin-raw</a> docstring for details.</p>\n",
+  "<p>Complement to <a href=\"/api/output/files#begin-raw\">begin-raw</a>; they must always be used together. See\nthe <a href=\"/api/output/files#begin-raw\">begin-raw</a> docstring for details.</p>\n",
   :what :fn},
  radians
  {:args ({:value [degrees], :type :both}),
@@ -419,7 +419,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/acos_.html",
   :docstring
-  "<p>The inverse of <a href=\"cos\">cos</a>, returns the arc cosine of a value. This\nfunction expects the values in the range of -1 to 1 and values are\nreturned in the range 0 to <code>Math/PI</code> (3.1415927).</p>\n",
+  "<p>The inverse of <a href=\"/api/math/trigonometry#cos\">cos</a>, returns the arc cosine of a value. This\nfunction expects the values in the range of -1 to 1 and values are\nreturned in the range 0 to <code>Math/PI</code> (3.1415927).</p>\n",
   :what :fn},
  angle-mode
  {:args #{[mode]},
@@ -458,7 +458,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/texture_.html",
   :docstring
-  "<p>Sets a texture to be applied to vertex points. The <a href=\"texture\">texture</a> function must\nbe called between <a href=\"begin-shape\">begin-shape</a> and <a href=\"end-shape\">end-shape</a> and before any calls to\n<a href=\"vertex\">vertex</a>.</p>\n<p>When textures are in use, the fill color is ignored. Instead, use\n<a href=\"tint\">tint</a> to specify the color of the texture as it is applied to the\nshape.</p>\n",
+  "<p>Sets a texture to be applied to vertex points. The <a href=\"/api/shape/vertex#texture\">texture</a> function must\nbe called between <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> and <a href=\"/api/shape/vertex#end-shape\">end-shape</a> and before any calls to\n<a href=\"/api/shape/vertex#vertex\">vertex</a>.</p>\n<p>When textures are in use, the fill color is ignored. Instead, use\n<a href=\"/api/image/loading-and-displaying#tint\">tint</a> to specify the color of the texture as it is applied to the\nshape.</p>\n",
   :what :fn},
  print-camera
  {:args #{[]},
@@ -497,7 +497,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/atan2_.html",
   :docstring
-  "<p>Calculates the angle (in radians) from a specified point to the\ncoordinate origin as measured from the positive x-axis. Values are\nreturned as a <code>float</code> in the range from <code>PI</code> to <code>-PI</code>. The <a href=\"atan2\">atan2</a> function\nis most often used for orienting geometry to the position of the\ncursor. Note: The y-coordinate of the point is the first parameter\nand the x-coordinate is the second due to the structure of\ncalculating the tangent.</p>\n",
+  "<p>Calculates the angle (in radians) from a specified point to the\ncoordinate origin as measured from the positive x-axis. Values are\nreturned as a <code>float</code> in the range from <code>PI</code> to <code>-PI</code>. The <a href=\"/api/math/trigonometry#atan2\">atan2</a> function\nis most often used for orienting geometry to the position of the\ncursor. Note: The y-coordinate of the point is the first parameter\nand the x-coordinate is the second due to the structure of\ncalculating the tangent.</p>\n",
   :what :fn},
  shader
  {:args
@@ -550,7 +550,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Enables navigation over 2D sketch. Drag mouse to change the center of the\nsketch and mouse wheel controls zoom. This middleware requires <a href=\"fun-mode\">fun-mode</a>.</p>\n<p>Customization</p>\n<p>You can customize this middleware by providing a map as\n<code>:navigation-2d</code> option in <a href=\"quil.sketch/defsketch\">quil.sketch/defsketch</a>/<a href=\"quil.sketch/sketch\">quil.sketch/sketch</a>.\nThe map can have the following optional keys:</p>\n<ul>\n<li>\n<p><code>:position</code> - vector of 2 numbers, x and y - center of the screen.\nDefault is width/2, height/2.</p>\n</li>\n<li>\n<p><code>:zoom</code> - number indicating current zoom level. Default is 1.</p>\n</li>\n</ul>\n<p>Accessing position information from sketch</p>\n<p><a href=\"navigation-2d\">navigation-2d</a> uses <a href=\"fun-mode\">fun-mode</a> under the hood so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under :navigation-2d key in the\nstate map. Position consists of 2 values: :position and :zoom.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Usage example:</p>\n<pre><code class=\"language-clojure\">(q/defsketch my-sketch\n  ...\n  :middleware [m/fun-mode m/navigation-2d])\n</code></pre>\n",
+  "<p>Enables navigation over 2D sketch. Drag mouse to change the center of the\nsketch and mouse wheel controls zoom. This middleware requires fun-mode.</p>\n<p>Customization</p>\n<p>You can customize this middleware by providing map as\n:navigation-2d option in defsketch/sketch. Map can have following\noptional keys:</p>\n<p>:position - vector of 2 numbers, x and y - center of the screen.\nDefault is width/2, height/2.</p>\n<p>:zoom - number indicating current zoom level. Default is 1.</p>\n<p>Accessing position information from sketch</p>\n<p>navigation-2d uses fun-mode under the hood so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under :navigation-2d key in the\nstate map. Position consists of 2 values: :position and :zoom.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Usage example:</p>\n<p>(q/defsketch my-sketch\n...\n:middleware [m/fun-mode m/navigation-2d])</p>\n",
   :what :fn},
  color-mode
  {:args
@@ -567,7 +567,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/colorMode_.html",
   :docstring
-  "<p>Changes the way Processing interprets color data. Available modes\nare <code>:rgb</code> and <code>:hsb</code> (and <code>:hsl</code> in clojurescript).\nBy default, the parameters for <a href=\"fill\">fill</a>, <a href=\"stroke\">stroke</a>,\n<a href=\"background\">background</a>, and <a href=\"color\">color</a> are defined by values between 0 and 255 using\nthe <code>:rgb</code> color model. The <a href=\"color-mode\">color-mode</a> function is used to change the\nnumerical range used for specifying colors and to switch color\nsystems. For example, calling\n<code>(color-mode :rgb 1.0)</code> will specify that values are specified between\n0 and 1. The limits for defining colors are altered by setting the\nparameters range1, range2, range3, and range 4.</p>\n",
+  "<p>Changes the way Processing interprets color data. Available modes\nare <code>:rgb</code> and <code>:hsb</code> (and <code>:hsl</code> in clojurescript).\nBy default, the parameters for <a href=\"/api/color/setting#fill\">fill</a>, <a href=\"/api/color/setting#stroke\">stroke</a>,\n<a href=\"/api/color/setting#background\">background</a>, and <a href=\"/api/color/creating-and-reading#color\">color</a> are defined by values between 0 and 255 using\nthe <code>:rgb</code> color model. The <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a> function is used to change the\nnumerical range used for specifying colors and to switch color\nsystems. For example, calling\n<code>(color-mode :rgb 1.0)</code> will specify that values are specified between\n0 and 1. The limits for defining colors are altered by setting the\nparameters range1, range2, range3, and range 4.</p>\n",
   :what :fn},
  create-image
  {:args
@@ -581,7 +581,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/createImage_.html",
   :docstring
-  "<p>Creates a new datatype for storing images (<code>PImage</code> for clj and\n<code>Image</code> for cljs). This provides a fresh buffer of pixels to play\nwith. Set the size of the buffer with the <code>width</code> and <code>height</code>\nparameters.</p>\n<p>In clj the <code>format</code> parameter defines how the pixels are stored.\nSee the PImage reference for more information.\nPossible formats: <code>:rgb</code>, <code>:argb</code>, <code>:alpha</code> (grayscale alpha channel)</p>\n<p>Prefer using <a href=\"create-image\">create-image</a> over initialising new <code>PImage</code> (or <code>Image</code>)\ninstances directly.</p>\n",
+  "<p>Creates a new datatype for storing images (<code>PImage</code> for clj and\n<code>Image</code> for cljs). This provides a fresh buffer of pixels to play\nwith. Set the size of the buffer with the <code>width</code> and <code>height</code>\nparameters.</p>\n<p>In clj the <code>format</code> parameter defines how the pixels are stored.\nSee the PImage reference for more information.\nPossible formats: <code>:rgb</code>, <code>:argb</code>, <code>:alpha</code> (grayscale alpha channel)</p>\n<p>Prefer using <a href=\"/api/image#create-image\">create-image</a> over initialising new <code>PImage</code> (or <code>Image</code>)\ninstances directly.</p>\n",
   :what :fn},
  sq
  {:args ({:value [a], :type :both}),
@@ -621,7 +621,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/noLoop_.html",
   :docstring
-  "<p>Stops Processing from continuously executing the code within\n<code>draw</code>. If <a href=\"start-loop\">start-loop</a> is called, the code in <code>draw</code> will begin to run\ncontinuously again. If using <a href=\"no-loop\">no-loop</a> in setup, it should be the last\nline inside the block.</p>\n<p>When <a href=\"no-loop\">no-loop</a> is used, it's not possible to manipulate or access the\nscreen inside event handling functions such as <a href=\"mouse-pressed\">mouse-pressed</a> or\n<a href=\"key-pressed\">key-pressed</a>. Instead, use those functions to call <a href=\"redraw\">redraw</a> or\nloop which will run <code>draw</code>, which can update the screen\nproperly. This means that when <a href=\"no-loop\">no-loop</a> has been called, no drawing\ncan happen, and functions like <a href=\"save-frame\">save-frame</a> may not be used.</p>\n<p>Note that if the sketch is resized, <a href=\"redraw\">redraw</a> will be called to\nupdate the sketch, even after <a href=\"no-loop\">no-loop</a> has been\nspecified. Otherwise, the sketch would enter an odd state until\nloop was called.</p>\n",
+  "<p>Stops Processing from continuously executing the code within\n<code>draw</code>. If <a href=\"/api/structure#start-loop\">start-loop</a> is called, the code in <code>draw</code> will begin to run\ncontinuously again. If using <a href=\"/api/structure#no-loop\">no-loop</a> in setup, it should be the last\nline inside the block.</p>\n<p>When <a href=\"/api/structure#no-loop\">no-loop</a> is used, it's not possible to manipulate or access the\nscreen inside event handling functions such as <a href=\"/api/input/mouse#mouse-pressed?\">mouse-pressed?</a> or\n<a href=\"/api/input/keyboard#key-pressed?\">key-pressed?</a>. Instead, use those functions to call <a href=\"/api/structure#redraw\">redraw</a> or\nloop which will run <code>draw</code>, which can update the screen\nproperly. This means that when <a href=\"/api/structure#no-loop\">no-loop</a> has been called, no drawing\ncan happen, and functions like <a href=\"/api/output/image#save-frame\">save-frame</a> may not be used.</p>\n<p>Note that if the sketch is resized, <a href=\"/api/structure#redraw\">redraw</a> will be called to\nupdate the sketch, even after <a href=\"/api/structure#no-loop\">no-loop</a> has been\nspecified. Otherwise, the sketch would enter an odd state until\nloop was called.</p>\n",
   :what :fn},
  minute
  {:args ({:value [], :type :both}),
@@ -663,7 +663,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/text_.html",
   :docstring
-  "<p>Draws text to the screen in the position specified by the <code>x</code> and <code>y</code>\nparameters (and the optional <code>z</code> parameter in clj). A default font will be used\nunless a font is set with the <a href=\"text-font\">text-font</a> function. Change the color of the\ntext with the <a href=\"fill\">fill</a> function. The text displays in relation to the\n<a href=\"text-align\">text-align</a> function, which gives the option to draw to the left, right, and\ncenter of the coordinates.</p>\n<p>The <code>x1</code>, <code>y1</code>, <code>x2</code> and <code>y2</code> parameters define a\nrectangular area to display within and may only be used with string\ndata. For text drawn inside a rectangle, the coordinates are\ninterpreted based on the current <a href=\"rect-mode\">rect-mode</a> setting.</p>\n",
+  "<p>Draws text to the screen in the position specified by the <code>x</code> and <code>y</code>\nparameters (and the optional <code>z</code> parameter in clj). A default font will be used\nunless a font is set with the <a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a> function. Change the color of the\ntext with the <a href=\"/api/color/setting#fill\">fill</a> function. The text displays in relation to the\n<a href=\"/api/typography/attributes#text-align\">text-align</a> function, which gives the option to draw to the left, right, and\ncenter of the coordinates.</p>\n<p>The <code>x1</code>, <code>y1</code>, <code>x2</code> and <code>y2</code> parameters define a\nrectangular area to display within and may only be used with string\ndata. For text drawn inside a rectangle, the coordinates are\ninterpreted based on the current <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a> setting.</p>\n",
   :what :fn},
  available-fonts
  {:args #{[]},
@@ -689,7 +689,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/clear_.html",
   :docstring
-  "<p>Clears the pixels within a buffer. This function only works on\ngraphics objects created with the <a href=\"create-graphics\">create-graphics</a> function meaning\nthat you should call it only inside <a href=\"with-graphics\">with-graphics</a> macro. Unlike\nthe main graphics context (the display window), pixels in additional\ngraphics areas created with <a href=\"create-graphics\">create-graphics</a> can be entirely or\npartially transparent. This function clears everything in a graphics\nobject to make all of the pixels 100% transparent.</p>\n",
+  "<p>Clears the pixels within a buffer. This function only works on\ngraphics objects created with the <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> function meaning\nthat you should call it only inside <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. Unlike\nthe main graphics context (the display window), pixels in additional\ngraphics areas created with <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> can be entirely or\npartially transparent. This function clears everything in a graphics\nobject to make all of the pixels 100% transparent.</p>\n",
   :what :fn},
  binary
  {:args
@@ -729,7 +729,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/popMatrix_.html",
   :docstring
-  "<p>Pops the current transformation matrix off the matrix\nstack. Understanding pushing and popping requires understanding the\nconcept of a matrix stack. The <a href=\"push-matrix\">push-matrix</a> function saves the current\ncoordinate system to the stack and <a href=\"pop-matrix\">pop-matrix</a> restores the prior\ncoordinate system. <a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a> are used in conjunction\nwith the other transformation methods and may be embedded to control\nthe scope of the transformations.</p>\n",
+  "<p>Pops the current transformation matrix off the matrix\nstack. Understanding pushing and popping requires understanding the\nconcept of a matrix stack. The <a href=\"/api/transform#push-matrix\">push-matrix</a> function saves the current\ncoordinate system to the stack and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> restores the prior\ncoordinate system. <a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> are used in conjunction\nwith the other transformation methods and may be embedded to control\nthe scope of the transformations.</p>\n",
   :what :fn},
  ceil
  {:args ({:value [n], :type :both}),
@@ -755,7 +755,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/keyCode.html",
   :docstring
-  "<p>The variable keyCode is used to detect special keys such as the UP,\nDOWN, LEFT, RIGHT arrow keys and ALT, CONTROL, SHIFT. When checking\nfor these keys, it's first necessary to check and see if the key is\ncoded. This is done with the conditional <code>(= (key) CODED)</code>.</p>\n<p>The keys included in the ASCII specification (BACKSPACE, TAB, ENTER,\nRETURN, ESC, and DELETE) do not require checking to see if they key\nis coded, and you should simply use the key variable instead of\n<a href=\"key-code\">key-code</a>. If you're making cross-platform projects, note that the\nENTER key is commonly used on PCs and Unix and the RETURN key is\nused instead on Macintosh. Check for both ENTER and RETURN to make\nsure your program will work for all platforms.</p>\n<p>For users familiar with Java, the values for UP and DOWN are simply\nshorter versions of Java's <code>KeyEvent.VK_UP</code> and\n<code>KeyEvent.VK_DOWN</code>. Other keyCode values can be found in the Java\nKeyEvent reference.</p>\n",
+  "<p>The variable keyCode is used to detect special keys such as the UP,\nDOWN, LEFT, RIGHT arrow keys and ALT, CONTROL, SHIFT. When checking\nfor these keys, it's first necessary to check and see if the key is\ncoded. This is done with the conditional <code>(= (key) CODED)</code>.</p>\n<p>The keys included in the ASCII specification (BACKSPACE, TAB, ENTER,\nRETURN, ESC, and DELETE) do not require checking to see if they key\nis coded, and you should simply use the key variable instead of\n<a href=\"/api/input/keyboard#key-code\">key-code</a>. If you're making cross-platform projects, note that the\nENTER key is commonly used on PCs and Unix and the RETURN key is\nused instead on Macintosh. Check for both ENTER and RETURN to make\nsure your program will work for all platforms.</p>\n<p>For users familiar with Java, the values for UP and DOWN are simply\nshorter versions of Java's <code>KeyEvent.VK_UP</code> and\n<code>KeyEvent.VK_DOWN</code>. Other keyCode values can be found in the Java\nKeyEvent reference.</p>\n",
   :what :fn},
  sphere
  {:args ({:value [radius], :type :both}),
@@ -793,7 +793,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/loop_.html",
   :docstring
-  "<p>Causes Processing to continuously execute the code within\ndraw. If <a href=\"no-loop\">no-loop</a> is called, the code in draw stops executing.</p>\n",
+  "<p>Causes Processing to continuously execute the code within\ndraw. If <a href=\"/api/structure#no-loop\">no-loop</a> is called, the code in draw stops executing.</p>\n",
   :what :fn},
  orbit-control
  {:args #{[]},
@@ -819,7 +819,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/curveVertex_.html",
   :docstring
-  "<p>Specifies vertex coordinates for curves. This function may only be\nused between <a href=\"begin-shape\">begin-shape</a> and <a href=\"end-shape\">end-shape</a> and only when there is no\n<code>mode</code> keyword specified to <a href=\"begin-shape\">begin-shape</a>. The first and last points in a\nseries of <a href=\"curve-vertex\">curve-vertex</a> lines will be used to guide the beginning and\nend of a the curve. A minimum of four points is required to draw a\ntiny curve between the second and third points. Adding a fifth point\nwith <a href=\"curve-vertex\">curve-vertex</a> will draw the curve between the second, third, and\nfourth points. The <a href=\"curve-vertex\">curve-vertex</a> function is an implementation of\nCatmull-Rom splines.</p>\n",
+  "<p>Specifies vertex coordinates for curves. This function may only be\nused between <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> and <a href=\"/api/shape/vertex#end-shape\">end-shape</a> and only when there is no\n<code>mode</code> keyword specified to <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>. The first and last points in a\nseries of <a href=\"/api/shape/vertex#curve-vertex\">curve-vertex</a> lines will be used to guide the beginning and\nend of a the curve. A minimum of four points is required to draw a\ntiny curve between the second and third points. Adding a fifth point\nwith <a href=\"/api/shape/vertex#curve-vertex\">curve-vertex</a> will draw the curve between the second, third, and\nfourth points. The <a href=\"/api/shape/vertex#curve-vertex\">curve-vertex</a> function is an implementation of\nCatmull-Rom splines.</p>\n",
   :what :fn},
  state-atom
  {:args ({:value [], :type :both}),
@@ -844,7 +844,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/loadImage_.html",
   :docstring
-  "<p>Loads an image into a variable of type <code>PImage</code>. Four types of\nimages (<code>.gif</code>, <code>.jpg</code>, <code>.tga</code>, <code>.png</code>) may be loaded. To load\ncorrectly, images must be located in the data directory of the\ncurrent sketch. In most cases, load all images in <code>setup</code> to preload\nthem at the start of the program. Loading images inside <code>draw</code> will\nreduce the speed of a program.</p>\n<p>The filename parameter can also be a URL to a file found online.</p>\n<p>Image is loaded asynchronously. In order to check whether image\nfinished loading use <a href=\"loaded?\">loaded?</a>.</p>\n",
+  "<p>Loads an image into a variable of type <code>PImage</code>. Four types of\nimages (<code>.gif</code>, <code>.jpg</code>, <code>.tga</code>, <code>.png</code>) may be loaded. To load\ncorrectly, images must be located in the data directory of the\ncurrent sketch. In most cases, load all images in <code>setup</code> to preload\nthem at the start of the program. Loading images inside <code>draw</code> will\nreduce the speed of a program.</p>\n<p>The filename parameter can also be a URL to a file found online.</p>\n<p>Image is loaded asynchronously. In order to check whether image\nfinished loading use <a href=\"/api/environment#loaded?\">loaded?</a>.</p>\n",
   :what :fn},
  bezier
  {:args
@@ -872,7 +872,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/smooth_.html",
   :docstring
-  "<p>Draws all geometry with smooth (anti-aliased) edges. This will slow\ndown the frame rate of the application, but will enhance the visual\nrefinement.</p>\n<p>Must be called inside <code>:settings</code> handler.</p>\n<p>The <code>level</code> parameter (int) increases the level of smoothness with the\n<code>:p2d</code> and <code>:p3d</code> renderers. This is the level of over sampling applied to\nthe graphics buffer. The value <code>2</code> will double the rendering size\nbefore scaling it down to the display size. This is called <code>2x anti-aliasing</code>. The value <code>4</code> is used for <code>4x anti-aliasing</code> and <code>8</code> is\nspecified for <code>8x anti-aliasing</code>. If level is set to <code>0</code>, it will disable\nall smoothing; it's the equivalent of the function <a href=\"no-smooth\">no-smooth</a>.\nThe maximum anti-aliasing level is determined by the hardware of the\nmachine that is running the software.</p>\n<p>Note that smooth will also improve image quality of resized images.</p>\n",
+  "<p>Draws all geometry with smooth (anti-aliased) edges. This will slow\ndown the frame rate of the application, but will enhance the visual\nrefinement.</p>\n<p>Must be called inside <code>:settings</code> handler.</p>\n<p>The <code>level</code> parameter (int) increases the level of smoothness with the\n<code>:p2d</code> and <code>:p3d</code> renderers. This is the level of over sampling applied to\nthe graphics buffer. The value <code>2</code> will double the rendering size\nbefore scaling it down to the display size. This is called <code>2x anti-aliasing</code>. The value <code>4</code> is used for <code>4x anti-aliasing</code> and <code>8</code> is\nspecified for <code>8x anti-aliasing</code>. If level is set to <code>0</code>, it will disable\nall smoothing; it's the equivalent of the function <a href=\"/api/shape/attributes#no-smooth\">no-smooth</a>.\nThe maximum anti-aliasing level is determined by the hardware of the\nmachine that is running the software.</p>\n<p>Note that smooth will also improve image quality of resized images.</p>\n",
   :what :fn},
  shear-x
  {:args ({:value [angle], :type :both}),
@@ -885,7 +885,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/shearX_.html",
   :docstring
-  "<p>Shears a shape around the x-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0 to\nPI*2) or converted to radians with the <a href=\"radians\">radians</a> function. Objects\nare always sheared around their relative position to the origin and\npositive numbers shear objects in a clockwise direction.\nTransformations apply to everything that happens after and\nsubsequent calls to the function accumulates the effect. For\nexample, calling <code>(shear-x (/ PI 2))</code> and then <code>(shear-x (/ PI 2))</code> is\nthe same as <code>(shear-x PI)</code>. If <a href=\"shear-x\">shear-x</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction works in P2D or JAVA2D mode.</p>\n<p>Technically, <a href=\"shear-x\">shear-x</a> multiplies the current transformation matrix\nby a rotation matrix. This function can be further controlled by the\n<a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a> functions.</p>\n",
+  "<p>Shears a shape around the x-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0 to\nPI*2) or converted to radians with the <a href=\"/api/math/trigonometry#radians\">radians</a> function. Objects\nare always sheared around their relative position to the origin and\npositive numbers shear objects in a clockwise direction.\nTransformations apply to everything that happens after and\nsubsequent calls to the function accumulates the effect. For\nexample, calling <code>(shear-x (/ PI 2))</code> and then <code>(shear-x (/ PI 2))</code> is\nthe same as <code>(shear-x PI)</code>. If <a href=\"/api/transform#shear-x\">shear-x</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction works in P2D or JAVA2D mode.</p>\n<p>Technically, <a href=\"/api/transform#shear-x\">shear-x</a> multiplies the current transformation matrix\nby a rotation matrix. This function can be further controlled by the\n<a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> functions.</p>\n",
   :what :fn},
  stroke-weight
  {:args ({:value [weight], :type :both}),
@@ -937,7 +937,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Pauses sketch if any of the user-provided handlers throws an error.\nIt allows to fix the error on the fly and continue sketch.\nMay be good alternative to default '500ms pause if exception'\nbehaviour.</p>\n",
+  "<p>Pauses sketch if any of user-provided handlers throws error.\nIt allows to fix the error on the fly and continue sketch.\nMay be good alternative to default '500ms pause if exception'\nbehaviour.</p>\n",
   :what :fn},
  hour
  {:args ({:value [], :type :both}),
@@ -963,7 +963,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/atan_.html",
   :docstring
-  "<p>The inverse of <a href=\"tan\">tan</a>, returns the arc tangent of a value. This\nfunction expects the values in the range of -Infinity to\nInfinity (exclusive) and values are returned in the range <code>-PI/2</code> to\n<code>PI/2</code>.</p>\n",
+  "<p>The inverse of <a href=\"/api/math/trigonometry#tan\">tan</a>, returns the arc tangent of a value. This\nfunction expects the values in the range of -Infinity to\nInfinity (exclusive) and values are returned in the range <code>-PI/2</code> to\n<code>PI/2</code>.</p>\n",
   :what :fn},
  rotate-y
  {:args ({:value [angle], :type :both}),
@@ -976,7 +976,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/rotateY_.html",
   :docstring
-  "<p>Rotates a shape around the y-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0\nto (* PI 2)) or converted to radians with the <a href=\"radians\">radians</a> function.\nObjects are always rotated around their relative position to the\norigin and positive numbers rotate objects in a counterclockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate-y HALF-PI)</code> and then <code>(rotate-y HALF-PI)</code> is\nthe same as <code>(rotate-y PI)</code>. If <a href=\"rotate-y\">rotate-y</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction requires either the <code>:p3d</code> or <code>:opengl</code> renderer.</p>\n",
+  "<p>Rotates a shape around the y-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0\nto (* PI 2)) or converted to radians with the <a href=\"/api/math/trigonometry#radians\">radians</a> function.\nObjects are always rotated around their relative position to the\norigin and positive numbers rotate objects in a counterclockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate-y HALF-PI)</code> and then <code>(rotate-y HALF-PI)</code> is\nthe same as <code>(rotate-y PI)</code>. If <a href=\"/api/transform#rotate-y\">rotate-y</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction requires either the <code>:p3d</code> or <code>:opengl</code> renderer.</p>\n",
   :what :fn},
  day
  {:args ({:value [], :type :both}),
@@ -1002,7 +1002,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/pointLight_.html",
   :docstring
-  "<p>Adds a point light. Lights need to be included in the draw() to\nremain persistent in a looping program. Placing them in the setup()\nof a looping program will cause them to only have an effect the\nfirst time through the loop. The affect of the <code>r</code>, <code>g</code>, and <code>b</code>\nparameters is determined by the current <a href=\"color-mode\">color-mode</a>. The <code>x</code>, <code>y</code>, and <code>z</code>\nparameters set the position of the light</p>\n",
+  "<p>Adds a point light. Lights need to be included in the draw() to\nremain persistent in a looping program. Placing them in the setup()\nof a looping program will cause them to only have an effect the\nfirst time through the loop. The affect of the <code>r</code>, <code>g</code>, and <code>b</code>\nparameters is determined by the current <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. The <code>x</code>, <code>y</code>, and <code>z</code>\nparameters set the position of the light</p>\n",
   :what :fn},
  pmouse-x
  {:args ({:value [], :type :both}),
@@ -1045,7 +1045,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/stroke_.html",
   :docstring
-  "<p>Sets the color used to draw lines and borders around shapes. This\ncolor is either specified in terms of the RGB or HSB color depending\non the current <a href=\"color-mode\">color-mode</a> (the default color space is RGB, with\neach value in the range from 0 to 255).\nIf nil is passed it removes any fill color; equivalent to <a href=\"no-stroke\">no-stroke</a>.</p>\n",
+  "<p>Sets the color used to draw lines and borders around shapes. This\ncolor is either specified in terms of the RGB or HSB color depending\non the current <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a> (the default color space is RGB, with\neach value in the range from 0 to 255).\nIf nil is passed it removes any fill color; equivalent to <a href=\"/api/color/setting#no-stroke\">no-stroke</a>.</p>\n",
   :what :fn},
  mouse-pressed?
  {:args ({:value [], :type :both}),
@@ -1084,7 +1084,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/displayDensity_.html",
   :docstring
-  "<p>This function returns the number 2 if the screen is a high-density\nscreen (called a Retina display on OS X or high-dpi on Windows and\nLinux) and a 1 if not. This information is useful for a program to\nadapt to run at double the pixel density on a screen that supports\nit. Can be used in conjunction with <a href=\"pixel-density\">pixel-density</a>.</p>\n",
+  "<p>This function returns the number 2 if the screen is a high-density\nscreen (called a Retina display on OS X or high-dpi on Windows and\nLinux) and a 1 if not. This information is useful for a program to\nadapt to run at double the pixel density on a screen that supports\nit. Can be used in conjunction with <a href=\"/api/environment#pixel-density\">pixel-density</a>.</p>\n",
   :what :fn},
  quadratic-vertex
  {:args
@@ -1099,7 +1099,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/quadraticVertex_.html",
   :docstring
-  "<p>Specifies vertex coordinates for quadratic Bezier curves. Each call to\n<a href=\"quadratic-vertex\">quadratic-vertex</a> defines the position of one control points and one\nanchor point of a Bezier curve, adding a new segment to a line or shape.\nThe first time <a href=\"quadratic-vertex\">quadratic-vertex</a> is used within a <a href=\"begin-shape\">begin-shape</a> call, it\nmust be prefaced with a call to <a href=\"vertex\">vertex</a> to set the first anchor point.\nThis function must be used between <a href=\"begin-shape\">begin-shape</a> and <a href=\"end-shape\">end-shape</a> and only\nwhen there is no MODE parameter specified to begin-shape. Using the 3D\nversion requires rendering with <code>:p3d</code>.</p>\n",
+  "<p>Specifies vertex coordinates for quadratic Bezier curves. Each call to\n<a href=\"/api/shape/vertex#quadratic-vertex\">quadratic-vertex</a> defines the position of one control points and one\nanchor point of a Bezier curve, adding a new segment to a line or shape.\nThe first time <a href=\"/api/shape/vertex#quadratic-vertex\">quadratic-vertex</a> is used within a <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> call, it\nmust be prefaced with a call to <a href=\"/api/shape/vertex#vertex\">vertex</a> to set the first anchor point.\nThis function must be used between <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> and <a href=\"/api/shape/vertex#end-shape\">end-shape</a> and only\nwhen there is no MODE parameter specified to begin-shape. Using the 3D\nversion requires rendering with <code>:p3d</code>.</p>\n",
   :what :fn},
  clip
  {:args #{[x y w h]},
@@ -1112,7 +1112,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/clip_.html",
   :docstring
-  "<p>Limits the rendering to the boundaries of a rectangle defined by\nthe parameters. The boundaries are drawn based on the state of\nthe <a href=\"image-mode\">image-mode</a> function, either <code>:corner</code>, <code>:corners</code>, or <code>:center</code>.\nTo disable use <a href=\"no-clip\">no-clip</a>.</p>\n",
+  "<p>Limits the rendering to the boundaries of a rectangle defined by\nthe parameters. The boundaries are drawn based on the state of\nthe <a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a> function, either <code>:corner</code>, <code>:corners</code>, or <code>:center</code>.\nTo disable use <a href=\"/api/rendering#no-clip\">no-clip</a>.</p>\n",
   :what :fn},
  pixel-density
  {:args ({:value [density], :type :both}),
@@ -1125,7 +1125,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/pixelDensity_.html",
   :docstring
-  "<p>It makes it possible for Processing to render using all of the pixels\non high resolutions screens like Apple Retina displays and Windows\nHigh-DPI displays. Possible values 1 or 2. Must be called only from\n:settings handler. To get density of the current screen you can use\nthe <a href=\"display-density\">display-density</a> function.</p>\n",
+  "<p>It makes it possible for Processing to render using all of the pixels\non high resolutions screens like Apple Retina displays and Windows\nHigh-DPI displays. Possible values 1 or 2. Must be called only from\n:settings handler. To get density of the current screen you can use\nthe <a href=\"/api/environment#display-density\">display-density</a> function.</p>\n",
   :what :fn},
  begin-raw
  {:args #{[renderer filename]},
@@ -1138,7 +1138,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/beginRaw_.html",
   :docstring
-  "<p>Enables the creation of vectors from 3D data. Requires\ncorresponding <a href=\"end-raw\">end-raw</a> command. These commands will grab the shape\ndata just before it is rendered to the screen. At this stage, your\nentire scene is nothing but a long list of individual lines and\ntriangles. This means that a shape created with sphere method will\nbe made up of hundreds of triangles, rather than a single object. Or\nthat a multi-segment line shape (such as a curve) will be rendered\nas individual segments.</p>\n",
+  "<p>Enables the creation of vectors from 3D data. Requires\ncorresponding <a href=\"/api/output/files#end-raw\">end-raw</a> command. These commands will grab the shape\ndata just before it is rendered to the screen. At this stage, your\nentire scene is nothing but a long list of individual lines and\ntriangles. This means that a shape created with sphere method will\nbe made up of hundreds of triangles, rather than a single object. Or\nthat a multi-segment line shape (such as a curve) will be rendered\nas individual segments.</p>\n",
   :what :fn},
  noise-seed
  {:args ({:value [val], :type :both}),
@@ -1189,7 +1189,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/copy_.html",
   :docstring
-  "<p>Copies a region of pixels from one image to another. If <code>src-img</code>\nis not specified it defaults to <a href=\"current-graphics\">current-graphics</a>. If <code>dest-img</code> is not\nspecified - it defaults to <a href=\"current-graphics\">current-graphics</a>. If the source\nand destination regions aren't the same size, it will automatically\nresize the source pixels to fit the specified target region. No\nalpha information is used in the process, however if the source\nimage has an alpha channel set, it will be copied as well.</p>\n",
+  "<p>Copies a region of pixels from one image to another. If <code>src-img</code>\nis not specified it defaults to <a href=\"/api/environment#current-graphics\">current-graphics</a>. If <code>dest-img</code> is not\nspecified - it defaults to <a href=\"/api/environment#current-graphics\">current-graphics</a>. If the source\nand destination regions aren't the same size, it will automatically\nresize the source pixels to fit the specified target region. No\nalpha information is used in the process, however if the source\nimage has an alpha channel set, it will be copied as well.</p>\n",
   :what :fn},
  random-3d
  {:args ({:value [], :type :both}),
@@ -1215,7 +1215,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/beginShape_.html",
   :docstring
-  "<p>Enables the creation of complex forms. <a href=\"begin-shape\">begin-shape</a> begins recording\nvertices for a shape and <a href=\"end-shape\">end-shape</a> stops recording. Use the <code>mode</code>\nkeyword to specify which shape to create from the provided\nvertices. With no mode specified, the shape can be any irregular\npolygon.</p>\n<p>The available mode keywords are <code>:points</code>, <code>:lines</code>, <code>:triangles</code>,\n<code>:triangle-fan</code>, <code>:triangle-strip</code>,\n<code>:quads</code>, <code>:quad-strip</code>.</p>\n<p>After calling the <a href=\"begin-shape\">begin-shape</a> function, a series of vertex commands\nmust follow. To stop drawing the shape, call <a href=\"end-shape\">end-shape</a>. The <a href=\"vertex\">vertex</a>\nfunction with two parameters specifies a position in 2D and the\n<a href=\"vertex\">vertex</a> function with three parameters specifies a position in\n3D. Each shape will be outlined with the current stroke color and\nfilled with the fill color.</p>\n<p>Transformations such as <a href=\"translate\">translate</a>, <a href=\"rotate\">rotate</a>, and <a href=\"scale\">scale</a> do not work\nwithin <a href=\"begin-shape\">begin-shape</a>. It is also not possible to use other shapes,\nsuch as <a href=\"ellipse\">ellipse</a> or <a href=\"rect\">rect</a> within <a href=\"begin-shape\">begin-shape</a>.</p>\n",
+  "<p>Enables the creation of complex forms. <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> begins recording\nvertices. With no mode specified, the shape can be any irregular\npolygon.</p>\n<p>The available mode keywords are <code>:points</code>, <code>:lines</code>, <code>:triangles</code>,\n<code>:triangle-fan</code>, <code>:triangle-strip</code>,\n<code>:quads</code>, <code>:quad-strip</code>.</p>\n<p>After calling the <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> function, a series of vertex commands\nmust follow. To stop drawing the shape, call <a href=\"/api/shape/vertex#end-shape\">end-shape</a>. The <a href=\"/api/shape/vertex#vertex\">vertex</a>\nfunction with two parameters specifies a position in 2D and the\n<a href=\"/api/shape/vertex#vertex\">vertex</a> function with three parameters specifies a position in\n3D. Each shape will be outlined with the <a href=\"/api/color/creating-and-reading#current-stroke\">current-stroke</a> color and\nfilled with the <a href=\"/api/color/setting#fill\">fill</a> color.</p>\n<p>Transformations such as <a href=\"/api/transform#translate\">translate</a>, <a href=\"/api/transform#rotate\">rotate</a>, and <a href=\"/api/transform#scale\">scale</a> do not work\nwithin <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>. It is also not possible to use other shapes,\nsuch as <a href=\"/api/shape/2d-primitives#ellipse\">ellipse</a> or <a href=\"/api/shape/2d-primitives#rect\">rect</a> within <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>.</p>\n",
   :what :fn},
  set-state!
  {:args ({:value [& state-vals], :type :both}),
@@ -1266,7 +1266,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/curveTightness_.html",
   :docstring
-  "<p>Modifies the quality of forms created with curve and\n<a href=\"curve-vertex\">curve-vertex</a>. The parameter <code>tightness</code> determines how the curve fits\nto the vertex points. The value 0.0 is the default value for\n<code>tightness</code> (this value defines the curves to be Catmull-Rom splines)\nand the value 1.0 connects all the points with straight\nlines. Values within the range -5.0 and 5.0 will deform the curves\nbut will leave them recognizable and as values increase in\nmagnitude, they will continue to deform.</p>\n",
+  "<p>Modifies the quality of forms created with curve and\n<a href=\"/api/shape/vertex#curve-vertex\">curve-vertex</a>. The parameter <code>tightness</code> determines how the curve fits\nto the vertex points. The value 0.0 is the default value for\n<code>tightness</code> (this value defines the curves to be Catmull-Rom splines)\nand the value 1.0 connects all the points with straight\nlines. Values within the range -5.0 and 5.0 will deform the curves\nbut will leave them recognizable and as values increase in\nmagnitude, they will continue to deform.</p>\n",
   :what :fn},
  tan
  {:args ({:value [angle], :type :both}),
@@ -1305,7 +1305,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/emissive_.html",
   :docstring
-  "<p>Sets the emissive color of the material used for drawing shapes\ndrawn to the screen. Used in combination with <a href=\"ambient\">ambient</a>, <a href=\"specular\">specular</a>, and\n<a href=\"shininess\">shininess</a> in setting the material properties of shapes.</p>\n<p>If passed one arg it is assumed to be an <code>int</code> (i.e. a color),\nmultiple args are converted to <code>floats</code>.</p>\n",
+  "<p>Sets the emissive color of the material used for drawing shapes\ndrawn to the screen. Used in combination with <a href=\"/api/lights-camera/material-properties#ambient\">ambient</a>, <a href=\"/api/lights-camera/material-properties#specular\">specular</a>, and\n<a href=\"/api/lights-camera/material-properties#shininess\">shininess</a> in setting the material properties of shapes.</p>\n<p>If passed one arg it is assumed to be an <code>int</code> (i.e. a color),\nmultiple args are converted to <code>floats</code>.</p>\n",
   :what :fn},
  sketch
  {:args ({:value [& opts], :type :both}),
@@ -1317,7 +1317,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Create and start a new visualisation applet. Can be used to create\nnew sketches programmatically. See documentation for <a href=\"defsketch\">defsketch</a> for\nlist of available options.</p>\n",
+  "<p>Create and start a new visualisation applet. Can be used to create\nnew sketches programmatically. See documentation for <a href=\"/api/environment#defsketch\">defsketch</a> for\nlist of available options.</p>\n",
   :what :fn},
  color
  {:args
@@ -1334,7 +1334,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/color_.html",
   :docstring
-  "<p>Creates an integer representation of a color. The parameters are\ninterpreted as RGB or HSB values depending on the current\n<a href=\"color-mode\">color-mode</a>. The default mode is RGB values from 0 to 255 and\ntherefore, the function call <code>(color 255 204 0)</code> will return a bright\nyellow. Args are cast to floats.</p>\n<ul>\n<li>r - red or hue value</li>\n<li>g - green or saturation value</li>\n<li>b - blue or brightness value</li>\n<li>a - alpha value</li>\n</ul>\n",
+  "<p>Creates an integer representation of a color. The parameters are\ninterpreted as RGB or HSB values depending on the current\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. The default mode is RGB values from 0 to 255 and\ntherefore, the function call <code>(color 255 204 0)</code> will return a bright\nyellow. Args are cast to floats.</p>\n<ul>\n<li>r - red or hue value</li>\n<li>g - green or saturation value</li>\n<li>b - blue or brightness value</li>\n<li>a - alpha value</li>\n</ul>\n",
   :what :fn},
  arc
  {:args
@@ -1349,7 +1349,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/arc_.html",
   :docstring
-  "<p>Draws an arc in the display window. Arcs are drawn along the outer\nedge of an ellipse defined by the <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>\nparameters. The origin or the arc's ellipse may be changed with the\n<a href=\"ellipse-mode\">ellipse-mode</a> function. The <code>start</code> and <code>stop</code> parameters specify the\nangles at which to draw the arc. The <code>mode</code> is either <code>:open</code>, <code>:chord</code> or <code>:pie</code>.</p>\n",
+  "<p>Draws an arc in the display window. Arcs are drawn along the outer\nedge of an ellipse defined by the <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>\nparameters. The origin or the arc's ellipse may be changed with the\n<a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a> function. The <code>start</code> and <code>stop</code> parameters specify the\nangles at which to draw the arc. The <code>mode</code> is either <code>:open</code>, <code>:chord</code> or <code>:pie</code>.</p>\n",
   :what :fn},
  text-align
  {:args
@@ -1364,7 +1364,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/textAlign_.html",
   :docstring
-  "<p>Sets the current alignment for drawing text. Available modes are:</p>\n<p>horizontal - <code>:left</code>, <code>:center</code>, and <code>:right</code>\nvertical   - <code>:top</code>, <code>:bottom</code>, <code>:center</code>, and <code>:baseline</code></p>\n<p>An optional second parameter specifies the vertical alignment\nmode. <code>:baseline</code> is the default. The <code>:top</code> and <code>:center</code> parameters are\nstraightforward. The <code>:bottom</code> parameter offsets the line based on the\ncurrent <a href=\"text-descent\">text-descent</a>. For multiple lines, the final line will be\naligned to the bottom, with the previous lines appearing above it.</p>\n<p>When using text with width and height parameters, <code>:baseline</code> is\nignored, and treated as <code>:top</code>. (Otherwise, text would by default draw\noutside the box, since <code>:baseline</code> is the default setting. <code>:baseline</code> is\nnot a useful drawing mode for text drawn in a rectangle.)</p>\n<p>The vertical alignment is based on the value of <a href=\"text-ascent\">text-ascent</a>, which\nmany fonts do not specify correctly. It may be necessary to use a\nhack and offset by a few pixels by hand so that the offset looks\ncorrect. To do this as less of a hack, use some percentage of\n<a href=\"text-ascent\">text-ascent</a> or <a href=\"text-descent\">text-descent</a> so that the hack works even if you\nchange the size of the font.</p>\n",
+  "<p>Sets the current alignment for drawing text. Available modes are:</p>\n<p>horizontal - <code>:left</code>, <code>:center</code>, and <code>:right</code>\nvertical   - <code>:top</code>, <code>:bottom</code>, <code>:center</code>, and <code>:baseline</code></p>\n<p>An optional second parameter specifies the vertical alignment\nmode. <code>:baseline</code> is the default. The <code>:top</code> and <code>:center</code> parameters are\nstraightforward. The <code>:bottom</code> parameter offsets the line based on the\ncurrent <a href=\"/api/typography/metrics#text-descent\">text-descent</a>. For multiple lines, the final line will be\naligned to the bottom, with the previous lines appearing above it.</p>\n<p>When using text with width and height parameters, <code>:baseline</code> is\nignored, and treated as <code>:top</code>. (Otherwise, text would by default draw\noutside the box, since <code>:baseline</code> is the default setting. <code>:baseline</code> is\nnot a useful drawing mode for text drawn in a rectangle.)</p>\n<p>The vertical alignment is based on the value of <a href=\"/api/typography/metrics#text-ascent\">text-ascent</a>, which\nmany fonts do not specify correctly. It may be necessary to use a\nhack and offset by a few pixels by hand so that the offset looks\ncorrect. To do this as less of a hack, use some percentage of\n<a href=\"/api/typography/metrics#text-ascent\">text-ascent</a> or <a href=\"/api/typography/metrics#text-descent\">text-descent</a> so that the hack works even if you\nchange the size of the font.</p>\n",
   :what :fn},
  text-width
  {:args ({:value [data], :type :both}),
@@ -1402,7 +1402,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/mag_.html",
   :docstring
-  "<p>Calculates the magnitude (or length) of a vector. A vector is a\ndirection in space commonly used in computer graphics and linear\nalgebra. Because it has no start position, the magnitude of a vector\ncan be thought of as the distance from coordinate <code>(0,0)</code> to its <code>(x,y)</code>\nvalue. Therefore, <a href=\"mag\">mag</a> is a shortcut for writing <code>(dist 0 0 x y)</code>.</p>\n",
+  "<p>Calculates the magnitude (or length) of a vector. A vector is a\ndirection in space commonly used in computer graphics and linear\nalgebra. Because it has no start position, the magnitude of a vector\ncan be thought of as the distance from coordinate <code>(0,0)</code> to its <code>(x,y)</code>\nvalue. Therefore, <a href=\"/api/math/calculation#mag\">mag</a> is a shortcut for writing <code>(dist 0 0 x y)</code>.</p>\n",
   :what :fn},
  exit
  {:args ({:value [], :type :both}),
@@ -1415,7 +1415,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/exit_.html",
   :docstring
-  "<p>Quits/stops/exits the program. Rather than terminating\nimmediately, <a href=\"exit\">exit</a> will cause the sketch to exit after <code>draw</code> has\ncompleted (or after <code>setup</code> completes if called during the <code>setup</code>\nmethod).</p>\n",
+  "<p>Quits/stops/exits the program. Rather than terminating\nimmediately, <a href=\"/api/structure#exit\">exit</a> will cause the sketch to exit after <code>draw</code> has\ncompleted (or after <code>setup</code> completes if called during the <code>setup</code>\nmethod).</p>\n",
   :what :fn},
  map-range
  {:args ({:value [val low1 high1 low2 high2], :type :both}),
@@ -1467,7 +1467,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/textFont_.html",
   :docstring
-  "<p>Sets the current font that will be drawn with the text\nfunction. Fonts must be loaded with <a href=\"load-font\">load-font</a> before it can be\nused. This font will be used in all subsequent calls to the <a href=\"text\">text</a>\nfunction. If no <code>size</code> parameter is input, the font will appear at its\noriginal size until it is changed with <a href=\"text-size\">text-size</a>.</p>\n<p>Because fonts are usually bitmaped, you should create fonts at the\nsizes that will be used most commonly. Using <a href=\"text-font\">text-font</a> without the\n<code>size</code> parameter will result in the cleanest-looking text.</p>\n<p>With the default (JAVA2D) and PDF renderers, it's also possible to\nenable the use of native fonts via the command\n<code>(hint :enable-native-fonts)</code>. This will produce vector text in JAVA2D\nsketches and PDF output in cases where the vector data is available:\nwhen the font is still installed, or the font is created via the\n<a href=\"create-font\">create-font</a> function.</p>\n",
+  "<p>Sets the current font that will be drawn with the text\nfunction. Fonts must be loaded with <a href=\"/api/typography/loading-and-displaying#load-font\">load-font</a> before it can be\nused. This font will be used in all subsequent calls to the <a href=\"/api/typography/loading-and-displaying#text\">text</a>\nfunction. If no <code>size</code> parameter is input, the font will appear at its\noriginal size until it is changed with <a href=\"/api/typography/attributes#text-size\">text-size</a>.</p>\n<p>Because fonts are usually bitmaped, you should create fonts at the\nsizes that will be used most commonly. Using <a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a> without the\n<code>size</code> parameter will result in the cleanest-looking text.</p>\n<p>With the default (JAVA2D) and PDF renderers, it's also possible to\nenable the use of native fonts via the command\n<code>(hint :enable-native-fonts)</code>. This will produce vector text in JAVA2D\nsketches and PDF output in cases where the vector data is available:\nwhen the font is still installed, or the font is created via the\n<a href=\"/api/typography/loading-and-displaying#create-font\">create-font</a> function.</p>\n",
   :what :fn},
  scale
  {:args
@@ -1483,7 +1483,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/scale_.html",
   :docstring
-  "<p>Increases or decreases the size of a shape by expanding and\ncontracting vertices. Objects always scale from their relative\norigin to the coordinate system. Scale values are specified as\ndecimal percentages. For example, the function call <code>(scale 2)</code>\nincreases the dimension of a shape by 200%. Transformations apply to\neverything that happens after and subsequent calls to the function\nmultiply the effect. For example, calling <code>(scale 2)</code> and then\n<code>(scale 1.5)</code> is the same as <code>(scale 3)</code>. If scale is called within\ndraw, the transformation is reset when the loop begins again. Using\nthis function with the <code>sz</code> parameter requires specifying <code>:p3d</code> or <code>:opengl</code>\nas the renderer. This function can be further controlled by\n<a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a>.</p>\n",
+  "<p>Increases or decreases the size of a shape by expanding and\ncontracting vertices. Objects always scale from their relative\norigin to the coordinate system. Scale values are specified as\ndecimal percentages. For example, the function call <code>(scale 2)</code>\nincreases the dimension of a shape by 200%. Transformations apply to\neverything that happens after and subsequent calls to the function\nmultiply the effect. For example, calling <code>(scale 2)</code> and then\n<code>(scale 1.5)</code> is the same as <code>(scale 3)</code>. If scale is called within\ndraw, the transformation is reset when the loop begins again. Using\nthis function with the <code>sz</code> parameter requires specifying <code>:p3d</code> or <code>:opengl</code>\nas the renderer. This function can be further controlled by\n<a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a>.</p>\n",
   :what :fn},
  defsketch
  {:args ({:value [app-name & options], :type :both}),
@@ -1495,7 +1495,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Define and start a sketch and bind it to a var with the symbol\n<code>app-name</code>. If any of the options to the various callbacks are\nsymbols, it wraps them in a call to var to ensure they aren't\ninlined and that redefinitions to the original functions are reflected in\nthe visualisation.</p>\n<ul>\n<li><code>:size</code>           - A vector of width and height for the sketch or :fullscreen.\nDefaults to <code>[500 300]</code>. If you're using :fullscreen you may\nwant to enable present mode - :features [:present].\n:fullscreen size works only in Clojure. In ClojureScript\nall sketches are support fullscreen when you press F11.</li>\n<li><code>:renderer</code>       - Specifies the renderer type. One of <code>:p2d</code>, <code>:p3d</code>, <code>:java2d</code>,\n<code>:opengl</code>, <code>:pdf</code>, <code>:svg</code>). Defaults to <code>:java2d</code>. <code>:dxf</code> renderer\ncan't be used as sketch renderer. Use <a href=\"begin-raw\">begin-raw</a> method\ninstead. In clojurescript only <code>:p2d</code> and <code>:p3d</code> renderers\nare supported.</li>\n<li><code>:output-file</code>    - Specifies an output file path. Only used in <code>:pdf</code> and <code>:svg</code>\nmodes. Not supported in clojurescript. When writing to a\nfile, call <a href=\"exit\">exit</a> at the end of the draw call to end\nthe sketch and not write repeatedly to the file.</li>\n<li><code>:title</code>          - A string which will be displayed at the top of\nthe sketch window. Not supported in clojurescript.</li>\n<li><code>:features</code>       - A vector of keywords customizing sketch behaviour.\nSupported features:\n<ul>\n<li><code>:keep-on-top</code>   - Sketch window will always be above other windows.\nNote: some platforms might not support always-on-top windows.\nNot supported in clojurescript.</li>\n<li><code>:exit-on-close</code> - Shutdown JVM  when sketch is closed.\nNot supported in clojurescript.</li>\n<li><code>:resizable</code>     - Makes sketch resizable. Not supported in clojurescript.</li>\n<li><code>:no-safe-fns</code>   - Do not catch and print exceptions thrown inside functions\nprovided to sketch (like draw, <a href=\"mouse-click\">mouse-click</a>,\n<a href=\"key-pressed\">key-pressed</a> and others). By default all exceptions\nthrown inside these functions are caught. This prevents\nsketch from breaking when bad function was provided and\nallows you to fix it and reload it on fly. You can\ndisable this behaviour by enabling <code>:no-safe-fns</code>\nfeature. Not supported in clojurescript.</li>\n<li><code>:present</code>       - Switch to present mode (fullscreen without borders, OS\npanels). You may want to use this feature together with\n<code>:size :fullscreen</code>. Not supported in ClojureScript. In\nClojureScript fullscreen is enabled by pressing F11 and\nit's enabled on all sketches automatically.</li>\n<li><code>:no-start</code>      - Disables autostart if sketch was created using defsketch\nmacro. To start sketch you have to call function created\ndefsketch. Supported only in ClojureScript.\nUsage example: <code>:features [:keep-on-top :present]</code></li>\n</ul>\n</li>\n<li><code>:bgcolor</code>        - Sets background color for unused space in present mode.\nColor is specified in hex format for example\n<code>:bgcolor &quot;#00FFFF&quot;</code> (cyan background)\nNot supported in ClojureScript.</li>\n<li><code>:display</code>        - Sets what display should be used by this sketch.\nDisplays are numbered starting from 0. Example: <code>:display 1</code>.\nNot supported in ClojureScript.</li>\n<li><code>:setup</code>          - A function to be called once when setting the sketch up.</li>\n<li><code>:draw</code>           - A function to be repeatedly called at most n times per\nsecond where n is the target <a href=\"frame-rate\">frame-rate</a> set for\nthe visualisation.</li>\n<li><code>:host</code>           - String id of canvas element or DOM element itself.\nSpecifies host for the sketch. Must be specified in sketch,\nmay be omitted in defsketch. If omitted in defsketch,\n:host is set to the name of the sketch. If element with\nspecified id is not found on the page and page is empty -\nnew canvas element will be created. Used in ClojureScript.</li>\n<li><code>:focus-gained</code>   - Called when the sketch gains focus.\nNot supported in ClojureScript.</li>\n<li><code>:focus-lost</code>     - Called when the sketch loses focus.\nNot supported in ClojureScript.</li>\n<li><code>:mouse-entered</code>  - Called when the mouse enters the sketch window.</li>\n<li><code>:mouse-exited</code>   - Called when the mouse leaves the sketch window</li>\n<li><code>:mouse-pressed</code>  - Called every time a mouse button is pressed.</li>\n<li><code>:mouse-released</code> - Called every time a mouse button is released.</li>\n<li><code>:mouse-clicked</code>  - Called once after a mouse button has been pressed\nand then released.</li>\n<li><code>:mouse-moved</code>    - Called every time the mouse moves and a button is\nnot pressed.</li>\n<li><code>:mouse-dragged</code>  - Called every time the mouse moves and a button is\npressed.</li>\n<li><code>:mouse-wheel</code>    - Called every time mouse wheel is rotated.\nTakes 1 argument - wheel rotation, an int.\nNegative values if the mouse wheel was rotated\nup/away from the user, and positive values\nif the mouse wheel was rotated down/ towards the user</li>\n<li><code>:key-pressed</code>    - Called every time any key is pressed.</li>\n<li><code>:key-released</code>   - Called every time any key is released.</li>\n<li><code>:key-typed</code>      - Called once every time non-modifier keys are\npressed.</li>\n<li><code>:on-close</code>       - Called once, when sketch is closed.\nNot supported in ClojureScript.</li>\n<li><code>:middleware</code>     - Vector of middleware to be applied to the sketch.\nMiddleware will be applied in the same order as in comp\nfunction: [f g] will be applied as <code>(f (g options))</code>.</li>\n<li><code>:settings</code>       - Cousin of <code>:setup</code>. A function to be called once when\nsetting sketch up. Should be used only for <a href=\"smooth\">smooth</a> and\n<a href=\"no-smooth\">no-smooth</a>. Due to Processing limitations these functions\ncannot be used neither in <code>:setup</code> nor in <code>:draw</code>.</li>\n</ul>\n",
+  "<p>Define and start a sketch and bind it to a var with the symbol\n<code>app-name</code>. If any of the options to the various callbacks are\nsymbols, it wraps them in a call to var to ensure they aren't\ninlined and that redefinitions to the original functions are reflected in\nthe visualisation.</p>\n<ul>\n<li><code>:size</code>           - A vector of width and height for the sketch or :fullscreen.\nDefaults to <code>[500 300]</code>. If you're using :fullscreen you may\nwant to enable present mode - :features [:present].\n:fullscreen size works only in Clojure. In ClojureScript\nall sketches are support fullscreen when you press F11.</li>\n<li><code>:renderer</code>       - Specifies the renderer type. One of <code>:p2d</code>, <code>:p3d</code>, <code>:java2d</code>,\n<code>:opengl</code>, <code>:pdf</code>, <code>:svg</code>). Defaults to <code>:java2d</code>. <code>:dxf</code> renderer\ncan't be used as sketch renderer. Use <a href=\"/api/output/files#begin-raw\">begin-raw</a> method\ninstead. In clojurescript only <code>:p2d</code> and <code>:p3d</code> renderers\nare supported.</li>\n<li><code>:output-file</code>    - Specifies an output file path. Only used in <code>:pdf</code> and <code>:svg</code>\nmodes. Not supported in clojurescript. When writing to a\nfile, call <a href=\"/api/structure#exit\">exit</a> at the end of the draw call to end\nthe sketch and not write repeatedly to the file.</li>\n<li><code>:title</code>          - A string which will be displayed at the top of\nthe sketch window. Not supported in clojurescript.</li>\n<li><code>:features</code>       - A vector of keywords customizing sketch behaviour.\nSupported features:\n<ul>\n<li><code>:keep-on-top</code>   - Sketch window will always be above other windows.\nNote: some platforms might not support always-on-top windows.\nNot supported in clojurescript.</li>\n<li><code>:exit-on-close</code> - Shutdown JVM  when sketch is closed.\nNot supported in clojurescript.</li>\n<li><code>:resizable</code>     - Makes sketch resizable. Not supported in clojurescript.</li>\n<li><code>:no-safe-fns</code>   - Do not catch and print exceptions thrown inside functions\nprovided to sketch (like draw, <a href=\"/api#mouse-clicked?\">mouse-clicked?</a>,\n<a href=\"/api/input/keyboard#key-pressed?\">key-pressed?</a> and others). By default all exceptions\nthrown inside these functions are caught. This prevents\nsketch from breaking when bad function was provided and\nallows you to fix it and reload it on fly. You can\ndisable this behaviour by enabling <code>:no-safe-fns</code>\nfeature. Not supported in clojurescript.</li>\n<li><code>:present</code>       - Switch to present mode (fullscreen without borders, OS\npanels). You may want to use this feature together with\n<code>:size :fullscreen</code>. Not supported in ClojureScript. In\nClojureScript fullscreen is enabled by pressing F11 and\nit's enabled on all sketches automatically.</li>\n<li><code>:no-start</code>      - Disables autostart if sketch was created using defsketch\nmacro. To start sketch you have to call function created\ndefsketch. Supported only in ClojureScript.\nUsage example: <code>:features [:keep-on-top :present]</code></li>\n</ul>\n</li>\n<li><code>:bgcolor</code>        - Sets background color for unused space in present mode.\nColor is specified in hex format for example\n<code>:bgcolor &quot;#00FFFF&quot;</code> (cyan background)\nNot supported in ClojureScript.</li>\n<li><code>:display</code>        - Sets what display should be used by this sketch.\nDisplays are numbered starting from 0. Example: <code>:display 1</code>.\nNot supported in ClojureScript.</li>\n<li><code>:setup</code>          - A function to be called once when setting the sketch up.</li>\n<li><code>:draw</code>           - A function to be repeatedly called at most n times per\nsecond where n is the target <a href=\"/api/environment#frame-rate\">frame-rate</a> set for\nthe visualisation.</li>\n<li><code>:host</code>           - String id of canvas element or DOM element itself.\nSpecifies host for the sketch. Must be specified in sketch,\nmay be omitted in defsketch. If omitted in defsketch,\n:host is set to the name of the sketch. If element with\nspecified id is not found on the page and page is empty -\nnew canvas element will be created. Used in ClojureScript.</li>\n<li><code>:focus-gained</code>   - Called when the sketch gains focus.\nNot supported in ClojureScript.</li>\n<li><code>:focus-lost</code>     - Called when the sketch loses focus.\nNot supported in ClojureScript.</li>\n<li><code>:mouse-entered</code>  - Called when the mouse enters the sketch window.</li>\n<li><code>:mouse-exited</code>   - Called when the mouse leaves the sketch window</li>\n<li><code>:mouse-pressed</code>  - Called every time a mouse button is pressed.</li>\n<li><code>:mouse-released</code> - Called every time a mouse button is released.</li>\n<li><code>:mouse-clicked</code>  - Called once after a mouse button has been pressed\nand then released.</li>\n<li><code>:mouse-moved</code>    - Called every time the mouse moves and a button is\nnot pressed.</li>\n<li><code>:mouse-dragged</code>  - Called every time the mouse moves and a button is\npressed.</li>\n<li><code>:mouse-wheel</code>    - Called every time mouse wheel is rotated.\nTakes 1 argument - wheel rotation, an int.\nNegative values if the mouse wheel was rotated\nup/away from the user, and positive values\nif the mouse wheel was rotated down/ towards the user</li>\n<li><code>:key-pressed</code>    - Called every time any key is pressed.</li>\n<li><code>:key-released</code>   - Called every time any key is released.</li>\n<li><code>:key-typed</code>      - Called once every time non-modifier keys are\npressed.</li>\n<li><code>:on-close</code>       - Called once, when sketch is closed.\nNot supported in ClojureScript.</li>\n<li><code>:middleware</code>     - Vector of middleware to be applied to the sketch.\nMiddleware will be applied in the same order as in comp\nfunction: [f g] will be applied as <code>(f (g options))</code>.</li>\n<li><code>:settings</code>       - Cousin of <code>:setup</code>. A function to be called once when\nsetting sketch up. Should be used only for <a href=\"/api/shape/attributes#smooth\">smooth</a> and\n<a href=\"/api/shape/attributes#no-smooth\">no-smooth</a>. Due to Processing limitations these functions\ncannot be used neither in <code>:setup</code> nor in <code>:draw</code>.</li>\n</ul>\n",
   :what :macro},
  no-stroke
  {:args ({:value [], :type :both}),
@@ -1508,7 +1508,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/noStroke_.html",
   :docstring
-  "<p>Disables drawing the stroke (outline). If both <a href=\"no-stroke\">no-stroke</a> and\n<a href=\"no-fill\">no-fill</a> are called, nothing will be drawn to the screen.</p>\n",
+  "<p>Disables drawing the stroke (outline). If both <a href=\"/api/color/setting#no-stroke\">no-stroke</a> and\n<a href=\"/api/color/setting#no-fill\">no-fill</a> are called, nothing will be drawn to the screen.</p>\n",
   :what :fn},
  random-seed
  {:args ({:value [w], :type :both}),
@@ -1534,7 +1534,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/lightSpecular_.html",
   :docstring
-  "<p>Sets the specular color for lights. Like <a href=\"fill\">fill</a>, it affects only the\nelements which are created after it in the code. Specular refers to\nlight which bounces off a surface in a preferred direction (rather\nthan bouncing in all directions like a diffuse light) and is used\nfor creating highlights. The specular quality of a light interacts\nwith the specular material qualities set through the <a href=\"specular\">specular</a> and\n<a href=\"shininess\">shininess</a> functions.</p>\n",
+  "<p>Sets the specular color for lights. Like <a href=\"/api/color/setting#fill\">fill</a>, it affects only the\nelements which are created after it in the code. Specular refers to\nlight which bounces off a surface in a preferred direction (rather\nthan bouncing in all directions like a diffuse light) and is used\nfor creating highlights. The specular quality of a light interacts\nwith the specular material qualities set through the <a href=\"/api/lights-camera/material-properties#specular\">specular</a> and\n<a href=\"/api/lights-camera/material-properties#shininess\">shininess</a> functions.</p>\n",
   :what :fn},
  plane
  {:args #{[width height]},
@@ -1613,7 +1613,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/endShape_.html",
   :docstring
-  "<p>May only be called after <a href=\"begin-shape\">begin-shape</a>. When <a href=\"end-shape\">end-shape</a> is called,\nall of image data defined since the previous call to <a href=\"begin-shape\">begin-shape</a> is\nwritten into the image buffer. The keyword <code>:close</code> may be passed to\nclose the shape (to connect the beginning and the end).</p>\n",
+  "<p>May only be called after <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>. When <a href=\"/api/shape/vertex#end-shape\">end-shape</a> is called,\nall of image data defined since the previous call to <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> is\nwritten into the image buffer. The keyword <code>:close</code> may be passed to\nclose the shape (to connect the beginning and the end).</p>\n",
   :what :fn},
  fill
  {:args
@@ -1630,7 +1630,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/fill_.html",
   :docstring
-  "<p>Sets the color used to fill shapes. For example, if you run <code>(fill 204 102 0)</code>,\nall subsequent shapes will be filled with orange.  This function casts all\ninput as a <code>float</code>. If nil is passed it removes any fill color; equivalent to\ncalling <a href=\"no-fill\">no-fill</a>.</p>\n",
+  "<p>Sets the color used to fill shapes. For example, if you run <code>(fill 204 102 0)</code>,\nall subsequent shapes will be filled with orange.  This function casts all\ninput as a <code>float</code>. If nil is passed it removes any fill color; equivalent to\ncalling <a href=\"/api/color/setting#no-fill\">no-fill</a>.</p>\n",
   :what :fn},
  with-translation
  {:args ({:value [translation-vector & body], :type :both}),
@@ -1670,7 +1670,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/PImage_mask_.html",
   :docstring
-  "<p>Masks part of an image from displaying by loading another image and\nusing it as an alpha channel. This mask image should only contain\ngrayscale data. The mask image needs to be the same size as the image\nto which it is applied.</p>\n<p>If single argument function is used - masked image is sketch itself\nor graphics if used inside <a href=\"with-graphics\">with-graphics</a> macro. If you're passing\ngraphics to this function - it works only with <code>:p3d</code> and <code>:opengl</code> renderers.</p>\n<p>This method is useful for creating dynamically generated alpha\nmasks.</p>\n",
+  "<p>Masks part of an image from displaying by loading another image and\nusing it as an alpha channel. This mask image should only contain\ngrayscale data. The mask image needs to be the same size as the image\nto which it is applied.</p>\n<p>If single argument function is used - masked image is sketch itself\nor graphics if used inside <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. If you're passing\ngraphics to this function - it works only with <code>:p3d</code> and <code>:opengl</code> renderers.</p>\n<p>This method is useful for creating dynamically generated alpha\nmasks.</p>\n",
   :what :fn},
  green
  {:args ({:value [col], :type :both}),
@@ -1683,7 +1683,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/green_.html",
   :docstring
-  "<p>Extracts the green value from a color, scaled to match current\n<a href=\"color-mode\">color-mode</a>. This value is always returned as a <code>float</code> so be careful\nnot to assign it to an <code>int</code> value.</p>\n",
+  "<p>Extracts the green value from a color, scaled to match current\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. This value is always returned as a <code>float</code> so be careful\nnot to assign it to an <code>int</code> value.</p>\n",
   :what :fn},
  begin-contour
  {:args ({:value [], :type :both}),
@@ -1696,7 +1696,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/beginContour_.html",
   :docstring
-  "<p>Use the <a href=\"begin-contour\">begin-contour</a> and <a href=\"end-contour\">end-contour</a> function to create negative\nshapes within shapes. These functions can only be used within a\n<a href=\"begin-shape\">begin-shape</a>/<a href=\"end-shape\">end-shape</a> pair and they only work with the <code>:p2d</code> and <code>:p3d</code>\nrenderers.</p>\n",
+  "<p>Use the <a href=\"/api/shape/vertex#begin-contour\">begin-contour</a> and <a href=\"/api/shape/vertex#end-contour\">end-contour</a> function to create negative\nshapes within shapes. These functions can only be used within a\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>/<a href=\"/api/shape/vertex#end-shape\">end-shape</a> pair and they only work with the <code>:p2d</code> and <code>:p3d</code>\nrenderers.</p>\n",
   :what :fn},
  pow
  {:args ({:value [num exponent], :type :both}),
@@ -1709,7 +1709,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/pow_.html",
   :docstring
-  "<p>Facilitates exponential expressions. The <a href=\"pow\">pow</a> function is an\nefficient way of multiplying numbers by themselves (or their\nreciprocal) in large quantities. For example, <code>(pow 3 5)</code> is\nequivalent to the expression <code>(* 3 3 3 3 3)</code> and <code>(pow 3 -5)</code> is\nequivalent to <code>(/ 1 (* 3 3 3 3 3))</code>.</p>\n",
+  "<p>Facilitates exponential expressions. The <a href=\"/api/math/calculation#pow\">pow</a> function is an\nefficient way of multiplying numbers by themselves (or their\nreciprocal) in large quantities. For example, <code>(pow 3 5)</code> is\nequivalent to the expression <code>(* 3 3 3 3 3)</code> and <code>(pow 3 -5)</code> is\nequivalent to <code>(/ 1 (* 3 3 3 3 3))</code>.</p>\n",
   :what :fn},
  box
  {:args
@@ -1749,7 +1749,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/textAscent_.html",
   :docstring
-  "<p>Returns the ascent of the current font at its current size. This\ninformation is useful for determining the height of the font above\nthe baseline. For example, adding the <a href=\"text-ascent\">text-ascent</a> and <a href=\"text-descent\">text-descent</a>\nvalues will give you the total height of the line.</p>\n",
+  "<p>Returns the ascent of the current font at its current size. This\ninformation is useful for determining the height of the font above\nthe baseline. For example, adding the <a href=\"/api/typography/metrics#text-ascent\">text-ascent</a> and <a href=\"/api/typography/metrics#text-descent\">text-descent</a>\nvalues will give you the total height of the line.</p>\n",
   :what :fn},
  shininess
  {:args #{[shine]},
@@ -1762,7 +1762,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/shininess_.html",
   :docstring
-  "<p>Sets the amount of gloss in the surface of shapes. Used in\ncombination with <a href=\"ambient\">ambient</a>, <a href=\"specular\">specular</a>, and <a href=\"emissive\">emissive</a> in setting\nthe material properties of shapes.</p>\n",
+  "<p>Sets the amount of gloss in the surface of shapes. Used in\ncombination with <a href=\"/api/lights-camera/material-properties#ambient\">ambient</a>, <a href=\"/api/lights-camera/material-properties#specular\">specular</a>, and <a href=\"/api/lights-camera/material-properties#emissive\">emissive</a> in setting\nthe material properties of shapes.</p>\n",
   :what :fn},
  rect-mode
  {:args ({:value [mode], :type :both}),
@@ -1775,7 +1775,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/rectMode_.html",
   :docstring
-  "<p>Modifies the location from which rectangles draw. The default <code>mode</code>\nis <code>:corner</code>. Available modes are:</p>\n<ul>\n<li><code>:corner</code>  - Specifies the location to be the upper left corner of the\nshape and uses the third and fourth parameters of <a href=\"rect\">rect</a> to\nspecify the width and height.</li>\n<li><code>:corners</code> - Uses the first and second parameters of <a href=\"rect\">rect</a> to set the\nlocation of one corner and uses the third and fourth\nparameters to set the opposite corner.</li>\n<li><code>:center</code>  - Draws the image from its center point and uses the third\nand fourth parameters of <a href=\"rect\">rect</a> to specify the image's width\nand height.</li>\n<li><code>:radius</code>  - Draws the image from its center point and uses the third\nand forth parameters of <a href=\"rect\">rect</a> to specify half of the\nimage's width and height.</li>\n</ul>\n",
+  "<p>Modifies the location from which rectangles draw. The default <code>mode</code>\nis <code>:corner</code>. Available modes are:</p>\n<ul>\n<li><code>:corner</code>  - Specifies the location to be the upper left corner of the\nshape and uses the third and fourth parameters of <a href=\"/api/shape/2d-primitives#rect\">rect</a> to\nspecify the width and height.</li>\n<li><code>:corners</code> - Uses the first and second parameters of <a href=\"/api/shape/2d-primitives#rect\">rect</a> to set the\nlocation of one corner and uses the third and fourth\nparameters to set the opposite corner.</li>\n<li><code>:center</code>  - Draws the image from its center point and uses the third\nand fourth parameters of <a href=\"/api/shape/2d-primitives#rect\">rect</a> to specify the image's width\nand height.</li>\n<li><code>:radius</code>  - Draws the image from its center point and uses the third\nand forth parameters of <a href=\"/api/shape/2d-primitives#rect\">rect</a> to specify half of the\nimage's width and height.</li>\n</ul>\n",
   :what :fn},
  ellipse-mode
  {:args ({:value [mode], :type :both}),
@@ -1832,7 +1832,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/background_.html",
   :docstring
-  "<p>Sets the color used for the background of the Processing\nwindow. The default background is light gray. In the draw function,\nthe background color is used to clear the display window at the\nbeginning of each frame.</p>\n<p>It is not possible to use transparency (alpha) in background colors\nwith the main drawing surface, however they will work properly with\n<a href=\"create-graphics\">create-graphics</a>. Converts args to <code>floats</code>.</p>\n",
+  "<p>Sets the color used for the background of the Processing\nwindow. The default background is light gray. In the draw function,\nthe background color is used to clear the display window at the\nbeginning of each frame.</p>\n<p>It is not possible to use transparency (alpha) in background colors\nwith the main drawing surface, however they will work properly with\n<a href=\"/api/image/rendering#create-graphics\">create-graphics</a>. Converts args to <code>floats</code>.</p>\n",
   :what :fn},
  ortho
  {:args
@@ -1861,7 +1861,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/noClip_.html",
   :docstring
-  "<p>Disables the clipping previously started by the <a href=\"clip\">clip</a> function.</p>\n",
+  "<p>Disables the clipping previously started by the <a href=\"/api/rendering#clip\">clip</a> function.</p>\n",
   :what :fn},
  brightness
  {:args ({:value [color], :type :both}),
@@ -1899,7 +1899,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/specular_.html",
   :docstring
-  "<p>Sets the specular color of the materials used for shapes drawn to\nthe screen, which sets the color of highlights. Specular refers to\nlight which bounces off a surface in a preferred direction (rather\nthan bouncing in all directions like a diffuse light). Used in\ncombination with <a href=\"emissive\">emissive</a>, <a href=\"ambient\">ambient</a>, and <a href=\"shininess\">shininess</a> in setting\nthe material properties of shapes.</p>\n",
+  "<p>Sets the specular color of the materials used for shapes drawn to\nthe screen, which sets the color of highlights. Specular refers to\nlight which bounces off a surface in a preferred direction (rather\nthan bouncing in all directions like a diffuse light). Used in\ncombination with <a href=\"/api/lights-camera/material-properties#emissive\">emissive</a>, <a href=\"/api/lights-camera/material-properties#ambient\">ambient</a>, and <a href=\"/api/lights-camera/material-properties#shininess\">shininess</a> in setting\nthe material properties of shapes.</p>\n",
   :what :fn},
  save-frame
  {:args #{[name]},
@@ -1925,7 +1925,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/cursor_.html",
   :docstring
-  "<p>Sets the cursor to a predefined symbol or makes it\nvisible if already hidden (after <a href=\"no-cursor\">no-cursor</a> was called).</p>\n<p>Available modes: <code>:arrow</code>, <code>:cross</code>, <code>:hand</code>, <code>:move</code>, <code>:text</code>, <code>:wait</code></p>\n<p>See <a href=\"cursor-image\">cursor-image</a> for specifying a generic image as the cursor\nsymbol (clj only).</p>\n",
+  "<p>Sets the cursor to a predefined symbol or makes it\nvisible if already hidden (after <a href=\"/api/environment#no-cursor\">no-cursor</a> was called).</p>\n<p>Available modes: <code>:arrow</code>, <code>:cross</code>, <code>:hand</code>, <code>:move</code>, <code>:text</code>, <code>:wait</code></p>\n<p>See <a href=\"/api/environment#cursor-image\">cursor-image</a> for specifying a generic image as the cursor\nsymbol (clj only).</p>\n",
   :what :fn},
  noise
  {:args
@@ -1954,7 +1954,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/pushStyle_.html",
   :docstring
-  "<p>Saves the current style settings onto a 'style stack'. Use with\n<a href=\"pop-style\">pop-style</a> which restores the prior settings. Note that these\nfunctions are always used together. They allow you to change the\nstyle settings and later return to what you had. When a new style is\nstarted with <a href=\"push-style\">push-style</a>, it builds on the current style\ninformation. The <a href=\"push-style\">push-style</a> and <a href=\"pop-style\">pop-style</a> functions can be\nembedded to provide more control.</p>\n<p>The style information controlled by the following functions are\nincluded in the style: <a href=\"fill\">fill</a>, <a href=\"stroke\">stroke</a>, <a href=\"tint\">tint</a>, <a href=\"stroke-weight\">stroke-weight</a>,\n<a href=\"stroke-cap\">stroke-cap</a>, <a href=\"stroke-join\">stroke-join</a>, <a href=\"image-mode\">image-mode</a>, <a href=\"rect-mode\">rect-mode</a>, <a href=\"ellipse-mode\">ellipse-mode</a>,\n<a href=\"shape-mode\">shape-mode</a>, <a href=\"color-mode\">color-mode</a>, <a href=\"text-align\">text-align</a>, <a href=\"text-font\">text-font</a>, <a href=\"text-mode\">text-mode</a>, <a href=\"text-size\">text-size</a>,\n<a href=\"text-leading\">text-leading</a>, <a href=\"emissive\">emissive</a>, <a href=\"specular\">specular</a>, <a href=\"shininess\">shininess</a>, and <a href=\"ambient\">ambient</a>.</p>\n",
+  "<p>Saves the current style settings onto a 'style stack'. Use with\n<a href=\"/api/structure#pop-style\">pop-style</a> which restores the prior settings. Note that these\nfunctions are always used together. They allow you to change the\nstyle settings and later return to what you had. When a new style is\nstarted with <a href=\"/api/structure#push-style\">push-style</a>, it builds on the current style\ninformation. The <a href=\"/api/structure#push-style\">push-style</a> and <a href=\"/api/structure#pop-style\">pop-style</a> functions can be\nembedded to provide more control.</p>\n<p>The style information controlled by the following functions are\nincluded in the style: <a href=\"/api/color/setting#fill\">fill</a>, <a href=\"/api/color/setting#stroke\">stroke</a>, <a href=\"/api/image/loading-and-displaying#tint\">tint</a>, <a href=\"/api/shape/attributes#stroke-weight\">stroke-weight</a>,\n<a href=\"/api/shape/attributes#stroke-cap\">stroke-cap</a>, <a href=\"/api/shape/attributes#stroke-join\">stroke-join</a>, <a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a>, <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a>, <a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a>,\n<a href=\"/api/shape/loading-and-displaying#shape-mode\">shape-mode</a>, <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>, <a href=\"/api/typography/attributes#text-align\">text-align</a>, <a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a>, <a href=\"/api/typography/attributes#text-mode\">text-mode</a>, <a href=\"/api/typography/attributes#text-size\">text-size</a>,\n<a href=\"/api/typography/attributes#text-leading\">text-leading</a>, <a href=\"/api/lights-camera/material-properties#emissive\">emissive</a>, <a href=\"/api/lights-camera/material-properties#specular\">specular</a>, <a href=\"/api/lights-camera/material-properties#shininess\">shininess</a>, and <a href=\"/api/lights-camera/material-properties#ambient\">ambient</a>.</p>\n",
   :what :fn},
  bezier-vertex
  {:args
@@ -1969,7 +1969,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/bezierVertex_.html",
   :docstring
-  "<p>Specifies vertex coordinates for Bezier curves. Each call to\n<a href=\"bezier-vertex\">bezier-vertex</a> defines the position of two control points and one\nanchor point of a Bezier curve, adding a new segment to a line or\nshape. The first time <a href=\"bezier-vertex\">bezier-vertex</a> is used within a <a href=\"begin-shape\">begin-shape</a>\ncall, it must be prefaced with a call to <a href=\"vertex\">vertex</a> to set the first\nanchor point. This function must be used between <a href=\"begin-shape\">begin-shape</a> and\n<a href=\"end-shape\">end-shape</a> and only when there is no parameter specified to\n<a href=\"begin-shape\">begin-shape</a>.</p>\n",
+  "<p>Specifies vertex coordinates for Bezier curves. Each call to\n<a href=\"/api/shape/vertex#bezier-vertex\">bezier-vertex</a> defines the position of two control points and one\nanchor point of a Bezier curve, adding a new segment to a line or\nshape. The first time <a href=\"/api/shape/vertex#bezier-vertex\">bezier-vertex</a> is used within a <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>\ncall, it must be prefaced with a call to <a href=\"/api/shape/vertex#vertex\">vertex</a> to set the first\nanchor point. This function must be used between <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> and\n<a href=\"/api/shape/vertex#end-shape\">end-shape</a> and only when there is no parameter specified to\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>.</p>\n",
   :what :fn},
  light-falloff
  {:args #{[constant linear quadratic]},
@@ -2010,7 +2010,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/save_.html",
   :docstring
-  "<p>Saves an image from the display window. Images are saved in TIFF,\nTARGA, JPEG, and PNG format depending on the extension within the\nfilename parameter. For example, image.tif will have a TIFF image\nand image.png will save a PNG image. If no extension is included in\nthe filename, the image will save in TIFF format and .tif will be\nadded to the name. All images saved from the main drawing window\nwill be opaque. To save images without a background, use\n<a href=\"create-graphics\">create-graphics</a>.</p>\n",
+  "<p>Saves an image from the display window. Images are saved in TIFF,\nTARGA, JPEG, and PNG format depending on the extension within the\nfilename parameter. For example, image.tif will have a TIFF image\nand image.png will save a PNG image. If no extension is included in\nthe filename, the image will save in TIFF format and .tif will be\nadded to the name. All images saved from the main drawing window\nwill be opaque. To save images without a background, use\n<a href=\"/api/image/rendering#create-graphics\">create-graphics</a>.</p>\n",
   :what :fn},
  curve-point
  {:args ({:value [a b c d t], :type :both}),
@@ -2119,7 +2119,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/sphereDetail_.html",
   :docstring
-  "<p>Controls the detail used to render a sphere by adjusting the number\nof vertices of the sphere mesh. The default resolution is 30, which\ncreates a fairly detailed sphere definition with vertices every\n360/30 = 12 degrees. If you're going to render a great number of\nspheres per frame, it is advised to reduce the level of detail using\nthis function. The setting stays active until <a href=\"sphere-detail\">sphere-detail</a> is\ncalled again with a new parameter and so should not be called prior\nto every <a href=\"sphere\">sphere</a> statement, unless you wish to render spheres with\ndifferent settings, e.g. using less detail for smaller spheres or\nones further away from the camera. To control the detail of the\nhorizontal and vertical resolution independently, use the version of\nthe functions with two parameters.</p>\n",
+  "<p>Controls the detail used to render a sphere by adjusting the number\nof vertices of the sphere mesh. The default resolution is 30, which\ncreates a fairly detailed sphere definition with vertices every\n360/30 = 12 degrees. If you're going to render a great number of\nspheres per frame, it is advised to reduce the level of detail using\nthis function. The setting stays active until <a href=\"/api/shape/3d-primitives#sphere-detail\">sphere-detail</a> is\ncalled again with a new parameter and so should not be called prior\nto every <a href=\"/api/shape/3d-primitives#sphere\">sphere</a> statement, unless you wish to render spheres with\ndifferent settings, e.g. using less detail for smaller spheres or\nones further away from the camera. To control the detail of the\nhorizontal and vertical resolution independently, use the version of\nthe functions with two parameters.</p>\n",
   :what :fn},
  vertex
  {:args
@@ -2136,7 +2136,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/vertex_.html",
   :docstring
-  "<p>All shapes are constructed by connecting a series of\nvertices. <a href=\"vertex\">vertex</a> is used to specify the vertex coordinates for\npoints, lines, triangles, quads, and polygons and is used\nexclusively within the <a href=\"begin-shape\">begin-shape</a> and <a href=\"end-shape\">end-shape</a> functions.</p>\n<p>Drawing a vertex in 3D using the <code>z</code> parameter requires the <code>:p3d</code> or\n<code>:opengl</code> renderers to be used.</p>\n<p>This function is also used to map a texture onto the geometry. The\n<a href=\"texture\">texture</a> function declares the texture to apply to the geometry and the <code>u</code>\nand <code>v</code> coordinates set define the mapping of this texture to the\nform. By default, the coordinates used for <code>u</code> and <code>v</code> are specified in\nrelation to the image's size in pixels, but this relation can be\nchanged with <a href=\"texture-mode\">texture-mode</a>.</p>\n",
+  "<p>All shapes are constructed by connecting a series of\nvertices. <a href=\"/api/shape/vertex#vertex\">vertex</a> is used to specify the vertex coordinates for\npoints, lines, triangles, quads, and polygons and is used\nexclusively within the <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> and <a href=\"/api/shape/vertex#end-shape\">end-shape</a> functions.</p>\n<p>Drawing a vertex in 3D using the <code>z</code> parameter requires the <code>:p3d</code> or\n<code>:opengl</code> renderers to be used.</p>\n<p>This function is also used to map a texture onto the geometry. The\n<a href=\"/api/shape/vertex#texture\">texture</a> function declares the texture to apply to the geometry and the <code>u</code>\nand <code>v</code> coordinates set define the mapping of this texture to the\nform. By default, the coordinates used for <code>u</code> and <code>v</code> are specified in\nrelation to the image's size in pixels, but this relation can be\nchanged with <a href=\"/api/shape/vertex#texture-mode\">texture-mode</a>.</p>\n",
   :what :fn},
  delay-frame
  {:args #{[freeze-ms]},
@@ -2150,7 +2150,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "<p>Forces the program to stop running for a specified time. Delay\ntimes are specified in thousandths of a second, therefore the\nfunction call <code>(delay 3000)</code> will stop the program for three\nseconds. Because the screen is updated only at the end of <code>draw</code>,\nthe program may appear to 'freeze', because the screen will not\nupdate when the <a href=\"delay-frame\">delay-frame</a> function is used. This function\nhas no effect inside <code>setup</code>.</p>\n",
+  "<p>Forces the program to stop running for a specified time. Delay\ntimes are specified in thousandths of a second, therefore the\nfunction call <code>(delay 3000)</code> will stop the program for three\nseconds. Because the screen is updated only at the end of <code>draw</code>,\nthe program may appear to 'freeze', because the screen will not\nupdate when the <a href=\"/api/structure#delay-frame\">delay-frame</a> function is used. This function\nhas no effect inside <code>setup</code>.</p>\n",
   :what :fn},
  spot-light
  {:args
@@ -2165,7 +2165,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/spotLight_.html",
   :docstring
-  "<p>Adds a spot light. Lights need to be included in the draw to\nremain persistent in a looping program. Placing them in the setup\nof a looping program will cause them to only have an effect the\nfirst time through the loop. The affect of the <code>r</code>, <code>g</code>, and <code>b</code>\nparameters is determined by the current <a href=\"color-mode\">color-mode</a>. The <code>x</code>, <code>y</code>, and <code>z</code>\nparameters specify the position of the light and <code>nx</code>, <code>ny</code>, <code>nz</code> specify\nthe direction or light. The angle parameter affects the angle of the\nspotlight cone.</p>\n",
+  "<p>Adds a spot light. Lights need to be included in the draw to\nremain persistent in a looping program. Placing them in the setup\nof a looping program will cause them to only have an effect the\nfirst time through the loop. The affect of the <code>r</code>, <code>g</code>, and <code>b</code>\nparameters is determined by the current <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. The <code>x</code>, <code>y</code>, and <code>z</code>\nparameters specify the position of the light and <code>nx</code>, <code>ny</code>, <code>nz</code> specify\nthe direction or light. The angle parameter affects the angle of the\nspotlight cone.</p>\n",
   :what :fn},
  target-frame-rate
  {:args ({:value [], :type :both}),
@@ -2177,7 +2177,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "<p>Returns the target framerate specified with the function <a href=\"frame-rate\">frame-rate</a></p>\n",
+  "<p>Returns the target framerate specified with the function <a href=\"/api/environment#frame-rate\">frame-rate</a></p>\n",
   :what :fn},
  tint
  {:args
@@ -2194,7 +2194,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/tint_.html",
   :docstring
-  "<p>Sets the fill value for displaying images. Images can be tinted to\nspecified colors or made transparent by setting the <code>alpha</code>.</p>\n<p>To make an image transparent, but not change it's color, use white\nas the tint color and specify an <code>alpha</code> value. For instance,\n<code>(tint 255 128)</code> will make an image 50% transparent (unless\n<a href=\"color-mode\">color-mode</a> has been used).</p>\n<p>The value for the parameter gray must be less than or equal to the\ncurrent maximum value as specified by <a href=\"color-mode\">color-mode</a>. The default\nmaximum value is 255.</p>\n<p>Also used to control the coloring of textures in 3D.</p>\n",
+  "<p>Sets the fill value for displaying images. Images can be tinted to\nspecified colors or made transparent by setting the <code>alpha</code>.</p>\n<p>To make an image transparent, but not change it's color, use white\nas the tint color and specify an <code>alpha</code> value. For instance,\n<code>(tint 255 128)</code> will make an image 50% transparent (unless\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a> has been used).</p>\n<p>The value for the parameter gray must be less than or equal to the\ncurrent maximum value as specified by <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. The default\nmaximum value is 255.</p>\n<p>Also used to control the coloring of textures in 3D.</p>\n",
   :what :fn},
  bezier-tangent
  {:args ({:value [a b c d t], :type :both}),
@@ -2220,7 +2220,7 @@
   :requires-bindings false,
   :link "https://processing.org/reference/asin_.html",
   :docstring
-  "<p>The inverse of <a href=\"sin\">sin</a>, returns the arc sine of a value. This function\nexpects the values in the range of -1 to 1 and values are returned\nin the range <code>-PI/2</code> to <code>PI/2</code>.</p>\n",
+  "<p>The inverse of <a href=\"/api/math/trigonometry#sin\">sin</a>, returns the arc sine of a value. This function\nexpects the values in the range of -1 to 1 and values are returned\nin the range <code>-PI/2</code> to <code>PI/2</code>.</p>\n",
   :what :fn},
  lerp
  {:args ({:value [start stop amt], :type :both}),
@@ -2259,7 +2259,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/text_.html",
   :docstring
-  "<p>Draws a number to the screen in the specified position. See the\n<a href=\"text\">text</a> function for more details.</p>\n",
+  "<p>Draws a number to the screen in the specified position. See the\n<a href=\"/api/typography/loading-and-displaying#text\">text</a> function for more details.</p>\n",
   :what :fn},
  round
  {:args ({:value [val], :type :both}),
@@ -2285,7 +2285,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/background_.html",
   :docstring
-  "<p>Specify an image to be used as the background for a sketch. Its\nwidth and height must be the same size as the sketch window. Images\nused as background will ignore the current <a href=\"tint\">tint</a> setting.</p>\n",
+  "<p>Specify an image to be used as the background for a sketch. Its\nwidth and height must be the same size as the sketch window. Images\nused as background will ignore the current <a href=\"/api/image/loading-and-displaying#tint\">tint</a> setting.</p>\n",
   :what :fn},
  load-shape
  {:args ({:value [filename], :type :both}),
@@ -2338,7 +2338,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Introduces function mode. Adds <code>update</code> function which takes current\nstate and returns new state. Makes all other functions (setup, draw,\nmouse-click, etc) state-aware. See wiki for more details.</p>\n",
+  "<p>Introduces function mode. Adds 'update' function which takes current\nstate and returns new state. Makes all other functions (setup, draw,\nmouse-click, etc) state-aware. See wiki for more details.</p>\n",
   :what :fn},
  stroke-cap
  {:args ({:value [cap-mode], :type :both}),
@@ -2364,7 +2364,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/noFill_.html",
   :docstring
-  "<p>Disables filling geometry. If both <a href=\"no-stroke\">no-stroke</a> and <a href=\"no-fill\">no-fill</a> are called,\nnothing will be drawn to the screen.</p>\n",
+  "<p>Disables filling geometry. If both <a href=\"/api/color/setting#no-stroke\">no-stroke</a> and <a href=\"/api/color/setting#no-fill\">no-fill</a> are called,\nnothing will be drawn to the screen.</p>\n",
   :what :fn},
  resize-sketch
  {:require-bindings true,
@@ -2401,7 +2401,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Returns true if char <code>c</code> is a <code>coded</code> char i.e. it is necessary to\nfetch the <a href=\"key-code\">key-code</a> as an integer and use that to determine the\nspecific key pressed. See <a href=\"key-as-keyword\">key-as-keyword</a>.</p>\n",
+  "<p>Returns true if char <code>c</code> is a <code>coded</code> char i.e. it is necessary to\nfetch the <a href=\"/api/input/keyboard#key-code\">key-code</a> as an integer and use that to determine the\nspecific key pressed. See <a href=\"/api/input/keyboard#key-as-keyword\">key-as-keyword</a>.</p>\n",
   :what :fn},
  curve-tangent
  {:args ({:value [a b c d t], :type :both}),
@@ -2453,7 +2453,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "<p>Temporarily set the fill color for the body of this macro.\nThe code outside of the <a href=\"with-fill\">with-fill</a> form will have the previous\nfill color set.</p>\n<p>A fill argument of nil disables the fill.</p>\n<p>Examples:</p>\n<pre><code class=\"language-clojure\">(with-fill 255 ...)\n(with-fill [10 80 98] ...)\n(with-fill nil ...)\n</code></pre>\n",
+  "<p>Temporarily set the fill color for the body of this macro.\nThe code outside of the <a href=\"/api/color/utility-macros#with-fill\">with-fill</a> form will have the previous\nfill color set.</p>\n<p>A fill argument of nil disables the fill.</p>\n<p>Examples:</p>\n<pre><code class=\"language-clojure\">(with-fill 255 ...)\n(with-fill [10 80 98] ...)\n(with-fill nil ...)\n</code></pre>\n",
   :what :macro},
  ellipsoid
  {:args
@@ -2507,7 +2507,7 @@
   :link nil,
   :tag PGraphics,
   :docstring
-  "<p>Graphics currently used for drawing. By default it is sketch graphics,\nbut if called inside <a href=\"with-graphics\">with-graphics</a> macro - graphics passed to the macro\nis returned. This method should be used if you need to call some methods\nthat are not implemented by quil.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(.beginDraw (current-graphics))\n</code></pre>\n",
+  "<p>Graphics currently used for drawing. By default it is sketch graphics,\nbut if called inside <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro - graphics passed to the macro\nis returned. This method should be used if you need to call some methods\nthat are not implemented by quil.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(.beginDraw (current-graphics))\n</code></pre>\n",
   :what :fn},
  abs
  {:args ({:value [n], :type :both}),
@@ -2533,7 +2533,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/popStyle_.html",
   :docstring
-  "<p>Restores the prior settings on the 'style stack'. Used in\nconjunction with <a href=\"push-style\">push-style</a>. Together they allow you to change the\nstyle settings and later return to what you had. When a new style is\nstarted with <a href=\"push-style\">push-style</a>, it builds on the current style information.\nThe <a href=\"push-style\">push-style</a> and <a href=\"pop-style\">pop-style</a> functions can be nested to provide more\ncontrol</p>\n",
+  "<p>Restores the prior settings on the 'style stack'. Used in\nconjunction with <a href=\"/api/structure#push-style\">push-style</a>. Together they allow you to change the\nstyle settings and later return to what you had. When a new style is\nstarted with <a href=\"/api/structure#push-style\">push-style</a>, it builds on the current style information.\nThe <a href=\"/api/structure#push-style\">push-style</a> and <a href=\"/api/structure#pop-style\">pop-style</a> functions can be nested to provide more\ncontrol</p>\n",
   :what :fn},
  focused
  {:args ({:value [], :type :both}),
@@ -2603,7 +2603,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/line_.html",
   :docstring
-  "<p>Draws a line (a direct path between two points) to the screen. The\nversion of line with four parameters draws the line in 2D. To color\na line, use the <a href=\"stroke\">stroke</a> function. A line cannot be filled, therefore\nthe fill method will not affect the color of a line. 2D lines are\ndrawn with a width of one pixel by default, but this can be changed\nwith the <a href=\"stroke-weight\">stroke-weight</a> function. The version with six parameters\nallows the line to be placed anywhere within XYZ space.</p>\n",
+  "<p>Draws a line (a direct path between two points) to the screen. The\nversion of line with four parameters draws the line in 2D. To color\na line, use the <a href=\"/api/color/setting#stroke\">stroke</a> function. A line cannot be filled, therefore\nthe fill method will not affect the color of a line. 2D lines are\ndrawn with a width of one pixel by default, but this can be changed\nwith the <a href=\"/api/shape/attributes#stroke-weight\">stroke-weight</a> function. The version with six parameters\nallows the line to be placed anywhere within XYZ space.</p>\n",
   :what :fn},
  do-record
  {:args ({:value [graphics & body], :type :both}),
@@ -2616,7 +2616,7 @@
   :requires-bindings true,
   :link nil,
   :docstring
-  "<p>Macro for drawing on graphics which saves result in the file at the end.\nSimilar to <a href=\"with-graphics\">with-graphics</a> macro. <a href=\"do-record\">do-record</a> assumed to be used with <code>:pdf</code>\ngraphics.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(q/do-record (q/create-graphics 200 200 :pdf &quot;output.pdf&quot;)\n  (q/fill 250 0 0)\n  (q/ellipse 100 100 150 150))\n</code></pre>\n",
+  "<p>Macro for drawing on graphics which saves result in the file at the end.\nSimilar to <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. <a href=\"/api/output/files#do-record\">do-record</a> assumed to be used with <code>:pdf</code>\ngraphics.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(q/do-record (q/create-graphics 200 200 :pdf &quot;output.pdf&quot;)\n  (q/fill 250 0 0)\n  (q/ellipse 100 100 150 150))\n</code></pre>\n",
   :what :macro},
  red
  {:args ({:value [c], :type :both}),
@@ -2629,7 +2629,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/red_.html",
   :docstring
-  "<p>Extracts the red value from a color, scaled to match the current\n<a href=\"color-mode\">color-mode</a>.</p>\n",
+  "<p>Extracts the red value from a color, scaled to match the current\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>.</p>\n",
   :what :fn},
  current-fill
  {:args ({:value [], :type :both}),
@@ -2710,7 +2710,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/ambientLight_.html",
   :docstring
-  "<p>Adds an ambient light. Ambient light doesn't come from a specific direction,\nthe rays of light have bounced around so much that objects are\nevenly lit from all sides. Ambient lights are almost always used in\ncombination with other types of lights. Lights need to be included\nin the draw to remain persistent in a looping program. Placing them\nin the setup of a looping program will cause them to only have an\neffect the first time through the loop. The effect of the\nparameters is determined by the current <a href=\"color-mode\">color-mode</a>.</p>\n",
+  "<p>Adds an ambient light. Ambient light doesn't come from a specific direction,\nthe rays of light have bounced around so much that objects are\nevenly lit from all sides. Ambient lights are almost always used in\ncombination with other types of lights. Lights need to be included\nin the draw to remain persistent in a looping program. Placing them\nin the setup of a looping program will cause them to only have an\neffect the first time through the loop. The effect of the\nparameters is determined by the current <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>.</p>\n",
   :what :fn},
  bezier-point
  {:args ({:value [a b c d t], :type :both}),
@@ -2762,7 +2762,7 @@
   :requires-bindings false,
   :link nil,
   :docstring
-  "<p>Enables navigation in 3D space. Similar to how it is done in\nshooters: WASD navigation, space is go up, drag mouse to look around.\nThis middleware requires <a href=\"fun-mode\">fun-mode</a>.</p>\n<p>Navigation</p>\n<ul>\n<li>\n<p>Drag mouse to look around. You can change settings to bind\nmouse-moved instead of mouse-dragged to look around. See\ncustomization info below.</p>\n</li>\n<li>\n<p>Keyboard:</p>\n<ul>\n<li>w - go forward</li>\n<li>s - go backward</li>\n<li>a - strafe left</li>\n<li>d - strafe right</li>\n<li>space - go up</li>\n<li>z - go down, can't bind to ctrl, limitation of Processing</li>\n</ul>\n</li>\n</ul>\n<p>Customization</p>\n<p>You can customize this middleware by providing a map as\n<code>:navigation-3d</code> option in <a href=\"quil.sketch/defsketch\">quil.sketch/defsketch</a>/<a href=\"quil.sketch/sketch\">quil.sketch/sketch</a>.\nThe map can have the following optional keys:</p>\n<ul>\n<li>\n<p><code>:position</code> - vector of 3 numbers, initial camera position. Default\nis the same as in <a href=\"quil.core/camera\">quil.core/camera</a> function.</p>\n</li>\n<li>\n<p><code>:straight</code> - vector of 3 numbers, direction you'll be looking at.\nDefault is <code>[0 0 -1]</code> (looking down).</p>\n</li>\n<li>\n<p><code>:up</code> - vector of 3 numbers, 'up' direction. Default is <code>[0 1 0]</code>.</p>\n</li>\n<li>\n<p><code>:pixels-in-360</code> - number, mouse sensitivity. Defines how many pixels\nyou need to move/drag you mouse to rotate 360 degrees.\nThe less the number the more sensitive is mouse.\nDefault is <code>1000</code>.</p>\n</li>\n<li>\n<p><code>:step-size</code> - number, number of pixels you move on each key event (wasd).\nDefault is 20.</p>\n</li>\n<li>\n<p><code>:rotate-on</code> - keyword, either :mouse-dragged or :mouse-moved. Specifies\non which mouse event camera should rotate. Default is\n<code>:mouse-dragged</code>.</p>\n</li>\n</ul>\n<p>Accessing position information from a sketch</p>\n<p><a href=\"navigation-3d\">navigation-3d</a> uses <a href=\"fun-mode\">fun-mode</a> under the hood so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under <code>:navigation-3d</code> key in the\nstate map. Position consists of 3 values: <code>:position</code>, <code>:straight</code> and <code>:up</code>.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Usage example:</p>\n<pre><code class=\"language-clojure\">(q/defsketch my-sketch\n  ...\n  :middleware [m/fun-mode m/navigation-3d])\n</code></pre>\n<p>See wiki article for more(?) details:\n<a href=\"https://github.com/quil/quil/wiki/Navigation-3D\">https://github.com/quil/quil/wiki/Navigation-3D</a></p>\n",
+  "<p>Enables navigation in 3D space. Similar to how it is done in\nshooters: WASD navigation, space is go up, drag mouse to look around.\nThis middleware requires fun-mode.</p>\n<p>Navigation</p>\n<ul>\n<li>\n<p>Drag mouse to look around. You can change settings to bind\nmouse-moved instead of mouse-dragged to look around. See\ncustomization info below.</p>\n</li>\n<li>\n<p>Keyboard:</p>\n<ul>\n<li>w - go forward</li>\n<li>s - go backward</li>\n<li>a - strafe left</li>\n<li>d - strafe right</li>\n<li>space - go up</li>\n<li>z - go down, can't bind to ctrl, limitation of Processing</li>\n</ul>\n</li>\n</ul>\n<p>Customization</p>\n<p>You can customize this middleware by providing map as\n:navigation-3d option in defsketch/sketch. Map can have following\noptional keys:</p>\n<p>:position - vector of 3 numbers, initial camera position. Default\nis the same as in 'camera' function.</p>\n<p>:straight - vector of 3 numbers, direction you'll be looking at.\nDefault is [0 0 -1] (looking down).</p>\n<p>:up - vector of 3 numbers, 'up' direction. Default is [0 1 0].</p>\n<p>:pixels-in-360 - number, mouse sensitivity. Defines how many pixels\nyou need to move/drag you mouse to rotate 360 degrees.\nThe less the number the more sensitive is mouse.\nDefault is 1000.</p>\n<p>:step-size - number, number of pixels you move on each key event (wasd).\nDefault is 20.</p>\n<p>:rotate-on - keyword, either :mouse-dragged or :mouse-moved. Specifies\non which mouse event camera should rotate. Default is\n:mouse-dragged.</p>\n<p>Accessing position information from sketch</p>\n<p>navigation-3d uses fun-mode under the hood  so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under :navigation-3d key in the\nstate map. Position consists of 3 values: :position, :straight and :up.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Usage example:</p>\n<p>(q/defsketch my-sketch\n...\n:middleware [m/fun-mode m/navigation-3d])</p>\n<p>See wiki article for more(?) details:\n<a href=\"https://github.com/quil/quil/wiki/Navigation-3D\">https://github.com/quil/quil/wiki/Navigation-3D</a></p>\n",
   :what :fn},
  lights
  {:args #{[]},
@@ -2853,7 +2853,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/endContour_.html",
   :docstring
-  "<p>Use the <a href=\"begin-contour\">begin-contour</a> and <a href=\"end-contour\">end-contour</a> function to create negative\nshapes within shapes. These functions can only be within a\n<a href=\"begin-shape\">begin-shape</a>/<a href=\"end-shape\">end-shape</a> pair and they only work with the <code>:p2d</code> and <code>:p3d</code>\nrenderers.</p>\n",
+  "<p>Use the <a href=\"/api/shape/vertex#begin-contour\">begin-contour</a> and <a href=\"/api/shape/vertex#end-contour\">end-contour</a> function to create negative\nshapes within shapes. These functions can only be within a\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>/<a href=\"/api/shape/vertex#end-shape\">end-shape</a> pair and they only work with the <code>:p2d</code> and <code>:p3d</code>\nrenderers.</p>\n",
   :what :fn},
  sin
  {:args ({:value [angle], :type :both}),
@@ -2923,7 +2923,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/curve_.html",
   :docstring
-  "<p>Draws a curved line on the screen. The first and second parameters\nspecify the beginning control point and the last two parameters\nspecify the ending control point. The middle parameters specify the\nstart and stop of the curve. Longer curves can be created by putting\na series of curve functions together or using <a href=\"curve-vertex\">curve-vertex</a>. An additional\nfunction called <a href=\"curve-tightness\">curve-tightness</a> provides control for the visual quality\nof the curve. The <a href=\"curve\">curve</a> function is an implementation of Catmull-Rom\nsplines.</p>\n",
+  "<p>Draws a curved line on the screen. The first and second parameters\nspecify the beginning control point and the last two parameters\nspecify the ending control point. The middle parameters specify the\nstart and stop of the curve. Longer curves can be created by putting\na series of curve functions together or using <a href=\"/api/shape/vertex#curve-vertex\">curve-vertex</a>. An additional\nfunction called <a href=\"/api/shape/curves#curve-tightness\">curve-tightness</a> provides control for the visual quality\nof the curve. The <a href=\"/api/shape/curves#curve\">curve</a> function is an implementation of Catmull-Rom\nsplines.</p>\n",
   :what :fn},
  shape
  {:args
@@ -2939,7 +2939,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/shape_.html",
   :docstring
-  "<p>Displays shapes to the screen. The shapes must have been loaded\nwith <a href=\"load-shape\">load-shape</a>. Processing currently works with SVG shapes\nonly. The <code>sh</code> parameter specifies the shape to display and the <code>x</code> and\n<code>y</code> parameters define the location of the shape from its upper-left\ncorner. The shape is displayed at its original size unless the <code>width</code>\nand <code>height</code> parameters specify a different size. The <a href=\"shape-mode\">shape-mode</a>\nfunction changes the way the parameters work. A call to\n<code>(shape-mode :corners)</code> for example, will change the width and height\nparameters to define the x and y values of the opposite corner of\nthe shape.</p>\n<p>Note complex shapes may draw awkwardly with the renderers <code>:p2d</code>, <code>:p3d</code>, and\n<code>:opengl</code>. Those renderers do not yet support shapes that have holes\nor complicated breaks.</p>\n",
+  "<p>Displays shapes to the screen. The shapes must have been loaded\nwith <a href=\"/api/shape/loading-and-displaying#load-shape\">load-shape</a>. Processing currently works with SVG shapes\nonly. The <code>sh</code> parameter specifies the shape to display and the <code>x</code> and\n<code>y</code> parameters define the location of the shape from its upper-left\ncorner. The shape is displayed at its original size unless the <code>width</code>\nand <code>height</code> parameters specify a different size. The <a href=\"/api/shape/loading-and-displaying#shape-mode\">shape-mode</a>\nfunction changes the way the parameters work. A call to\n<code>(shape-mode :corners)</code> for example, will change the width and height\nparameters to define the x and y values of the opposite corner of\nthe shape.</p>\n<p>Note complex shapes may draw awkwardly with the renderers <code>:p2d</code>, <code>:p3d</code>, and\n<code>:opengl</code>. Those renderers do not yet support shapes that have holes\nor complicated breaks.</p>\n",
   :what :fn},
  text-descent
  {:args ({:value [], :type :both}),
@@ -2952,7 +2952,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/textDescent_.html",
   :docstring
-  "<p>Returns descent of the current font at its current size. This\ninformation is useful for determining the height of the font below\nthe baseline. For example, adding the <a href=\"text-ascent\">text-ascent</a> and <a href=\"text-descent\">text-descent</a>\nvalues will give you the total height of the line.</p>\n",
+  "<p>Returns descent of the current font at its current size. This\ninformation is useful for determining the height of the font below\nthe baseline. For example, adding the <a href=\"/api/typography/metrics#text-ascent\">text-ascent</a> and <a href=\"/api/typography/metrics#text-descent\">text-descent</a>\nvalues will give you the total height of the line.</p>\n",
   :what :fn},
  ellipse
  {:args ({:value [x y width height], :type :both}),
@@ -2965,7 +2965,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/ellipse_.html",
   :docstring
-  "<p>Draws an ellipse (oval) in the display window. An ellipse with an\nequal <code>width</code> and <code>height</code> is a circle. The origin may be changed with\nthe <a href=\"ellipse-mode\">ellipse-mode</a> function.</p>\n",
+  "<p>Draws an ellipse (oval) in the display window. An ellipse with an\nequal <code>width</code> and <code>height</code> is a circle. The origin may be changed with\nthe <a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a> function.</p>\n",
   :what :fn},
  text-leading
  {:args ({:value [leading], :type :both}),
@@ -2978,7 +2978,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/textLeading_.html",
   :docstring
-  "<p>Sets the spacing between lines of text in units of pixels. This\nsetting will be used in all subsequent calls to the <a href=\"text\">text</a> function.</p>\n",
+  "<p>Sets the spacing between lines of text in units of pixels. This\nsetting will be used in all subsequent calls to the <a href=\"/api/typography/loading-and-displaying#text\">text</a> function.</p>\n",
   :what :fn},
  image-filter
  {:args
@@ -3032,7 +3032,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/redraw_.html",
   :docstring
-  "<p>Executes the code within the <code>draw</code> function one time (or n times in cljs).\nThis function allows the program to update the display window only\nwhen necessary, for example when an event registered by <a href=\"mouse-pressed\">mouse-pressed</a> or\n<a href=\"key-pressed\">key-pressed</a> occurs.</p>\n<p>In structuring a program, it only makes sense to call <a href=\"redraw\">redraw</a>\nwithin events such as <a href=\"mouse-pressed\">mouse-pressed</a>. This is because <a href=\"redraw\">redraw</a> does\nnot run draw immediately (it only sets a flag that indicates an\nupdate is needed).</p>\n<p>Calling <a href=\"redraw\">redraw</a> within <code>draw</code> has no effect because <code>draw</code> is\ncontinuously called anyway.</p>\n",
+  "<p>Executes the code within the <code>draw</code> function one time (or n times in cljs).\nThis function allows the program to update the display window only\nwhen necessary, for example when an event registered by <a href=\"/api/input/mouse#mouse-pressed?\">mouse-pressed?</a> or\n<a href=\"/api/input/keyboard#key-pressed?\">key-pressed?</a> occurs.</p>\n<p>In structuring a program, it only makes sense to call <a href=\"/api/structure#redraw\">redraw</a>\nwithin events such as <a href=\"/api/input/mouse#mouse-pressed?\">mouse-pressed?</a>. This is because <a href=\"/api/structure#redraw\">redraw</a> does\nnot run draw immediately (it only sets a flag that indicates an\nupdate is needed).</p>\n<p>Calling <a href=\"/api/structure#redraw\">redraw</a> within <code>draw</code> has no effect because <code>draw</code> is\ncontinuously called anyway.</p>\n",
   :what :fn},
  get-pixel
  {:args
@@ -3051,7 +3051,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/get_.html",
   :docstring
-  "<p>Reads the color of any pixel or grabs a section of an image. If no\nparameters are specified, a copy of entire image is returned. Get the\nvalue of one pixel by specifying an <code>x</code>,<code>y</code> coordinate. Get a section of\nthe image by specifying an additional <code>width</code> and <code>height</code> parameter.\nIf the pixel requested is outside of the image window, black is returned.\nThe numbers returned are scaled according to the current color ranges,\nbut only RGB values are returned by this function. For example, even though\nyou may have drawn a shape with <code>(color-mode :hsb)</code>, the numbers returned\nwill be in RGB.</p>\n<p>Getting the color of a single pixel with <code>(get x y)</code> is easy, but not\nas fast as grabbing the data directly using the <a href=\"pixels\">pixels</a> function.</p>\n<p>If no <code>img</code> specified - <a href=\"current-graphics\">current-graphics</a> is used.</p>\n",
+  "<p>Reads the color of any pixel or grabs a section of an image. If no\nparameters are specified, a copy of entire image is returned. Get the\nvalue of one pixel by specifying an <code>x</code>,<code>y</code> coordinate. Get a section of\nthe image by specifying an additional <code>width</code> and <code>height</code> parameter.\nIf the pixel requested is outside of the image window, black is returned.\nThe numbers returned are scaled according to the current color ranges,\nbut only RGB values are returned by this function. For example, even though\nyou may have drawn a shape with <code>(color-mode :hsb)</code>, the numbers returned\nwill be in RGB.</p>\n<p>Getting the color of a single pixel with <code>(get x y)</code> is easy, but not\nas fast as grabbing the data directly using the <a href=\"/api/image/pixels#pixels\">pixels</a> function.</p>\n<p>If no <code>img</code> specified - <a href=\"/api/environment#current-graphics\">current-graphics</a> is used.</p>\n",
   :what :fn},
  rotate
  {:args
@@ -3066,7 +3066,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/rotate_.html",
   :docstring
-  "<p>Rotates a shape the amount specified by the <code>angle</code> parameter. Angles\nshould be specified in radians (values from 0 to TWO-PI) or\nconverted to radians with the <a href=\"radians\">radians</a> function.</p>\n<p>Objects are always rotated around their relative position to the\norigin and positive numbers rotate objects in a clockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate HALF-PI)</code> and then <code>(rotate HALF-PI)</code> is the\nsame as <code>(rotate PI)</code>. All transformations are reset when draw begins\nagain.</p>\n<p>Technically, rotate multiplies the current transformation matrix by\na rotation matrix. This function can be further controlled by the\n<a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a> functions.</p>\n<p>When 4 arguments are provided it produces a rotation of <code>angle</code> degrees\naround the vector <code>vx</code> <code>vy</code> <code>vz</code>. Check examples to better understand.\nThis rotation follows the right-hand rule, so if the vector x y z points\ntoward the user, the rotation will be counterclockwise.</p>\n",
+  "<p>Rotates a shape the amount specified by the <code>angle</code> parameter. Angles\nshould be specified in radians (values from 0 to TWO-PI) or\nconverted to radians with the <a href=\"/api/math/trigonometry#radians\">radians</a> function.</p>\n<p>Objects are always rotated around their relative position to the\norigin and positive numbers rotate objects in a clockwise\ndirection. Transformations apply to everything that happens after\nand subsequent calls to the function accumulates the effect. For\nexample, calling <code>(rotate HALF-PI)</code> and then <code>(rotate HALF-PI)</code> is the\nsame as <code>(rotate PI)</code>. All transformations are reset when draw begins\nagain.</p>\n<p>Technically, rotate multiplies the current transformation matrix by\na rotation matrix. This function can be further controlled by the\n<a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> functions.</p>\n<p>When 4 arguments are provided it produces a rotation of <code>angle</code> degrees\naround the vector <code>vx</code> <code>vy</code> <code>vz</code>. Check examples to better understand.\nThis rotation follows the right-hand rule, so if the vector x y z points\ntoward the user, the rotation will be counterclockwise.</p>\n",
   :what :fn},
  set-pixel
  {:args
@@ -3080,7 +3080,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/set_.html",
   :docstring
-  "<p>Changes the color of any pixel in the display window. The <code>x</code> and <code>y</code>\nparameters specify the pixel to change and the <code>c</code> parameter\nspecifies the color value. The color parameter is affected by the\ncurrent <a href=\"color-mode\">color-mode</a> (the default is RGB values from 0 to 255).</p>\n<p>Setting the color of a single pixel with <code>(set-pixel x y)</code> is easy, but not\nas fast as putting the data directly into <a href=\"pixels\">pixels</a>.</p>\n<p>This function ignores <a href=\"image-mode\">image-mode</a>.</p>\n<p>Due to what appears to be a bug in Apple's Java implementation, the\n<a href=\"point\">point</a> and <a href=\"set-pixel\">set-pixel</a> methods are extremely slow in some circumstances\nwhen used with the default renderer. Using <code>:p2d</code> or <code>:p3d</code> will fix the\nproblem. Grouping many calls to <a href=\"point\">point</a> or <a href=\"set-pixel\">set-pixel</a> together can also\nhelp. (Bug 1094)</p>\n",
+  "<p>Changes the color of any pixel in the display window. The <code>x</code> and <code>y</code>\nparameters specify the pixel to change and the <code>c</code> parameter\nspecifies the color value. The color parameter is affected by the\ncurrent <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a> (the default is RGB values from 0 to 255).</p>\n<p>Setting the color of a single pixel with <code>(set-pixel x y)</code> is easy, but not\nas fast as putting the data directly into <a href=\"/api/image/pixels#pixels\">pixels</a>.</p>\n<p>This function ignores <a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a>.</p>\n<p>Due to what appears to be a bug in Apple's Java implementation, the\n<a href=\"/api/shape/2d-primitives#point\">point</a> and <a href=\"/api/image/pixels#set-pixel\">set-pixel</a> methods are extremely slow in some circumstances\nwhen used with the default renderer. Using <code>:p2d</code> or <code>:p3d</code> will fix the\nproblem. Grouping many calls to <a href=\"/api/shape/2d-primitives#point\">point</a> or <a href=\"/api/image/pixels#set-pixel\">set-pixel</a> together can also\nhelp. (Bug 1094)</p>\n",
   :what :fn},
  push-matrix
  {:args ({:value [], :type :both}),
@@ -3093,7 +3093,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/pushMatrix_.html",
   :docstring
-  "<p>Pushes the current transformation matrix onto the matrix\nstack. Understanding [<a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a> requires\nunderstanding the concept of a matrix stack. The <a href=\"push-matrix\">push-matrix</a>\nfunction saves the current coordinate system to the stack and\n<a href=\"pop-matrix\">pop-matrix</a> restores the prior coordinate system. <a href=\"push-matrix\">push-matrix</a> and\n<a href=\"pop-matrix\">pop-matrix</a> are used in conjunction with the other transformation\nmethods and may be embedded to control the scope of the\ntransformations.</p>\n",
+  "<p>Pushes the current transformation matrix onto the matrix\nstack. Understanding [<a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> requires\nunderstanding the concept of a matrix stack. The <a href=\"/api/transform#push-matrix\">push-matrix</a>\nfunction saves the current coordinate system to the stack and\n<a href=\"/api/transform#pop-matrix\">pop-matrix</a> restores the prior coordinate system. <a href=\"/api/transform#push-matrix\">push-matrix</a> and\n<a href=\"/api/transform#pop-matrix\">pop-matrix</a> are used in conjunction with the other transformation\nmethods and may be embedded to control the scope of the\ntransformations.</p>\n",
   :what :fn},
  no-smooth
  {:args ({:value [], :type :both}),
@@ -3150,7 +3150,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/translate_.html",
   :docstring
-  "<p>Specifies an amount to displace objects within the display\nwindow. The <code>tx</code> parameter specifies left/right translation, the <code>ty</code>\nparameter specifies up/down translation, and the <code>tz</code> parameter\nspecifies translations toward/away from the screen.  Transformations\napply to everything that happens after and subsequent calls to the\nfunction accumulates the effect. For example, calling <code>(translate 50 0)</code> and then <code>(translate 20, 0)</code> is the same as <code>(translate 70, 0)</code>. If\n<a href=\"translate\">translate</a> is called within draw, the transformation is reset when\nthe loop begins again. This function can be further controlled by\nthe <a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a> functions.</p>\n",
+  "<p>Specifies an amount to displace objects within the display\nwindow. The <code>tx</code> parameter specifies left/right translation, the <code>ty</code>\nparameter specifies up/down translation, and the <code>tz</code> parameter\nspecifies translations toward/away from the screen.  Transformations\napply to everything that happens after and subsequent calls to the\nfunction accumulates the effect. For example, calling <code>(translate 50 0)</code> and then <code>(translate 20, 0)</code> is the same as <code>(translate 70, 0)</code>. If\n<a href=\"/api/transform#translate\">translate</a> is called within draw, the transformation is reset when\nthe loop begins again. This function can be further controlled by\nthe <a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> functions.</p>\n",
   :what :fn},
  load-font
  {:args ({:value [filename], :type :both}),
@@ -3163,7 +3163,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/loadFont_.html",
   :docstring
-  "<p>Loads a font into a variable of type <code>PFont</code>. To load correctly,\nfonts must be located in the data directory of the current sketch.\nTo create a font to use with Processing use the <a href=\"create-font\">create-font</a> function.</p>\n<p>Like <a href=\"load-image\">load-image</a> and other methods that load data, the <a href=\"load-font\">load-font</a>\nfunction should not be used inside draw, because it will slow down the sketch\nconsiderably, as the font will be re-loaded from the disk (or\nnetwork) on each frame.</p>\n<p>For most renderers, Processing displays fonts using the <code>.vlw</code> font\nformat, which uses images for each letter, rather than defining them\nthrough vector data. When hint <code>:enable-native-fonts</code> is used with the\nJAVA2D renderer, the native version of a font will be used if it is\ninstalled on the user's machine.</p>\n<p>Using <a href=\"create-font\">create-font</a> (instead of <a href=\"load-font\">load-font</a>) enables vector data to be\nused with the JAVA2D (default) renderer setting. This can be helpful\nwhen many font sizes are needed, or when using any renderer based on\nJAVA2D, such as the PDF library.</p>\n",
+  "<p>Loads a font into a variable of type <code>PFont</code>. To load correctly,\nfonts must be located in the data directory of the current sketch.\nTo create a font to use with Processing use the <a href=\"/api/typography/loading-and-displaying#create-font\">create-font</a> function.</p>\n<p>Like <a href=\"/api/image/loading-and-displaying#load-image\">load-image</a> and other methods that load data, the <a href=\"/api/typography/loading-and-displaying#load-font\">load-font</a>\nfunction should not be used inside draw, because it will slow down the sketch\nconsiderably, as the font will be re-loaded from the disk (or\nnetwork) on each frame.</p>\n<p>For most renderers, Processing displays fonts using the <code>.vlw</code> font\nformat, which uses images for each letter, rather than defining them\nthrough vector data. When hint <code>:enable-native-fonts</code> is used with the\nJAVA2D renderer, the native version of a font will be used if it is\ninstalled on the user's machine.</p>\n<p>Using <a href=\"/api/typography/loading-and-displaying#create-font\">create-font</a> (instead of <a href=\"/api/typography/loading-and-displaying#load-font\">load-font</a>) enables vector data to be\nused with the JAVA2D (default) renderer setting. This can be helpful\nwhen many font sizes are needed, or when using any renderer based on\nJAVA2D, such as the PDF library.</p>\n",
   :what :fn},
  ambient
  {:args ({:value [gray], :type :both} {:value [r g b], :type :both}),
@@ -3176,7 +3176,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/ambient_.html",
   :docstring
-  "<p>Sets the ambient reflectance for shapes drawn to the screen. This\nis combined with the ambient light component of environment. The\ncolor components set through the parameters define the\nreflectance. For example in the default <a href=\"color-mode\">color-mode</a>, setting <code>r=255, g=126, b=0</code>, would cause all the red light to reflect and half of the\ngreen light to reflect. Used in combination with <a href=\"emissive\">emissive</a>, <a href=\"specular\">specular</a>,\nand <a href=\"shininess\">shininess</a> in setting the material properties of shapes.</p>\n",
+  "<p>Sets the ambient reflectance for shapes drawn to the screen. This\nis combined with the ambient light component of environment. The\ncolor components set through the parameters define the\nreflectance. For example in the default <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>, setting <code>r=255, g=126, b=0</code>, would cause all the red light to reflect and half of the\ngreen light to reflect. Used in combination with <a href=\"/api/lights-camera/material-properties#emissive\">emissive</a>, <a href=\"/api/lights-camera/material-properties#specular\">specular</a>,\nand <a href=\"/api/lights-camera/material-properties#shininess\">shininess</a> in setting the material properties of shapes.</p>\n",
   :what :fn},
  shear-y
  {:args ({:value [angle], :type :both}),
@@ -3189,7 +3189,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/shearY_.html",
   :docstring
-  "<p>Shears a shape around the y-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0 to\nPI*2) or converted to radians with the <a href=\"radians\">radians</a> function. Objects\nare always sheared around their relative position to the origin and\npositive numbers shear objects in a clockwise direction.\nTransformations apply to everything that happens after and\nsubsequent calls to the function accumulates the effect. For\nexample, calling <code>(shear-y (/ PI 2))</code> and then <code>(shear-y (/ PI 2))</code> is\nthe same as <code>(shear-y PI)</code>. If <a href=\"shear-y\">shear-y</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction works in P2D or JAVA2D mode.</p>\n<p>Technically, <a href=\"shear-y\">shear-y</a> multiplies the current transformation matrix\nby a rotation matrix. This function can be further controlled by the\n<a href=\"push-matrix\">push-matrix</a> and <a href=\"pop-matrix\">pop-matrix</a> functions.</p>\n",
+  "<p>Shears a shape around the y-axis the amount specified by the <code>angle</code>\nparameter. Angles should be specified in radians (values from 0 to\nPI*2) or converted to radians with the <a href=\"/api/math/trigonometry#radians\">radians</a> function. Objects\nare always sheared around their relative position to the origin and\npositive numbers shear objects in a clockwise direction.\nTransformations apply to everything that happens after and\nsubsequent calls to the function accumulates the effect. For\nexample, calling <code>(shear-y (/ PI 2))</code> and then <code>(shear-y (/ PI 2))</code> is\nthe same as <code>(shear-y PI)</code>. If <a href=\"/api/transform#shear-y\">shear-y</a> is called within the draw\nfunction, the transformation is reset when the loop begins again. This\nfunction works in P2D or JAVA2D mode.</p>\n<p>Technically, <a href=\"/api/transform#shear-y\">shear-y</a> multiplies the current transformation matrix\nby a rotation matrix. This function can be further controlled by the\n<a href=\"/api/transform#push-matrix\">push-matrix</a> and <a href=\"/api/transform#pop-matrix\">pop-matrix</a> functions.</p>\n",
   :what :fn},
  mouse-y
  {:args ({:value [], :type :both}),
@@ -3229,7 +3229,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/image_.html",
   :docstring
-  "<p>Displays images to the screen. Processing currently works with GIF,\nJPEG, and Targa images. The color of an image may be modified with\nthe <a href=\"tint\">tint</a> function and if a GIF has transparency, it will maintain\nits transparency. The <code>img</code> parameter specifies the image to display\nand the <code>x</code> and <code>y</code> parameters define the location of the image from its\nupper-left corner. The image is displayed at its original size\nunless the width and height parameters specify a different size. The\n<a href=\"image-mode\">image-mode</a> function changes the way the parameters work. A call to\n<code>(image-mode :corners)</code> will change the <code>width</code> and <code>height</code> parameters to\ndefine the x and y values of the opposite corner of the image.</p>\n",
+  "<p>Displays images to the screen. Processing currently works with GIF,\nJPEG, and Targa images. The color of an image may be modified with\nthe <a href=\"/api/image/loading-and-displaying#tint\">tint</a> function and if a GIF has transparency, it will maintain\nits transparency. The <code>img</code> parameter specifies the image to display\nand the <code>x</code> and <code>y</code> parameters define the location of the image from its\nupper-left corner. The image is displayed at its original size\nunless the width and height parameters specify a different size. The\n<a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a> function changes the way the parameters work. A call to\n<code>(image-mode :corners)</code> will change the <code>width</code> and <code>height</code> parameters to\ndefine the x and y values of the opposite corner of the image.</p>\n",
   :what :fn},
  unbinary
  {:args ({:value [str-val], :type :both}),
@@ -3242,7 +3242,7 @@
   :processing-name "unbinary()",
   :link "https://processing.org/reference/unbinary_.html",
   :docstring
-  "<p>Unpack a binary string to an integer. See <a href=\"binary\">binary</a> for converting\nintegers to strings.</p>\n",
+  "<p>Unpack a binary string to an integer. See <a href=\"/api/data/conversion#binary\">binary</a> for converting\nintegers to strings.</p>\n",
   :what :fn},
  no-tint
  {:args ({:value [], :type :both}),
@@ -3268,7 +3268,7 @@
   :requires-bindings true,
   :link "https://processing.org/reference/noLights_.html",
   :docstring
-  "<p>Disable all lighting. Lighting is turned off by default and enabled\nwith the <a href=\"lights\">lights</a> function. This function can be used to disable lighting so\nthat 2D geometry (which does not require lighting) can be drawn\nafter a set of lighted 3D geometry.</p>\n",
+  "<p>Disable all lighting. Lighting is turned off by default and enabled\nwith the <a href=\"/api/lights-camera/lights#lights\">lights</a> function. This function can be used to disable lighting so\nthat 2D geometry (which does not require lighting) can be drawn\nafter a set of lighted 3D geometry.</p>\n",
   :what :fn},
  point
  {:args ({:value [x y], :type :both} {:value [x y z], :type :both}),
