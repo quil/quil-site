@@ -219,7 +219,7 @@
   :name "time-and-date",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (doseq [[ind capt fn] [[0 \"millis\" q/millis] [1 \"seconds\" q/seconds] [2 \"minute\" q/minute] [3 \"hour\" q/hour] [4 \"day\" q/day] [5 \"month\" q/month] [6 \"year\" q/year]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
+  "((q/background 255) (q/fill 0) (comment \"iterate through all time-related functions\") (comment \"and print their values\") (doseq [[ind capt fn] [[0 \"millis\" q/millis] [1 \"seconds\" q/seconds] [2 \"minute\" q/minute] [3 \"hour\" q/hour] [4 \"day\" q/day] [5 \"month\" q/month] [6 \"year\" q/year]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
   :setup "()",
   :target :cljs}
  {:fns
@@ -233,7 +233,7 @@
   :name "mouse",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (doseq [[ind capt fn] [[0 \"mouse-button\" q/mouse-button] [1 \"mouse-pressed?\" q/mouse-pressed?] [2 \"mouse-x\" q/mouse-x] [3 \"mouse-y\" q/mouse-y] [4 \"pmouse-x\" q/pmouse-x] [5 \"pmouse-y\" q/pmouse-y]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
+  "((q/background 255) (q/fill 0) (comment \"iterate through all mouse-related functions\") (comment \"and print their values\") (doseq [[ind capt fn] [[0 \"mouse-button\" q/mouse-button] [1 \"mouse-pressed?\" q/mouse-pressed?] [2 \"mouse-x\" q/mouse-x] [3 \"mouse-y\" q/mouse-y] [4 \"pmouse-x\" q/pmouse-x] [5 \"pmouse-y\" q/pmouse-y]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
   :setup "()",
   :target :cljs}
  {:fns
@@ -242,7 +242,7 @@
   :name "keyboard",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (doseq [[ind capt fn] [[0 \"key-as-keyword\" q/key-as-keyword] [1 \"key-code\" q/key-code] [2 \"key-coded?\" (fn* [] (q/key-coded? (q/raw-key)))] [3 \"key-pressed?\" q/key-pressed?] [4 \"raw-key\" q/raw-key]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
+  "((q/background 255) (q/fill 0) (comment \"iterate through all key-related functions\") (comment \"and print their values\") (doseq [[ind capt fn] [[0 \"key-as-keyword\" q/key-as-keyword] [1 \"key-code\" q/key-code] [2 \"key-coded?\" (fn* [] (q/key-coded? (q/raw-key)))] [3 \"key-pressed?\" q/key-pressed?] [4 \"raw-key\" q/raw-key]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
   :setup "()",
   :target :cljs}
  {:fns ["sqrt"],
@@ -610,12 +610,28 @@
   "((q/camera 200 200 200 0 0 0 0 0 -1) (q/with-translation [100 0 0] (q/box 70)) (q/with-translation [0 100 0] (q/box 70 100 50)))",
   :setup "()",
   :target :cljs}
- {:fns ["looping?"],
+ {:fns ["redraw"],
   :ns "quil.snippets.structure",
-  :name "looping?",
+  :name "redraw",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/text (str \"(q/looping?) = \" (q/looping?)) 10 20))",
+  "((q/background 255) (q/fill 0) (q/text \"click to move\" 10 20) (q/rect (* (q/frame-count) 10) (+ (* (q/frame-count) 10) 40) 50 50))",
+  :setup "(q/no-loop)",
+  :target :cljs}
+ {:fns ["no-loop" "start-loop" "looping?"],
+  :ns "quil.snippets.structure",
+  :name "no-loop-start-loop",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (q/fill 0) (comment \"pause sketch on every 10th frame\") (when (zero? (rem (q/frame-count) 10)) (q/no-loop) (q/text \"paused, click to unpause\" 10 20)) (q/text (str \"(q/looping?) = \" (q/looping?)) 10 40) (q/text (str \"frame: \" (q/frame-count)) 10 60))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["exit"],
+  :ns "quil.snippets.structure",
+  :name "exit",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (q/fill 0) (comment \"exit sketch on 50th frame\") (q/text (str \"countdown \" (- 50 (q/frame-count))) 20 20) (when (= 50 (q/frame-count)) (q/exit)))",
   :setup "()",
   :target :cljs}
  {:fns ["push-style" "pop-style"],
@@ -631,7 +647,7 @@
   :name "save",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 150 150 150 0 0 0 0 0 1) (q/box 100) (q/save \"generated/box.png\"))",
+  "((q/camera 150 150 150 0 0 0 0 0 1) (q/box 100) (q/save \"generated/box.png\") (comment \"stop sketch after saving image\") (comment \"otherwise it will show save dialog\") (comment \"on every iteration\") (q/exit))",
   :setup "()",
   :target :cljs}
  {:fns ["point-light"],
@@ -672,7 +688,8 @@
   :opts {:renderer :p3d, :settings nil},
   :draw
   "((if (zero? (.-width (q/state :image))) (q/text \"Loading\" 10 10) (let [gr (q/state :image)] (q/with-translation [50 0] (q/texture gr) (q/plane 200 200)))))",
-  :setup "(q/set-state! :image (q/load-image \"texture.jpg\"))",
+  :setup
+  "(q/set-state! :image (q/load-image \"https://placekitten.com/100/100\"))",
   :target :cljs}
  {:fns ["quadratic-vertex"],
   :ns "quil.snippets.shape.vertex",
@@ -1040,7 +1057,7 @@
   :name "set-state-state",
   :opts {:settings nil},
   :draw
-  "((q/fill 0) (q/text (q/state :text) 10 20) (q/text (str \"Full state: \" (q/state)) 10 40))",
+  "((q/background 255) (q/fill 0) (q/text (q/state :text) 10 20) (q/text (str \"Full state: \" (q/state)) 10 40))",
   :setup "(q/set-state! :text \"I'm state!\" :year (q/year))",
   :target :cljs}
  {:fns ["resize"],
@@ -2613,12 +2630,28 @@
   "((comment \"setup camera\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (comment \"draw box at [0 0 0]\") (q/box 50) (comment \"move positiion by [50 -50 0] and draw box\") (q/apply-matrix 1 0 50 0 1 -50) (q/box 50) (comment \"rotate position and move by [0 50 -50] and draw box\") (let [s (q/sin 1) c (q/cos 1)] (q/apply-matrix 1 0 0 0 0 c s 50 0 (- s) c -50 0 0 0 1)) (q/box 50))",
   :setup "()",
   :target :clj}
- {:fns ["looping?"],
+ {:fns ["redraw"],
   :ns "quil.snippets.structure",
-  :name "looping?",
+  :name "redraw",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (q/text (str \"(q/looping?) = \" (q/looping?)) 10 20))",
+  "((q/background 255) (q/fill 0) (q/text \"click to move\" 10 20) (q/rect (* (q/frame-count) 10) (+ (* (q/frame-count) 10) 40) 50 50))",
+  :setup "(q/no-loop)",
+  :target :clj}
+ {:fns ["no-loop" "start-loop" "looping?"],
+  :ns "quil.snippets.structure",
+  :name "no-loop-start-loop",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (q/fill 0) (comment \"pause sketch on every 10th frame\") (when (zero? (rem (q/frame-count) 10)) (q/no-loop) (q/text \"paused, click to unpause\" 10 20)) (q/text (str \"(q/looping?) = \" (q/looping?)) 10 40) (q/text (str \"frame: \" (q/frame-count)) 10 60))",
+  :setup "()",
+  :target :clj}
+ {:fns ["exit"],
+  :ns "quil.snippets.structure",
+  :name "exit",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (q/fill 0) (comment \"exit sketch on 50th frame\") (q/text (str \"countdown \" (- 50 (q/frame-count))) 20 20) (when (= 50 (q/frame-count)) (q/exit)))",
   :setup "()",
   :target :clj}
  {:fns ["delay"],
@@ -2626,7 +2659,7 @@
   :name "delay",
   :opts {:settings nil},
   :draw
-  "((q/background 127) (q/ellipse (* 5 (q/frame-count)) (* 5 (q/frame-count)) 50 50) (q/delay-frame (rand-int (* 500 (rand-int 4)))))",
+  "((q/background 127) (q/ellipse (* 5 (q/frame-count)) (* 5 (q/frame-count)) 50 50) (comment \"delay frame for random duration between 0 and 2s\") (q/delay-frame (rand-int (* 500 (rand-int 4)))))",
   :setup "()",
   :target :clj}
  {:fns ["push-style" "pop-style"],
@@ -2642,7 +2675,7 @@
   :name "set-state-state",
   :opts {:settings nil},
   :draw
-  "((q/fill 0) (q/text (q/state :text) 10 20) (q/text (str \"Full state: \" (q/state)) 10 40))",
+  "((q/background 255) (q/fill 0) (q/text (q/state :text) 10 20) (q/text (str \"Full state: \" (q/state)) 10 40))",
   :setup "(q/set-state! :text \"I'm state!\" :year (q/year))",
   :target :clj}
  {:fns ["clip" "no-clip"],
@@ -2658,8 +2691,9 @@
   :name "load-shader",
   :opts {:renderer :p2d, :settings nil},
   :draw
-  "((let [gr (q/create-graphics 250 250) path (clojure.java.io/resource \"SimpleShader.glsl\") shd (q/load-shader (.getPath path))] (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/triangle 50 30 220 120 20 180)) (q/image gr 0 0) (q/image gr 250 0) (q/shader shd) (q/image gr 0 250) (q/reset-shader) (q/image gr 250 250)))",
-  :setup "()",
+  "((let [gr (q/create-graphics 250 250) shd (q/state :shader)] (when (q/loaded? shd) (q/with-graphics gr (q/background 255) (q/fill 255 0 0) (q/triangle 50 30 220 120 20 180)) (q/image gr 0 0) (q/image gr 250 0) (q/shader shd) (q/image gr 0 250) (q/reset-shader) (q/image gr 250 250))))",
+  :setup
+  "(let [path (clojure.java.io/resource \"SimpleShader.glsl\") shd (q/load-shader (.getPath path))] (q/set-state! :shader shd))",
   :target :clj}
  {:fns ["with-graphics"],
   :ns "quil.snippets.rendering",
@@ -2690,7 +2724,7 @@
   :name "save-frame",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 150 150 150 0 0 0 0 0 1) (q/background 127) (q/with-rotation [(/ (q/frame-count) 10)] (q/box 100)) (q/save-frame) (q/save-frame \"generated/rotating-box-####.png\"))",
+  "((q/camera 150 150 150 0 0 0 0 0 1) (q/background 127) (q/with-rotation [(/ (q/frame-count) 10)] (q/box 100)) (q/save-frame \"generated/rotating-box-####.png\"))",
   :setup "()",
   :target :clj}
  {:fns ["save"],
@@ -2698,7 +2732,7 @@
   :name "save",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 150 150 150 0 0 0 0 0 1) (q/box 100) (q/save \"generated/box.png\"))",
+  "((q/camera 150 150 150 0 0 0 0 0 1) (q/box 100) (q/save \"generated/box.png\") (comment \"stop sketch after saving image\") (comment \"otherwise it will show save dialog\") (comment \"on every iteration\") (q/exit))",
   :setup "()",
   :target :clj}
  {:fns ["begin-raw" "end-raw"],
@@ -2714,7 +2748,7 @@
   :name "time-and-date",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (doseq [[ind capt fn] [[0 \"millis\" q/millis] [1 \"seconds\" q/seconds] [2 \"minute\" q/minute] [3 \"hour\" q/hour] [4 \"day\" q/day] [5 \"month\" q/month] [6 \"year\" q/year]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
+  "((q/background 255) (q/fill 0) (comment \"iterate through all time-related functions\") (comment \"and print their values\") (doseq [[ind capt fn] [[0 \"millis\" q/millis] [1 \"seconds\" q/seconds] [2 \"minute\" q/minute] [3 \"hour\" q/hour] [4 \"day\" q/day] [5 \"month\" q/month] [6 \"year\" q/year]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
   :setup "()",
   :target :clj}
  {:fns
@@ -2728,7 +2762,7 @@
   :name "mouse",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (doseq [[ind capt fn] [[0 \"mouse-button\" q/mouse-button] [1 \"mouse-pressed?\" q/mouse-pressed?] [2 \"mouse-x\" q/mouse-x] [3 \"mouse-y\" q/mouse-y] [4 \"pmouse-x\" q/pmouse-x] [5 \"pmouse-y\" q/pmouse-y]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
+  "((q/background 255) (q/fill 0) (comment \"iterate through all mouse-related functions\") (comment \"and print their values\") (doseq [[ind capt fn] [[0 \"mouse-button\" q/mouse-button] [1 \"mouse-pressed?\" q/mouse-pressed?] [2 \"mouse-x\" q/mouse-x] [3 \"mouse-y\" q/mouse-y] [4 \"pmouse-x\" q/pmouse-x] [5 \"pmouse-y\" q/pmouse-y]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
   :setup "()",
   :target :clj}
  {:fns
@@ -2737,7 +2771,7 @@
   :name "keyboard",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0) (doseq [[ind capt fn] [[0 \"key-as-keyword\" q/key-as-keyword] [1 \"key-code\" q/key-code] [2 \"key-coded?\" (fn* [] (q/key-coded? (q/raw-key)))] [3 \"key-pressed?\" q/key-pressed?] [4 \"raw-key\" q/raw-key] [5 \"key-modifiers\" q/key-modifiers]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
+  "((q/background 255) (q/fill 0) (comment \"iterate through all key-related functions\") (comment \"and print their values\") (doseq [[ind capt fn] [[0 \"key-as-keyword\" q/key-as-keyword] [1 \"key-code\" q/key-code] [2 \"key-coded?\" (fn* [] (q/key-coded? (q/raw-key)))] [3 \"key-pressed?\" q/key-pressed?] [4 \"raw-key\" q/raw-key] [5 \"key-modifiers\" q/key-modifiers]]] (q/text (str capt \" \" (fn)) 10 (+ (* 20 ind) 20))))",
   :setup "()",
   :target :clj}
  {:fns ["resize-sketch"],
