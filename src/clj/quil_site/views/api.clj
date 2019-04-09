@@ -186,8 +186,8 @@
                              snippets)]]))))]]]])
 
 (defn- render-function [fn]
-  (let [{:keys [name args subcategory docstring link type what
-                processing-name requires-bindings category ns]} fn
+  (let [{:keys [name args subcategory docstring processing-link p5js-link type
+                what processing-name p5js-name requires-bindings category ns]} fn
         args (map #(if (vector? %) {:value % :type :both} %)
                   args)
         fields {:arguments
@@ -201,12 +201,18 @@
                 :binding?
                 (if requires-bindings "Yes" "No")
 
-                :original-name
+                :original-processing-method
                 (if processing-name
-                  (if link
-                    [:span (e/link-to link processing-name)]
+                  (if processing-link
+                    [:span (e/link-to processing-link processing-name)]
                     [:span processing-name])
-                  "None. It is present only in Quil.")}]
+                  "None.")
+                :original-p5js-method
+                (if p5js-name
+                  (if p5js-link
+                    [:span (e/link-to p5js-link p5js-name)]
+                    [:span p5js-name])
+                  "None.")}]
     [:div.function-doc {:id (as-url name)}
      (render-type-specific :h3 (str
                                 (if ns (str ns "/") "")
@@ -219,7 +225,8 @@
       [:div.col-md-5.col-xs-12
        [:dl
         [:dt "Works only inside sketch functions?"] [:dd (:binding? fields)]
-        [:dt "Original Processing method"] [:dd (:original-name fields)]]]]
+        [:dt "Original Processing method"] [:dd (:original-processing-method fields)]
+        [:dt "Original p5js method"] [:dd (:original-p5js-method fields)]]]]
      (render-snippets name
                       (get-snippets-for-function name))]))
 
