@@ -237,7 +237,12 @@
   :setup "()",
   :target :cljs}
  {:fns
-  ["key-as-keyword" "key-code" "key-coded?" "key-pressed?" "raw-key"],
+  ["key-as-keyword"
+   "key-code"
+   "key-coded?"
+   "key-pressed?"
+   "raw-key"
+   "key-modifiers"],
   :ns "quil.snippets.input",
   :name "keyboard",
   :opts {:settings nil},
@@ -534,7 +539,7 @@
   "((q/no-fill) (q/rect 10 10 50 50) (comment \"move position by 100, 100 and shear\") (q/apply-matrix 1 0 1 1 100 100) (q/rect 10 10 50 50))",
   :setup "()",
   :target :cljs}
- {:fns ["load-shader"],
+ {:fns ["load-shader" "loaded?" "shader"],
   :ns "quil.snippets.rendering",
   :name "load-shader",
   :opts {:renderer :p3d, :settings nil},
@@ -1252,7 +1257,7 @@
   "((comment \"see https://p5js.org/reference/#/p5/bezierPoint for better example\") (q/fill 0) (dotimes [i 5] (let [v (/ i 4) res (q/bezier-point 0 5 7 0 v) txt (str \"(q/bezier-point 0 5 7 0 \" v \") = \" res)] (q/text txt 10 (+ 20 (* i 20))))))",
   :setup "()",
   :target :cljs}
- {:fns ["bezier-detail"],
+ {:fns ["bezier-detail" "bezier"],
   :ns "quil.snippets.shape.curves",
   :name "bezier-detail",
   :opts {:renderer :p3d, :settings nil},
@@ -1260,7 +1265,7 @@
   "((q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/bezier-detail 5) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :cljs}
- {:fns ["bezier-3d"],
+ {:fns ["bezier"],
   :ns "quil.snippets.shape.curves",
   :name "bezier-3d",
   :opts {:renderer :p3d, :settings nil},
@@ -1268,7 +1273,7 @@
   "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :cljs}
- {:fns ["bezier-2d"],
+ {:fns ["bezier"],
   :ns "quil.snippets.shape.curves",
   :name "bezier-2d",
   :opts {:settings nil},
@@ -1340,7 +1345,7 @@
   "((q/background 255) (q/fill 0) (comment \"draw text\") (q/text \"word\" 10 30) (comment \"draw text in a 'box'\") (q/text \"a long sentence wrapping inside a box\" 60 20 120 60))",
   :setup "()",
   :target :cljs}
- {:fns ["background-image"],
+ {:fns ["load-font"],
   :ns "quil.snippets.typography.loading-and-displaying",
   :name "load-font",
   :opts {:settings nil},
@@ -1405,7 +1410,7 @@
   "((q/background 255) (q/fill 0) (comment \"draw text\") (q/text \"word\" 10 30) (comment \"draw text in a 'box'\") (q/text \"a long sentence wrapping inside a box\" 60 20 120 60))",
   :setup "()",
   :target :clj}
- {:fns ["background-image"],
+ {:fns ["load-font"],
   :ns "quil.snippets.typography.loading-and-displaying",
   :name "load-font",
   :opts {:settings nil},
@@ -1750,7 +1755,7 @@
   "((comment \"see https://p5js.org/reference/#/p5/bezierPoint for better example\") (q/fill 0) (dotimes [i 5] (let [v (/ i 4) res (q/bezier-point 0 5 7 0 v) txt (str \"(q/bezier-point 0 5 7 0 \" v \") = \" res)] (q/text txt 10 (+ 20 (* i 20))))))",
   :setup "()",
   :target :clj}
- {:fns ["bezier-detail"],
+ {:fns ["bezier-detail" "bezier"],
   :ns "quil.snippets.shape.curves",
   :name "bezier-detail",
   :opts {:renderer :p3d, :settings nil},
@@ -1758,7 +1763,7 @@
   "((q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/bezier-detail 5) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :clj}
- {:fns ["bezier-3d"],
+ {:fns ["bezier"],
   :ns "quil.snippets.shape.curves",
   :name "bezier-3d",
   :opts {:renderer :p3d, :settings nil},
@@ -1766,7 +1771,7 @@
   "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :clj}
- {:fns ["bezier-2d"],
+ {:fns ["bezier"],
   :ns "quil.snippets.shape.curves",
   :name "bezier-2d",
   :opts {:settings nil},
@@ -2654,7 +2659,7 @@
   "((q/background 255) (q/fill 0) (comment \"exit sketch on 50th frame\") (q/text (str \"countdown \" (- 50 (q/frame-count))) 20 20) (when (= 50 (q/frame-count)) (q/exit)))",
   :setup "()",
   :target :clj}
- {:fns ["delay"],
+ {:fns ["delay-frame"],
   :ns "quil.snippets.structure",
   :name "delay",
   :opts {:settings nil},
@@ -2686,7 +2691,7 @@
   "((q/background 255) (q/fill 0) (comment \"clip rendering so that triangle will be incomplete\") (q/clip 50 100 100 100) (q/triangle 100 70 170 180 30 180) (comment \"draw normal unclipped triangle\") (q/no-clip) (q/with-translation [(/ (q/width) 2) (/ (q/height) 2)] (q/triangle 100 70 170 180 30 180)))",
   :setup "()",
   :target :clj}
- {:fns ["load-shader"],
+ {:fns ["load-shader" "loaded?" "reset-shader" "shader"],
   :ns "quil.snippets.rendering",
   :name "load-shader",
   :opts {:renderer :p2d, :settings nil},
@@ -2766,7 +2771,12 @@
   :setup "()",
   :target :clj}
  {:fns
-  ["key-as-keyword" "key-code" "key-coded?" "key-pressed?" "raw-key"],
+  ["key-as-keyword"
+   "key-code"
+   "key-coded?"
+   "key-pressed?"
+   "raw-key"
+   "key-modifiers"],
   :ns "quil.snippets.input",
   :name "keyboard",
   :opts {:settings nil},
