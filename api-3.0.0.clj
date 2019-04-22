@@ -67,7 +67,7 @@
   :processing-name "key",
   :processing-link "https://processing.org/reference/key.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/key",
   :docstring
   "<p>Contains the value of the most recent key on the keyboard that was\nused (either pressed or released).</p>\n<p>For non-ASCII keys, use the keyCode variable. The keys included in\nthe ASCII specification (BACKSPACE, TAB, ENTER, RETURN, ESC, and\nDELETE) do not require checking to see if they key is coded, and you\nshould simply use the key variable instead of keyCode If you're\nmaking cross-platform projects, note that the ENTER key is commonly\nused on PCs and Unix and the RETURN key is used instead on\nMacintosh. Check for both ENTER and RETURN to make sure your program\nwill work for all platforms.</p>\n",
   :what :fn},
@@ -153,7 +153,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/blend",
   :docstring
-  "<p>Blends a region of pixels from one image into another with full alpha\nchannel support. If <code>src</code> is not specified it defaults to <a href=\"/api/environment#current-graphics\">current-graphics</a>.\nIf dest is not specified it defaults to <a href=\"/api/environment#current-graphics\">current-graphics</a>.</p>\n<p>Note: it is recommended to use the <a href=\"/api/image/rendering#blend-mode\">blend-mode</a> function instead of this one.</p>\n<p>Available blend modes are:</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:overlay</code>    - A mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - Mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay,\nbut not as harsh.</li>\n<li><code>:dodge</code>      - Lightens light tones and increases contrast, ignores\ndarks.\nCalled &quot;Color Dodge&quot; in Illustrator and Photoshop.</li>\n<li><code>:burn</code>       - Darker areas are applied, increasing contrast, ignores\nlights. Called &quot;Color Burn&quot; in Illustrator and\nPhotoshop.</li>\n</ul>\n<p>In clj the following blend modes are also supported:\n<code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</p>\n<p>In cljs the following blend modes are also supported:\n<code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</p>\n",
+  "<p>Blends a region of pixels from one image into another with full alpha\nchannel support. If <code>src</code> is not specified it defaults to\n<a href=\"/api/environment#current-graphics\">current-graphics</a>. If <code>dest-img</code> is not specified it defaults to\n<a href=\"/api/environment#current-graphics\">current-graphics</a>.</p>\n<p>Note: it is recommended to use <a href=\"/api/image/rendering#blend-mode\">blend-mode</a> instead of <a href=\"/api/image/pixels#blend\">blend</a>.</p>\n<p>Available blend modes are:</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:overlay</code>    - A mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - Mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay,\nbut not as harsh.</li>\n<li><code>:dodge</code>      - Lightens light tones and increases contrast, ignores\ndarks.\nCalled &quot;Color Dodge&quot; in Illustrator and Photoshop.</li>\n<li><code>:burn</code>       - Darker areas are applied, increasing contrast, ignores\nlights. Called &quot;Color Burn&quot; in Illustrator and\nPhotoshop.</li>\n</ul>\n<p>In clj the following blend modes are also supported:\n<code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</p>\n<p>In cljs the following blend modes are also supported:\n<code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</p>\n",
   :what :fn},
  frame-count
  {:args ({:value [], :type :both}),
@@ -166,7 +166,7 @@
   :processing-name "frameCount",
   :processing-link "https://processing.org/reference/frameCount.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/frameCount",
   :docstring
   "<p>The system variable frameCount contains the number of frames\ndisplayed since the program started. Inside setup() the value is 0\nand after the first iteration of draw it is 1, etc.</p>\n",
   :what :fn},
@@ -256,7 +256,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/createGraphics",
   :docstring
-  "<p>Creates and returns a new <code>PGraphics</code> object of the types <code>:p2d</code>, <code>:p3d</code>,\n<code>:java2d</code>, <code>:pdf</code>. By default <code>:java2d</code> is used. Use this class if you\nneed to draw into an off-screen graphics buffer. It's not possible\nto use <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> with the <code>:opengl</code> renderer, because it doesn't\nallow offscreen use. The <code>:pdf</code> renderer requires the filename parameter.</p>\n<p>Note: don't use <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> in draw in clojurescript, it leaks memory.\nYou should create graphic in setup and reuse it in draw instead of creating\na new one.</p>\n<p>It's important to call any drawing commands between <code>(.beginDraw graphics)</code> and\n<code>(.endDraw graphics)</code> statements or use <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. This is also true\nfor any commands that affect drawing, such as <a href=\"/api/shape/attributes#smooth\">smooth</a> or <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>.</p>\n<p>If you're using <code>:pdf</code> renderer - don't forget to call <code>(.dispose graphics)</code>\nas last command inside <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro, otherwise graphics won't be\nsaved.</p>\n<p>Unlike the main drawing surface which is completely opaque, surfaces\ncreated with <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> can have transparency. This makes it\npossible to draw into a graphics and maintain the alpha channel. By\nusing save to write a <code>PNG</code> or <code>TGA</code> file, the transparency of the\ngraphics object will be honored.</p>\n",
+  "<p>Creates and returns a new <code>PGraphics</code> object of the types <code>:p2d</code>, <code>:p3d</code>,\n<code>:java2d</code>, <code>:pdf</code>. By default <code>:java2d</code> is used. Use this class if you\nneed to draw into an off-screen graphics buffer. It's not possible\nto use <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> with the <code>:opengl</code> renderer, because it doesn't\nallow offscreen use. The <code>:pdf</code> renderer requires the filename parameter.</p>\n<p>Note: don't use <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> in draw in Clojurescript, it leaks memory.\nYou should create graphic in setup and reuse it in draw instead of creating\na new one.</p>\n<p>It's important to call any drawing commands between <code>(.beginDraw graphics)</code>\nand <code>(.endDraw graphics)</code> statements or use <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. This is\nalso true for any commands that affect drawing, such as <a href=\"/api/shape/attributes#smooth\">smooth</a> or\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>.</p>\n<p>If you're using <code>:pdf</code> renderer - don't forget to call <code>(.dispose graphics)</code>\nas last command inside <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro, otherwise graphics won't be\nsaved.</p>\n<p>Unlike the main drawing surface which is completely opaque, surfaces\ncreated with <a href=\"/api/image/rendering#create-graphics\">create-graphics</a> can have transparency. This makes it\npossible to draw into a graphics and maintain the alpha channel. By\nusing save to write a <code>PNG</code> or <code>TGA</code> file, the transparency of the\ngraphics object will be honored.</p>\n",
   :what :fn},
  update-pixels
  {:args ({:value [img], :type :both} {:value [], :type :both}),
@@ -300,7 +300,7 @@
   :processing-name "pixels[]",
   :processing-link "https://processing.org/reference/pixels.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/pixels",
   :docstring
   "<p>Array containing the values for all the pixels in the display\nwindow or image. This array is therefore the size of the display window. If\nthis array is modified, the <a href=\"/api/image/pixels#update-pixels\">update-pixels</a> function must be called to\nupdate the changes. Calls <code>.loadPixels</code> before obtaining the pixel array.</p>\n",
   :what :fn},
@@ -643,7 +643,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/colorMode",
   :docstring
-  "<p>Changes the way Processing interprets color data. Available modes\nare <code>:rgb</code> and <code>:hsb</code> (and <code>:hsl</code> in clojurescript).\nBy default, the parameters for <a href=\"/api/color/setting#fill\">fill</a>, <a href=\"/api/color/setting#stroke\">stroke</a>,\n<a href=\"/api/color/setting#background\">background</a>, and <a href=\"/api/color/creating-and-reading#color\">color</a> are defined by values between 0 and 255 using\nthe <code>:rgb</code> color model. The <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a> function is used to change the\nnumerical range used for specifying colors and to switch color\nsystems. For example, calling\n<code>(color-mode :rgb 1.0)</code> will specify that values are specified between\n0 and 1. The limits for defining colors are altered by setting the\nparameters range1, range2, range3, and range 4.</p>\n",
+  "<p>Changes the way Processing interprets color data. Available modes\nare <code>:rgb</code> and <code>:hsb</code> (and <code>:hsl</code> in Clojurescript).\nBy default, the parameters for <a href=\"/api/color/setting#fill\">fill</a>, <a href=\"/api/color/setting#stroke\">stroke</a>,\n<a href=\"/api/color/setting#background\">background</a>, and <a href=\"/api/color/creating-and-reading#color\">color</a> are defined by values between 0 and 255 using\nthe <code>:rgb</code> color model. The <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a> function is used to change the\nnumerical range used for specifying colors and to switch color\nsystems. For example, calling\n<code>(color-mode :rgb 1.0)</code> will specify that values are specified between\n0 and 1. The limits for defining colors are altered by setting the\nparameters range1, range2, range3, and range 4.</p>\n",
   :what :fn},
  create-image
  {:args
@@ -688,7 +688,7 @@
   :processing-name "height",
   :processing-link nil,
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/height",
   :docstring
   "<p>Height of the display window. The value of height is zero until\nsize is called.</p>\n",
   :what :fn},
@@ -752,7 +752,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/text",
   :docstring
-  "<p>Draws text to the screen in the position specified by the <code>x</code> and <code>y</code>\nparameters (and the optional <code>z</code> parameter in clj). A default font will be used\nunless a font is set with the <a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a> function. Change the color of the\ntext with the <a href=\"/api/color/setting#fill\">fill</a> function. The text displays in relation to the\n<a href=\"/api/typography/attributes#text-align\">text-align</a> function, which gives the option to draw to the left, right, and\ncenter of the coordinates.</p>\n<p>The <code>x1</code>, <code>y1</code>, <code>x2</code> and <code>y2</code> parameters define a\nrectangular area to display within and may only be used with string\ndata. For text drawn inside a rectangle, the coordinates are\ninterpreted based on the current <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a> setting.</p>\n",
+  "<p>Draws text to the screen in the position specified by the <code>x</code> and <code>y</code>\nparameters (and the optional <code>z</code> parameter in clj). A default font\nwill be used unless a font is set with the <a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a>\nfunction. Change the color of the text with the <a href=\"/api/color/setting#fill\">fill</a>\nfunction. The text displays in relation to the\n<a href=\"/api/typography/attributes#text-align\">text-align</a> function, which gives the option to draw to the left,\nright, and center of the coordinates.</p>\n<p>The <code>x1</code>, <code>y1</code>, <code>x2</code> and <code>y2</code> parameters define a rectangular area\nto display within and may only be used with string data. For text\ndrawn inside a rectangle, the coordinates are interpreted based on\nthe current <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a> setting.</p>\n",
   :what :fn},
  available-fonts
  {:args #{[]},
@@ -853,7 +853,7 @@
   :processing-name "keyCode",
   :processing-link "https://processing.org/reference/keyCode.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/keyCode",
   :docstring
   "<p>The variable keyCode is used to detect special keys such as the UP,\nDOWN, LEFT, RIGHT arrow keys and ALT, CONTROL, SHIFT. When checking\nfor these keys, it's first necessary to check and see if the key is\ncoded. This is done with the conditional <code>(= (key) CODED)</code>.</p>\n<p>The keys included in the ASCII specification (BACKSPACE, TAB, ENTER,\nRETURN, ESC, and DELETE) do not require checking to see if they key\nis coded, and you should simply use the key variable instead of\n<a href=\"/api/input/keyboard#key-code\">key-code</a>. If you're making cross-platform projects, note that the\nENTER key is commonly used on PCs and Unix and the RETURN key is\nused instead on Macintosh. Check for both ENTER and RETURN to make\nsure your program will work for all platforms.</p>\n<p>For users familiar with Java, the values for UP and DOWN are simply\nshorter versions of Java's <code>KeyEvent.VK_UP</code> and\n<code>KeyEvent.VK_DOWN</code>. Other keyCode values can be found in the Java\nKeyEvent reference.</p>\n",
   :what :fn},
@@ -1153,7 +1153,7 @@
   :processing-name "pmouseX",
   :processing-link "https://processing.org/reference/pmouseX.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/pmouseX",
   :docstring
   "<p>Horizontal coordinate of the mouse in the previous frame</p>\n",
   :what :fn},
@@ -1201,7 +1201,7 @@
   :processing-link
   "https://processing.org/reference/mousePressed.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/mouseIsPressed",
   :docstring
   "<p>true if a mouse button is pressed, false otherwise.</p>\n",
   :what :fn},
@@ -1216,7 +1216,7 @@
   :processing-name "keyPressed",
   :processing-link "https://processing.org/reference/keyPressed.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/keyIsPressed",
   :docstring
   "<p>true if any key is currently pressed, false otherwise.</p>\n",
   :what :fn},
@@ -1535,7 +1535,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/arc",
   :docstring
-  "<p>Draws an arc in the display window. Arcs are drawn along the outer\nedge of an ellipse defined by the <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>\nparameters. The origin or the arc's ellipse may be changed with the\n<a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a> function. The <code>start</code> and <code>stop</code> parameters specify the\nangles at which to draw the arc. The <code>mode</code> is either <code>:open</code>, <code>:chord</code> or <code>:pie</code>.</p>\n",
+  "<p>Draws an arc in the display window. Arcs are drawn along the outer\nedge of an ellipse defined by the <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>\nparameters. The origin or the arc's ellipse may be changed with the\n<a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a> function. The <code>start</code> and <code>stop</code> parameters specify\nthe angles at which to draw the arc. The <code>mode</code> is either <code>:open</code>,\n<code>:chord</code> or <code>:pie</code>.</p>\n",
   :what :fn},
  text-align
  {:args
@@ -1580,7 +1580,7 @@
   :processing-name "mouseX",
   :processing-link "https://processing.org/reference/mouseX.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/mouseX",
   :docstring "<p>Current horizontal coordinate of the mouse.</p>\n",
   :what :fn},
  mag
@@ -1702,7 +1702,7 @@
   :requires-bindings false,
   :p5js-link nil,
   :docstring
-  "<p>Define and start a sketch and bind it to a var with the symbol\n<code>app-name</code>. If any of the options to the various callbacks are\nsymbols, it wraps them in a call to var to ensure they aren't\ninlined and that redefinitions to the original functions are reflected in\nthe visualisation.</p>\n<ul>\n<li><code>:size</code>           - A vector of width and height for the sketch or :fullscreen.\nDefaults to <code>[500 300]</code>. If you're using :fullscreen you may\nwant to enable present mode - :features [:present].\n:fullscreen size works only in Clojure. In ClojureScript\nall sketches are support fullscreen when you press F11.</li>\n<li><code>:renderer</code>       - Specifies the renderer type. One of <code>:p2d</code>, <code>:p3d</code>, <code>:java2d</code>,\n<code>:opengl</code>, <code>:pdf</code>, <code>:svg</code>). Defaults to <code>:java2d</code>. <code>:dxf</code> renderer\ncan't be used as sketch renderer. Use <a href=\"/api/output/files#begin-raw\">begin-raw</a> method\ninstead. In clojurescript only <code>:p2d</code> and <code>:p3d</code> renderers\nare supported.</li>\n<li><code>:output-file</code>    - Specifies an output file path. Only used in <code>:pdf</code> and <code>:svg</code>\nmodes. Not supported in clojurescript. When writing to a\nfile, call <a href=\"/api/structure#exit\">exit</a> at the end of the draw call to end\nthe sketch and not write repeatedly to the file.</li>\n<li><code>:title</code>          - A string which will be displayed at the top of\nthe sketch window. Not supported in clojurescript.</li>\n<li><code>:features</code>       - A vector of keywords customizing sketch behaviour.\nSupported features:\n<ul>\n<li><code>:keep-on-top</code>   - Sketch window will always be above other windows.\nNote: some platforms might not support always-on-top windows.\nNot supported in clojurescript.</li>\n<li><code>:exit-on-close</code> - Shutdown JVM  when sketch is closed.\nNot supported in clojurescript.</li>\n<li><code>:resizable</code>     - Makes sketch resizable. Not supported in clojurescript.</li>\n<li><code>:no-safe-fns</code>   - Do not catch and print exceptions thrown inside functions\nprovided to sketch (like draw, <a href=\"/api#mouse-clicked?\">mouse-clicked?</a>,\n<a href=\"/api/input/keyboard#key-pressed?\">key-pressed?</a> and others). By default all exceptions\nthrown inside these functions are caught. This prevents\nsketch from breaking when bad function was provided and\nallows you to fix it and reload it on fly. You can\ndisable this behaviour by enabling <code>:no-safe-fns</code>\nfeature. Not supported in clojurescript.</li>\n<li><code>:present</code>       - Switch to present mode (fullscreen without borders, OS\npanels). You may want to use this feature together with\n<code>:size :fullscreen</code>. Not supported in ClojureScript. In\nClojureScript fullscreen is enabled by pressing F11 and\nit's enabled on all sketches automatically.</li>\n<li><code>:no-start</code>      - Disables autostart if sketch was created using defsketch\nmacro. To start sketch you have to call function created\ndefsketch. Supported only in ClojureScript.\nUsage example: <code>:features [:keep-on-top :present]</code></li>\n</ul>\n</li>\n<li><code>:bgcolor</code>        - Sets background color for unused space in present mode.\nColor is specified in hex format for example\n<code>:bgcolor &quot;#00FFFF&quot;</code> (cyan background)\nNot supported in ClojureScript.</li>\n<li><code>:display</code>        - Sets what display should be used by this sketch.\nDisplays are numbered starting from 0. Example: <code>:display 1</code>.\nNot supported in ClojureScript.</li>\n<li><code>:setup</code>          - A function to be called once when setting the sketch up.</li>\n<li><code>:draw</code>           - A function to be repeatedly called at most n times per\nsecond where n is the target <a href=\"/api/environment#frame-rate\">frame-rate</a> set for\nthe visualisation.</li>\n<li><code>:host</code>           - String id of canvas element or DOM element itself.\nSpecifies host for the sketch. Must be specified in sketch,\nmay be omitted in defsketch. If omitted in defsketch,\n:host is set to the name of the sketch. If element with\nspecified id is not found on the page and page is empty -\nnew canvas element will be created. Used in ClojureScript.</li>\n<li><code>:focus-gained</code>   - Called when the sketch gains focus.\nNot supported in ClojureScript.</li>\n<li><code>:focus-lost</code>     - Called when the sketch loses focus.\nNot supported in ClojureScript.</li>\n<li><code>:mouse-entered</code>  - Called when the mouse enters the sketch window.</li>\n<li><code>:mouse-exited</code>   - Called when the mouse leaves the sketch window</li>\n<li><code>:mouse-pressed</code>  - Called every time a mouse button is pressed.</li>\n<li><code>:mouse-released</code> - Called every time a mouse button is released.</li>\n<li><code>:mouse-clicked</code>  - Called once after a mouse button has been pressed\nand then released.</li>\n<li><code>:mouse-moved</code>    - Called every time the mouse moves and a button is\nnot pressed.</li>\n<li><code>:mouse-dragged</code>  - Called every time the mouse moves and a button is\npressed.</li>\n<li><code>:mouse-wheel</code>    - Called every time mouse wheel is rotated.\nTakes 1 argument - wheel rotation, an int.\nNegative values if the mouse wheel was rotated\nup/away from the user, and positive values\nif the mouse wheel was rotated down/ towards the user</li>\n<li><code>:key-pressed</code>    - Called every time any key is pressed.</li>\n<li><code>:key-released</code>   - Called every time any key is released.</li>\n<li><code>:key-typed</code>      - Called once every time non-modifier keys are\npressed.</li>\n<li><code>:on-close</code>       - Called once, when sketch is closed.\nNot supported in ClojureScript.</li>\n<li><code>:middleware</code>     - Vector of middleware to be applied to the sketch.\nMiddleware will be applied in the same order as in comp\nfunction: [f g] will be applied as <code>(f (g options))</code>.</li>\n<li><code>:settings</code>       - Cousin of <code>:setup</code>. A function to be called once when\nsetting sketch up. Should be used only for <a href=\"/api/shape/attributes#smooth\">smooth</a> and\n<a href=\"/api/shape/attributes#no-smooth\">no-smooth</a>. Due to Processing limitations these functions\ncannot be used neither in <code>:setup</code> nor in <code>:draw</code>.</li>\n</ul>\n",
+  "<p>Define and start a sketch and bind it to a var with the symbol\n<code>app-name</code>. If any of the options to the various callbacks are\nsymbols, it wraps them in a call to var to ensure they aren't\ninlined and that redefinitions to the original functions are reflected in\nthe visualisation.</p>\n<ul>\n<li><code>:size</code>           - A vector of width and height for the sketch or\n<code>:fullscreen</code>. Defaults to <code>[500 300]</code>. If you're using\n<code>:fullscreen</code> you may  want to enable present mode using\n<code>:features [:present]</code>. <code>:fullscreen</code> size works only in\nClojure. In ClojureScript all sketches support\nfullscreen when you press <code>F11</code>.</li>\n<li><code>:renderer</code>       - Specifies the renderer type. One of <code>:p2d</code>, <code>:p3d</code>,\n<code>:java2d</code>, <code>:opengl</code>, <code>:pdf</code>, <code>:svg</code>, <code>:fx2d</code>). Defaults\nto <code>:java2d</code> in Clojure and <code>:p2d</code> in ClojureScript.\n<code>:dxf</code> renderer can't be used as sketch renderer.\nUse <a href=\"/api/output/files#begin-raw\">begin-raw</a> method instead. In Clojurescript only\n<code>:p2d</code> and <code>:p3d</code> renderers are supported.\nMore info on Clojure renderers:\n<a href=\"https://processing.org/reference/environment/#Renderers\">https://processing.org/reference/environment/#Renderers</a></li>\n<li><code>:output-file</code>    - Specifies an output file path. Only used in <code>:pdf</code> and\n<code>:svg</code> modes. Not supported in Clojurescript. When\nwriting to a file, call <a href=\"/api/structure#exit\">exit</a> at the end of the\n<code>draw</code> call to end the sketch and not write repeatedly\nto the file.</li>\n<li><code>:title</code>          - A string which will be displayed at the top of\nthe sketch window. Not supported in Clojurescript.</li>\n<li><code>:features</code>       - A vector of keywords customizing sketch behaviour.\nSupported features:\n<ul>\n<li><code>:keep-on-top</code>   - Sketch window will always be above other windows.\nNote: some platforms might not support always-on-top\nwindows. Not supported in clojurescript.</li>\n<li><code>:exit-on-close</code> - Shutdown JVM  when sketch is closed.\nNot supported in Clojurescript.</li>\n<li><code>:resizable</code>     - Makes sketch resizable. Not supported in Clojurescript.</li>\n<li><code>:no-safe-fns</code>   - Do not catch and print exceptions thrown inside\nfunctions provided to sketch (like draw,\n<a href=\"/api/input/mouse#mouse-pressed?\">mouse-pressed?</a>, <a href=\"/api/input/keyboard#key-pressed?\">key-pressed?</a> and others). By\ndefault all exceptions thrown inside these functions\nare caught. This prevents the sketch from breaking when\na bad function is provided and allows you to fix it and\nreload it on the fly. You can disable this behaviour by\nenabling the <code>:no-safe-fns</code> feature. Not supported in\nClojurescript.</li>\n<li><code>:present</code>       - Switch to present mode (fullscreen without borders, OS\npanels). You may want to use this feature together with\n<code>:size :fullscreen</code>. Not supported in ClojureScript. In\nClojureScript fullscreen is enabled by pressing F11 and\nit's enabled on all sketches automatically.</li>\n<li><code>:no-start</code>      - Disables autostart if sketch was created using the\n<a href=\"/api/environment#defsketch\">defsketch</a> macro. To start sketch you have to call\nfunction created <a href=\"/api/environment#defsketch\">defsketch</a>. Supported only in\nClojureScript.\nUsage example: <code>:features [:keep-on-top :present]</code></li>\n</ul>\n</li>\n<li><code>:bgcolor</code>        - Sets background color for unused space in present mode.\nColor is specified in hex format for example\n<code>:bgcolor &quot;#00FFFF&quot;</code> (cyan background)\nNot supported in ClojureScript.</li>\n<li><code>:display</code>        - Sets what display should be used by this sketch.\nDisplays are numbered starting from 0.\nExample: <code>:display 1</code>.\nNot supported in ClojureScript.</li>\n<li><code>:setup</code>          - A function to be called once when setting the sketch up.</li>\n<li><code>:draw</code>           - A function to be repeatedly called at most n times per\nsecond where n is the target <a href=\"/api/environment#frame-rate\">frame-rate</a> set for\nthe visualisation.</li>\n<li><code>:host</code>           - String id of canvas element or DOM element itself.\nSpecifies host for the sketch. Must be specified in\nsketch, may be omitted in defsketch. If omitted in\n<a href=\"/api/environment#defsketch\">defsketch</a>, <code>:host</code> is set to the name of the sketch.\nIf element with specified id is not found on the page\nand page is empty, a new canvas element will be created.\nUsed in ClojureScript.</li>\n<li><code>:focus-gained</code>   - Called when the sketch gains focus.\nNot supported in ClojureScript.</li>\n<li><code>:focus-lost</code>     - Called when the sketch loses focus. Not supported in\nClojureScript.</li>\n<li><code>:mouse-entered</code>  - Called when the mouse enters the sketch window.</li>\n<li><code>:mouse-exited</code>   - Called when the mouse leaves the sketch window</li>\n<li><code>:mouse-pressed</code>  - Called every time a mouse button is pressed.</li>\n<li><code>:mouse-released</code> - Called every time a mouse button is released.</li>\n<li><code>:mouse-clicked</code>  - Called once after a mouse button has been pressed\nand then released.</li>\n<li><code>:mouse-moved</code>    - Called every time the mouse moves and a button is\nnot pressed.</li>\n<li><code>:mouse-dragged</code>  - Called every time the mouse moves and a button is\npressed.</li>\n<li><code>:mouse-wheel</code>    - Called every time mouse wheel is rotated.\nTakes 1 argument - wheel rotation, an <code>int</code>.\nNegative values if the mouse wheel was rotated\nup/away from the user, and positive values\nif the mouse wheel was rotated down/towards the user.</li>\n<li><code>:key-pressed</code>    - Called every time any key is pressed.</li>\n<li><code>:key-released</code>   - Called every time any key is released.</li>\n<li><code>:key-typed</code>      - Called once every time non-modifier keys are\npressed.</li>\n<li><code>:on-close</code>       - Called once, when sketch is closed.\nNot supported in ClojureScript.</li>\n<li><code>:middleware</code>     - Vector of middleware to be applied to the sketch.\nMiddleware will be applied in the same order as in\n<code>comp</code> function: <code>[f g]</code> will be applied as\n<code>(f (g options))</code>.</li>\n<li><code>:settings</code>       - Cousin of <code>:setup</code>. A function to be called once when\nsetting sketch up. Should be used only for <a href=\"/api/shape/attributes#smooth\">smooth</a>\nand <a href=\"/api/shape/attributes#no-smooth\">no-smooth</a>. Due to Processing limitations these\nfunctions cannot be used neither in <code>:setup</code> nor in\n<code>:draw</code>.</li>\n</ul>\n",
   :what :macro},
  no-stroke
  {:args ({:value [], :type :both}),
@@ -1775,7 +1775,7 @@
   :requires-bindings true,
   :p5js-link nil,
   :docstring
-  "<p>Returns a keyword representing the currently pressed key. Modifier\nkeys are represented as: <code>:up</code>, <code>:down</code>, <code>:left</code>, <code>:right</code>, <code>:alt</code>, <code>:control</code>,\n<code>:shift</code>, <code>:command</code>, <code>:f1-24</code></p>\n",
+  "<p>Returns a keyword representing the currently pressed key. Modifier\nkeys are represented as: <code>:up</code>, <code>:down</code>, <code>:left</code>, <code>:right</code>, <code>:alt</code>,\n<code>:control</code>, <code>:shift</code>, <code>:command</code>, <code>:f1-24</code></p>\n",
   :what :fn},
  blend-mode
  {:args ({:value [mode], :type :both}),
@@ -1933,7 +1933,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/beginContour",
   :docstring
-  "<p>Use the <a href=\"/api/shape/vertex#begin-contour\">begin-contour</a> and <a href=\"/api/shape/vertex#end-contour\">end-contour</a> function to create negative\nshapes within shapes. These functions can only be used within a\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>/<a href=\"/api/shape/vertex#end-shape\">end-shape</a> pair and they only work with the <code>:p2d</code> and <code>:p3d</code>\nrenderers.</p>\n",
+  "<p>Use the <a href=\"/api/shape/vertex#begin-contour\">begin-contour</a> and <a href=\"/api/shape/vertex#end-contour\">end-contour</a> function to create\nnegative shapes within shapes. These functions can only be used\nwithin a <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>/<a href=\"/api/shape/vertex#end-shape\">end-shape</a> pair and they only work with\nthe <code>:p2d</code> and <code>:p3d</code> renderers.</p>\n",
   :what :fn},
  pow
  {:args ({:value [num exponent], :type :both}),
@@ -2067,7 +2067,7 @@
   :processing-name "width",
   :processing-link nil,
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/width",
   :docstring
   "<p>Width of the display window. The value of width is zero until size is\ncalled.</p>\n",
   :what :fn},
@@ -2143,7 +2143,6 @@
   :added "1.6",
   :name debug,
   :type :clj,
-  :processing-name nil,
   :processing-link nil,
   :requires-bindings false,
   :p5js-link nil,
@@ -2225,7 +2224,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/push",
   :docstring
-  "<p>Saves the current style settings onto a 'style stack'. Use with\n<a href=\"/api/structure#pop-style\">pop-style</a> which restores the prior settings. Note that these\nfunctions are always used together. They allow you to change the\nstyle settings and later return to what you had. When a new style is\nstarted with <a href=\"/api/structure#push-style\">push-style</a>, it builds on the current style\ninformation. The <a href=\"/api/structure#push-style\">push-style</a> and <a href=\"/api/structure#pop-style\">pop-style</a> functions can be\nembedded to provide more control.</p>\n<p>The style information controlled by the following functions are\nincluded in the style: <a href=\"/api/color/setting#fill\">fill</a>, <a href=\"/api/color/setting#stroke\">stroke</a>, <a href=\"/api/image/loading-and-displaying#tint\">tint</a>, <a href=\"/api/shape/attributes#stroke-weight\">stroke-weight</a>,\n<a href=\"/api/shape/attributes#stroke-cap\">stroke-cap</a>, <a href=\"/api/shape/attributes#stroke-join\">stroke-join</a>, <a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a>, <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a>, <a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a>,\n<a href=\"/api/shape/loading-and-displaying#shape-mode\">shape-mode</a>, <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>, <a href=\"/api/typography/attributes#text-align\">text-align</a>, <a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a>, <a href=\"/api/typography/attributes#text-mode\">text-mode</a>, <a href=\"/api/typography/attributes#text-size\">text-size</a>,\n<a href=\"/api/typography/attributes#text-leading\">text-leading</a>, <a href=\"/api/lights-camera/material-properties#emissive\">emissive</a>, <a href=\"/api/lights-camera/material-properties#specular\">specular</a>, <a href=\"/api/lights-camera/material-properties#shininess\">shininess</a>, and <a href=\"/api/lights-camera/material-properties#ambient\">ambient</a>.</p>\n",
+  "<p>Saves the current style settings onto a 'style stack'. Use with\n<a href=\"/api/structure#pop-style\">pop-style</a> which restores the prior settings. Note that these\nfunctions are always used together. They allow you to change the\nstyle settings and later return to what you had. When a new style is\nstarted with <a href=\"/api/structure#push-style\">push-style</a>, it builds on the current style\ninformation. The <a href=\"/api/structure#push-style\">push-style</a> and <a href=\"/api/structure#pop-style\">pop-style</a> functions can be\nembedded to provide more control.</p>\n<p>The style information controlled by the following functions are\nincluded in the\nstyle: <a href=\"/api/color/setting#fill\">fill</a>, <a href=\"/api/color/setting#stroke\">stroke</a>, <a href=\"/api/image/loading-and-displaying#tint\">tint</a>, <a href=\"/api/shape/attributes#stroke-weight\">stroke-weight</a>,\n<a href=\"/api/shape/attributes#stroke-cap\">stroke-cap</a>, <a href=\"/api/shape/attributes#stroke-join\">stroke-join</a>, <a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a>, <a href=\"/api/shape/attributes#rect-mode\">rect-mode</a>,\n<a href=\"/api/shape/attributes#ellipse-mode\">ellipse-mode</a>, <a href=\"/api/shape/loading-and-displaying#shape-mode\">shape-mode</a>, <a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>, <a href=\"/api/typography/attributes#text-align\">text-align</a>,\n<a href=\"/api/typography/loading-and-displaying#text-font\">text-font</a>, <a href=\"/api/typography/attributes#text-mode\">text-mode</a>, <a href=\"/api/typography/attributes#text-size\">text-size</a>, <a href=\"/api/typography/attributes#text-leading\">text-leading</a>,\n<a href=\"/api/lights-camera/material-properties#emissive\">emissive</a>, <a href=\"/api/lights-camera/material-properties#specular\">specular</a>, <a href=\"/api/lights-camera/material-properties#shininess\">shininess</a>, and <a href=\"/api/lights-camera/material-properties#ambient\">ambient</a>.</p>\n",
   :what :fn},
  bezier-vertex
  {:args
@@ -2306,7 +2305,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/curvePoint",
   :docstring
-  "<p>Evaluates the curve at point <code>t</code> for points <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>. The parameter\n<code>t</code> varies between 0 and 1, <code>a</code> and <code>d</code> are points on the curve, and <code>b</code> and <code>c</code>\nare the control points. This can be done once with the x\ncoordinates and a second time with the y coordinates to get the\nlocation of a curve at <code>t</code>.</p>\n",
+  "<p>Evaluates the curve at point <code>t</code> for points <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>. The\nparameter <code>t</code> varies between 0 and 1, <code>a</code> and <code>d</code> are points on the\ncurve, and <code>b</code> and <code>c</code> are the control points. This can be done once\nwith the x coordinates and a second time with the y coordinates to\nget the location of a curve at <code>t</code>.</p>\n",
   :what :fn},
  state
  {:args ({:value [], :type :both} {:value [key], :type :both}),
@@ -2341,7 +2340,7 @@
  resize
  {:args ({:value [img w h], :type :both}),
   :category "Image",
-  :p5js-name "resize()",
+  :p5js-name "Image.resize()",
   :added "2.1.0",
   :name resize,
   :type :both,
@@ -2349,7 +2348,7 @@
   :processing-link
   "https://processing.org/reference/PImage_resize_.html",
   :requires-bindings true,
-  :p5js-link "https://p5js.org/reference/#/p5/resize",
+  :p5js-link "https://p5js.org/reference/#/p5.Image/resize",
   :docstring
   "<p>Resize the image to a new width and height.\nTo make the image scale proportionally, use 0 as the value for the wide or\nhigh parameter. For instance, to make the width of an image 150 pixels,\nand change the height using the same proportion, use <code>(resize 150 0)</code>.</p>\n<p>Even though a <code>PGraphics</code> is technically a <code>PImage</code>, it is not possible\nto rescale the image data found in a <code>PGraphics</code>.\n(It's simply not possible to do this consistently across renderers:\ntechnically infeasible with P3D, or what would it even do with PDF?)\nIf you want to resize <code>PGraphics</code> content, first get a copy of its image data\nusing the get() method, and call resize() on the <code>PImage</code> that is returned.</p>\n",
   :what :fn},
@@ -2758,7 +2757,7 @@
   :processing-name "pmouseY",
   :processing-link "https://processing.org/reference/pmouseY.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/pmouseY",
   :docstring
   "<p>Vertical coordinate of the mouse in the previous frame</p>\n",
   :what :fn},
@@ -2891,7 +2890,7 @@
   :processing-name "focused",
   :processing-link "https://processing.org/reference/focused.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/focused",
   :docstring
   "<p>Returns <code>true</code> if the applet has focus, <code>false</code> otherwise.</p>\n",
   :what :fn},
@@ -2970,7 +2969,7 @@
   :requires-bindings true,
   :p5js-link nil,
   :docstring
-  "<p>Macro for drawing on graphics which saves result in the file at the end.\nSimilar to <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. <a href=\"/api/output/files#do-record\">do-record</a> assumed to be used with <code>:pdf</code>\ngraphics.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(q/do-record (q/create-graphics 200 200 :pdf &quot;output.pdf&quot;)\n  (q/fill 250 0 0)\n  (q/ellipse 100 100 150 150))\n</code></pre>\n",
+  "<p>Macro for drawing on graphics which saves result in the file at the end.\nSimilar to <a href=\"/api/rendering#with-graphics\">with-graphics</a> macro. <a href=\"/api/output/files#do-record\">do-record</a> assumed to be used\nwith <code>:pdf</code> graphics.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(q/do-record (q/create-graphics 200 200 :pdf &quot;output.pdf&quot;)\n  (q/fill 250 0 0)\n  (q/ellipse 100 100 150 150))\n</code></pre>\n",
   :what :macro},
  red
  {:args ({:value [c], :type :both}),
@@ -3190,7 +3189,7 @@
   :requires-bindings true,
   :p5js-link nil,
   :docstring
-  "<p>Originally named filter in Processing Language.\nFilters the display window with given shader (only in <code>:p2d</code> and <code>:p3d</code> modes).</p>\n",
+  "<p>Originally named filter in Processing Language. Filters the display\nwindow with given shader (only in <code>:p2d</code> and <code>:p3d</code> modes).</p>\n",
   :what :fn},
  curve-detail
  {:args ({:value [detail], :type :both}),
@@ -3235,7 +3234,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/endContour",
   :docstring
-  "<p>Use the <a href=\"/api/shape/vertex#begin-contour\">begin-contour</a> and <a href=\"/api/shape/vertex#end-contour\">end-contour</a> function to create negative\nshapes within shapes. These functions can only be within a\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>/<a href=\"/api/shape/vertex#end-shape\">end-shape</a> pair and they only work with the <code>:p2d</code> and <code>:p3d</code>\nrenderers.</p>\n",
+  "<p>Use the <a href=\"/api/shape/vertex#begin-contour\">begin-contour</a> and <a href=\"/api/shape/vertex#end-contour\">end-contour</a> function to create\nnegative shapes within shapes. These functions can only be within a\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>/<a href=\"/api/shape/vertex#end-shape\">end-shape</a> pair and they only work with the\n<code>:p2d</code> and <code>:p3d</code> renderers.</p>\n",
   :what :fn},
  sin
  {:args ({:value [angle], :type :both}),
@@ -3629,7 +3628,7 @@
   :processing-name "mouseY",
   :processing-link "https://processing.org/reference/mouseY.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/mouseY",
   :docstring "<p>Current vertical coordinate of the mouse.</p>\n",
   :what :fn},
  mouse-button
@@ -3643,7 +3642,7 @@
   :processing-name "mouseButton",
   :processing-link "https://processing.org/reference/mouseButton.html",
   :requires-bindings true,
-  :p5js-link nil,
+  :p5js-link "https://p5js.org/reference/#/p5/mouseButton",
   :docstring
   "<p>The value of the system variable mouseButton is either <code>:left</code>, <code>:right</code>,\nor <code>:center</code> depending on which button is pressed. <code>nil</code> if no button pressed</p>\n",
   :what :fn},
