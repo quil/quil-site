@@ -115,7 +115,9 @@
                             :lissajous-table {:output-to "public/js/examples/lissajous_table.js"
                                               :entries #{quil-site.examples.lissajous-table}}
                             :fire {:output-to "public/js/examples/fire.js"
-                                   :entries #{quil-site.examples.fire}}}}}
+                                   :entries #{quil-site.examples.fire}}
+                            :fireworks {:output-to "public/js/examples/fireworks.js"
+                                   :entries #{quil-site.examples.fireworks}}}}}
                 {:source-paths ["src/cljs/editor"]
                  :compiler
                  {:output-to "public/js/editor.js"
