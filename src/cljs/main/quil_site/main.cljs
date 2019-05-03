@@ -109,7 +109,8 @@
            tooltips)))
 
 (def available-examples
-  ["fire"
+  ["fireworks"
+   "fire"
    "dancer"
    "dry paint"
    "emerald"
