@@ -87,6 +87,10 @@
     float: right;
 }
 
+.sketch #share, .sketch #reset {
+    color: inherit;
+}
+
 body .navbar {
     border-radius: 0px;
 }
