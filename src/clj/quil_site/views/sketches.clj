@@ -34,7 +34,13 @@
            {:data-toggle "tooltip"
             :data-placement "bottom"
             :title "Share sketch via URL."}
-           "Share"]]
+           "Share"]
+          [:div.btn-group
+           [:div.form-group
+            [:select#parinfer.form-control
+             [:option {:value "off"} "Parinfer: Off"]
+             [:option {:value "indent"} "Parinfer: Indent"]
+             [:option {:value "paren"} "Parinfer: Paren"]]]]]
          [:dev#result-status.alert
           {:role "alert"}]]
 

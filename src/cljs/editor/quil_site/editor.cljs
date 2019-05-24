@@ -279,6 +279,14 @@
                                   (reset-iframe)
                                   (report-action "reset")))
   (j/on (j/$ "#share") "click" share)
+  (j/on (j/$ "#parinfer") "change" #(case (.val (j/$ (.-target %)))
+                                      "off" (.disable js/parinferCodeMirror @editor)
+                                      "indent" (do
+                                                 (.enable js/parinferCodeMirror @editor)
+                                                 (.setMode js/parinferCodeMirror @editor "indent"))
+                                      "paren" (do
+                                                (.enable js/parinferCodeMirror @editor)
+                                                (.setMode js/parinferCodeMirror @editor "paren"))))
   (j/on (j/$ "body") "click" "#share-dialog input" #(this-as el (.select el)))
   (j/on (j/$ js/window) "message"
         (fn [event]
