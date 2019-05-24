@@ -263,9 +263,8 @@
              :autoCloseBrackets true
              :extraKeys #js {"Ctrl-Enter" compile-selected}}))
 
-   (.init
-    js/parinferCodeMirror
-    @editor)
+   (.init js/parinferCodeMirror @editor)
+   (.disable js/parinferCodeMirror @editor)
 
   (let [id (j/data (j/$ "#source") "sketch-id")
         local (j/data (j/$ "#source") "is-local")]
