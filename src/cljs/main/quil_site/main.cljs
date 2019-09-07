@@ -117,6 +117,7 @@
    "matrix"
    "equilibrium"
    "hyper"
+   "cluster"
    "leaf"
    "colorjoy"
    "nanoscopic"
