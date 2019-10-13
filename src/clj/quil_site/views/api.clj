@@ -12,7 +12,7 @@
    ["Math" "Data" "State"]
    ["Shape"]
    ["Lights, Camera" "Environment"]
-   ["Input" "Output" "Structure" "Middleware"]])
+   ["Input" "Output" "Structure" "Middleware" "Debugging"]])
 
 (defn as-url [str]
   (-> str

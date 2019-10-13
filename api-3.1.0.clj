@@ -69,7 +69,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/key",
   :docstring
-  "<p>Contains the value of the most recent key on the keyboard that was\nused (either pressed or released).</p>\n<p>For non-ASCII keys, use the keyCode variable. The keys included in\nthe ASCII specification (BACKSPACE, TAB, ENTER, RETURN, ESC, and\nDELETE) do not require checking to see if they key is coded, and you\nshould simply use the key variable instead of keyCode If you're\nmaking cross-platform projects, note that the ENTER key is commonly\nused on PCs and Unix and the RETURN key is used instead on\nMacintosh. Check for both ENTER and RETURN to make sure your program\nwill work for all platforms.</p>\n",
+  "<p>Contains the value of the most recent key on the keyboard that was\nused (either pressed or released).</p>\n<p>For non-ASCII keys, use <a href=\"/api/input/keyboard#key-code\">key-code</a>. The keys included in\nthe ASCII specification (<code>BACKSPACE</code>, <code>TAB</code>, <code>ENTER</code>, <code>RETURN</code>, <code>ESC</code>, and\n<code>DELETE</code>) do not require checking to see if the key is coded, and you\nshould simply use <a href=\"/api/input/keyboard#raw-key\">raw-key</a> instead of <a href=\"/api/input/keyboard#key-code\">key-code</a>. If you're\nmaking cross-platform projects, note that the <code>ENTER</code> key is commonly\nused on PCs and Unix and the <code>RETURN</code> key is used instead on\nMacintosh. Check for both <code>ENTER</code> and <code>RETURN</code> to make sure your program\nwill work for all platforms.</p>\n",
   :what :fn},
  text-char
  {:args
@@ -153,7 +153,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/blend",
   :docstring
-  "<p>Blends a region of pixels from one image into another with full alpha\nchannel support. If <code>src</code> is not specified it defaults to\n<a href=\"/api/environment#current-graphics\">current-graphics</a>. If <code>dest-img</code> is not specified it defaults to\n<a href=\"/api/environment#current-graphics\">current-graphics</a>.</p>\n<p>Note: it is recommended to use <a href=\"/api/image/rendering#blend-mode\">blend-mode</a> instead of <a href=\"/api/image/pixels#blend\">blend</a>.</p>\n<p>Available blend modes are:</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:overlay</code>    - A mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - Mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay,\nbut not as harsh.</li>\n<li><code>:dodge</code>      - Lightens light tones and increases contrast, ignores\ndarks.\nCalled &quot;Color Dodge&quot; in Illustrator and Photoshop.</li>\n<li><code>:burn</code>       - Darker areas are applied, increasing contrast, ignores\nlights. Called &quot;Color Burn&quot; in Illustrator and\nPhotoshop.</li>\n</ul>\n<p>In clj the following blend modes are also supported:\n<code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</p>\n<p>In cljs the following blend modes are also supported:\n<code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</p>\n",
+  "<p>Blends a region of pixels from one image into another with full alpha\nchannel support. If <code>src-img</code> is not specified it defaults to\n<a href=\"/api/environment#current-graphics\">current-graphics</a>. If <code>dest-img</code> is not specified it defaults to\n<a href=\"/api/environment#current-graphics\">current-graphics</a>.</p>\n<p>Note: it is recommended to use <a href=\"/api/image/rendering#blend-mode\">blend-mode</a> instead of <a href=\"/api/image/pixels#blend\">blend</a>.</p>\n<p>Available blend modes are:</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:overlay</code>    - A mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - Mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay,\nbut not as harsh.</li>\n<li><code>:dodge</code>      - Lightens light tones and increases contrast, ignores\ndarks.\nCalled &quot;Color Dodge&quot; in Illustrator and Photoshop.</li>\n<li><code>:burn</code>       - Darker areas are applied, increasing contrast, ignores\nlights. Called &quot;Color Burn&quot; in Illustrator and\nPhotoshop.</li>\n</ul>\n<p>In clj the following blend modes are also supported:\n<code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</p>\n<p>In cljs the following blend modes are also supported:\n<code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</p>\n",
   :what :fn},
  frame-count
  {:args ({:value [], :type :both}),
@@ -445,7 +445,7 @@
   :requires-bindings false,
   :p5js-link "https://p5js.org/reference/#/p5/radians",
   :docstring
-  "<p>Converts a degree measurement to its corresponding value in\nradians. Radians and degrees are two ways of measuring the same\nthing. There are 360 degrees in a circle and 2*PI radians in a\ncircle. For example, 90Â° = PI/2 = 1.5707964. All trigonometric\nmethods require their parameters to be specified in radians.</p>\n",
+  "<p>Converts a <code>degrees</code> measurement to its corresponding value in\nradians. Radians and degrees are two ways of measuring the same\nthing. There are 360 degrees in a circle and <code>2*PI</code> radians in a\ncircle. For example, <code>90° = PI/2 = 1.5707964</code>. All\ntrigonometric methods require their parameters to be specified in\nradians.</p>\n",
   :what :fn},
  degrees
  {:args ({:value [radians], :type :both}),
@@ -459,7 +459,7 @@
   :requires-bindings false,
   :p5js-link nil,
   :docstring
-  "<p>Converts a radian measurement to its corresponding value in\ndegrees. Radians and degrees are two ways of measuring the same\nthing. There are 360 degrees in a circle and <code>(* 2 Math/PI)</code> radians\nin a circle. For example, <code>(= 90Â° (/ Math/PI 2) 1.5707964)</code>. All\ntrigonometric methods in Processing require their parameters to be\nspecified in radians.</p>\n",
+  "<p>Converts a <code>radians</code> measurement to its corresponding value in\ndegrees. Radians and degrees are two ways of measuring the same\nthing. There are 360 degrees in a circle and <code>2*PI</code> radians in a\ncircle. For example, <code>90° = PI/2 = 1.5707964</code>. All\ntrigonometric methods in Processing require their parameters to be\nspecified in radians.</p>\n",
   :what :fn,
   :p5j-name "degrees()"},
  acos
@@ -624,7 +624,7 @@
   :requires-bindings false,
   :p5js-link nil,
   :docstring
-  "<p>Enables navigation over 2D sketch. Drag mouse to change the center of the\nsketch and mouse wheel controls zoom. This middleware requires fun-mode.</p>\n<p>Customization</p>\n<p>You can customize this middleware by providing map as\n:navigation-2d option in defsketch/sketch. Map can have following\noptional keys:</p>\n<p>:position - vector of 2 numbers, x and y - center of the screen.\nDefault is width/2, height/2.</p>\n<p>:zoom - number indicating current zoom level. Default is 1.</p>\n<p>Accessing position information from sketch</p>\n<p>navigation-2d uses fun-mode under the hood so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under :navigation-2d key in the\nstate map. Position consists of 2 values: :position and :zoom.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Usage example:</p>\n<p>(q/defsketch my-sketch\n...\n:middleware [m/fun-mode m/navigation-2d])</p>\n",
+  "<p>Enables navigation over 2D sketch. Drag mouse to change the center of the\nsketch and mouse wheel controls zoom. This middleware requires <a href=\"/api/middleware#fun-mode\">fun-mode</a>.</p>\n<p>Customization</p>\n<p>You can customize this middleware by providing a map as\n<code>:navigation-2d</code> option in <a href=\"/api#quil.sketch/defsketch\">quil.sketch/defsketch</a>/<a href=\"/api#quil.sketch/sketch\">quil.sketch/sketch</a>.\nThe map can have the following optional keys:</p>\n<ul>\n<li>\n<p><code>:position</code> - vector of 2 numbers, x and y - center of the screen.\nDefault is <code>width/2</code>, <code>height/2</code>.</p>\n</li>\n<li>\n<p><code>:zoom</code> - number indicating current zoom level. Default is <code>1</code>.</p>\n</li>\n</ul>\n<p>Accessing position information from a sketch</p>\n<p><a href=\"/api/middleware#navigation-2d\">navigation-2d</a> uses <a href=\"/api/middleware#fun-mode\">fun-mode</a> under the hood so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under <code>:navigation-2d</code> key in the\nstate map. Position consists of 2 values: <code>:position</code> and <code>:zoom</code>.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(q/defsketch my-sketch\n  ...\n  :middleware [m/fun-mode m/navigation-2d])\n</code></pre>\n",
   :what :fn},
  color-mode
  {:args
@@ -767,6 +767,20 @@
   :p5js-link nil,
   :docstring
   "<p>A sequence of strings representing the fonts on this system\navailable for use.</p>\n<pre><code class=\"language-clojure\">Because of limitations in Java, not all fonts can be used and some\nmight work with one operating system and not others. When sharing a\nsketch with other people or posting it on the web, you may need to\ninclude a `.ttf` or `.otf` version of your font in the data directory of\nthe sketch because other people might not have the font installed on\ntheir computer. Only fonts that can legally be distributed should be\nincluded with a sketch.\n</code></pre>\n",
+  :what :fn},
+ print-every-n-millisec
+ {:args ({:value [n & more], :type :both}),
+  :category "Debugging",
+  :p5js-name nil,
+  :added "3.1.0",
+  :name print-every-n-millisec,
+  :type :both,
+  :processing-name nil,
+  :processing-link nil,
+  :requires-bindings true,
+  :p5js-link nil,
+  :docstring
+  "<p>Prints the provided arguments every <code>n</code> milliseconds.</p>\n",
   :what :fn},
  clear
  {:args ({:value [], :type :both}),
@@ -942,7 +956,7 @@
   :requires-bindings true,
   :p5js-link nil,
   :docstring
-  "<p>Retrieve sketch-specific state-atom. All changes to the\natom will be reflected in the state.</p>\n<p>(set-state! :foo 1)\n(state :foo) ;=&gt; 1\n(swap! (state-atom) update-in [:foo] inc)\n(state :foo) ;=&gt; 2</p>\n",
+  "<p>Retrieve sketch-specific state-atom. All changes to the\natom will be reflected in the state.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(set-state! :foo 1)\n(state :foo) ;=&gt; 1\n(swap! (state-atom) update-in [:foo] inc)\n(state :foo) ;=&gt; 2\n</code></pre>\n",
   :what :fn},
  load-image
  {:args ({:value [filename], :type :both}),
@@ -1065,7 +1079,7 @@
   :requires-bindings false,
   :p5js-link nil,
   :docstring
-  "<p>Pauses sketch if any of user-provided handlers throws error.\nIt allows to fix the error on the fly and continue sketch.\nMay be good alternative to default '500ms pause if exception'\nbehaviour.</p>\n",
+  "<p>Pauses sketch if any of the user-provided handlers throws an error.\nIt allows to fix the error on the fly and continue sketch.\nMay be good alternative to default '500ms pause if exception'\nbehaviour.</p>\n",
   :what :fn},
  hour
  {:args ({:value [], :type :both}),
@@ -1282,7 +1296,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/pixelDensity",
   :docstring
-  "<p>It makes it possible for Processing to render using all of the pixels\non high resolutions screens like Apple Retina displays and Windows\nHigh-DPI displays. Possible values 1 or 2. Must be called only from\n:settings handler. To get density of the current screen you can use\nthe <a href=\"/api/environment#display-density\">display-density</a> function.</p>\n",
+  "<p>It makes it possible for Processing to render using all of the pixels\non high resolutions screens like Apple Retina displays and Windows\nHigh-DPI displays. Possible values 1 or 2. Must be called only from\n<code>:settings</code> handler. To get density of the current screen you can use\nthe <a href=\"/api/environment#display-density\">display-density</a> function.</p>\n",
   :what :fn},
  begin-raw
  {:args #{[renderer filename]},
@@ -1518,7 +1532,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/color",
   :docstring
-  "<p>Creates an integer representation of a color. The parameters are\ninterpreted as RGB or HSB values depending on the current\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. The default mode is RGB values from 0 to 255 and\ntherefore, the function call <code>(color 255 204 0)</code> will return a bright\nyellow. Args are cast to floats.</p>\n<ul>\n<li>r - red or hue value</li>\n<li>g - green or saturation value</li>\n<li>b - blue or brightness value</li>\n<li>a - alpha value</li>\n</ul>\n",
+  "<p>Creates an integer representation of a color. The parameters are\ninterpreted as RGB or HSB values depending on the current\n<a href=\"/api/color/creating-and-reading#color-mode\">color-mode</a>. The default mode is RGB values from 0 to 255 and\ntherefore, the function call <code>(color 255 204 0)</code> will return a bright\nyellow. Args are cast to floats.</p>\n<ul>\n<li><code>r</code> - red or hue value</li>\n<li><code>g</code> - green or saturation value</li>\n<li><code>b</code> - blue or brightness value</li>\n<li><code>a</code> - alpha value</li>\n</ul>\n",
   :what :fn},
  arc
  {:args
@@ -1790,7 +1804,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/blendMode",
   :docstring
-  "<p>Blends the pixels in the display window according to the defined mode.\nThere is a choice of the following modes to blend the source pixels (A)\nwith the ones of pixels already in the display window (B):</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: C = A*factor + B</li>\n<li><code>:add</code>        - additive blending with white clip:\nC = min(A*factor + B, 255)</li>\n<li><code>:subtract</code>   - subtractive blending with black clip:\nC = max(B - A*factor, 0)</li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\nC = min(A*factor, B)</li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\nC = max(A*factor, B)</li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - Multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - Opposite multiply, uses inverse values of the colors.</li>\n<li><code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</li>\n<li><code>:overlay</code>    - mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values,\nand screens light values.</li>\n<li><code>:hard-light</code> - :screen when greater than 50% gray, <code>:multiply</code> when lower.</li>\n<li><code>:soft-light</code> - mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay, but\nnot as harsh.</li>\n<li><code>:dodge</code>      - lightens light tones and increases contrast, ignores darks.</li>\n<li><code>:burn</code>       - darker areas are applied, increasing contrast, ignores\nlights.</li>\n</ul>\n<p>Note: in clj <code>:hard-light</code>, <code>:soft-light</code>, <code>:overlay</code>, <code>:dodge</code>, <code>:burn</code>\nmodes are not supported. In cljs <code>:subtract</code> mode is not supported.</p>\n<p>factor is the alpha value of the pixel being drawn</p>\n",
+  "<p>Blends the pixels in the display window according to the defined <code>mode</code>.\nThere is a choice of the following modes to blend the source pixels (A)\nwith the ones of pixels already in the display window (B):</p>\n<ul>\n<li><code>:blend</code>      - linear interpolation of colours: <code>C = A*factor + B</code></li>\n<li><code>:add</code>        - additive blending with white clip:\n<code>C = min(A*factor + B, 255)</code></li>\n<li><code>:subtract</code>   - subtractive blending with black clip:\n<code>C = max(B - A*factor, 0)</code></li>\n<li><code>:darkest</code>    - only the darkest colour succeeds:\n<code>C = min(A*factor, B)</code></li>\n<li><code>:lightest</code>   - only the lightest colour succeeds:\n<code>C = max(A*factor, B)</code></li>\n<li><code>:difference</code> - subtract colors from underlying image.</li>\n<li><code>:exclusion</code>  - similar to <code>:difference</code>, but less extreme.</li>\n<li><code>:multiply</code>   - multiply the colors, result will always be darker.</li>\n<li><code>:screen</code>     - opposite of <code>:multiply</code>, uses inverse values of the colors.</li>\n<li><code>:replace</code>    - the pixels entirely replace the others and don't utilize\nalpha (transparency) values.</li>\n<li><code>:overlay</code>    - mix of <code>:multiply</code> and <code>:screen</code>. Multiplies dark values,\nand screens light values.</li>\n<li><code>:hard-light</code> - <code>:screen</code> when greater than 50% gray, <code>:multiply</code> when\nlower.</li>\n<li><code>:soft-light</code> - mix of <code>:darkest</code> and <code>:lightest</code>. Works like :overlay, but\nnot as harsh.</li>\n<li><code>:dodge</code>      - lightens light tones and increases contrast, ignores darks.</li>\n<li><code>:burn</code>       - darker areas are applied, increasing contrast, ignores\nlights.</li>\n</ul>\n<p>Note: in clj <code>:hard-light</code>, <code>:soft-light</code>, <code>:overlay</code>, <code>:dodge</code>, <code>:burn</code>\nmodes are not supported. In cljs <code>:subtract</code> mode is not supported.</p>\n<p><code>factor</code> is the alpha value of the pixel being drawn</p>\n",
   :what :fn},
  dist
  {:args
@@ -1997,12 +2011,12 @@
   "<p>Returns the ascent of the current font at its current size. This\ninformation is useful for determining the height of the font above\nthe baseline. For example, adding the <a href=\"/api/typography/metrics#text-ascent\">text-ascent</a> and <a href=\"/api/typography/metrics#text-descent\">text-descent</a>\nvalues will give you the total height of the line.</p>\n",
   :what :fn},
  shininess
- {:args #{[shine]},
+ {:args ({:value [shine], :type :both}),
   :category "Lights, Camera",
   :added "1.0",
   :name shininess,
   :subcategory "Material Properties",
-  :type :clj,
+  :type :both,
   :processing-name "shininess()",
   :processing-link "https://processing.org/reference/shininess_.html",
   :requires-bindings true,
@@ -2245,12 +2259,12 @@
   "<p>Specifies vertex coordinates for Bezier curves. Each call to\n<a href=\"/api/shape/vertex#bezier-vertex\">bezier-vertex</a> defines the position of two control points and one\nanchor point of a Bezier curve, adding a new segment to a line or\nshape. The first time <a href=\"/api/shape/vertex#bezier-vertex\">bezier-vertex</a> is used within a <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>\ncall, it must be prefaced with a call to <a href=\"/api/shape/vertex#vertex\">vertex</a> to set the first\nanchor point. This function must be used between <a href=\"/api/shape/vertex#begin-shape\">begin-shape</a> and\n<a href=\"/api/shape/vertex#end-shape\">end-shape</a> and only when there is no parameter specified to\n<a href=\"/api/shape/vertex#begin-shape\">begin-shape</a>.</p>\n",
   :what :fn},
  light-falloff
- {:args #{[constant linear quadratic]},
+ {:args ({:value [constant linear quadratic], :type :both}),
   :category "Lights, Camera",
   :added "1.0",
   :name light-falloff,
   :subcategory "Lights",
-  :type :clj,
+  :type :both,
   :processing-name "lightFalloff()",
   :processing-link
   "https://processing.org/reference/lightFalloff_.html",
@@ -2318,7 +2332,7 @@
   :requires-bindings true,
   :p5js-link nil,
   :docstring
-  "<p>Retrieve sketch-specific state by key. Must initially call\nset-state! to store state. If no parameter passed whole\nstate map is returned.</p>\n<p>(set-state! :foo 1)\n(state :foo) ;=&gt; 1\n(state) ;=&gt; {:foo 1}</p>\n",
+  "<p>Retrieve sketch-specific state by <code>key</code>. Must initially call\n<a href=\"/api/state#set-state!\">set-state!</a> to store state. If no parameter is passed the whole\nstate map is returned.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(set-state! :foo 1)\n(state :foo) ;=&gt; 1\n(state) ;=&gt; {:foo 1}\n</code></pre>\n",
   :what :fn},
  load-shader
  {:args
@@ -2657,7 +2671,7 @@
   :requires-bindings false,
   :p5js-link nil,
   :docstring
-  "<p>Introduces function mode. Adds 'update' function which takes current\nstate and returns new state. Makes all other functions (setup, draw,\nmouse-click, etc) state-aware. See wiki for more details.</p>\n",
+  "<p>Introduces <code>function mode</code>. Adds <code>update</code> function which takes current state\nand returns new state. Makes all other functions (<code>setup</code>, <code>draw</code>,\n<code>mouse-click</code>, etc) state-aware.\nSee <a href=\"https://github.com/quil/quil/wiki/Functional-mode-%28fun-mode%29\">wiki</a>\nfor more details.</p>\n",
   :what :fn},
  stroke-cap
  {:args ({:value [cap-mode], :type :both}),
@@ -2924,6 +2938,20 @@
   :docstring
   "<p>Draw a torus with given <code>radius</code> and <code>tube-radius</code>.</p>\n<pre><code class=\"language-clojure\">  Optional parameters:\n    * `detail-x` - number of segments, the more segments the smoother geometry default is 24\n    * `detail-y` - number of segments, the more segments the smoother geometry default is 16\n</code></pre>\n",
   :what :fn},
+ print-first-n
+ {:args ({:value [n & more], :type :both}),
+  :category "Debugging",
+  :p5js-name nil,
+  :added "3.1.0",
+  :name print-first-n,
+  :type :both,
+  :processing-name nil,
+  :processing-link nil,
+  :requires-bindings true,
+  :p5js-link nil,
+  :docstring
+  "<p>Prints the provided arguments for the first <code>n</code> iterations.</p>\n",
+  :what :fn},
  image-mode
  {:args ({:value [mode], :type :both}),
   :category "Image",
@@ -2937,7 +2965,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/imageMode",
   :docstring
-  "<p>Modifies the location from which images draw. The default <code>mode</code> is <code>:corner</code>.\nAvailable modes are:</p>\n<ul>\n<li><code>:corner</code>  - specifies the location to be the upper left corner and\nuses the fourth and fifth parameters of image to set the\nimage's width and height.</li>\n<li><code>:corners</code> - uses the second and third parameters of image to set the\nlocation of one corner of the image and uses the fourth\nand fifth parameters to set the opposite corner.</li>\n<li><code>:center</code>  - draw images centered at the given x and y position.</li>\n</ul>\n",
+  "<p>Modifies the location from which images draw. The default <code>mode</code> is <code>:corner</code>.\nAvailable modes are:</p>\n<ul>\n<li><code>:corner</code>  - specifies the location to be the upper left corner and\nuses the fourth and fifth parameters of <a href=\"/api/image/loading-and-displaying#image\">image</a> to set the\nimage's width and height.</li>\n<li><code>:corners</code> - uses the second and third parameters of <a href=\"/api/image/loading-and-displaying#image\">image</a> to set the\nlocation of one corner of the image and uses the fourth\nand fifth parameters to set the opposite corner.</li>\n<li><code>:center</code>  - draw images centered at the given x and y position.</li>\n</ul>\n",
   :what :fn},
  line
  {:args
@@ -3118,7 +3146,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/textStyle",
   :docstring
-  "<p>Sets/gets the style of the text for system fonts to <code>:normal</code>, <code>:italic</code>,\nor <code>:bold</code>. Note: this may be is overridden by CSS styling. For\nnon-system fonts (opentype, truetype, etc.) please load styled fonts\ninstead.</p>\n",
+  "<p>Sets/gets the style of the text for system fonts to <code>:normal</code>, <code>:italic</code>,\nor <code>:bold</code> or <code>:bolditalic</code>.</p>\n<pre><code class=\"language-clojure\"> Note: this may be overridden by CSS styling. For non-system\n fonts (opentype, truetype, etc.) please load styled fonts instead.\n</code></pre>\n",
   :what :fn},
  navigation-3d
  {:args ({:value [options], :type :both}),
@@ -3132,15 +3160,15 @@
   :requires-bindings false,
   :p5js-link nil,
   :docstring
-  "<p>Enables navigation in 3D space. Similar to how it is done in\nshooters: WASD navigation, space is go up, drag mouse to look around.\nThis middleware requires fun-mode.</p>\n<p>Navigation</p>\n<ul>\n<li>\n<p>Drag mouse to look around. You can change settings to bind\nmouse-moved instead of mouse-dragged to look around. See\ncustomization info below.</p>\n</li>\n<li>\n<p>Keyboard:</p>\n<ul>\n<li>w - go forward</li>\n<li>s - go backward</li>\n<li>a - strafe left</li>\n<li>d - strafe right</li>\n<li>space - go up</li>\n<li>z - go down, can't bind to ctrl, limitation of Processing</li>\n</ul>\n</li>\n</ul>\n<p>Customization</p>\n<p>You can customize this middleware by providing map as\n:navigation-3d option in defsketch/sketch. Map can have following\noptional keys:</p>\n<p>:position - vector of 3 numbers, initial camera position. Default\nis the same as in 'camera' function.</p>\n<p>:straight - vector of 3 numbers, direction you'll be looking at.\nDefault is [0 0 -1] (looking down).</p>\n<p>:up - vector of 3 numbers, 'up' direction. Default is [0 1 0].</p>\n<p>:pixels-in-360 - number, mouse sensitivity. Defines how many pixels\nyou need to move/drag you mouse to rotate 360 degrees.\nThe less the number the more sensitive is mouse.\nDefault is 1000.</p>\n<p>:step-size - number, number of pixels you move on each key event (wasd).\nDefault is 20.</p>\n<p>:rotate-on - keyword, either :mouse-dragged or :mouse-moved. Specifies\non which mouse event camera should rotate. Default is\n:mouse-dragged.</p>\n<p>Accessing position information from sketch</p>\n<p>navigation-3d uses fun-mode under the hood  so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under :navigation-3d key in the\nstate map. Position consists of 3 values: :position, :straight and :up.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Usage example:</p>\n<p>(q/defsketch my-sketch\n...\n:middleware [m/fun-mode m/navigation-3d])</p>\n<p>See wiki article for more(?) details:\n<a href=\"https://github.com/quil/quil/wiki/Navigation-3D\">https://github.com/quil/quil/wiki/Navigation-3D</a></p>\n",
+  "<p>Enables navigation in 3D space. Similar to how it is done in\nshooters: WASD navigation, space is go up, drag mouse to look around.\nThis middleware requires <a href=\"/api/middleware#fun-mode\">fun-mode</a>.</p>\n<p>Navigation</p>\n<ul>\n<li>\n<p>Drag mouse to look around. You can change settings to bind\nmouse-moved instead of mouse-dragged to look around. See\ncustomization info below.</p>\n</li>\n<li>\n<p>Keyboard:</p>\n<ul>\n<li><code>w</code> - go forward</li>\n<li><code>s</code> - go backward</li>\n<li><code>a</code> - strafe left</li>\n<li><code>d</code> - strafe right</li>\n<li><code>space</code> - go up</li>\n<li><code>z</code> - go down, can't bind to <code>ctrl</code>, limitation of Processing</li>\n</ul>\n</li>\n</ul>\n<p>Customization</p>\n<p>You can customize this middleware by providing a map as\n<code>:navigation-3d</code> option in <a href=\"/api#quil.sketch/defsketch\">quil.sketch/defsketch</a>/<a href=\"/api#quil.sketch/sketch\">quil.sketch/sketch</a>.\nThe map can have the following optional keys:</p>\n<ul>\n<li>\n<p><code>:position</code> - vector of 3 numbers, initial camera position. Default\nis the same as in <a href=\"/api#quil.core/camera\">quil.core/camera</a> function.</p>\n</li>\n<li>\n<p><code>:straight</code> - vector of 3 numbers, direction you'll be looking at.\nDefault is <code>[0 0 -1]</code> (looking down).</p>\n</li>\n<li>\n<p><code>:up</code> - vector of 3 numbers, 'up' direction. Default is <code>[0 1 0]</code>.</p>\n</li>\n<li>\n<p><code>:pixels-in-360</code> - number, mouse sensitivity. Defines how many pixels\nyou need to move/drag your mouse to rotate 360 degrees.\nThe less the number the more sensitive the mouse.\nDefault is <code>1000</code>.</p>\n</li>\n<li>\n<p><code>:step-size</code> - number, number of pixels you move on each key event (wasd).\nDefault is <code>20</code>.</p>\n</li>\n<li>\n<p><code>:rotate-on</code> - keyword, either <code>:mouse-dragged</code> or <code>:mouse-moved</code>. Specifies\non which mouse event camera should rotate. Default is\n<code>:mouse-dragged</code>.</p>\n</li>\n</ul>\n<p>Accessing position information from a sketch</p>\n<p><a href=\"/api/middleware#navigation-3d\">navigation-3d</a> uses <a href=\"/api/middleware#fun-mode\">fun-mode</a> under the hood so all position-related\ninformation is stored in the state map. It means that you can access in\ndraw/update/any handler and modify it if you need to. Position\ninformation is a map which is stored under <code>:navigation-3d</code> key in the\nstate map. Position consists of 3 values: <code>:position</code>, <code>:straight</code> and <code>:up</code>.\nSee &quot;Customization&quot; section above for more details.</p>\n<p>Example:</p>\n<pre><code class=\"language-clojure\">(q/defsketch my-sketch\n  ...\n  :middleware [m/fun-mode m/navigation-3d])\n</code></pre>\n<p>See wiki article for more(?) details:\n<a href=\"https://github.com/quil/quil/wiki/Navigation-3D\">https://github.com/quil/quil/wiki/Navigation-3D</a></p>\n",
   :what :fn},
  lights
- {:args #{[]},
+ {:args ({:value [], :type :both}),
   :category "Lights, Camera",
   :added "1.0",
   :name lights,
   :subcategory "Lights",
-  :type :clj,
+  :type :both,
   :processing-name "lights()",
   :processing-link "https://processing.org/reference/lights_.html",
   :requires-bindings true,
@@ -3649,7 +3677,7 @@
  image
  {:args
   ({:value [img x y], :type :both}
-   {:value [img x y c d], :type :both}),
+   {:value [img x y width height], :type :both}),
   :category "Image",
   :p5js-name "image()",
   :added "1.0",
@@ -3661,7 +3689,7 @@
   :requires-bindings true,
   :p5js-link "https://p5js.org/reference/#/p5/image",
   :docstring
-  "<p>Displays images to the screen. Processing currently works with GIF,\nJPEG, and Targa images. The color of an image may be modified with\nthe <a href=\"/api/image/loading-and-displaying#tint\">tint</a> function and if a GIF has transparency, it will maintain\nits transparency. The <code>img</code> parameter specifies the image to display\nand the <code>x</code> and <code>y</code> parameters define the location of the image from its\nupper-left corner. The image is displayed at its original size\nunless the width and height parameters specify a different size. The\n<a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a> function changes the way the parameters work. A call to\n<code>(image-mode :corners)</code> will change the <code>width</code> and <code>height</code> parameters to\ndefine the x and y values of the opposite corner of the image.</p>\n",
+  "<p>Displays images to the screen. Processing currently works with <code>GIF</code>,\n<code>JPEG</code>, and <code>Targa</code> images. The color of an image may be modified with\nthe <a href=\"/api/image/loading-and-displaying#tint\">tint</a> function and if a <code>GIF</code> has transparency, it will maintain\nits transparency. The <code>img</code> parameter specifies the image to display\nand the <code>x</code> and <code>y</code> parameters define the location of the image from its\nupper-left corner. The image is displayed at its original size\nunless the <code>width</code> and <code>height</code> parameters specify a different size. The\n<a href=\"/api/image/loading-and-displaying#image-mode\">image-mode</a> function changes the way the parameters work. A call to\n<code>(image-mode :corners)</code> will change the <code>width</code> and <code>height</code> parameters to\ndefine the x and y values of the opposite corner of the image.</p>\n",
   :what :fn},
  unbinary
  {:args ({:value [str-val], :type :both}),

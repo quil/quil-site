@@ -11,7 +11,7 @@
   :name "lerp-color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [red (q/color 255 0 0) blue (q/color 0 0 255)] (comment \"draw colors that transition from red to blue\") (dotimes [i 6] (q/fill (q/lerp-color red blue (/ i 5))) (q/rect (* i 70) (* i 70) 100 100))))",
+  "((q/background 255) (let [red (q/color 255 0 0) blue (q/color 0 0 255)] (comment \"draw colors that transition from red to blue\") (dotimes [i 6] (q/fill (q/lerp-color red blue (/ i 5))) (q/rect (inc (* i 70)) (inc (* i 70)) 100 100))))",
   :setup "()",
   :target :cljs}
  {:fns ["current-stroke"],
@@ -19,7 +19,7 @@
   :name "current-stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"set to red\") (q/stroke 255 0 0) (q/rect 0 0 100 100) (let [_ (comment \"remember current color\") cur-stroke (q/current-stroke)] (comment \"change to blue\") (q/stroke 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
+  "((q/background 255) (comment \"set to red\") (q/stroke 255 0 0) (q/rect 1 1 100 100) (let [_ (comment \"remember current color\") cur-stroke (q/current-stroke)] (comment \"change to blue\") (q/stroke 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["current-fill"],
@@ -27,7 +27,7 @@
   :name "current-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"set to red\") (q/fill 255 0 0) (q/rect 0 0 100 100) (let [_ (comment \"remember current color\") cur-fill (q/current-fill)] (comment \"change to blue\") (q/fill 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/fill cur-fill) (q/rect 140 140 100 100)))",
+  "((q/background 255) (comment \"set to red\") (q/fill 255 0 0) (q/rect 1 1 100 100) (let [_ (comment \"remember current color\") cur-fill (q/current-fill)] (comment \"change to blue\") (q/fill 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/fill cur-fill) (q/rect 140 140 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["color-mode"],
@@ -35,7 +35,7 @@
   :name "color-mode",
   :opts {:settings nil},
   :draw
-  "((q/color-mode :rgb 255) (q/background 255) (comment \"use HSB and draw red\") (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100) (comment \"use HSB with different max and draw dark green\") (q/color-mode :hsb 5 10 20) (q/fill 2 10 5) (q/rect 70 70 100 100) (comment \"use RGB with 42 max value and draw 75% transparent blue\") (q/color-mode :rgb 40) (q/fill 0 0 40 30) (q/rect 140 140 100 100) (comment \"use RGB with different max values and draw semitransparent cyan\") (q/color-mode :rgb 5 10 20 30) (q/fill 0 10 20 15) (q/rect 210 210 100 100))",
+  "((q/color-mode :rgb 255) (q/background 255) (comment \"use HSB and draw red\") (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 1 1 100 100) (comment \"use HSB with different max and draw dark green\") (q/color-mode :hsb 5 10 20) (q/fill 2 10 5) (q/rect 70 70 100 100) (comment \"use RGB with 42 max value and draw 75% transparent blue\") (q/color-mode :rgb 40) (q/fill 0 0 40 30) (q/rect 140 140 100 100) (comment \"use RGB with different max values and draw semitransparent cyan\") (q/color-mode :rgb 5 10 20 30) (q/fill 0 10 20 15) (q/rect 210 210 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["color-mode"],
@@ -43,7 +43,7 @@
   :name "color-mode-hsl",
   :opts {:settings nil},
   :draw
-  "((q/color-mode :rgb 255) (q/background 255) (q/color-mode :hsl) (comment \"use red color\") (q/fill 255 255 127) (q/rect 0 0 100 100))",
+  "((q/color-mode :rgb 255) (q/background 255) (q/color-mode :hsl) (comment \"use red color\") (q/fill 255 255 127) (q/rect 1 1 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["color"],
@@ -51,7 +51,7 @@
   :name "color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"black\") (q/fill (q/color 0)) (q/rect 0 0 100 100) (comment \"semitransparent gray\") (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (comment \"purple\") (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (comment \"semitransparent cyan\") (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
+  "((q/background 255) (comment \"black\") (q/fill (q/color 0)) (q/rect 1 1 100 100) (comment \"semitransparent gray\") (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (comment \"purple\") (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (comment \"semitransparent cyan\") (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["brightness"],
@@ -59,7 +59,7 @@
   :name "brightness",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 0 0 100 100) (comment \"use the same brightness but different color\") (q/fill 255 255 (q/brightness dark-green)) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 1 1 100 100) (comment \"use the same brightness but different color\") (q/fill 255 255 (q/brightness dark-green)) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["saturation"],
@@ -67,7 +67,7 @@
   :name "saturation",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 0 0 100 100) (comment \"use the same saturation but different color\") (q/fill 255 (q/saturation dark-green) 255) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 1 1 100 100) (comment \"use the same saturation but different color\") (q/fill 255 (q/saturation dark-green) 255) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["hue"],
@@ -75,7 +75,7 @@
   :name "hue",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 0 0 100 100) (comment \"use the hue (green) but make it bright\") (q/fill (q/hue dark-green) 255 255) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 1 1 100 100) (comment \"use the hue (green) but make it bright\") (q/fill (q/hue dark-green) 255 255) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["blue"],
@@ -83,7 +83,7 @@
   :name "blue",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 0 0 100 100) (comment \"use only blue component of purple\") (q/fill 0 0 (q/blue purple)) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 1 1 100 100) (comment \"use only blue component of purple\") (q/fill 0 0 (q/blue purple)) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["green"],
@@ -91,7 +91,7 @@
   :name "green",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 0 0 100 100) (comment \"use only green component of purple\") (q/fill 0 (q/green purple) 0) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 1 1 100 100) (comment \"use only green component of purple\") (q/fill 0 (q/green purple) 0) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["red"],
@@ -99,7 +99,7 @@
   :name "red",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 0 0 100 100) (comment \"use only red component of purple\") (q/fill (q/red purple) 0 0) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 1 1 100 100) (comment \"use only red component of purple\") (q/fill (q/red purple) 0 0) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["lightness"],
@@ -107,7 +107,7 @@
   :name "lightness",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsl) (let [_ (comment \"blue with low lightness (70 of 255)\") blue (q/color 156 255 70) _ (comment \"extract lightness\") l (q/lightness blue) _ (comment \"create red with same lightness\") red (q/color 0 255 l)] (q/fill blue) (q/rect 0 0 100 100) (q/fill red) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsl) (let [_ (comment \"blue with low lightness (70 of 255)\") blue (q/color 156 255 70) _ (comment \"extract lightness\") l (q/lightness blue) _ (comment \"create red with same lightness\") red (q/color 0 255 l)] (q/fill blue) (q/rect 1 1 100 100) (q/fill red) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["alpha"],
@@ -115,7 +115,7 @@
   :name "alpha",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [_ (comment \"create semitransparent red\") semi-red (q/color 255 0 0 120) _ (comment \"extract alpha value from it\") alph (q/alpha semi-red) _ (comment \"create semitransparent blue using the alpha\") semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 0 0 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [_ (comment \"create semitransparent red\") semi-red (q/color 255 0 0 120) _ (comment \"extract alpha value from it\") alph (q/alpha semi-red) _ (comment \"create semitransparent blue using the alpha\") semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 1 1 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :cljs}
  {:fns ["text-width"],
@@ -131,7 +131,7 @@
   :name "text-style",
   :opts {:settings nil},
   :draw
-  "((q/fill 0) (q/text-style :normal) (q/text \"text-style: normal\" 20 50) (q/text-style :italic) (q/text \"text-style: italic\" 20 100) (q/text-style :bold) (q/text \"text-style: bold\" 20 150))",
+  "((q/fill 0) (q/text-style :normal) (q/text \"text-style: normal\" 20 50) (q/text-style :italic) (q/text \"text-style: italic\" 20 100) (q/text-style :bold) (q/text \"text-style: bold\" 20 150) (q/text-style :bolditalic) (q/text \"text-style: bolditalic\" 20 200))",
   :setup "()",
   :target :cljs}
  {:fns ["text-size"],
@@ -455,7 +455,7 @@
   :ns "quil.snippets.shape.loading-and-displaying",
   :name "shape",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((let [sh (q/state :shp)] (q/shape sh)))",
+  :draw "((q/background 255) (let [sh (q/state :shp)] (q/shape sh)))",
   :setup
   "(let [sh (q/load-shape \"octahedron.obj\")] (q/set-state! :shp sh))",
   :target :cljs}
@@ -480,7 +480,7 @@
   :name "translate",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw 3 identical boxes in 3 different positions\") (comment \"using different translate calls\") (q/translate 100 0) (q/box 50) (q/translate [-100 100]) (q/box 50) (q/translate 0 -100 100) (q/box 50))",
+  "((q/background 255) (comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw 3 identical boxes in 3 different positions\") (comment \"using different translate calls\") (q/translate 100 0) (q/box 50) (q/translate [-100 100]) (q/box 50) (q/translate 0 -100 100) (q/box 50))",
   :setup "()",
   :target :cljs}
  {:fns ["shear-x" "shear-y"],
@@ -496,7 +496,7 @@
   :name "scale",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw box 50% smaller\") (q/with-translation [100 0 0] (q/scale 0.5) (q/box 50) (q/scale 2)) (comment \"draw box 50% narrower but same length/height\") (q/with-translation [0 100 0] (q/scale 1 0.5) (q/box 50) (q/scale 1 2)) (comment \"draw box 50% shorter and 150% taller, but same width\") (q/with-translation [0 0 100] (q/scale 0.5 1 1.5) (q/box 50) (q/scale 2 1 0.75)))",
+  "((q/background 255) (comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw box 50% smaller\") (q/with-translation [100 0 0] (q/scale 0.5) (q/box 50) (q/scale 2)) (comment \"draw box 50% narrower but same length/height\") (q/with-translation [0 100 0] (q/scale 1 0.5) (q/box 50) (q/scale 1 2)) (comment \"draw box 50% shorter and 150% taller, but same width\") (q/with-translation [0 0 100] (q/scale 0.5 1 1.5) (q/box 50) (q/scale 2 1 0.75)))",
   :setup "()",
   :target :cljs}
  {:fns ["rotate-x" "rotate-y" "rotate-z"],
@@ -504,7 +504,7 @@
   :name "rotate-x-y-z",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (q/push-matrix) (comment \"move, rotate x axis and draw box\") (q/translate 100 0 0) (q/rotate-x 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate y axis and draw box\") (q/translate 0 100 0) (q/rotate-y 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate z axis and draw box\") (q/translate 0 0 100) (q/rotate-z 0.5) (q/box 50) (q/pop-matrix))",
+  "((q/background 255) (comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (q/push-matrix) (comment \"move, rotate x axis and draw box\") (q/translate 100 0 0) (q/rotate-x 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate y axis and draw box\") (q/translate 0 100 0) (q/rotate-y 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate z axis and draw box\") (q/translate 0 0 100) (q/rotate-z 0.5) (q/box 50) (q/pop-matrix))",
   :setup "()",
   :target :cljs}
  {:fns ["rotate"],
@@ -576,35 +576,38 @@
   :ns "quil.snippets.shape.primitives-3d",
   :name "torus",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((q/rotate-x (/ q/PI 4)) (q/torus 70 20))",
+  :draw "((q/background 255) (q/rotate-x (/ q/PI 4)) (q/torus 70 20))",
   :setup "()",
   :target :cljs}
  {:fns ["sphere"],
   :ns "quil.snippets.shape.primitives-3d",
   :name "sphere",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((q/camera 200 200 200 0 0 0 0 0 -1) (q/sphere 150))",
+  :draw
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/sphere 150))",
   :setup "()",
   :target :cljs}
  {:fns ["ellipsoid"],
   :ns "quil.snippets.shape.primitives-3d",
   :name "ellipsoid",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((q/ellipsoid 40 60 80))",
+  :draw "((q/background 255) (q/ellipsoid 40 60 80))",
   :setup "()",
   :target :cljs}
  {:fns ["cylinder"],
   :ns "quil.snippets.shape.primitives-3d",
   :name "cylinder",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((q/rotate-x (* q/PI 1.25)) (q/cylinder 40 140))",
+  :draw
+  "((q/background 255) (q/rotate-x (* q/PI 1.25)) (q/cylinder 40 140))",
   :setup "()",
   :target :cljs}
  {:fns ["cone"],
   :ns "quil.snippets.shape.primitives-3d",
   :name "cone",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((q/rotate-x (* q/PI 1.25)) (q/cone 80 140))",
+  :draw
+  "((q/background 255) (q/rotate-x (* q/PI 1.25)) (q/cone 80 140))",
   :setup "()",
   :target :cljs}
  {:fns ["box"],
@@ -612,7 +615,7 @@
   :name "box",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/with-translation [100 0 0] (q/box 70)) (q/with-translation [0 100 0] (q/box 70 100 50)))",
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/with-translation [100 0 0] (q/box 70)) (q/with-translation [0 100 0] (q/box 70 100 50)))",
   :setup "()",
   :target :cljs}
  {:fns ["redraw"],
@@ -663,6 +666,22 @@
   "((q/background 0) (q/camera 100 100 100 0 0 0 0 0 -1) (comment \"set light from the same point as camera [100, 100, 100]\") (q/point-light 255 150 150 100 100 100) (q/box 50))",
   :setup "()",
   :target :cljs}
+ {:fns ["lights"],
+  :ns "quil.snippets.lights-camera.lights",
+  :name "lights",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 0) (q/camera 100 100 100 0 0 0 0 0 -1) (q/lights) (q/box 50))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["light-falloff"],
+  :ns "quil.snippets.lights-camera.lights",
+  :name "light-falloff",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 0) (q/camera 100 100 100 0 0 0 0 0 -1) (q/light-falloff 1 0.008 0) (q/point-light 255 150 150 100 100 100) (q/box 50))",
+  :setup "()",
+  :target :cljs}
  {:fns ["directional-light"],
   :ns "quil.snippets.lights-camera.lights",
   :name "directional-light",
@@ -679,12 +698,28 @@
   "((q/background 0) (q/camera 100 100 100 0 0 0 0 0 1) (q/ambient-light 200 190 230) (q/sphere 50))",
   :setup "()",
   :target :cljs}
+ {:fns ["print-every-n-millisec"],
+  :ns "quil.snippets.debugging",
+  :name "print-every-n-millisec",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (comment \"will print 'foo' every 1000 milliseconds\") (q/print-every-n-millisec 1000 \"foo\"))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["print-first-n"],
+  :ns "quil.snippets.debugging",
+  :name "print-first-n",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (comment \"will print 'foo' the first 5 iterations\") (q/print-first-n 5 \"foo\"))",
+  :setup "()",
+  :target :cljs}
  {:fns ["vertex"],
   :ns "quil.snippets.shape.vertex",
   :name "vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 100 400 200 100 0 0 0 0 -1) (q/line 0 0 0 0 0 150) (q/line 0 0 0 0 150 0) (q/line 0 0 0 150 0 0) (let [txtr (q/create-graphics 100 100)] (q/with-graphics txtr (q/background 255) (comment \"draw belarusian flag, kinda\") (q/fill 255 0 0) (q/rect 0 60 100 40) (q/fill 0 150 0) (q/rect 0 0 100 60)) (comment \"draw blue rect\") (q/fill 0 0 127) (q/begin-shape) (q/vertex 0 0) (q/vertex 100 0) (q/vertex 100 100) (q/vertex 0 100) (q/end-shape :close) (comment \"draw another blue rect\") (q/begin-shape) (q/vertex 0 0 0) (q/vertex 100 0 0) (q/vertex 100 0 100) (q/vertex 0 0 100) (q/end-shape :close) (comment \"draw rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0) (q/vertex 200 0 100 0) (q/vertex 200 100 100 100) (q/vertex 100 100 0 100) (q/end-shape :close) (comment \"draw another rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0 0) (q/vertex 200 0 0 100 0) (q/vertex 200 0 100 100 100) (q/vertex 100 0 100 0 100) (q/end-shape :close)))",
+  "((q/background 255) (q/camera 100 400 200 100 0 0 0 0 -1) (q/line 0 0 0 0 0 150) (q/line 0 0 0 0 150 0) (q/line 0 0 0 150 0 0) (let [txtr (q/create-graphics 100 100)] (q/with-graphics txtr (q/background 255) (comment \"draw belarusian flag, kinda\") (q/fill 255 0 0) (q/rect 0 60 100 40) (q/fill 0 150 0) (q/rect 0 0 100 60)) (comment \"draw blue rect\") (q/fill 0 0 127) (q/begin-shape) (q/vertex 0 0) (q/vertex 100 0) (q/vertex 100 100) (q/vertex 0 100) (q/end-shape :close) (comment \"draw another blue rect\") (q/begin-shape) (q/vertex 0 0 0) (q/vertex 100 0 0) (q/vertex 100 0 100) (q/vertex 0 0 100) (q/end-shape :close) (comment \"draw rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0) (q/vertex 200 0 100 0) (q/vertex 200 100 100 100) (q/vertex 100 100 0 100) (q/end-shape :close) (comment \"draw another rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0 0) (q/vertex 200 0 0 100 0) (q/vertex 200 0 100 100 100) (q/vertex 100 0 100 0 100) (q/end-shape :close)))",
   :setup "()",
   :target :cljs}
  {:fns ["texture"],
@@ -692,7 +727,7 @@
   :name "texture",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((if (zero? (.-width (q/state :image))) (q/text \"Loading\" 10 10) (let [gr (q/state :image)] (q/with-translation [50 0] (q/texture gr) (q/plane 200 200)))))",
+  "((q/background 255) (if (zero? (.-width (q/state :image))) (q/text \"Loading\" 10 10) (let [gr (q/state :image)] (q/with-translation [50 0] (q/texture gr) (q/plane 200 200)))))",
   :setup
   "(q/set-state! :image (q/load-image \"https://placekitten.com/100/100\"))",
   :target :cljs}
@@ -701,7 +736,7 @@
   :name "quadratic-vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw axes\") (q/camera 50 200 50 50 0 0 0 0 -1) (q/line 0 0 0 0 0 100) (q/line 0 0 0 0 100 0) (q/line 0 0 0 100 0 0) (comment \"draw first shape\") (q/begin-shape) (q/vertex 0 0) (q/quadratic-vertex 30 50 10 100) (q/quadratic-vertex 50 -50 90 100) (q/quadratic-vertex 80 50 100 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 0 0 0) (q/quadratic-vertex 30 0 50 10 0 100) (q/quadratic-vertex 50 0 -50 90 0 100) (q/quadratic-vertex 80 0 50 100 0 0) (q/end-shape :close))",
+  "((q/background 255) (comment \"setup camera and draw axes\") (q/camera 50 200 50 50 0 0 0 0 -1) (q/line 0 0 0 0 0 100) (q/line 0 0 0 0 100 0) (q/line 0 0 0 100 0 0) (comment \"draw first shape\") (q/begin-shape) (q/vertex 0 0) (q/quadratic-vertex 30 50 10 100) (q/quadratic-vertex 50 -50 90 100) (q/quadratic-vertex 80 50 100 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 0 0 0) (q/quadratic-vertex 30 0 50 10 0 100) (q/quadratic-vertex 50 0 -50 90 0 100) (q/quadratic-vertex 80 0 50 100 0 0) (q/end-shape :close))",
   :setup "()",
   :target :cljs}
  {:fns ["curve-vertex"],
@@ -709,7 +744,7 @@
   :name "curve-vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 50 200 50 50 0 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/curve-vertex 100 20) (q/curve-vertex 100 80) (q/curve-vertex 20 80) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/curve-vertex 100 0 20) (q/curve-vertex 100 0 80) (q/curve-vertex 20 0 80) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/end-shape :close))",
+  "((q/background 255) (q/camera 50 200 50 50 0 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/curve-vertex 100 20) (q/curve-vertex 100 80) (q/curve-vertex 20 80) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/curve-vertex 100 0 20) (q/curve-vertex 100 0 80) (q/curve-vertex 20 0 80) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/end-shape :close))",
   :setup "()",
   :target :cljs}
  {:fns ["bezier-vertex"],
@@ -717,7 +752,7 @@
   :name "bezier-vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera -400 250 -100 500 250 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/vertex 30 20) (q/bezier-vertex 480 0 480 475 30 475) (q/bezier-vertex 250 380 360 125 30 20) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 30 20 0) (q/bezier-vertex 480 0 20 480 475 30 30 475 40) (q/bezier-vertex 250 380 40 360 125 10 30 20 0) (q/end-shape :close))",
+  "((q/background 255) (q/camera -400 250 -100 500 250 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/vertex 30 20) (q/bezier-vertex 480 0 480 475 30 475) (q/bezier-vertex 250 380 360 125 30 20) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 30 20 0) (q/bezier-vertex 480 0 20 480 475 30 30 475 40) (q/bezier-vertex 250 380 40 360 125 10 30 20 0) (q/end-shape :close))",
   :setup "()",
   :target :cljs}
  {:fns ["begin-shape" "end-shape"],
@@ -773,7 +808,7 @@
   :name "no-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"set background to grey\") (q/stroke 0) (q/fill 120) (q/rect 0 0 100 100) (comment \"remove background, only border left\") (q/no-fill) (q/rect 70 70 100 100))",
+  "((q/background 255) (comment \"set background to grey\") (q/stroke 0) (q/fill 120) (q/rect 1 1 100 100) (comment \"remove background, only border left\") (q/no-fill) (q/rect 70 70 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["fill"],
@@ -781,7 +816,7 @@
   :name "fill",
   :opts {:settings nil},
   :draw
-  "((comment \"blue background\") (q/background 0 0 255) (comment \"grey\") (q/fill 120) (q/rect 0 0 100 100) (comment \"semitransparent light grey\") (q/fill 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/fill 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/fill 255 0 0 120) (q/rect 210 210 100 100))",
+  "((comment \"blue background\") (q/background 0 0 255) (comment \"grey\") (q/fill 120) (q/rect 1 1 100 100) (comment \"semitransparent light grey\") (q/fill 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/fill 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/fill 255 0 0 120) (q/rect 210 210 100 100))",
   :setup "()",
   :target :cljs}
  {:fns ["background-image"],
@@ -807,7 +842,23 @@
   :opts {:renderer :p3d, :settings nil},
   :draw
   "((q/background 240) (comment \"flip between ortho and perspective camera every frame\") (comment \"enable ortho camera\") (comment \"in ortho all figures will look the same regardless distance\") (comment \"in perspective (default) all figures will look smaller the farther they are\") (if (even? (q/frame-count)) (q/ortho) (q/perspective)) (comment \"set camera to look from [300, 0, 300] at point [100, 0, 0]\") (q/camera 300 0 300 100 0 0 0 0 -1) (q/fill 0 127 127) (comment \"draw 3 boxes with x coordinates 0, 100 and 200\") (doseq [x [0 100 200]] (q/with-translation [x 0 0] (q/box 50))))",
-  :setup "(q/frame-rate 1)",
+  :setup "()",
+  :target :cljs}
+ {:fns ["perspective"],
+  :ns "quil.snippets.lights-camera.camera",
+  :name "perspective",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 240) (comment \"set camera to look from [400, 100, 200] at point [100, 0, 0]\") (q/camera 400 100 200 100 0 0 0 0 -1) (comment \"in perspective (default) all figures will look smaller the farther they are\") (q/perspective) (comment \"draw 3  boxes with x coordinates 0, 100 and 200\") (q/fill 0 127 127) (doseq [x [0 100 200]] (q/with-translation [x 0 0] (q/box 50))))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["ortho"],
+  :ns "quil.snippets.lights-camera.camera",
+  :name "ortho",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 240) (comment \"set camera to look from [400, 100, 200] at point [100, 0, 0]\") (q/camera 400 100 200 100 0 0 0 0 -1) (comment \"in ortho all figures will look the same regardless distance\") (q/ortho) (comment \"draw 3 boxes with x coordinates 0, 100 and 200\") (q/fill 0 127 127) (doseq [x [0 100 200]] (q/with-translation [x 0 0] (q/box 50))))",
+  :setup "()",
   :target :cljs}
  {:fns ["orbit-control"],
   :ns "quil.snippets.lights-camera.camera",
@@ -967,6 +1018,14 @@
   :opts {:renderer :p3d, :settings nil},
   :draw
   "((q/fill 255) (q/background 0) (q/camera 150 150 150 0 25 0 0 0 -1) (q/ambient-light 60 60 60) (q/no-stroke) (q/point-light 25 255 255 150 150 150) (q/specular 255) (q/sphere 50) (q/translate 0 100 0) (q/specular 204 0 0) (q/sphere 40))",
+  :setup "()",
+  :target :cljs}
+ {:fns ["shininess"],
+  :ns "quil.snippets.lights-camera.material-properties",
+  :name "shininess",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 0) (q/camera 150 150 150 0 25 0 0 0 -1) (q/fill 127 0 255) (q/no-stroke) (q/directional-light 102 102 102 -1 -1 -1) (q/specular 255 255 255) (comment \"draw two spheres with different shininess\") (q/shininess 2) (q/sphere 50) (q/translate 0 100 0) (q/shininess 10) (q/sphere 40))",
   :setup "()",
   :target :cljs}
  {:fns ["ambient"],
@@ -1150,7 +1209,7 @@
   :name "current-graphics",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0 0 255) (.rect (q/current-graphics) 0 0 100 100) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (.fill (q/current-graphics) 255 255 0) (.ellipse (q/current-graphics) 50 50 100 100)) (q/image gr 70 70)))",
+  "((q/background 255) (q/fill 0 0 255) (.rect (q/current-graphics) 1 1 100 100) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (.fill (q/current-graphics) 255 255 0) (.ellipse (q/current-graphics) 50 50 100 100)) (q/image gr 70 70)))",
   :setup "()",
   :target :cljs}
  {:fns ["current-frame-rate" "target-frame-rate"],
@@ -1230,7 +1289,7 @@
   :name "curve-detail",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/curve-detail 5) (q/curve 0 0 50 100 100 -100 150 0) (q/curve-detail 20) (q/curve 0 0 -50 100 -100 -100 -150 0))",
+  "((q/background 255) (q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/curve-detail 5) (q/curve 0 0 50 100 100 -100 150 0) (q/curve-detail 20) (q/curve 0 0 -50 100 -100 -100 -150 0))",
   :setup "()",
   :target :cljs}
  {:fns ["curve"],
@@ -1238,7 +1297,7 @@
   :name "curve",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/curve 0 0 50 100 100 -100 150 0) (q/curve 0 0 0 0 100 0 0 0 100 100 0 0))",
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/curve 0 0 50 100 100 -100 150 0) (q/curve 0 0 0 0 100 0 0 0 100 100 0 0))",
   :setup "()",
   :target :cljs}
  {:fns ["bezier-tangent"],
@@ -1262,7 +1321,7 @@
   :name "bezier-detail",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/bezier-detail 5) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
+  "((q/background 255) (q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/bezier-detail 5) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :cljs}
  {:fns ["bezier"],
@@ -1270,7 +1329,7 @@
   :name "bezier-3d",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :cljs}
  {:fns ["bezier"],
@@ -1528,7 +1587,7 @@
   :name "vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 100 400 200 100 0 0 0 0 -1) (q/line 0 0 0 0 0 150) (q/line 0 0 0 0 150 0) (q/line 0 0 0 150 0 0) (let [txtr (q/create-graphics 100 100)] (q/with-graphics txtr (q/background 255) (comment \"draw belarusian flag, kinda\") (q/fill 255 0 0) (q/rect 0 60 100 40) (q/fill 0 150 0) (q/rect 0 0 100 60)) (comment \"draw blue rect\") (q/fill 0 0 127) (q/begin-shape) (q/vertex 0 0) (q/vertex 100 0) (q/vertex 100 100) (q/vertex 0 100) (q/end-shape :close) (comment \"draw another blue rect\") (q/begin-shape) (q/vertex 0 0 0) (q/vertex 100 0 0) (q/vertex 100 0 100) (q/vertex 0 0 100) (q/end-shape :close) (comment \"draw rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0) (q/vertex 200 0 100 0) (q/vertex 200 100 100 100) (q/vertex 100 100 0 100) (q/end-shape :close) (comment \"draw another rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0 0) (q/vertex 200 0 0 100 0) (q/vertex 200 0 100 100 100) (q/vertex 100 0 100 0 100) (q/end-shape :close)))",
+  "((q/background 255) (q/camera 100 400 200 100 0 0 0 0 -1) (q/line 0 0 0 0 0 150) (q/line 0 0 0 0 150 0) (q/line 0 0 0 150 0 0) (let [txtr (q/create-graphics 100 100)] (q/with-graphics txtr (q/background 255) (comment \"draw belarusian flag, kinda\") (q/fill 255 0 0) (q/rect 0 60 100 40) (q/fill 0 150 0) (q/rect 0 0 100 60)) (comment \"draw blue rect\") (q/fill 0 0 127) (q/begin-shape) (q/vertex 0 0) (q/vertex 100 0) (q/vertex 100 100) (q/vertex 0 100) (q/end-shape :close) (comment \"draw another blue rect\") (q/begin-shape) (q/vertex 0 0 0) (q/vertex 100 0 0) (q/vertex 100 0 100) (q/vertex 0 0 100) (q/end-shape :close) (comment \"draw rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0) (q/vertex 200 0 100 0) (q/vertex 200 100 100 100) (q/vertex 100 100 0 100) (q/end-shape :close) (comment \"draw another rect using our custom texture\") (q/begin-shape) (q/texture txtr) (q/vertex 100 0 0 0 0) (q/vertex 200 0 0 100 0) (q/vertex 200 0 100 100 100) (q/vertex 100 0 100 0 100) (q/end-shape :close)))",
   :setup "()",
   :target :clj}
  {:fns ["texture-wrap"],
@@ -1560,7 +1619,7 @@
   :name "quadratic-vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw axes\") (q/camera 50 200 50 50 0 0 0 0 -1) (q/line 0 0 0 0 0 100) (q/line 0 0 0 0 100 0) (q/line 0 0 0 100 0 0) (comment \"draw first shape\") (q/begin-shape) (q/vertex 0 0) (q/quadratic-vertex 30 50 10 100) (q/quadratic-vertex 50 -50 90 100) (q/quadratic-vertex 80 50 100 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 0 0 0) (q/quadratic-vertex 30 0 50 10 0 100) (q/quadratic-vertex 50 0 -50 90 0 100) (q/quadratic-vertex 80 0 50 100 0 0) (q/end-shape :close))",
+  "((q/background 255) (comment \"setup camera and draw axes\") (q/camera 50 200 50 50 0 0 0 0 -1) (q/line 0 0 0 0 0 100) (q/line 0 0 0 0 100 0) (q/line 0 0 0 100 0 0) (comment \"draw first shape\") (q/begin-shape) (q/vertex 0 0) (q/quadratic-vertex 30 50 10 100) (q/quadratic-vertex 50 -50 90 100) (q/quadratic-vertex 80 50 100 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 0 0 0) (q/quadratic-vertex 30 0 50 10 0 100) (q/quadratic-vertex 50 0 -50 90 0 100) (q/quadratic-vertex 80 0 50 100 0 0) (q/end-shape :close))",
   :setup "()",
   :target :clj}
  {:fns ["curve-vertex"],
@@ -1568,7 +1627,7 @@
   :name "curve-vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 50 200 50 50 0 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/curve-vertex 100 20) (q/curve-vertex 100 80) (q/curve-vertex 20 80) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/curve-vertex 100 0 20) (q/curve-vertex 100 0 80) (q/curve-vertex 20 0 80) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/end-shape :close))",
+  "((q/background 255) (q/camera 50 200 50 50 0 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/curve-vertex 100 20) (q/curve-vertex 100 80) (q/curve-vertex 20 80) (q/curve-vertex 0 0) (q/curve-vertex 0 0) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/curve-vertex 100 0 20) (q/curve-vertex 100 0 80) (q/curve-vertex 20 0 80) (q/curve-vertex 0 0 0) (q/curve-vertex 0 0 0) (q/end-shape :close))",
   :setup "()",
   :target :clj}
  {:fns ["bezier-vertex"],
@@ -1576,7 +1635,7 @@
   :name "bezier-vertex",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera -400 250 -100 500 250 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/vertex 30 20) (q/bezier-vertex 480 0 480 475 30 475) (q/bezier-vertex 250 380 360 125 30 20) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 30 20 0) (q/bezier-vertex 480 0 20 480 475 30 30 475 40) (q/bezier-vertex 250 380 40 360 125 10 30 20 0) (q/end-shape :close))",
+  "((q/background 255) (q/camera -400 250 -100 500 250 0 0 0 1) (comment \"draw first shape\") (q/begin-shape) (q/vertex 30 20) (q/bezier-vertex 480 0 480 475 30 475) (q/bezier-vertex 250 380 360 125 30 20) (q/end-shape :close) (comment \"draw second shape\") (q/begin-shape) (q/vertex 30 20 0) (q/bezier-vertex 480 0 20 480 475 30 30 475 40) (q/bezier-vertex 250 380 40 360 125 10 30 20 0) (q/end-shape :close))",
   :setup "()",
   :target :clj}
  {:fns ["begin-shape" "end-shape"],
@@ -1615,7 +1674,8 @@
   :ns "quil.snippets.shape.primitives-3d",
   :name "sphere",
   :opts {:renderer :p3d, :settings nil},
-  :draw "((q/camera 200 200 200 0 0 0 0 0 -1) (q/sphere 150))",
+  :draw
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/sphere 150))",
   :setup "()",
   :target :clj}
  {:fns ["box"],
@@ -1623,7 +1683,7 @@
   :name "box",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/with-translation [100 0 0] (q/box 70)) (q/with-translation [0 100 0] (q/box 70 100 50)))",
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/with-translation [100 0 0] (q/box 70)) (q/with-translation [0 100 0] (q/box 70 100 50)))",
   :setup "()",
   :target :clj}
  {:fns ["triangle"],
@@ -1695,7 +1755,7 @@
   :name "shape",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((let [sh (q/state :shp)] (q/shape sh) (q/shape sh 100 100) (q/shape sh 300 300 200 200)))",
+  "((q/background 255) (let [sh (q/state :shp)] (q/shape sh) (q/shape sh 100 100) (q/shape sh 300 300 200 200)))",
   :setup
   "(let [sh (q/load-shape \"https://upload.wikimedia.org/wikipedia/en/2/22/Heckert_GNU_white.svg\")] (q/set-state! :shp sh))",
   :target :clj}
@@ -1728,7 +1788,7 @@
   :name "curve-detail",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/curve-detail 5) (q/curve 0 0 50 100 100 -100 150 0) (q/curve-detail 20) (q/curve 0 0 -50 100 -100 -100 -150 0))",
+  "((q/background 255) (q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/curve-detail 5) (q/curve 0 0 50 100 100 -100 150 0) (q/curve-detail 20) (q/curve 0 0 -50 100 -100 -100 -150 0))",
   :setup "()",
   :target :clj}
  {:fns ["curve"],
@@ -1736,7 +1796,7 @@
   :name "curve",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/curve 0 0 50 100 100 -100 150 0) (q/curve 0 0 0 0 100 0 0 0 100 100 0 0))",
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/curve 0 0 50 100 100 -100 150 0) (q/curve 0 0 0 0 100 0 0 0 100 100 0 0))",
   :setup "()",
   :target :clj}
  {:fns ["bezier-tangent"],
@@ -1760,7 +1820,7 @@
   :name "bezier-detail",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/bezier-detail 5) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
+  "((q/background 255) (q/camera 0 0 300 0 0 0 0 1 0) (q/no-fill) (q/bezier-detail 5) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :clj}
  {:fns ["bezier"],
@@ -1768,7 +1828,7 @@
   :name "bezier-3d",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
+  "((q/background 255) (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/bezier 0 0 0 0 100 0 0 100 0 100 0 0))",
   :setup "()",
   :target :clj}
  {:fns ["bezier"],
@@ -2199,7 +2259,23 @@
   :opts {:renderer :p3d, :settings nil},
   :draw
   "((q/background 240) (comment \"flip between ortho and perspective camera every frame\") (comment \"enable ortho camera\") (comment \"in ortho all figures will look the same regardless distance\") (comment \"in perspective (default) all figures will look smaller the farther they are\") (if (even? (q/frame-count)) (q/ortho) (q/perspective)) (comment \"set camera to look from [300, 0, 300] at point [100, 0, 0]\") (q/camera 300 0 300 100 0 0 0 0 -1) (q/fill 0 127 127) (comment \"draw 3 boxes with x coordinates 0, 100 and 200\") (doseq [x [0 100 200]] (q/with-translation [x 0 0] (q/box 50))))",
-  :setup "(q/frame-rate 1)",
+  :setup "()",
+  :target :clj}
+ {:fns ["perspective"],
+  :ns "quil.snippets.lights-camera.camera",
+  :name "perspective",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 240) (comment \"set camera to look from [400, 100, 200] at point [100, 0, 0]\") (q/camera 400 100 200 100 0 0 0 0 -1) (comment \"in perspective (default) all figures will look smaller the farther they are\") (q/perspective) (comment \"draw 3  boxes with x coordinates 0, 100 and 200\") (q/fill 0 127 127) (doseq [x [0 100 200]] (q/with-translation [x 0 0] (q/box 50))))",
+  :setup "()",
+  :target :clj}
+ {:fns ["ortho"],
+  :ns "quil.snippets.lights-camera.camera",
+  :name "ortho",
+  :opts {:renderer :p3d, :settings nil},
+  :draw
+  "((q/background 240) (comment \"set camera to look from [400, 100, 200] at point [100, 0, 0]\") (q/camera 400 100 200 100 0 0 0 0 -1) (comment \"in ortho all figures will look the same regardless distance\") (q/ortho) (comment \"draw 3 boxes with x coordinates 0, 100 and 200\") (q/fill 0 127 127) (doseq [x [0 100 200]] (q/with-translation [x 0 0] (q/box 50))))",
+  :setup "()",
   :target :clj}
  {:fns ["frustum"],
   :ns "quil.snippets.lights-camera.camera",
@@ -2294,7 +2370,7 @@
   :name "no-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"set background to grey\") (q/stroke 0) (q/fill 120) (q/rect 0 0 100 100) (comment \"remove background, only border left\") (q/no-fill) (q/rect 70 70 100 100))",
+  "((q/background 255) (comment \"set background to grey\") (q/stroke 0) (q/fill 120) (q/rect 1 1 100 100) (comment \"remove background, only border left\") (q/no-fill) (q/rect 70 70 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["fill"],
@@ -2302,7 +2378,7 @@
   :name "fill",
   :opts {:settings nil},
   :draw
-  "((comment \"blue background\") (q/background 0 0 255) (comment \"grey\") (q/fill 120) (q/rect 0 0 100 100) (comment \"semitransparent light grey\") (q/fill 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/fill 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/fill 255 0 0 120) (q/rect 210 210 100 100))",
+  "((comment \"blue background\") (q/background 0 0 255) (comment \"grey\") (q/fill 120) (q/rect 1 1 100 100) (comment \"semitransparent light grey\") (q/fill 80 120) (q/rect 70 70 100 100) (comment \"green\") (q/fill 0 255 0) (q/rect 140 140 100 100) (comment \"semitransparent red\") (q/fill 255 0 0 120) (q/rect 210 210 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["background-image"],
@@ -2335,7 +2411,7 @@
   :name "lerp-color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [red (q/color 255 0 0) blue (q/color 0 0 255)] (comment \"draw colors that transition from red to blue\") (dotimes [i 6] (q/fill (q/lerp-color red blue (/ i 5))) (q/rect (* i 70) (* i 70) 100 100))))",
+  "((q/background 255) (let [red (q/color 255 0 0) blue (q/color 0 0 255)] (comment \"draw colors that transition from red to blue\") (dotimes [i 6] (q/fill (q/lerp-color red blue (/ i 5))) (q/rect (inc (* i 70)) (inc (* i 70)) 100 100))))",
   :setup "()",
   :target :clj}
  {:fns ["current-stroke"],
@@ -2343,7 +2419,7 @@
   :name "current-stroke",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"set to red\") (q/stroke 255 0 0) (q/rect 0 0 100 100) (let [_ (comment \"remember current color\") cur-stroke (q/current-stroke)] (comment \"change to blue\") (q/stroke 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
+  "((q/background 255) (comment \"set to red\") (q/stroke 255 0 0) (q/rect 1 1 100 100) (let [_ (comment \"remember current color\") cur-stroke (q/current-stroke)] (comment \"change to blue\") (q/stroke 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/stroke cur-stroke) (q/rect 140 140 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["current-fill"],
@@ -2351,7 +2427,7 @@
   :name "current-fill",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"set to red\") (q/fill 255 0 0) (q/rect 0 0 100 100) (let [_ (comment \"remember current color\") cur-fill (q/current-fill)] (comment \"change to blue\") (q/fill 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/fill cur-fill) (q/rect 140 140 100 100)))",
+  "((q/background 255) (comment \"set to red\") (q/fill 255 0 0) (q/rect 1 1 100 100) (let [_ (comment \"remember current color\") cur-fill (q/current-fill)] (comment \"change to blue\") (q/fill 0 0 255) (q/rect 70 70 100 100) (comment \"change back to the original color\") (q/fill cur-fill) (q/rect 140 140 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["color-mode"],
@@ -2359,7 +2435,7 @@
   :name "color-mode",
   :opts {:settings nil},
   :draw
-  "((q/color-mode :rgb 255) (q/background 255) (comment \"use HSB and draw red\") (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 0 0 100 100) (comment \"use HSB with different max and draw dark green\") (q/color-mode :hsb 5 10 20) (q/fill 2 10 5) (q/rect 70 70 100 100) (comment \"use RGB with 42 max value and draw 75% transparent blue\") (q/color-mode :rgb 40) (q/fill 0 0 40 30) (q/rect 140 140 100 100) (comment \"use RGB with different max values and draw semitransparent cyan\") (q/color-mode :rgb 5 10 20 30) (q/fill 0 10 20 15) (q/rect 210 210 100 100))",
+  "((q/color-mode :rgb 255) (q/background 255) (comment \"use HSB and draw red\") (q/color-mode :hsb) (q/fill 255 255 255) (q/rect 1 1 100 100) (comment \"use HSB with different max and draw dark green\") (q/color-mode :hsb 5 10 20) (q/fill 2 10 5) (q/rect 70 70 100 100) (comment \"use RGB with 42 max value and draw 75% transparent blue\") (q/color-mode :rgb 40) (q/fill 0 0 40 30) (q/rect 140 140 100 100) (comment \"use RGB with different max values and draw semitransparent cyan\") (q/color-mode :rgb 5 10 20 30) (q/fill 0 10 20 15) (q/rect 210 210 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["color"],
@@ -2367,7 +2443,7 @@
   :name "color",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (comment \"black\") (q/fill (q/color 0)) (q/rect 0 0 100 100) (comment \"semitransparent gray\") (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (comment \"purple\") (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (comment \"semitransparent cyan\") (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
+  "((q/background 255) (comment \"black\") (q/fill (q/color 0)) (q/rect 1 1 100 100) (comment \"semitransparent gray\") (q/fill (q/color 128 128)) (q/rect 70 70 100 100) (comment \"purple\") (q/fill (q/color 255 0 255)) (q/rect 140 140 100 100) (comment \"semitransparent cyan\") (q/fill (q/color 0 255 255 120)) (q/rect 210 210 100 100))",
   :setup "()",
   :target :clj}
  {:fns ["brightness"],
@@ -2375,7 +2451,7 @@
   :name "brightness",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 0 0 100 100) (comment \"use the same brightness but different color\") (q/fill 255 255 (q/brightness dark-green)) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 1 1 100 100) (comment \"use the same brightness but different color\") (q/fill 255 255 (q/brightness dark-green)) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["saturation"],
@@ -2383,7 +2459,7 @@
   :name "saturation",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 0 0 100 100) (comment \"use the same saturation but different color\") (q/fill 255 (q/saturation dark-green) 255) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 1 1 100 100) (comment \"use the same saturation but different color\") (q/fill 255 (q/saturation dark-green) 255) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["hue"],
@@ -2391,7 +2467,7 @@
   :name "hue",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 0 0 100 100) (comment \"use the hue (green) but make it bright\") (q/fill (q/hue dark-green) 255 255) (q/rect 70 70 100 100)))",
+  "((q/background 255) (q/color-mode :hsb) (let [dark-green (q/color 100 230 100)] (q/fill dark-green) (q/rect 1 1 100 100) (comment \"use the hue (green) but make it bright\") (q/fill (q/hue dark-green) 255 255) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["blue"],
@@ -2399,7 +2475,7 @@
   :name "blue",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 0 0 100 100) (comment \"use only blue component of purple\") (q/fill 0 0 (q/blue purple)) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 1 1 100 100) (comment \"use only blue component of purple\") (q/fill 0 0 (q/blue purple)) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["green"],
@@ -2407,7 +2483,7 @@
   :name "green",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 0 0 100 100) (comment \"use only green component of purple\") (q/fill 0 (q/green purple) 0) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 1 1 100 100) (comment \"use only green component of purple\") (q/fill 0 (q/green purple) 0) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["red"],
@@ -2415,7 +2491,7 @@
   :name "red",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 0 0 100 100) (comment \"use only red component of purple\") (q/fill (q/red purple) 0 0) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [purple (q/color 123 50 220)] (q/fill purple) (q/rect 1 1 100 100) (comment \"use only red component of purple\") (q/fill (q/red purple) 0 0) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["blend-color"],
@@ -2431,7 +2507,7 @@
   :name "alpha",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (let [_ (comment \"create semitransparent red\") semi-red (q/color 255 0 0 120) _ (comment \"extract alpha value from it\") alph (q/alpha semi-red) _ (comment \"create semitransparent blue using the alpha\") semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 0 0 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
+  "((q/background 255) (let [_ (comment \"create semitransparent red\") semi-red (q/color 255 0 0 120) _ (comment \"extract alpha value from it\") alph (q/alpha semi-red) _ (comment \"create semitransparent blue using the alpha\") semi-blue (q/color 0 0 255 alph)] (q/fill semi-red) (q/rect 1 1 100 100) (q/fill semi-blue) (q/rect 70 70 100 100)))",
   :setup "()",
   :target :clj}
  {:fns ["tint"],
@@ -2568,7 +2644,7 @@
   :name "translate",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw 3 identical boxes in 3 different positions\") (comment \"using different translate calls\") (q/translate 100 0) (q/box 50) (q/translate [-100 100]) (q/box 50) (q/translate 0 -100 100) (q/box 50))",
+  "((q/background 255) (comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw 3 identical boxes in 3 different positions\") (comment \"using different translate calls\") (q/translate 100 0) (q/box 50) (q/translate [-100 100]) (q/box 50) (q/translate 0 -100 100) (q/box 50))",
   :setup "()",
   :target :clj}
  {:fns ["shear-x" "shear-y"],
@@ -2584,7 +2660,7 @@
   :name "scale",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw box 50% smaller\") (q/with-translation [100 0 0] (q/scale 0.5) (q/box 50) (q/scale 2)) (comment \"draw box 50% narrower but same length/height\") (q/with-translation [0 100 0] (q/scale 1 0.5) (q/box 50) (q/scale 1 2)) (comment \"draw box 50% shorter and 150% taller, but same width\") (q/with-translation [0 0 100] (q/scale 0.5 1 1.5) (q/box 50) (q/scale 2 1 0.75)))",
+  "((q/background 255) (comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (comment \"draw box 50% smaller\") (q/with-translation [100 0 0] (q/scale 0.5) (q/box 50) (q/scale 2)) (comment \"draw box 50% narrower but same length/height\") (q/with-translation [0 100 0] (q/scale 1 0.5) (q/box 50) (q/scale 1 2)) (comment \"draw box 50% shorter and 150% taller, but same width\") (q/with-translation [0 0 100] (q/scale 0.5 1 1.5) (q/box 50) (q/scale 2 1 0.75)))",
   :setup "()",
   :target :clj}
  {:fns ["rotate-x" "rotate-y" "rotate-z"],
@@ -2592,7 +2668,7 @@
   :name "rotate-x-y-z",
   :opts {:renderer :p3d, :settings nil},
   :draw
-  "((comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (q/push-matrix) (comment \"move, rotate x axis and draw box\") (q/translate 100 0 0) (q/rotate-x 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate y axis and draw box\") (q/translate 0 100 0) (q/rotate-y 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate z axis and draw box\") (q/translate 0 0 100) (q/rotate-z 0.5) (q/box 50) (q/pop-matrix))",
+  "((q/background 255) (comment \"setup camera and draw box at [0 0 0]\") (q/camera 200 200 200 0 0 0 0 0 -1) (q/no-fill) (q/box 50) (q/push-matrix) (comment \"move, rotate x axis and draw box\") (q/translate 100 0 0) (q/rotate-x 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate y axis and draw box\") (q/translate 0 100 0) (q/rotate-y 0.5) (q/box 50) (q/pop-matrix) (q/push-matrix) (comment \"move, rotate z axis and draw box\") (q/translate 0 0 100) (q/rotate-z 0.5) (q/box 50) (q/pop-matrix))",
   :setup "()",
   :target :clj}
  {:fns ["rotate"],
@@ -2870,7 +2946,7 @@
   :name "current-graphics",
   :opts {:settings nil},
   :draw
-  "((q/background 255) (q/fill 0 0 255) (.rect (q/current-graphics) 0 0 100 100) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (.fill (q/current-graphics) 255 255 0) (.ellipse (q/current-graphics) 50 50 100 100)) (q/image gr 70 70)))",
+  "((q/background 255) (q/fill 0 0 255) (.rect (q/current-graphics) 1 1 100 100) (let [gr (q/create-graphics 100 100)] (q/with-graphics gr (.fill (q/current-graphics) 255 255 0) (.ellipse (q/current-graphics) 50 50 100 100)) (q/image gr 70 70)))",
   :setup "()",
   :target :clj}
  {:fns ["current-frame-rate" "target-frame-rate"],
@@ -2879,6 +2955,22 @@
   :opts {:settings nil},
   :draw
   "((q/background 255) (q/fill 0) (q/text (str \"(q/current-frame-rate) = \" (q/current-frame-rate)) 10 20) (q/text (str \"(q/target-frame-rate) = \" (q/target-frame-rate)) 10 40))",
+  :setup "()",
+  :target :clj}
+ {:fns ["print-every-n-millisec"],
+  :ns "quil.snippets.debugging",
+  :name "print-every-n-millisec",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (comment \"will print 'foo' every 1000 milliseconds\") (q/print-every-n-millisec 1000 \"foo\"))",
+  :setup "()",
+  :target :clj}
+ {:fns ["print-first-n"],
+  :ns "quil.snippets.debugging",
+  :name "print-first-n",
+  :opts {:settings nil},
+  :draw
+  "((q/background 255) (comment \"will print 'foo' the first 5 iterations\") (q/print-first-n 5 \"foo\"))",
   :setup "()",
   :target :clj}
  {:fns ["resize"],
