@@ -109,7 +109,8 @@
            tooltips)))
 
 (def available-examples
-  ["fireworks"
+  ["cluster"
+   "fireworks"
    "fire"
    "dancer"
    "dry paint"
@@ -117,7 +118,6 @@
    "matrix"
    "equilibrium"
    "hyper"
-   "cluster"
    "leaf"
    "colorjoy"
    "nanoscopic"
