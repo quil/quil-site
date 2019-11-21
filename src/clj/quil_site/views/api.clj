@@ -137,7 +137,7 @@
      [:dd
 
       (if (= snippets {"clj/cljs" '()})
-        [:p "There are no examples for this function. You can request examples which will help us to prioritize this funciton."
+        [:p "There are no examples for this function. You can request examples which will help us to prioritize this function."
          [:br]
          [:button.btn.btn-primary.btn-xs.report-example
           {:type "button"
